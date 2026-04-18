@@ -55,39 +55,54 @@ function Index() {
 
   return (
     <Layout>
-      {/* HERO */}
+      {/* HERO — monumental ATDB gateway */}
       <section className="relative isolate overflow-hidden bg-iron-deep text-white">
         <img
           src={heroImg}
-          alt="Liebherr LTM mobile crane on a Bangladesh construction site at dawn"
+          alt="ATDB Trade International — monumental industrial gateway with cranes, road roller and Dhaka skyline at sunset"
           width={1920}
-          height={1280}
-          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-65"
+          height={1080}
+          fetchPriority="high"
+          className="absolute inset-0 -z-10 h-full w-full scale-105 animate-[heroZoom_18s_ease-out_forwards] object-cover opacity-80"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,oklch(0.18_0.018_240/0.55)_0%,oklch(0.18_0.018_240/0.92)_100%)]" />
-        <div className="container-page flex min-h-[88vh] flex-col justify-end pb-20 pt-32 md:min-h-[92vh] md:pb-28">
-          <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.eyebrow")}</p>
-          <h1 className={`mt-4 max-w-4xl text-4xl font-bold leading-[1.05] text-balance text-white md:text-6xl lg:text-7xl ${fontClass}`}>
-            {t("home.hero.title.a")} <span className="text-safety">{t("home.hero.title.b")}</span> {t("home.hero.title.c")}
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,oklch(0.18_0.018_240/0.35)_0%,oklch(0.18_0.018_240/0.78)_55%,oklch(0.16_0.018_240/0.95)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+
+        <div className="container-page flex min-h-[88vh] flex-col justify-end pb-16 pt-28 md:min-h-[92vh] md:pb-24 md:pt-32">
+          <p className={`eyebrow !text-bronze-glow animate-in fade-in slide-in-from-bottom-3 duration-700 ${lang === "bn" ? "font-bn" : ""}`}>
+            {t("home.eyebrow")}
+          </p>
+          <h1 className={`mt-4 max-w-4xl text-4xl font-bold leading-[1.05] text-balance text-white animate-in fade-in slide-in-from-bottom-4 duration-700 [animation-delay:120ms] [animation-fill-mode:both] sm:text-5xl md:text-6xl lg:text-7xl ${fontClass}`}>
+            {t("home.hero.title.a")} <span className="bg-gradient-to-r from-safety to-bronze-glow bg-clip-text text-transparent">{t("home.hero.title.b")}</span> {t("home.hero.title.c")}
           </h1>
-          <p className={`mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg ${fontClass}`}>
+          <p className={`mt-5 max-w-xl text-base leading-relaxed text-white/85 animate-in fade-in slide-in-from-bottom-4 duration-700 [animation-delay:240ms] [animation-fill-mode:both] md:text-lg ${fontClass}`}>
             {t("home.hero.sub")}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700 [animation-delay:360ms] [animation-fill-mode:both]">
             <Link
               to="/equipment"
-              className={`inline-flex items-center gap-2 rounded-sm bg-gradient-safety px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
+              className={`group inline-flex items-center gap-2 rounded-sm bg-gradient-safety px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_oklch(0.7_0.19_45/0.5)] sm:px-7 sm:py-4 ${fontClass}`}
             >
-              {t("home.hero.cta.browse")} <ArrowRight className="h-4 w-4" />
+              {t("home.hero.cta.browse")}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <a
               href={buildWhatsappGenericLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 rounded-sm border-2 border-white/80 px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-iron ${fontClass}`}
+              className={`inline-flex items-center gap-2 rounded-sm border-2 border-white/80 bg-white/5 px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-iron sm:px-7 sm:py-4 ${fontClass}`}
             >
               {t("home.hero.cta.whatsapp")}
             </a>
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/10 pt-5 text-[11px] uppercase tracking-[0.18em] text-white/55 animate-in fade-in duration-1000 [animation-delay:520ms] [animation-fill-mode:both]">
+            <span className="font-display"><span className="text-bronze-glow">●</span> Liebherr</span>
+            <span className="font-display"><span className="text-bronze-glow">●</span> Kato</span>
+            <span className="font-display"><span className="text-bronze-glow">●</span> Sakai</span>
+            <span className="font-display"><span className="text-bronze-glow">●</span> CAT</span>
+            <span className="font-display"><span className="text-bronze-glow">●</span> Komatsu</span>
+            <span className="font-display"><span className="text-bronze-glow">●</span> JCB</span>
           </div>
         </div>
       </section>

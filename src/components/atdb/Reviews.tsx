@@ -1,0 +1,105 @@
+import { Star } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+
+export type Review = {
+  id: number;
+  author: string;
+  company: string;
+  rating: number;
+  date: string; // ISO yyyy-mm-dd
+  content: string;
+};
+
+export const SAMPLE_REVIEWS: Review[] = [
+  {
+    id: 1,
+    author: "Engr. Rahim Chowdhury",
+    company: "MegaBuilders Corp.",
+    rating: 5,
+    date: "2025-10-12",
+    content:
+      "Equipment delivered on time and in pristine condition. The ATDB team supported us through the entire bridge piling phase — operator discipline was outstanding.",
+  },
+  {
+    id: 2,
+    author: "Engr. Tariqul Islam",
+    company: "National Infrastructure Solutions",
+    rating: 5,
+    date: "2025-08-28",
+    content:
+      "Maintenance logs were fully up to date — our compliance audit took minutes, not days. Highest tier supplier in the country.",
+  },
+  {
+    id: 3,
+    author: "Sajjad Hossain",
+    company: "Pinnacle Developments",
+    rating: 4,
+    date: "2025-06-05",
+    content:
+      "Reliable machinery and a WhatsApp response team that handles shift changes within minutes. Will rent from ATDB again.",
+  },
+];
+
+export const reviewAggregate = {
+  rating: 4.8,
+  count: SAMPLE_REVIEWS.length,
+};
+
+function Stars({ value }: { value: number }) {
+  return (
+    <div className="flex items-center gap-0.5" aria-label={`${value} out of 5 stars`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={`h-4 w-4 ${i < Math.round(value) ? "fill-bronze-glow text-bronze-glow" : "text-iron/20"}`}
+        />
+      ))}
+    </div>
+  );
+}
+
+export function ReviewsSection() {
+  const { t, lang } = useI18n();
+  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+
+  return (
+    <section className="bg-background py-16 md:py-20">
+      <div className="container-page">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow">{t("reviews.eyebrow")}</p>
+            <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{t("reviews.title")}</h2>
+          </div>
+          <div className="flex items-center gap-3 rounded-md border border-border bg-card px-4 py-2.5 shadow-card">
+            <Stars value={reviewAggregate.rating} />
+            <p className="font-display text-sm font-semibold text-iron">
+              {reviewAggregate.rating.toFixed(1)}
+              <span className="ml-2 text-xs font-medium text-muted-foreground">
+                {t("reviews.based")} {reviewAggregate.count} {t("reviews.count")}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {SAMPLE_REVIEWS.map((r) => (
+            <article
+              key={r.id}
+              className="flex flex-col rounded-md border border-border bg-card p-5 shadow-card transition-transform hover:-translate-y-0.5"
+            >
+              <Stars value={r.rating} />
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-iron/80">"{r.content}"</p>
+              <div className="mt-4 border-t border-border pt-3">
+                <p className="font-display text-sm font-semibold text-iron">{r.author}</p>
+                <p className="text-xs text-muted-foreground">
+                  {r.company} ·{" "}
+                  {new Date(r.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

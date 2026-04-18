@@ -134,6 +134,10 @@ export function getCategoryFleet(cat: EquipmentCategory) {
   return FLEET.filter((e) => e.category === cat);
 }
 
+export function getEquipmentById(id: string) {
+  return FLEET.find((e) => e.id.toLowerCase() === id.toLowerCase());
+}
+
 export function buildWhatsappRentLink(eq: Equipment) {
   const msg = `আমি ${eq.name} (${eq.id}) ভাড়া নিতে চাই।\n\nI'd like to rent the ${eq.name} (${eq.id} · ${eq.capacity}).\nProject location: \nDuration (days): \nPlease send a quotation. — ATDB website`;
   return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(msg)}`;

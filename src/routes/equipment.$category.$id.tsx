@@ -69,6 +69,20 @@ export const Route = createFileRoute("/equipment/$category/$id")({
         ...(eq.year ? [{ "@type": "PropertyValue", name: "Year", value: String(eq.year) }] : []),
         { "@type": "PropertyValue", name: "Inspection", value: "City Inspection Services CIS/077/2018" },
       ],
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: reviewAggregate.rating.toFixed(1),
+        reviewCount: reviewAggregate.count,
+        bestRating: "5",
+        worstRating: "1",
+      },
+      review: SAMPLE_REVIEWS.map((r) => ({
+        "@type": "Review",
+        reviewRating: { "@type": "Rating", ratingValue: String(r.rating), bestRating: "5" },
+        author: { "@type": "Person", name: r.author },
+        datePublished: r.date,
+        reviewBody: r.content,
+      })),
     };
     return {
       meta: [

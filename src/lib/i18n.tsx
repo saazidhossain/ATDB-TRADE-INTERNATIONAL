@@ -109,6 +109,40 @@ export const TRANSLATIONS: Dict = {
   "footer.contact": { en: "Contact", bn: "যোগাযোগ" },
   "footer.tagline": { en: "Bangladesh's premier heavy equipment rental partner. Since 2000.", bn: "বাংলাদেশের সেরা হেভি ইকুইপমেন্ট রেন্টাল পার্টনার। ২০০০ সাল থেকে।" },
   "footer.rights": { en: "All rights reserved.", bn: "সর্বস্বত্ব সংরক্ষিত।" },
+
+  // Cart
+  "common.addToQuote": { en: "Add to quote", bn: "কোটেশনে যোগ করুন" },
+  "common.added": { en: "Added", bn: "যোগ হয়েছে" },
+  "cart.title": { en: "Quotation Cart", bn: "কোটেশন কার্ট" },
+  "cart.empty.t": { en: "Your quotation cart is empty.", bn: "আপনার কার্ট খালি।" },
+  "cart.empty.d": { en: "Add equipment from the fleet pages to build a single consolidated WhatsApp quotation.", bn: "ফ্লিট পেজ থেকে ইকুইপমেন্ট যোগ করে একসাথে হোয়াটসঅ্যাপে কোটেশন পাঠান।" },
+  "cart.project": { en: "Project Details", bn: "প্রজেক্ট ডিটেইলস" },
+  "cart.location": { en: "Location", bn: "লোকেশন" },
+  "cart.start": { en: "Start", bn: "শুরু" },
+  "cart.end": { en: "End", bn: "শেষ" },
+  "cart.notes": { en: "Notes", bn: "নোট" },
+  "cart.notes.ph": { en: "Site access, lift duration, special requirements…", bn: "সাইট অ্যাক্সেস, কাজের সময়, বিশেষ প্রয়োজন…" },
+  "cart.send": { en: "Send Quote on WhatsApp", bn: "হোয়াটসঅ্যাপে কোটেশন পাঠান" },
+  "cart.clear": { en: "Clear cart", bn: "কার্ট খালি করুন" },
+
+  // Contact form
+  "contact.eyebrow": { en: "Quote Request", bn: "কোটেশন রিকোয়েস্ট" },
+  "contact.title": { en: "Tell us about your project.", bn: "আপনার প্রজেক্ট সম্পর্কে জানান।" },
+  "contact.sub": { en: "Send a detailed enquiry — our team will respond with a written quotation, usually within the hour during business days.", bn: "বিস্তারিত পাঠান — আমরা সাধারণত একই কর্মদিবসে লিখিত কোটেশন পাঠিয়ে দিই।" },
+  "contact.name": { en: "Full name", bn: "পুরো নাম" },
+  "contact.email": { en: "Email", bn: "ইমেইল" },
+  "contact.phone": { en: "Phone (optional)", bn: "ফোন (ঐচ্ছিক)" },
+  "contact.company": { en: "Company (optional)", bn: "কোম্পানি (ঐচ্ছিক)" },
+  "contact.location": { en: "Project location", bn: "প্রজেক্ট লোকেশন" },
+  "contact.equipment": { en: "Equipment of interest (optional)", bn: "যে ইকুইপমেন্ট প্রয়োজন (ঐচ্ছিক)" },
+  "contact.message": { en: "Message", bn: "মেসেজ" },
+  "contact.message.ph": { en: "Tell us about timelines, lift weights, site access — anything that helps us quote accurately.", bn: "টাইমলাইন, ওজন, সাইট অ্যাক্সেস — যা কোটেশন তৈরিতে সাহায্য করবে।" },
+  "contact.submit": { en: "Send Enquiry", bn: "এনকোয়ারি পাঠান" },
+  "contact.submitting": { en: "Sending…", bn: "পাঠানো হচ্ছে…" },
+  "contact.success.t": { en: "Enquiry received — thank you!", bn: "এনকোয়ারি পেয়েছি — ধন্যবাদ!" },
+  "contact.success.d": { en: "Our team will reach out shortly with a written quotation.", bn: "আমাদের টিম শীঘ্রই লিখিত কোটেশন পাঠাবে।" },
+  "contact.error": { en: "We couldn't send your enquiry. Please try again or message us on WhatsApp.", bn: "এনকোয়ারি পাঠানো যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন বা হোয়াটসঅ্যাপে জানান।" },
+  "contact.rate": { en: "Too many requests — please try again in a minute.", bn: "অনেক রিকোয়েস্ট — এক মিনিট পর আবার চেষ্টা করুন।" },
 };
 
 interface I18nCtx {

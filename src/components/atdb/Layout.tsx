@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
 import { WhatsappFab } from "./WhatsappFab";
+import { CartDrawer } from "./CartDrawer";
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -10,6 +11,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <main className="flex-1">{children}</main>
       <SiteFooter />
       <WhatsappFab />
+      <CartDrawer />
     </div>
   );
 }

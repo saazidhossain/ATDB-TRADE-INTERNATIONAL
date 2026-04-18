@@ -4,6 +4,7 @@ import { Menu, X, Phone, Globe } from "lucide-react";
 import logo from "@/assets/logo-atdb.png";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n, type Lang } from "@/lib/i18n";
+import { CartButton } from "./CartButton";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -45,6 +46,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <CartButton />
           <LangSwitch lang={lang} onToggle={toggleLang} />
           <a
             href={`tel:${COMPANY.phones[0].number}`}

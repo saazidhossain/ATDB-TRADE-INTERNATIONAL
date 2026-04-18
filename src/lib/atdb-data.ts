@@ -1,11 +1,31 @@
 // ATDB Trade International — canonical company + fleet data.
-// Single source of truth used across the marketing site.
+// Synced 1:1 with the Product Inventory Master List (Apr 2026).
 
 import craneImg from "@/assets/eq-crane-liebherr.jpg";
 import rollerImg from "@/assets/eq-roller-sakai.jpg";
 import excavatorImg from "@/assets/eq-excavator-cat.jpg";
-import backhoeImg from "@/assets/eq-backhoe-case.jpg";
 import supportImg from "@/assets/eq-support.jpg";
+
+// Per-equipment, brand-accurate imagery
+import imgLiebherr1120 from "@/assets/fleet/liebherr-ltm-1120.jpg";
+import imgLiebherr1070 from "@/assets/fleet/liebherr-ltm-1070.jpg";
+import imgKato50 from "@/assets/fleet/kato-kr50h.jpg";
+import imgKato25 from "@/assets/fleet/kato-kr25.jpg";
+import imgKato150 from "@/assets/fleet/kato-kr150.jpg";
+import imgSakai900 from "@/assets/fleet/sakai-sv900.jpg";
+import imgSakaiMini from "@/assets/fleet/sakai-mini.jpg";
+import imgDynapac from "@/assets/fleet/dynapac-cc20.jpg";
+import imgBomag from "@/assets/fleet/bomag-bw.jpg";
+import imgHawa from "@/assets/fleet/hawa-tandem.jpg";
+import imgAdvance from "@/assets/fleet/advance-3wheel.jpg";
+import imgCat320 from "@/assets/fleet/cat-320.jpg";
+import imgCatCs54 from "@/assets/fleet/cat-cs54.jpg";
+import imgKomatsu from "@/assets/fleet/komatsu-pc40.jpg";
+import imgCase from "@/assets/fleet/case-770ex.jpg";
+import imgJcb from "@/assets/fleet/jcb-backhoe.jpg";
+import imgXcmg from "@/assets/fleet/xcmg-loader.jpg";
+import imgSupport from "@/assets/fleet/support-tools.jpg";
+import imgTata from "@/assets/fleet/tata-truck.jpg";
 
 export const COMPANY = {
   name: "M/S ATDB Trade International",
@@ -41,7 +61,7 @@ export const COMPANY = {
 
 export const PRIMARY_WHATSAPP = COMPANY.phones[0].whatsapp;
 
-export type EquipmentCategory = "cranes" | "rollers" | "excavators" | "support";
+export type EquipmentCategory = "cranes" | "rollers" | "excavators" | "loaders" | "support";
 
 export interface Equipment {
   id: string;
@@ -52,6 +72,8 @@ export interface Equipment {
   capacity: string;
   origin: string;
   year?: number;
+  fuel?: string;
+  notes?: string;
   image: string;
   featured?: boolean;
 }
@@ -63,69 +85,81 @@ export const CATEGORIES: Record<
   cranes: {
     slug: "cranes",
     label: "Mobile Cranes",
-    label_bn: "ক্রেন",
+    label_bn: "ক্রেন বহর",
     tagline: "7 units · 10T to 120T · Liebherr & Kato",
-    image: craneImg,
+    image: imgLiebherr1120,
   },
   rollers: {
     slug: "rollers",
     label: "Road Rollers",
     label_bn: "রোড রোলার",
     tagline: "9 units · 1T to 12T · Sakai, Dynapac, Bomag",
-    image: rollerImg,
+    image: imgSakai900,
   },
   excavators: {
     slug: "excavators",
-    label: "Excavators & Heavy",
+    label: "Excavators & Compactors",
     label_bn: "এক্সক্যাভেটর",
-    tagline: "6 units · CAT, Komatsu, JCB, CASE",
-    image: excavatorImg,
+    tagline: "3 units · CAT, Komatsu",
+    image: imgCat320,
+  },
+  loaders: {
+    slug: "loaders",
+    label: "Loaders & Backhoes",
+    label_bn: "লোডার ও ব্যাকহো",
+    tagline: "3 units · CASE, XCMG, JCB",
+    image: imgCase,
   },
   support: {
     slug: "support",
     label: "Support Equipment",
     label_bn: "সাপোর্ট ইকুইপমেন্ট",
-    tagline: "Generators, compactors, cutters & drills",
-    image: supportImg,
+    tagline: "Generators, compactors, cutters & TATA trucks",
+    image: imgSupport,
   },
 };
 
 export const FLEET: Equipment[] = [
-  // Cranes
-  { id: "ATDB-CR-001", category: "cranes", name: "Liebherr LTM 1120-5.1", brand: "Liebherr", model: "LTM 1120-5.1", capacity: "120 Tons", origin: "Germany", year: 2005, image: craneImg, featured: true },
-  { id: "ATDB-CR-002", category: "cranes", name: "Liebherr LTM 1070-4.1", brand: "Liebherr", model: "LTM 1070-4.1", capacity: "70 Tons", origin: "Germany", year: 2005, image: craneImg, featured: true },
-  { id: "ATDB-CR-003", category: "cranes", name: "Kato KR-50H-V", brand: "Kato", model: "KR-50H-V", capacity: "50 Tons", origin: "Japan", year: 2003, image: craneImg, featured: true },
-  { id: "ATDB-CR-004", category: "cranes", name: "Kato KR-35H-III", brand: "Kato", model: "KR-35H-III", capacity: "35 Tons", origin: "Japan", year: 2012, image: craneImg },
-  { id: "ATDB-CR-005", category: "cranes", name: "Kato KR-25H-V7", brand: "Kato", model: "KR-25H-V7", capacity: "25 Tons", origin: "Japan", year: 2017, image: craneImg },
-  { id: "ATDB-CR-006", category: "cranes", name: "Kato KR-150", brand: "Kato", model: "KR-150", capacity: "15 Tons", origin: "Japan", image: craneImg },
-  { id: "ATDB-CR-007", category: "cranes", name: "Kato KR-10H", brand: "Kato", model: "KR-10H", capacity: "10 Tons", origin: "Japan", year: 2002, image: craneImg },
+  // ── Cranes ──────────────────────────────────────────────────────────
+  { id: "ATDB-CR-001", category: "cranes", name: "Liebherr LTM 1120-5.1", brand: "Liebherr", model: "LTM 1120-5.1", capacity: "120 Tons", origin: "Germany", year: 2005, fuel: "Diesel", image: imgLiebherr1120, featured: true },
+  { id: "ATDB-CR-002", category: "cranes", name: "Liebherr LTM 1070-4.1", brand: "Liebherr", model: "LTM 1070-4.1", capacity: "70 Tons", origin: "Germany", year: 2005, fuel: "Diesel", image: imgLiebherr1070, featured: true },
+  { id: "ATDB-CR-003", category: "cranes", name: "Kato KR-50H-V", brand: "Kato", model: "KR-50H-V (SS-500SP-V)", capacity: "50 Tons", origin: "Japan", year: 2003, fuel: "Diesel", image: imgKato50, featured: true },
+  { id: "ATDB-CR-004", category: "cranes", name: "Kato KR-35H-III", brand: "Kato", model: "KR-35H-III", capacity: "35 Tons", origin: "Japan", year: 2012, fuel: "Diesel", image: imgKato50 },
+  { id: "ATDB-CR-005", category: "cranes", name: "Kato KR-25H-V7", brand: "Kato", model: "KR-25H-V7", capacity: "25 Tons", origin: "Japan", year: 2017, fuel: "Diesel", image: imgKato25 },
+  { id: "ATDB-CR-006", category: "cranes", name: "Kato KR-150", brand: "Kato", model: "KR-150", capacity: "15 Tons", origin: "Japan", fuel: "Diesel", image: imgKato150 },
+  { id: "ATDB-CR-007", category: "cranes", name: "Kato KR-10H", brand: "Kato", model: "KR-10H", capacity: "10 Tons", origin: "Japan", year: 2002, fuel: "Diesel", image: imgKato25 },
 
-  // Rollers
-  { id: "ATDB-RR-001", category: "rollers", name: "Sakai 10T Roller", brand: "Sakai", model: "SV902", capacity: "10 Ton", origin: "Japan", image: rollerImg, featured: true },
-  { id: "ATDB-RR-002", category: "rollers", name: "Sakai 10T Roller", brand: "Sakai", model: "SV900", capacity: "10 Ton", origin: "Japan", image: rollerImg },
-  { id: "ATDB-RR-003", category: "rollers", name: "Dynapac 10T Roller", brand: "Dynapac", model: "CA250", capacity: "10 Ton", origin: "Sweden", image: rollerImg },
-  { id: "ATDB-RR-004", category: "rollers", name: "Dynapac 12T Roller", brand: "Dynapac", model: "CA302", capacity: "12 Ton", origin: "Sweden", image: rollerImg },
-  { id: "ATDB-RR-005", category: "rollers", name: "Bomag Tandem", brand: "Bomag", model: "BW", capacity: "4/6 Ton", origin: "Germany", image: rollerImg },
-  { id: "ATDB-RR-006", category: "rollers", name: "Hawa Tandem", brand: "Hawa", model: "—", capacity: "4/6 Ton", origin: "Japan", image: rollerImg },
-  { id: "ATDB-RR-007", category: "rollers", name: "Advance Roller", brand: "Advance", model: "—", capacity: "8.5 Ton", origin: "Japan", image: rollerImg },
-  { id: "ATDB-RR-008", category: "rollers", name: "Sakai Mini Tandem", brand: "Sakai", model: "—", capacity: "1/2 Ton", origin: "Japan", image: rollerImg },
-  { id: "ATDB-RR-009", category: "rollers", name: "Sakai Tandem", brand: "Sakai", model: "—", capacity: "3.5/5 Ton", origin: "Japan", image: rollerImg },
+  // ── Road Rollers ───────────────────────────────────────────────────
+  { id: "ATDB-RR-001", category: "rollers", name: "Sakai SV902 3-Wheel Steel", brand: "Sakai", model: "SV902335", capacity: "10 Ton", origin: "Japan", year: 2014, notes: "3 Wheel Steel", image: imgSakai900, featured: true },
+  { id: "ATDB-RR-002", category: "rollers", name: "Sakai RS902 3-Wheel Steel", brand: "Sakai", model: "RS902335", capacity: "10 Ton", origin: "Japan", year: 2014, notes: "3 Wheel Steel", image: imgSakai900 },
+  { id: "ATDB-RR-003", category: "rollers", name: "Dynapac HP890 1-Drum & 2-Tire", brand: "Dynapac", model: "HP89042ST", capacity: "10 Ton", origin: "Sweden", year: 2013, notes: "1 Drum & 2 Tier Wheel", image: imgDynapac },
+  { id: "ATDB-RR-004", category: "rollers", name: "Dynapac CC20 Double Drum", brand: "Dynapac", model: "CC20 (489759)", capacity: "12 Ton", origin: "Italy", year: 2012, notes: "Double Drum", image: imgDynapac, featured: true },
+  { id: "ATDB-RR-005", category: "rollers", name: "Bomag BW Tandem Vibratory", brand: "Bomag", model: "BW121.A.C", capacity: "4/6 Ton", origin: "Germany", year: 2015, notes: "Vibration", image: imgBomag },
+  { id: "ATDB-RR-006", category: "rollers", name: "Hawa JV-40 Tandem", brand: "Hawa", model: "JV-40-CW1", capacity: "4/6 Ton", origin: "Japan", year: 2013, notes: "Vibration", image: imgHawa },
+  { id: "ATDB-RR-007", category: "rollers", name: "Advance 3-Wheel Steel", brand: "Advance", model: "—", capacity: "8.5 Ton", origin: "—", year: 2015, notes: "3 Wheel Steel", image: imgAdvance },
+  { id: "ATDB-RR-008", category: "rollers", name: "Sakai HV60 Mini Tandem", brand: "Sakai", model: "HV 60ST", capacity: "1/2 Ton", origin: "Japan", year: 2015, notes: "2 Drum Steel, Vibration", image: imgSakaiMini },
+  { id: "ATDB-RR-009", category: "rollers", name: "Sakai 920 Tandem Vibratory", brand: "Sakai", model: "920", capacity: "3.5/5 Ton", origin: "Japan", year: 2014, notes: "Drum Steel, Vibration", image: imgSakaiMini },
 
-  // Excavators
-  { id: "ATDB-EX-001", category: "excavators", name: "CAT Soil Compactor", brand: "Caterpillar", model: "CS54B", capacity: "12/18 Ton", origin: "USA", image: excavatorImg },
-  { id: "ATDB-EX-002", category: "excavators", name: "CAT Excavator 320BU", brand: "Caterpillar", model: "320BU", capacity: "20 Ton", origin: "USA", image: excavatorImg, featured: true },
-  { id: "ATDB-EX-003", category: "excavators", name: "Komatsu PC40", brand: "Komatsu", model: "PC40", capacity: "4 Ton", origin: "Japan", image: excavatorImg },
-  { id: "ATDB-EX-004", category: "excavators", name: "CASE Backhoe 770EX", brand: "CASE", model: "770EX", capacity: "Backhoe Loader", origin: "USA", image: backhoeImg, featured: true },
-  { id: "ATDB-EX-005", category: "excavators", name: "XCMG Pay Loader", brand: "XCMG", model: "KMC 950", capacity: "5 Ton Bucket", origin: "China", image: excavatorImg },
-  { id: "ATDB-EX-006", category: "excavators", name: "JCB Backhoe", brand: "JCB", model: "JC 0.6", capacity: "Backhoe Loader", origin: "UK", image: backhoeImg },
+  // ── Excavators & Heavy ─────────────────────────────────────────────
+  { id: "ATDB-EX-001", category: "excavators", name: "CAT CS54 Soil Compactor", brand: "Caterpillar", model: "CAT11020", capacity: "12/18 Ton", origin: "USA", year: 2014, notes: "Vibration", image: imgCatCs54 },
+  { id: "ATDB-EX-002", category: "excavators", name: "CAT 320BU Excavator", brand: "Caterpillar", model: "320BU", capacity: "20 Ton", origin: "Japan", year: 2015, notes: "Chain wheel", image: imgCat320, featured: true },
+  { id: "ATDB-EX-003", category: "excavators", name: "Komatsu PC40 Mini Excavator", brand: "Komatsu", model: "PC40", capacity: "4 Ton", origin: "Japan", year: 2017, notes: "Chain wheel", image: imgKomatsu },
 
-  // Support
-  { id: "ATDB-SP-001", category: "support", name: "Honda Cutting Machines", brand: "Honda", model: "—", capacity: "4 units", origin: "Japan", image: supportImg },
-  { id: "ATDB-SP-002", category: "support", name: "Plate / Sand Compactors", brand: "Mixed", model: "—", capacity: "4 units", origin: "Japan", image: supportImg },
-  { id: "ATDB-SP-003", category: "support", name: "Diesel Generators", brand: "Mixed", model: "—", capacity: "4 units", origin: "—", image: supportImg },
-  { id: "ATDB-SP-004", category: "support", name: "Asphalt Core Cutter", brand: "—", model: "—", capacity: "1 unit", origin: "—", image: supportImg },
-  { id: "ATDB-SP-005", category: "support", name: "Big Drill Hammers", brand: "—", model: "—", capacity: "5 units", origin: "—", image: supportImg },
-  { id: "ATDB-SP-006", category: "support", name: "TATA Drum Trucks", brand: "TATA", model: "—", capacity: "2 units", origin: "India", image: supportImg },
+  // ── Loaders ────────────────────────────────────────────────────────
+  { id: "ATDB-LD-001", category: "loaders", name: "CASE 770EX Backhoe Loader", brand: "CASE", model: "770EX (NKJ-Series)", capacity: "Backhoe Loader", origin: "China", year: 2018, image: imgCase, featured: true },
+  { id: "ATDB-LD-002", category: "loaders", name: "XCMG KMC 950 Pay Loader", brand: "XCMG", model: "KMC 950 (TNV-Series)", capacity: "5 Ton Bucket", origin: "China", year: 2017, image: imgXcmg },
+  { id: "ATDB-LD-003", category: "loaders", name: "JCB JC 0.6 Backhoe Loader", brand: "JCB", model: "JC 0.6", capacity: "Backhoe Loader", origin: "India", year: 2014, image: imgJcb },
+
+  // ── Support ────────────────────────────────────────────────────────
+  { id: "ATDB-SP-001", category: "support", name: "Honda GQR 350 Cutting Machine", brand: "Honda", model: "GQR 350", capacity: "2 units · 2021", origin: "Japan", image: imgSupport },
+  { id: "ATDB-SP-002", category: "support", name: "Honda HSP500C Cutting Machine", brand: "Honda", model: "HSP500C", capacity: "2 units · 2020", origin: "Japan", image: imgSupport },
+  { id: "ATDB-SP-003", category: "support", name: "Honda HZR-90 Plate Compactor", brand: "Honda", model: "HZR-90", capacity: "2 units", origin: "Japan", image: imgSupport },
+  { id: "ATDB-SP-004", category: "support", name: "Honda 80k-100 Sand Compactor", brand: "Honda", model: "80k-100", capacity: "2 units", origin: "Japan", image: imgSupport },
+  { id: "ATDB-SP-005", category: "support", name: "Honda ER2500CX Generator", brand: "Honda", model: "ER2500CX", capacity: "3 units", origin: "Japan", image: imgSupport },
+  { id: "ATDB-SP-006", category: "support", name: "Zhejiang BS8000WT Generator", brand: "Zhejiang", model: "BS8000WT", capacity: "1 unit", origin: "China", image: imgSupport },
+  { id: "ATDB-SP-007", category: "support", name: "Asphalt Core Cutter Honda 700", brand: "Honda", model: "Asphalt Core Cutter 700 RPM", capacity: "1 unit", origin: "Japan", image: imgSupport },
+  { id: "ATDB-SP-008", category: "support", name: "Honda GXCR200ST Drill Hammer", brand: "Honda", model: "GXCR200ST", capacity: "5 units", origin: "Japan", image: imgSupport },
+  { id: "ATDB-SP-009", category: "support", name: "TATA T7 Ultra Drum Truck", brand: "TATA", model: "T7 Ultra", capacity: "2 units", origin: "India", image: imgTata },
 ];
 
 export const FEATURED = FLEET.filter((e) => e.featured);
@@ -138,6 +172,9 @@ export function getEquipmentById(id: string) {
   return FLEET.find((e) => e.id.toLowerCase() === id.toLowerCase());
 }
 
+// Re-export legacy fallback assets so other files keep working
+export { craneImg, rollerImg, excavatorImg, supportImg };
+
 export function buildWhatsappRentLink(eq: Equipment) {
   const msg = `আমি ${eq.name} (${eq.id}) ভাড়া নিতে চাই।\n\nI'd like to rent the ${eq.name} (${eq.id} · ${eq.capacity}).\nProject location: \nDuration (days): \nPlease send a quotation. — ATDB website`;
   return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(msg)}`;
@@ -148,4 +185,41 @@ export function buildWhatsappGenericLink(text?: string) {
     text ??
     `Hello ATDB Trade International,\n\nI'd like to discuss a heavy-equipment rental for an upcoming project. Please share availability and a quotation.`;
   return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+}
+
+// ── Cart → consolidated WhatsApp quotation ────────────────────────────
+export interface CartItem {
+  id: string;
+  name: string;
+  capacity: string;
+  qty: number;
+}
+
+export interface CartProject {
+  location?: string;
+  startDate?: string;
+  endDate?: string;
+  notes?: string;
+}
+
+export function buildWhatsappCartLink(items: CartItem[], project: CartProject) {
+  const lines: string[] = [];
+  lines.push("Hello ATDB Trade International,");
+  lines.push("");
+  lines.push("I'd like a quotation for the following equipment:");
+  lines.push("");
+  items.forEach((it, i) => {
+    lines.push(`${i + 1}. ${it.name}  ·  ${it.capacity}  ·  Qty: ${it.qty}  (${it.id})`);
+  });
+  lines.push("");
+  if (project.location) lines.push(`📍 Project location: ${project.location}`);
+  if (project.startDate) lines.push(`📅 Start date: ${project.startDate}`);
+  if (project.endDate) lines.push(`📅 End date: ${project.endDate}`);
+  if (project.notes) {
+    lines.push("");
+    lines.push(`Notes: ${project.notes}`);
+  }
+  lines.push("");
+  lines.push("Please share availability and pricing. — ATDB website");
+  return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(lines.join("\n"))}`;
 }

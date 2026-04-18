@@ -109,6 +109,7 @@ export const TRANSLATIONS: Dict = {
   "footer.contact": { en: "Contact", bn: "যোগাযোগ" },
   "footer.tagline": { en: "Bangladesh's premier heavy equipment rental partner. Since 2000.", bn: "বাংলাদেশের সেরা হেভি ইকুইপমেন্ট রেন্টাল পার্টনার। ২০০০ সাল থেকে।" },
   "footer.rights": { en: "All rights reserved.", bn: "সর্বস্বত্ব সংরক্ষিত।" },
+  "footer.credit": { en: "A SAZID HOSSAIN ARCHITECTURE", bn: "একটি সাজিদ হোসেন স্থাপত্য" },
 
   // Cart
   "common.addToQuote": { en: "Add to quote", bn: "কোটেশনে যোগ করুন" },

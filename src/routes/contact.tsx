@@ -1,12 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
-import { Phone, Mail, MapPin } from "lucide-react";
-import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
+import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact ATDB Trade International — WhatsApp, Phone & Office Locations" },
+      { title: "Contact ATDB Trade International — WhatsApp, Phone & Quote Form" },
       { name: "description", content: "Reach ATDB Trade International for heavy equipment rental quotations. WhatsApp +8801712106242. Offices in Dhaka and Tangail." },
       { property: "og:title", content: "Contact ATDB Trade International" },
     ],
@@ -14,87 +16,344 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
+type Status = "idle" | "submitting" | "success" | "error" | "rate_limited";
+
 function ContactPage() {
+  const { t, lang } = useI18n();
+  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+
+  const [status, setStatus] = useState<Status>("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    project_location: "",
+    equipment_interest: "",
+    message: "",
+    website: "", // honeypot
+  });
+
+  const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrors({});
+    setStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, source: "contact_page" }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.status === 429) {
+        setStatus("rate_limited");
+        return;
+      }
+      if (!res.ok) {
+        if (data?.issues?.fieldErrors) {
+          const fe: Record<string, string> = {};
+          for (const [k, v] of Object.entries<string[]>(data.issues.fieldErrors)) {
+            if (v?.[0]) fe[k] = v[0];
+          }
+          setErrors(fe);
+        }
+        setStatus("error");
+        return;
+      }
+      setStatus("success");
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        project_location: "",
+        equipment_interest: "",
+        message: "",
+        website: "",
+      });
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <Layout>
-      <section className="bg-iron-deep py-24 text-white">
+      {/* Hero */}
+      <section className="bg-iron-deep py-20 text-white md:py-24">
         <div className="container-page">
-          <p className="eyebrow !text-bronze-glow">Contact</p>
-          <h1 className="mt-2 max-w-3xl font-display text-4xl font-bold text-white md:text-5xl">
-            Get a quotation in minutes — straight on WhatsApp.
+          <p className="eyebrow !text-bronze-glow">{t("nav.contact")}</p>
+          <h1 className={`mt-2 max-w-3xl text-3xl font-bold text-white sm:text-4xl md:text-5xl ${fontClass}`}>
+            {t("contact.title")}
           </h1>
-          <p className="mt-4 max-w-2xl text-white/75">
-            Tell us your equipment, location and dates. Our team responds with availability and pricing — usually within the hour during business days.
-          </p>
+          <p className="mt-4 max-w-2xl text-base text-white/75 md:text-lg">{t("contact.sub")}</p>
           <a
             href={buildWhatsappGenericLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-sm bg-whatsapp px-7 py-4 font-display text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px"
+            className={`mt-8 inline-flex items-center gap-2 rounded-sm bg-whatsapp px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
           >
-            Open WhatsApp
+            {t("common.openWhatsapp")}
           </a>
         </div>
       </section>
 
-      <section className="bg-background py-20">
-        <div className="container-page grid gap-10 lg:grid-cols-2">
-          <div>
-            <p className="eyebrow">Direct Lines</p>
-            <h2 className="mt-2 font-display text-2xl font-bold text-iron md:text-3xl">Speak to leadership.</h2>
-            <ul className="mt-6 space-y-3">
-              {COMPANY.phones.map((p) => (
-                <li key={p.number}>
-                  <a href={`tel:${p.number}`} className="flex items-center justify-between rounded-md border border-border bg-card px-5 py-4 shadow-card transition-colors hover:border-safety">
-                    <div className="flex items-center gap-3">
-                      <div className="grid h-10 w-10 place-items-center rounded-sm bg-gradient-safety text-white">
-                        <Phone className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="font-display text-sm font-semibold text-iron">{p.number}</p>
-                        <p className="text-xs text-muted-foreground">{p.label}</p>
-                      </div>
-                    </div>
-                    <span className="font-display text-xs font-semibold uppercase tracking-wider text-safety">Call</span>
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-3 rounded-md border border-border bg-card px-5 py-4 shadow-card transition-colors hover:border-safety">
-                  <div className="grid h-10 w-10 place-items-center rounded-sm bg-gradient-iron text-white">
-                    <Mail className="h-4 w-4" />
+      <section className="bg-background py-16 md:py-20">
+        <div className="container-page grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+          {/* FORM */}
+          <div className="rounded-md border border-border bg-card p-6 shadow-card md:p-8">
+            <p className="eyebrow">{t("contact.eyebrow")}</p>
+            <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>
+              {t("contact.title")}
+            </h2>
+
+            {status === "success" ? (
+              <div className="mt-8 rounded-md border border-success/30 bg-success/10 p-6">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-success" />
+                  <div>
+                    <p className={`text-base font-bold text-success ${fontClass}`}>{t("contact.success.t")}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{t("contact.success.d")}</p>
+                    <button
+                      type="button"
+                      onClick={() => setStatus("idle")}
+                      className="mt-4 text-sm font-semibold text-safety hover:underline"
+                    >
+                      ← {t("contact.submit")}
+                    </button>
                   </div>
-                  <p className="font-display text-sm font-semibold text-iron">{COMPANY.email}</p>
-                </a>
-              </li>
-            </ul>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
+                {/* Honeypot */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={update("website")}
+                  className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                  aria-hidden="true"
+                />
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label={t("contact.name")} name="name" required value={form.name} onChange={update("name")} error={errors.name} fontClass={fontClass} />
+                  <Field label={t("contact.email")} name="email" type="email" required value={form.email} onChange={update("email")} error={errors.email} fontClass={fontClass} />
+                  <Field label={t("contact.phone")} name="phone" type="tel" value={form.phone} onChange={update("phone")} error={errors.phone} fontClass={fontClass} />
+                  <Field label={t("contact.company")} name="company" value={form.company} onChange={update("company")} error={errors.company} fontClass={fontClass} />
+                  <Field label={t("contact.location")} name="project_location" value={form.project_location} onChange={update("project_location")} error={errors.project_location} fontClass={fontClass} />
+                  <SelectField
+                    label={t("contact.equipment")}
+                    name="equipment_interest"
+                    value={form.equipment_interest}
+                    onChange={update("equipment_interest")}
+                    error={errors.equipment_interest}
+                    fontClass={fontClass}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className={`mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground ${fontClass}`}>
+                    {t("contact.message")} <span className="text-safety">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    minLength={10}
+                    maxLength={2000}
+                    rows={5}
+                    value={form.message}
+                    onChange={update("message")}
+                    placeholder={t("contact.message.ph")}
+                    className={`w-full resize-none rounded-sm border bg-background px-4 py-3 text-sm text-iron transition-colors focus:outline-none ${
+                      errors.message ? "border-destructive focus:border-destructive" : "border-border focus:border-safety"
+                    }`}
+                  />
+                  {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message}</p>}
+                </div>
+
+                {status === "error" && (
+                  <div className="flex items-start gap-2 rounded-sm border border-destructive/30 bg-destructive/10 p-3">
+                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+                    <p className="text-sm text-destructive">{t("contact.error")}</p>
+                  </div>
+                )}
+                {status === "rate_limited" && (
+                  <div className="flex items-start gap-2 rounded-sm border border-warning/30 bg-warning/10 p-3">
+                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
+                    <p className="text-sm text-warning">{t("contact.rate")}</p>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className={`inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gradient-safety px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto ${fontClass}`}
+                >
+                  <Send className="h-4 w-4" />
+                  {status === "submitting" ? t("contact.submitting") : t("contact.submit")}
+                </button>
+              </form>
+            )}
           </div>
 
-          <div>
-            <p className="eyebrow">Offices</p>
-            <h2 className="mt-2 font-display text-2xl font-bold text-iron md:text-3xl">Dhaka & Tangail.</h2>
-            <ul className="mt-6 space-y-4">
-              {COMPANY.offices.map((o) => (
-                <li key={o.city} className="rounded-md border border-border bg-card p-6 shadow-card border-safety-top">
-                  <div className="flex items-start gap-3">
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-gradient-iron text-white">
-                      <MapPin className="h-4 w-4" />
+          {/* SIDEBAR */}
+          <div className="space-y-8">
+            <div>
+              <p className="eyebrow">Direct Lines</p>
+              <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>Speak to leadership.</h2>
+              <ul className="mt-5 space-y-3">
+                {COMPANY.phones.map((p) => (
+                  <li key={p.number}>
+                    <a href={`tel:${p.number}`} className="flex items-center justify-between rounded-md border border-border bg-card px-4 py-3.5 shadow-card transition-colors hover:border-safety">
+                      <div className="flex items-center gap-3">
+                        <div className="grid h-10 w-10 place-items-center rounded-sm bg-gradient-safety text-white">
+                          <Phone className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <p className="font-display text-sm font-semibold text-iron">{p.number}</p>
+                          <p className="text-xs text-muted-foreground">{p.label}</p>
+                        </div>
+                      </div>
+                      <span className="font-display text-[10px] font-semibold uppercase tracking-wider text-safety">Call</span>
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-3 rounded-md border border-border bg-card px-4 py-3.5 shadow-card transition-colors hover:border-safety">
+                    <div className="grid h-10 w-10 place-items-center rounded-sm bg-gradient-iron text-white">
+                      <Mail className="h-4 w-4" />
                     </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-safety">{o.label}</p>
-                      <p className="mt-1 font-display text-lg font-semibold text-iron">{o.city}</p>
-                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{o.address}</p>
-                    </div>
-                  </div>
+                    <p className="font-display text-sm font-semibold text-iron break-all">{COMPANY.email}</p>
+                  </a>
                 </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-xs text-muted-foreground">
-              TIN {COMPANY.tin} · VAT {COMPANY.vat}
-            </p>
+              </ul>
+            </div>
+
+            <div>
+              <p className="eyebrow">{t("footer.offices")}</p>
+              <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>Dhaka & Tangail.</h2>
+              <ul className="mt-5 space-y-4">
+                {COMPANY.offices.map((o) => (
+                  <li key={o.city} className="rounded-md border border-border bg-card p-5 shadow-card border-safety-top">
+                    <div className="flex items-start gap-3">
+                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-gradient-iron text-white">
+                        <MapPin className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-safety">{o.label}</p>
+                        <p className="mt-0.5 font-display text-base font-semibold text-iron">{o.city}</p>
+                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{o.address}</p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-xs text-muted-foreground">
+                TIN {COMPANY.tin} · VAT {COMPANY.vat}
+              </p>
+            </div>
           </div>
         </div>
       </section>
     </Layout>
+  );
+}
+
+function Field({
+  label,
+  name,
+  value,
+  onChange,
+  type = "text",
+  required,
+  error,
+  fontClass,
+}: {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+  required?: boolean;
+  error?: string;
+  fontClass: string;
+}) {
+  return (
+    <div>
+      <label htmlFor={name} className={`mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground ${fontClass}`}>
+        {label} {required && <span className="text-safety">*</span>}
+      </label>
+      <input
+        id={name}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        required={required}
+        className={`w-full rounded-sm border bg-background px-4 py-2.5 text-sm text-iron transition-colors focus:outline-none ${
+          error ? "border-destructive focus:border-destructive" : "border-border focus:border-safety"
+        }`}
+      />
+      {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
+    </div>
+  );
+}
+
+function SelectField({
+  label,
+  name,
+  value,
+  onChange,
+  error,
+  fontClass,
+}: {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  error?: string;
+  fontClass: string;
+}) {
+  // Group brands for quick selection
+  const brands = Array.from(new Set(FLEET.map((f) => f.brand))).sort();
+  return (
+    <div>
+      <label htmlFor={name} className={`mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground ${fontClass}`}>
+        {label}
+      </label>
+      <select
+        id={name}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={`w-full rounded-sm border bg-background px-4 py-2.5 text-sm text-iron transition-colors focus:outline-none ${
+          error ? "border-destructive focus:border-destructive" : "border-border focus:border-safety"
+        }`}
+      >
+        <option value="">—</option>
+        <optgroup label="Categories">
+          <option value="Mobile Cranes">Mobile Cranes</option>
+          <option value="Road Rollers">Road Rollers</option>
+          <option value="Excavators">Excavators</option>
+          <option value="Loaders & Backhoes">Loaders & Backhoes</option>
+          <option value="Support Equipment">Support Equipment</option>
+        </optgroup>
+        <optgroup label="Brands">
+          {brands.map((b) => (
+            <option key={b} value={b}>{b}</option>
+          ))}
+        </optgroup>
+      </select>
+      {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
+    </div>
   );
 }

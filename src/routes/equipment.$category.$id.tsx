@@ -268,14 +268,6 @@ function Gallery({ images, alt }: { images: string[]; alt: string }) {
   );
 }
 
-function SpecRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-start justify-between gap-6 bg-card px-6 py-4">
-      <dt className="font-display text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">{label}</dt>
-      <dd className="text-right font-display text-sm font-semibold text-iron">{value}</dd>
-    </div>
-  );
-}
 
 function Highlight({ icon: Icon, title, value }: { icon: React.ComponentType<{ className?: string }>; title: string; value: string }) {
   return (

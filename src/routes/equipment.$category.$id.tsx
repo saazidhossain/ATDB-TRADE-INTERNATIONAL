@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ChevronRight, ShieldCheck, BadgeCheck, Phone, MapPin, Calendar, Plus, Check } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard } from "@/components/atdb/EquipmentCard";
+import { SpecGroupsAccordion } from "@/components/atdb/SpecGroups";
+import { ReviewsSection, SAMPLE_REVIEWS, reviewAggregate } from "@/components/atdb/Reviews";
 import {
   CATEGORIES,
   FLEET,
@@ -67,6 +69,20 @@ export const Route = createFileRoute("/equipment/$category/$id")({
         ...(eq.year ? [{ "@type": "PropertyValue", name: "Year", value: String(eq.year) }] : []),
         { "@type": "PropertyValue", name: "Inspection", value: "City Inspection Services CIS/077/2018" },
       ],
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: reviewAggregate.rating.toFixed(1),
+        reviewCount: reviewAggregate.count,
+        bestRating: "5",
+        worstRating: "1",
+      },
+      review: SAMPLE_REVIEWS.map((r) => ({
+        "@type": "Review",
+        reviewRating: { "@type": "Rating", ratingValue: String(r.rating), bestRating: "5" },
+        author: { "@type": "Person", name: r.author },
+        datePublished: r.date,
+        reviewBody: r.content,
+      })),
     };
     return {
       meta: [
@@ -178,24 +194,17 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
-      {/* Specs */}
+      {/* Specs — collapsible groups */}
       <section className="bg-muted/40 py-16 md:py-20">
         <div className="container-page">
           <p className="eyebrow">{t("detail.specs")}</p>
           <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{eq.name}</h2>
-
-          <dl className="mt-8 grid gap-px overflow-hidden rounded-md border border-border bg-border md:grid-cols-2">
-            <SpecRow label={t("detail.spec.id")} value={eq.id} />
-            <SpecRow label={t("detail.spec.brand")} value={eq.brand} />
-            <SpecRow label={t("detail.spec.model")} value={eq.model} />
-            <SpecRow label={t("detail.spec.capacity")} value={eq.capacity} />
-            <SpecRow label={t("detail.spec.origin")} value={eq.origin} />
-            <SpecRow label={t("detail.spec.year")} value={eq.year ? String(eq.year) : "—"} />
-            <SpecRow label={t("detail.spec.category")} value={cat.label} />
-            <SpecRow label={t("detail.spec.operator")} value={t("detail.spec.operator.v")} />
-          </dl>
+          <SpecGroupsAccordion eq={eq} />
         </div>
       </section>
+
+      {/* Reviews */}
+      <ReviewsSection />
 
       {/* Sticky CTA */}
       <section className="bg-gradient-safety py-14 text-white">
@@ -259,14 +268,6 @@ function Gallery({ images, alt }: { images: string[]; alt: string }) {
   );
 }
 
-function SpecRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-start justify-between gap-6 bg-card px-6 py-4">
-      <dt className="font-display text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">{label}</dt>
-      <dd className="text-right font-display text-sm font-semibold text-iron">{value}</dd>
-    </div>
-  );
-}
 
 function Highlight({ icon: Icon, title, value }: { icon: React.ComponentType<{ className?: string }>; title: string; value: string }) {
   return (

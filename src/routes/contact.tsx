@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
@@ -264,7 +264,99 @@ function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Maps — Dhaka ↔ Tangail toggle */}
+      <OfficeMaps />
     </Layout>
+  );
+}
+
+const MAP_URLS: Record<"dhaka" | "tangail", string> = {
+  dhaka:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.6273418576404!2d90.37255151543208!3d23.796245293027963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0cd9dc76d75%3A0x8e1aecdfe7dd29d8!2sEast%20Kazipara%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1684000000000!5m2!1sen!2sbd",
+  tangail:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3637.3879796264906!2d89.91264251544265!3d24.263172074813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fdfb5a2bf8fb53%3A0xe5a3c61aa0de4c6f!2sBoro%20Kalibari%20Rd%2C%20Tangail!5e0!3m2!1sen!2sbd!4v1684000000000!5m2!1sen!2sbd",
+};
+
+const DIRECTIONS_URLS: Record<"dhaka" | "tangail", string> = {
+  dhaka: "https://www.google.com/maps/dir/?api=1&destination=East+Kazipara+Kafrul+Dhaka+1216",
+  tangail: "https://www.google.com/maps/dir/?api=1&destination=Boro+Kalibari+Road+Tangail+1900",
+};
+
+function OfficeMaps() {
+  const { t, lang } = useI18n();
+  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const [active, setActive] = useState<"dhaka" | "tangail">("dhaka");
+  const office = COMPANY.offices.find((o) => o.city.toLowerCase() === active) ?? COMPANY.offices[0];
+
+  return (
+    <section className="bg-muted/40 py-16 md:py-20">
+      <div className="container-page">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow">{t("maps.eyebrow")}</p>
+            <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{t("maps.title")}</h2>
+          </div>
+          <div className="inline-flex rounded-md border border-border bg-card p-1 shadow-card">
+            {(["dhaka", "tangail"] as const).map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setActive(c)}
+                aria-pressed={active === c}
+                className={`rounded-sm px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${fontClass} ${
+                  active === c
+                    ? "bg-gradient-safety text-white shadow-cta"
+                    : "text-iron/70 hover:text-iron"
+                }`}
+              >
+                {c === "dhaka" ? t("maps.dhaka") : t("maps.tangail")}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
+          <div className="overflow-hidden rounded-md border border-border bg-card shadow-card">
+            <iframe
+              key={active}
+              title={`ATDB ${office.label} map`}
+              src={MAP_URLS[active]}
+              width="100%"
+              height="420"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="block w-full animate-fade-in"
+            />
+          </div>
+
+          <aside className="rounded-md border border-border bg-card p-6 shadow-card border-safety-top">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-safety">{office.label}</p>
+            <p className={`mt-1 font-display text-xl font-bold text-iron ${fontClass}`}>{office.city}</p>
+            <p className="mt-3 flex items-start gap-2 text-sm leading-relaxed text-muted-foreground">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-bronze-glow" />
+              {office.address}
+            </p>
+            <a
+              href={DIRECTIONS_URLS[active]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gradient-safety px-4 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
+            >
+              {t("maps.directions")} <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href={`tel:${COMPANY.phones[0].number}`}
+              className={`mt-2 inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-iron/15 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-iron transition-colors hover:border-iron hover:bg-iron hover:text-white ${fontClass}`}
+            >
+              <Phone className="h-3.5 w-3.5" /> {COMPANY.phones[0].number}
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
   );
 }
 

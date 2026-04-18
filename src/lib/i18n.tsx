@@ -103,6 +103,25 @@ export const TRANSLATIONS: Dict = {
   "detail.related": { en: "Related Equipment", bn: "সম্পর্কিত ইকুইপমেন্ট" },
   "detail.notFound": { en: "Equipment not found", bn: "ইকুইপমেন্ট পাওয়া যায়নি" },
 
+  // Spec groups
+  "specs.dimensions": { en: "Dimensions", bn: "মাত্রা" },
+  "specs.performance": { en: "Performance", bn: "পারফরম্যান্স" },
+  "specs.engine": { en: "Engine & Power", bn: "ইঞ্জিন ও পাওয়ার" },
+  "specs.safety": { en: "Safety & Compliance", bn: "সেফটি ও কমপ্লায়েন্স" },
+
+  // Reviews
+  "reviews.eyebrow": { en: "Customer Reviews", bn: "কাস্টমার রিভিউ" },
+  "reviews.title": { en: "Trusted by Bangladesh's biggest builders.", bn: "বাংলাদেশের শীর্ষ নির্মাতাদের আস্থা।" },
+  "reviews.based": { en: "based on", bn: "মোট" },
+  "reviews.count": { en: "verified projects", bn: "ভেরিফায়েড প্রজেক্ট" },
+
+  // Maps
+  "maps.eyebrow": { en: "Find Us", bn: "আমাদের খুঁজুন" },
+  "maps.title": { en: "Two offices, one team.", bn: "দুটি অফিস, এক টিম।" },
+  "maps.dhaka": { en: "Dhaka HQ", bn: "ঢাকা হেডকোয়ার্টার" },
+  "maps.tangail": { en: "Tangail Branch", bn: "টাঙ্গাইল শাখা" },
+  "maps.directions": { en: "Get Directions", bn: "ডিরেকশন নিন" },
+
   // Footer
   "footer.explore": { en: "Explore", bn: "অন্বেষণ" },
   "footer.offices": { en: "Offices", bn: "অফিস" },

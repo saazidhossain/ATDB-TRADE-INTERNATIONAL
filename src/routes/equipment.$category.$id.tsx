@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ChevronRight, ShieldCheck, BadgeCheck, Phone, MapPin, Calendar, Plus, Check } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard } from "@/components/atdb/EquipmentCard";
+import { SpecGroupsAccordion } from "@/components/atdb/SpecGroups";
+import { ReviewsSection, SAMPLE_REVIEWS, reviewAggregate } from "@/components/atdb/Reviews";
 import {
   CATEGORIES,
   FLEET,

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
-import logo from "@/assets/logo-atdb.png";
+import logo from "@/assets/brand/atdb-logo-dark.webp";
 import { COMPANY } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 
@@ -19,13 +19,7 @@ export function SiteFooter() {
     <footer className="bg-gradient-iron text-white/85">
       <div className="container-page grid gap-12 py-16 md:grid-cols-4">
         <div className="md:col-span-1">
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="" width={48} height={48} className="h-12 w-12 object-contain" />
-            <div>
-              <p className="font-display text-base font-bold text-white">ATDB</p>
-              <p className="text-[11px] uppercase tracking-[0.2em] text-bronze-glow">Trade International</p>
-            </div>
-          </div>
+          <img src={logo} alt="ATDB Trade International" width={220} height={64} className="h-14 w-auto object-contain" />
           <p className={`mt-5 max-w-xs text-sm leading-relaxed text-white/65 ${fontClass}`}>
             {t("footer.tagline")}
           </p>

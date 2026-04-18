@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { CATEGORIES, FLEET } from "@/lib/atdb-data";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/equipment/")({
   head: () => ({
@@ -19,16 +20,18 @@ export const Route = createFileRoute("/equipment/")({
 });
 
 function EquipmentIndex() {
+  const { t, lang } = useI18n();
+  const fontClass = lang === "bn" ? "font-bn" : "font-display";
   return (
     <Layout>
       <section className="bg-iron-deep py-20 text-white">
         <div className="container-page">
-          <p className="eyebrow !text-bronze-glow">Equipment</p>
-          <h1 className="mt-2 max-w-3xl font-display text-4xl font-bold text-white md:text-5xl">
-            A certified fleet of {FLEET.length} machines, ready to mobilise.
+          <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("eq.eyebrow")}</p>
+          <h1 className={`mt-2 max-w-3xl text-4xl font-bold text-white md:text-5xl ${fontClass}`}>
+            {t("eq.title")}
           </h1>
-          <p className="mt-4 max-w-2xl text-white/75">
-            From 120-tonne mobile cranes to road rollers, excavators and on-site support equipment — every unit is inspection-certified and operator-supported.
+          <p className={`mt-4 max-w-2xl text-white/80 ${fontClass}`}>
+            {t("eq.sub")}
           </p>
         </div>
       </section>
@@ -49,9 +52,9 @@ function EquipmentIndex() {
                 <div className="p-6 text-white md:p-8">
                   <p className="font-bn text-sm text-bronze-glow">{c.label_bn}</p>
                   <h2 className="mt-1 font-display text-2xl font-bold text-white md:text-3xl">{c.label}</h2>
-                  <p className="mt-1 text-sm text-white/80">{count} units · {c.tagline}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 font-display text-xs font-semibold uppercase tracking-wider text-safety">
-                    Explore Category <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  <p className="mt-1 text-sm text-white/80">{count} {t("common.units")} · {c.tagline}</p>
+                  <span className={`mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-safety ${fontClass}`}>
+                    {t("common.exploreCategory")} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>

@@ -1,26 +1,246 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, ShieldCheck, Zap, Wrench, BadgeCheck } from "lucide-react";
+import { Layout } from "@/components/atdb/Layout";
+import { EquipmentCard } from "@/components/atdb/EquipmentCard";
+import {
+  CATEGORIES,
+  COMPANY,
+  FEATURED,
+  buildWhatsappGenericLink,
+} from "@/lib/atdb-data";
+import heroImg from "@/assets/hero-crane.jpg";
+import projectRoad from "@/assets/project-road.jpg";
+import projectBridge from "@/assets/project-bridge.jpg";
+import projectPharma from "@/assets/project-pharma.jpg";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "ATDB Trade International — Heavy Equipment Rental in Bangladesh" },
+      {
+        name: "description",
+        content:
+          "Bangladesh's premier heavy equipment rental partner since 2000. Cranes, road rollers, excavators, and support equipment. Instant WhatsApp quotation.",
+      },
+      { property: "og:title", content: "ATDB Trade International — Heavy Equipment Rental" },
+      {
+        property: "og:description",
+        content:
+          "26 years of certified fleet operations across Bangladesh. Liebherr, Kato, Sakai, CAT, Komatsu, JCB, CASE.",
+      },
+      { property: "og:image", content: heroImg },
+      { name: "twitter:image", content: heroImg },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+const PILLARS = [
+  { icon: ShieldCheck, title: "Reliable Fleet", desc: "26 years of mission-critical maintenance and operator training keep every unit job-ready." },
+  { icon: BadgeCheck, title: "Safety First", desc: "City Inspection Services certified equipment. ISO-aligned operating protocols on every site." },
+  { icon: Zap, title: "Instant WhatsApp Service", desc: "Direct line to leadership. Quotations and confirmations in minutes, not days." },
+  { icon: Wrench, title: "Transparent Pricing", desc: "Simple per-day & per-project rates. No hidden mobilisation or fuel surprises." },
+];
+
+const PROJECTS = [
+  { img: projectRoad, label: "RTIP-2 · Ghatail, Tangail" },
+  { img: projectBridge, label: "Jamuna Bridge Approach" },
+  { img: projectPharma, label: "Pharma Ashia · Centeon Pharma" },
+];
 
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <Layout>
+      {/* HERO */}
+      <section className="relative isolate overflow-hidden bg-iron-deep text-white">
+        <img
+          src={heroImg}
+          alt="Liebherr LTM mobile crane on a Bangladesh construction site at dawn"
+          width={1920}
+          height={1280}
+          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-65"
+        />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,oklch(0.18_0.018_240/0.55)_0%,oklch(0.18_0.018_240/0.92)_100%)]" />
+        <div className="container-page flex min-h-[88vh] flex-col justify-end pb-20 pt-32 md:min-h-[92vh] md:pb-28">
+          <p className="eyebrow !text-bronze-glow">Since {COMPANY.founded} · Dhaka & Tangail, Bangladesh</p>
+          <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.05] text-balance text-white md:text-6xl lg:text-7xl">
+            Bangladesh's premier <span className="text-safety">heavy equipment</span> rental partner.
+          </h1>
+          <p className="mt-3 max-w-2xl font-bn text-lg text-white/85 md:text-xl">
+            বাংলাদেশের সেরা হেভি ইকুইপমেন্ট রেন্টাল পার্টনার
+          </p>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
+            Cranes · Road Rollers · Excavators · Support Equipment. A certified, government-compliant fleet ready for your next project.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/equipment"
+              className="inline-flex items-center gap-2 rounded-sm bg-gradient-safety px-7 py-4 font-display text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px"
+            >
+              Browse Equipment <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href={buildWhatsappGenericLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-sm border-2 border-white/80 px-7 py-4 font-display text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-iron"
+            >
+              WhatsApp a Quote
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* TRUST BAR */}
+      <section className="bg-iron text-white">
+        <div className="container-page grid grid-cols-2 gap-y-8 py-10 md:grid-cols-4">
+          {[
+            { n: `${COMPANY.yearsOperating}+`, l: "Years Experience", bn: "বছর অভিজ্ঞতা" },
+            { n: "30+", l: "Equipment Units", bn: "ইকুইপমেন্ট" },
+            { n: `${COMPANY.staff}`, l: "Skilled Staff", bn: "দক্ষ কর্মী" },
+            { n: "2", l: "Office Locations", bn: "অফিস" },
+          ].map((s) => (
+            <div key={s.l} className="border-l-2 border-bronze pl-5">
+              <p className="font-display text-4xl font-bold text-white md:text-5xl">{s.n}</p>
+              <p className="mt-1 font-display text-xs font-medium uppercase tracking-[0.18em] text-white/65">{s.l}</p>
+              <p className="font-bn text-xs text-bronze-glow/90">{s.bn}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CATEGORIES */}
+      <section className="bg-background py-20 md:py-28">
+        <div className="container-page">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <p className="eyebrow">Our Equipment</p>
+              <h2 className="mt-2 font-display text-3xl font-bold text-iron md:text-4xl">
+                A complete fleet for every job site.
+              </h2>
+            </div>
+            <Link to="/equipment" className="hidden items-center gap-1 font-display text-sm font-semibold text-safety hover:text-safety-deep md:inline-flex">
+              View all <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {Object.values(CATEGORIES).map((c) => (
+              <Link
+                key={c.slug}
+                to="/equipment/$category"
+                params={{ category: c.slug }}
+                className="group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-md border-safety-top shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover"
+              >
+                <img src={c.image} alt={c.label} loading="lazy" className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-iron-deep via-iron-deep/70 to-transparent" />
+                <div className="p-6 text-white">
+                  <p className="font-bn text-sm text-bronze-glow">{c.label_bn}</p>
+                  <h3 className="mt-1 font-display text-xl font-bold text-white">{c.label}</h3>
+                  <p className="mt-1 text-xs text-white/75">{c.tagline}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 font-display text-xs font-semibold uppercase tracking-wider text-safety transition-transform group-hover:translate-x-1">
+                    Explore <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED */}
+      <section className="bg-muted/40 py-20 md:py-28">
+        <div className="container-page">
+          <p className="eyebrow">Featured Equipment</p>
+          <h2 className="mt-2 max-w-2xl font-display text-3xl font-bold text-iron md:text-4xl">
+            Flagship machines from our certified fleet.
+          </h2>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURED.map((eq) => (
+              <EquipmentCard key={eq.id} eq={eq} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY ATDB */}
+      <section className="bg-background py-20 md:py-28">
+        <div className="container-page">
+          <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
+            <div>
+              <p className="eyebrow">Why ATDB</p>
+              <h2 className="mt-2 font-display text-3xl font-bold text-iron md:text-4xl">
+                A partner contractors return to, project after project.
+              </h2>
+              <p className="mt-4 text-base text-muted-foreground">
+                We've spent {COMPANY.yearsOperating}+ years earning the trust of Bangladesh's largest road, bridge, pharma and industrial developers — through certified equipment, disciplined operations, and zero-friction WhatsApp service.
+              </p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2">
+              {PILLARS.map((p) => (
+                <div key={p.title} className="rounded-md border border-border bg-card p-6 shadow-card">
+                  <div className="grid h-11 w-11 place-items-center rounded-sm bg-gradient-safety text-white">
+                    <p.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-display text-lg font-semibold text-iron">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROJECTS STRIP */}
+      <section className="bg-iron-deep py-20 text-white md:py-28">
+        <div className="container-page">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow !text-bronze-glow">Project Highlights</p>
+              <h2 className="mt-2 font-display text-3xl font-bold text-white md:text-4xl">
+                Powering Bangladesh's biggest builds.
+              </h2>
+            </div>
+            <Link to="/projects" className="inline-flex items-center gap-1 font-display text-sm font-semibold text-safety hover:text-bronze-glow">
+              View all projects <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {PROJECTS.map((p) => (
+              <figure key={p.label} className="group relative aspect-[4/5] overflow-hidden rounded-md">
+                <img src={p.img} alt={p.label} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-iron-deep/95 via-iron-deep/30 to-transparent" />
+                <figcaption className="absolute bottom-0 left-0 right-0 p-5 font-display text-sm font-semibold text-white">
+                  {p.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-gradient-safety py-16 text-white">
+        <div className="container-page flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+          <div>
+            <h2 className="font-display text-3xl font-bold text-white md:text-4xl">
+              Ready to mobilise? Get a quote in minutes.
+            </h2>
+            <p className="mt-2 max-w-xl text-white/90">
+              Tell us your equipment, location and dates on WhatsApp — we'll respond with availability and pricing.
+            </p>
+          </div>
+          <a
+            href={buildWhatsappGenericLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-sm bg-iron-deep px-7 py-4 font-display text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px"
+          >
+            Start on WhatsApp <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+      </section>
+    </Layout>
+  );
 }

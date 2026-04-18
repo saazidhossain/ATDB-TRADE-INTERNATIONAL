@@ -178,12 +178,6 @@ function EquipmentDetailPage() {
 }
 
 function Gallery({ images, alt }: { images: string[]; alt: string }) {
-  // Light state via React (uses URL hash to stay simple)
-  return <GalleryClient images={images} alt={alt} />;
-}
-
-import { useState } from "react";
-function GalleryClient({ images, alt }: { images: string[]; alt: string }) {
   const [active, setActive] = useState(0);
   return (
     <div>

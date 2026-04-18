@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";

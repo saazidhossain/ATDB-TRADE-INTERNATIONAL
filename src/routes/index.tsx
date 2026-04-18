@@ -9,7 +9,7 @@ import {
   buildWhatsappGenericLink,
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
-import heroImg from "@/assets/hero-crane.webp";
+import heroImg from "@/assets/brand/atdb-hero-monument.webp";
 import projectRoad from "@/assets/project-road.webp";
 import projectBridge from "@/assets/project-bridge.webp";
 import projectPharma from "@/assets/project-pharma.webp";

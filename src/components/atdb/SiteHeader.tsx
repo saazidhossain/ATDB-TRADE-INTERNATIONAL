@@ -23,12 +23,15 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="flex items-center gap-3" aria-label="ATDB home">
-          <img src={logo} alt="ATDB Trade International" width={48} height={48} className="h-10 w-10 object-contain md:h-12 md:w-12" />
-          <div className="hidden flex-col leading-tight sm:flex">
-            <span className="font-display text-sm font-bold tracking-wide text-iron">ATDB</span>
-            <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Trade International</span>
-          </div>
+        <Link to="/" className="flex items-center gap-2.5 group" aria-label="ATDB Trade International — home">
+          <img
+            src={logo}
+            alt="ATDB Trade International"
+            width={180}
+            height={48}
+            className="h-9 w-auto object-contain transition-transform group-hover:scale-[1.03] md:h-11"
+            fetchPriority="high"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">

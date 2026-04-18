@@ -8,6 +8,7 @@ import {
   FEATURED,
   buildWhatsappGenericLink,
 } from "@/lib/atdb-data";
+import { useI18n } from "@/lib/i18n";
 import heroImg from "@/assets/hero-crane.jpg";
 import projectRoad from "@/assets/project-road.jpg";
 import projectBridge from "@/assets/project-bridge.jpg";
@@ -35,13 +36,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const PILLARS = [
-  { icon: ShieldCheck, title: "Reliable Fleet", desc: "26 years of mission-critical maintenance and operator training keep every unit job-ready." },
-  { icon: BadgeCheck, title: "Safety First", desc: "City Inspection Services certified equipment. ISO-aligned operating protocols on every site." },
-  { icon: Zap, title: "Instant WhatsApp Service", desc: "Direct line to leadership. Quotations and confirmations in minutes, not days." },
-  { icon: Wrench, title: "Transparent Pricing", desc: "Simple per-day & per-project rates. No hidden mobilisation or fuel surprises." },
-];
-
 const PROJECTS = [
   { img: projectRoad, label: "RTIP-2 · Ghatail, Tangail" },
   { img: projectBridge, label: "Jamuna Bridge Approach" },
@@ -49,6 +43,16 @@ const PROJECTS = [
 ];
 
 function Index() {
+  const { t, lang } = useI18n();
+  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+
+  const PILLARS = [
+    { icon: ShieldCheck, title: t("pillar.fleet.t"), desc: t("pillar.fleet.d") },
+    { icon: BadgeCheck, title: t("pillar.safety.t"), desc: t("pillar.safety.d") },
+    { icon: Zap, title: t("pillar.whatsapp.t"), desc: t("pillar.whatsapp.d") },
+    { icon: Wrench, title: t("pillar.pricing.t"), desc: t("pillar.pricing.d") },
+  ];
+
   return (
     <Layout>
       {/* HERO */}
@@ -62,30 +66,27 @@ function Index() {
         />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,oklch(0.18_0.018_240/0.55)_0%,oklch(0.18_0.018_240/0.92)_100%)]" />
         <div className="container-page flex min-h-[88vh] flex-col justify-end pb-20 pt-32 md:min-h-[92vh] md:pb-28">
-          <p className="eyebrow !text-bronze-glow">Since {COMPANY.founded} · Dhaka & Tangail, Bangladesh</p>
-          <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.05] text-balance text-white md:text-6xl lg:text-7xl">
-            Bangladesh's premier <span className="text-safety">heavy equipment</span> rental partner.
+          <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.eyebrow")}</p>
+          <h1 className={`mt-4 max-w-4xl text-4xl font-bold leading-[1.05] text-balance text-white md:text-6xl lg:text-7xl ${fontClass}`}>
+            {t("home.hero.title.a")} <span className="text-safety">{t("home.hero.title.b")}</span> {t("home.hero.title.c")}
           </h1>
-          <p className="mt-3 max-w-2xl font-bn text-lg text-white/85 md:text-xl">
-            বাংলাদেশের সেরা হেভি ইকুইপমেন্ট রেন্টাল পার্টনার
-          </p>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
-            Cranes · Road Rollers · Excavators · Support Equipment. A certified, government-compliant fleet ready for your next project.
+          <p className={`mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg ${fontClass}`}>
+            {t("home.hero.sub")}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/equipment"
-              className="inline-flex items-center gap-2 rounded-sm bg-gradient-safety px-7 py-4 font-display text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px"
+              className={`inline-flex items-center gap-2 rounded-sm bg-gradient-safety px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
             >
-              Browse Equipment <ArrowRight className="h-4 w-4" />
+              {t("home.hero.cta.browse")} <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href={buildWhatsappGenericLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-sm border-2 border-white/80 px-7 py-4 font-display text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-iron"
+              className={`inline-flex items-center gap-2 rounded-sm border-2 border-white/80 px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-iron ${fontClass}`}
             >
-              WhatsApp a Quote
+              {t("home.hero.cta.whatsapp")}
             </a>
           </div>
         </div>
@@ -95,15 +96,14 @@ function Index() {
       <section className="bg-iron text-white">
         <div className="container-page grid grid-cols-2 gap-y-8 py-10 md:grid-cols-4">
           {[
-            { n: `${COMPANY.yearsOperating}+`, l: "Years Experience", bn: "বছর অভিজ্ঞতা" },
-            { n: "30+", l: "Equipment Units", bn: "ইকুইপমেন্ট" },
-            { n: `${COMPANY.staff}`, l: "Skilled Staff", bn: "দক্ষ কর্মী" },
-            { n: "2", l: "Office Locations", bn: "অফিস" },
+            { n: `${COMPANY.yearsOperating}+`, l: t("stats.years") },
+            { n: "30+", l: t("stats.equipment") },
+            { n: `${COMPANY.staff}`, l: t("stats.staff") },
+            { n: "2", l: t("stats.offices") },
           ].map((s) => (
             <div key={s.l} className="border-l-2 border-bronze pl-5">
               <p className="font-display text-4xl font-bold text-white md:text-5xl">{s.n}</p>
-              <p className="mt-1 font-display text-xs font-medium uppercase tracking-[0.18em] text-white/65">{s.l}</p>
-              <p className="font-bn text-xs text-bronze-glow/90">{s.bn}</p>
+              <p className={`mt-1 text-xs font-medium uppercase tracking-[0.18em] text-white/70 ${fontClass}`}>{s.l}</p>
             </div>
           ))}
         </div>
@@ -114,13 +114,13 @@ function Index() {
         <div className="container-page">
           <div className="flex items-end justify-between gap-6">
             <div>
-              <p className="eyebrow">Our Equipment</p>
-              <h2 className="mt-2 font-display text-3xl font-bold text-iron md:text-4xl">
-                A complete fleet for every job site.
+              <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.cat.eyebrow")}</p>
+              <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>
+                {t("home.cat.title")}
               </h2>
             </div>
-            <Link to="/equipment" className="hidden items-center gap-1 font-display text-sm font-semibold text-safety hover:text-safety-deep md:inline-flex">
-              View all <ArrowRight className="h-4 w-4" />
+            <Link to="/equipment" className={`hidden items-center gap-1 text-sm font-semibold text-safety hover:text-safety-deep md:inline-flex ${fontClass}`}>
+              {t("common.viewAll")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
@@ -138,8 +138,8 @@ function Index() {
                   <p className="font-bn text-sm text-bronze-glow">{c.label_bn}</p>
                   <h3 className="mt-1 font-display text-xl font-bold text-white">{c.label}</h3>
                   <p className="mt-1 text-xs text-white/75">{c.tagline}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 font-display text-xs font-semibold uppercase tracking-wider text-safety transition-transform group-hover:translate-x-1">
-                    Explore <ArrowRight className="h-3.5 w-3.5" />
+                  <span className={`mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-safety transition-transform group-hover:translate-x-1 ${fontClass}`}>
+                    {t("common.explore")} <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                 </div>
               </Link>
@@ -151,9 +151,9 @@ function Index() {
       {/* FEATURED */}
       <section className="bg-muted/40 py-20 md:py-28">
         <div className="container-page">
-          <p className="eyebrow">Featured Equipment</p>
-          <h2 className="mt-2 max-w-2xl font-display text-3xl font-bold text-iron md:text-4xl">
-            Flagship machines from our certified fleet.
+          <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.featured.eyebrow")}</p>
+          <h2 className={`mt-2 max-w-2xl text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>
+            {t("home.featured.title")}
           </h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURED.map((eq) => (
@@ -168,12 +168,12 @@ function Index() {
         <div className="container-page">
           <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
             <div>
-              <p className="eyebrow">Why ATDB</p>
-              <h2 className="mt-2 font-display text-3xl font-bold text-iron md:text-4xl">
-                A partner contractors return to, project after project.
+              <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.why.eyebrow")}</p>
+              <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>
+                {t("home.why.title")}
               </h2>
-              <p className="mt-4 text-base text-muted-foreground">
-                We've spent {COMPANY.yearsOperating}+ years earning the trust of Bangladesh's largest road, bridge, pharma and industrial developers — through certified equipment, disciplined operations, and zero-friction WhatsApp service.
+              <p className={`mt-4 text-base text-muted-foreground ${fontClass}`}>
+                {t("home.why.body")}
               </p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
@@ -182,8 +182,8 @@ function Index() {
                   <div className="grid h-11 w-11 place-items-center rounded-sm bg-gradient-safety text-white">
                     <p.icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold text-iron">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <h3 className={`mt-4 text-lg font-semibold text-iron ${fontClass}`}>{p.title}</h3>
+                  <p className={`mt-2 text-sm leading-relaxed text-muted-foreground ${fontClass}`}>{p.desc}</p>
                 </div>
               ))}
             </div>
@@ -196,13 +196,13 @@ function Index() {
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="eyebrow !text-bronze-glow">Project Highlights</p>
-              <h2 className="mt-2 font-display text-3xl font-bold text-white md:text-4xl">
-                Powering Bangladesh's biggest builds.
+              <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.projects.eyebrow")}</p>
+              <h2 className={`mt-2 text-3xl font-bold text-white md:text-4xl ${fontClass}`}>
+                {t("home.projects.title")}
               </h2>
             </div>
-            <Link to="/projects" className="inline-flex items-center gap-1 font-display text-sm font-semibold text-safety hover:text-bronze-glow">
-              View all projects <ArrowRight className="h-4 w-4" />
+            <Link to="/projects" className={`inline-flex items-center gap-1 text-sm font-semibold text-safety hover:text-bronze-glow ${fontClass}`}>
+              {t("home.projects.viewAll")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
@@ -224,20 +224,20 @@ function Index() {
       <section className="bg-gradient-safety py-16 text-white">
         <div className="container-page flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <div>
-            <h2 className="font-display text-3xl font-bold text-white md:text-4xl">
-              Ready to mobilise? Get a quote in minutes.
+            <h2 className={`text-3xl font-bold text-white md:text-4xl ${fontClass}`}>
+              {t("home.cta.title")}
             </h2>
-            <p className="mt-2 max-w-xl text-white/90">
-              Tell us your equipment, location and dates on WhatsApp — we'll respond with availability and pricing.
+            <p className={`mt-2 max-w-xl text-white/90 ${fontClass}`}>
+              {t("home.cta.body")}
             </p>
           </div>
           <a
             href={buildWhatsappGenericLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-sm bg-iron-deep px-7 py-4 font-display text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px"
+            className={`inline-flex items-center gap-2 rounded-sm bg-iron-deep px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px ${fontClass}`}
           >
-            Start on WhatsApp <ArrowRight className="h-4 w-4" />
+            {t("home.cta.button")} <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>

@@ -57,7 +57,7 @@ function CategoryPage() {
           </nav>
           <p className="eyebrow mt-4 !text-bronze-glow">{cat.label_bn}</p>
           <h1 className="mt-2 font-display text-4xl font-bold text-white md:text-5xl">{cat.label}</h1>
-          <p className="mt-3 max-w-2xl text-white/75">{items.length} units available · {cat.tagline}</p>
+          <p className="mt-3 max-w-2xl text-white/75">{items.length} {`units available`} · {cat.tagline}</p>
         </div>
       </section>
 

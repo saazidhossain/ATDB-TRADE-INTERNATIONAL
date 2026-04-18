@@ -187,9 +187,9 @@ function ContactPage() {
                   </div>
                 )}
                 {status === "rate_limited" && (
-                  <div className="flex items-start gap-2 rounded-sm border border-warning/30 bg-warning/10 p-3">
-                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
-                    <p className="text-sm text-warning">{t("contact.rate")}</p>
+                  <div className="flex items-start gap-2 rounded-sm border border-safety/30 bg-safety/10 p-3">
+                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-safety" />
+                    <p className="text-sm text-safety">{t("contact.rate")}</p>
                   </div>
                 )}
 

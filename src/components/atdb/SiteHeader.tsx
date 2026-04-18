@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, Phone, Globe } from "lucide-react";
-import logo from "@/assets/logo-atdb.png";
+import logo from "@/assets/brand/atdb-logo-light.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { CartButton } from "./CartButton";

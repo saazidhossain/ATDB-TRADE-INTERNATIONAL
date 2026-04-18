@@ -13,9 +13,9 @@ import {
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
-import detailHero from "@/assets/eq-detail-crane.jpg";
-import detailCabin from "@/assets/eq-detail-cabin.jpg";
-import detailFleet from "@/assets/eq-detail-fleet.jpg";
+import detailHero from "@/assets/eq-detail-crane.webp";
+import detailCabin from "@/assets/eq-detail-cabin.webp";
+import detailFleet from "@/assets/eq-detail-fleet.webp";
 
 const validCategories = Object.keys(CATEGORIES) as EquipmentCategory[];
 

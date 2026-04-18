@@ -9,10 +9,10 @@ import {
   buildWhatsappGenericLink,
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
-import heroImg from "@/assets/hero-crane.jpg";
-import projectRoad from "@/assets/project-road.jpg";
-import projectBridge from "@/assets/project-bridge.jpg";
-import projectPharma from "@/assets/project-pharma.jpg";
+import heroImg from "@/assets/hero-crane.webp";
+import projectRoad from "@/assets/project-road.webp";
+import projectBridge from "@/assets/project-bridge.webp";
+import projectPharma from "@/assets/project-pharma.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({

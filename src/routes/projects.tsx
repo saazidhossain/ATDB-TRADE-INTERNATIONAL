@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/atdb/Layout";
-import projectRoad from "@/assets/project-road.jpg";
-import projectBridge from "@/assets/project-bridge.jpg";
-import projectPharma from "@/assets/project-pharma.jpg";
+import projectRoad from "@/assets/project-road.webp";
+import projectBridge from "@/assets/project-bridge.webp";
+import projectPharma from "@/assets/project-pharma.webp";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({

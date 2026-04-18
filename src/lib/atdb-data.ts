@@ -1,31 +1,31 @@
 // ATDB Trade International — canonical company + fleet data.
 // Synced 1:1 with the Product Inventory Master List (Apr 2026).
 
-import craneImg from "@/assets/eq-crane-liebherr.jpg";
-import rollerImg from "@/assets/eq-roller-sakai.jpg";
-import excavatorImg from "@/assets/eq-excavator-cat.jpg";
-import supportImg from "@/assets/eq-support.jpg";
+import craneImg from "@/assets/eq-crane-liebherr.webp";
+import rollerImg from "@/assets/eq-roller-sakai.webp";
+import excavatorImg from "@/assets/eq-excavator-cat.webp";
+import supportImg from "@/assets/eq-support.webp";
 
 // Per-equipment, brand-accurate imagery
-import imgLiebherr1120 from "@/assets/fleet/liebherr-ltm-1120.jpg";
-import imgLiebherr1070 from "@/assets/fleet/liebherr-ltm-1070.jpg";
-import imgKato50 from "@/assets/fleet/kato-kr50h.jpg";
-import imgKato25 from "@/assets/fleet/kato-kr25.jpg";
-import imgKato150 from "@/assets/fleet/kato-kr150.jpg";
-import imgSakai900 from "@/assets/fleet/sakai-sv900.jpg";
-import imgSakaiMini from "@/assets/fleet/sakai-mini.jpg";
-import imgDynapac from "@/assets/fleet/dynapac-cc20.jpg";
-import imgBomag from "@/assets/fleet/bomag-bw.jpg";
-import imgHawa from "@/assets/fleet/hawa-tandem.jpg";
-import imgAdvance from "@/assets/fleet/advance-3wheel.jpg";
-import imgCat320 from "@/assets/fleet/cat-320.jpg";
-import imgCatCs54 from "@/assets/fleet/cat-cs54.jpg";
-import imgKomatsu from "@/assets/fleet/komatsu-pc40.jpg";
-import imgCase from "@/assets/fleet/case-770ex.jpg";
-import imgJcb from "@/assets/fleet/jcb-backhoe.jpg";
-import imgXcmg from "@/assets/fleet/xcmg-loader.jpg";
-import imgSupport from "@/assets/fleet/support-tools.jpg";
-import imgTata from "@/assets/fleet/tata-truck.jpg";
+import imgLiebherr1120 from "@/assets/fleet/liebherr-ltm-1120.webp";
+import imgLiebherr1070 from "@/assets/fleet/liebherr-ltm-1070.webp";
+import imgKato50 from "@/assets/fleet/kato-kr50h.webp";
+import imgKato25 from "@/assets/fleet/kato-kr25.webp";
+import imgKato150 from "@/assets/fleet/kato-kr150.webp";
+import imgSakai900 from "@/assets/fleet/sakai-sv900.webp";
+import imgSakaiMini from "@/assets/fleet/sakai-mini.webp";
+import imgDynapac from "@/assets/fleet/dynapac-cc20.webp";
+import imgBomag from "@/assets/fleet/bomag-bw.webp";
+import imgHawa from "@/assets/fleet/hawa-tandem.webp";
+import imgAdvance from "@/assets/fleet/advance-3wheel.webp";
+import imgCat320 from "@/assets/fleet/cat-320.webp";
+import imgCatCs54 from "@/assets/fleet/cat-cs54.webp";
+import imgKomatsu from "@/assets/fleet/komatsu-pc40.webp";
+import imgCase from "@/assets/fleet/case-770ex.webp";
+import imgJcb from "@/assets/fleet/jcb-backhoe.webp";
+import imgXcmg from "@/assets/fleet/xcmg-loader.webp";
+import imgSupport from "@/assets/fleet/support-tools.webp";
+import imgTata from "@/assets/fleet/tata-truck.webp";
 
 export const COMPANY = {
   name: "M/S ATDB Trade International",

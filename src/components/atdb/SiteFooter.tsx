@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
-import logo from "@/assets/logo-atdb.png";
+import logo from "@/assets/brand/atdb-logo-dark.webp";
 import { COMPANY } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 

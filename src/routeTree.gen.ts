@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -18,6 +20,16 @@ import { Route as EquipmentCategoryRouteImport } from './routes/equipment.$categ
 import { Route as ApiContactRouteImport } from './routes/api.contact'
 import { Route as EquipmentCategoryIdRouteImport } from './routes/equipment.$category.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
@@ -64,6 +76,8 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/contact': typeof ApiContactRoute
   '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment/': typeof EquipmentIndexRoute
@@ -74,6 +88,8 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/contact': typeof ApiContactRoute
   '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment': typeof EquipmentIndexRoute
@@ -85,6 +101,8 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/contact': typeof ApiContactRoute
   '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment/': typeof EquipmentIndexRoute
@@ -97,6 +115,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/projects'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/api/contact'
     | '/equipment/$category'
     | '/equipment/'
@@ -107,6 +127,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/projects'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/api/contact'
     | '/equipment/$category'
     | '/equipment'
@@ -117,6 +139,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/projects'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/api/contact'
     | '/equipment/$category'
     | '/equipment/'
@@ -128,6 +152,8 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   ProjectsRoute: typeof ProjectsRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiContactRoute: typeof ApiContactRoute
   EquipmentCategoryRoute: typeof EquipmentCategoryRouteWithChildren
   EquipmentIndexRoute: typeof EquipmentIndexRoute
@@ -135,6 +161,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
@@ -210,6 +250,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ProjectsRoute: ProjectsRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiContactRoute: ApiContactRoute,
   EquipmentCategoryRoute: EquipmentCategoryRouteWithChildren,
   EquipmentIndexRoute: EquipmentIndexRoute,

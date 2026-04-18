@@ -28,6 +28,46 @@ export const Route = createFileRoute("/equipment/$category/$id")({
   head: ({ params }) => {
     const eq = getEquipmentById(params.id);
     if (!eq) return { meta: [{ title: "Equipment — ATDB" }] };
+    const productLd = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": `#product-${eq.id}`,
+      name: eq.name,
+      sku: eq.id,
+      mpn: eq.model,
+      brand: { "@type": "Brand", name: eq.brand },
+      manufacturer: { "@type": "Organization", name: eq.brand },
+      category: CATEGORIES[eq.category].label,
+      image: [eq.image],
+      description: `${eq.brand} ${eq.model} (${eq.capacity}) — inspection-certified heavy equipment for rent in Bangladesh. Operator included, mobilisation arranged on request.`,
+      countryOfOrigin: eq.origin,
+      ...(eq.year ? { releaseDate: String(eq.year) } : {}),
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        priceCurrency: "BDT",
+        price: "0",
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          priceCurrency: "BDT",
+          description: "Daily / project-based rental. Quotation on request via WhatsApp.",
+        },
+        areaServed: { "@type": "Country", name: "Bangladesh" },
+        seller: {
+          "@type": "Organization",
+          name: COMPANY.name,
+          telephone: COMPANY.phones[0].number,
+          email: COMPANY.email,
+        },
+        url: `/equipment/${eq.category}/${eq.id}`,
+      },
+      additionalProperty: [
+        { "@type": "PropertyValue", name: "Capacity", value: eq.capacity },
+        { "@type": "PropertyValue", name: "Origin", value: eq.origin },
+        ...(eq.year ? [{ "@type": "PropertyValue", name: "Year", value: String(eq.year) }] : []),
+        { "@type": "PropertyValue", name: "Inspection", value: "City Inspection Services CIS/077/2018" },
+      ],
+    };
     return {
       meta: [
         { title: `${eq.name} (${eq.id}) — ATDB Trade International` },
@@ -36,6 +76,9 @@ export const Route = createFileRoute("/equipment/$category/$id")({
         { property: "og:description", content: `${eq.brand} · ${eq.capacity} · ${eq.origin}. Inspection-certified heavy equipment for hire.` },
         { property: "og:image", content: eq.image },
         { name: "twitter:image", content: eq.image },
+      ],
+      scripts: [
+        { type: "application/ld+json", children: JSON.stringify(productLd) },
       ],
     };
   },

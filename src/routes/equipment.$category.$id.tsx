@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronRight, ShieldCheck, BadgeCheck, Phone, MapPin, Calendar } from "lucide-react";
+import { ChevronRight, ShieldCheck, BadgeCheck, Phone, MapPin, Calendar, Plus, Check } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard } from "@/components/atdb/EquipmentCard";
 import {
@@ -12,6 +12,7 @@ import {
   type EquipmentCategory,
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
+import { useCart } from "@/lib/cart";
 import detailHero from "@/assets/eq-detail-crane.jpg";
 import detailCabin from "@/assets/eq-detail-cabin.jpg";
 import detailFleet from "@/assets/eq-detail-fleet.jpg";
@@ -61,6 +62,8 @@ function EquipmentDetailPage() {
 
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
   const whatsappUrl = buildWhatsappRentLink(eq);
+  const { add, items } = useCart();
+  const inCart = items.some((i) => i.id === eq.id);
 
   return (
     <Layout>
@@ -110,6 +113,18 @@ function EquipmentDetailPage() {
             >
               <WhatsappIcon /> {t("detail.cta.button")}
             </a>
+            <button
+              type="button"
+              onClick={() => add(eq)}
+              className={`mt-3 inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider transition-colors ${
+                inCart
+                  ? "border-success bg-success/10 text-success"
+                  : "border-safety bg-safety/5 text-safety hover:bg-safety hover:text-white"
+              } ${fontClass}`}
+            >
+              {inCart ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+              {inCart ? t("common.added") : t("common.addToQuote")}
+            </button>
             <a
               href={`tel:${COMPANY.phones[0].number}`}
               className={`mt-3 inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-iron/15 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-iron transition-colors hover:border-iron hover:bg-iron hover:text-white ${fontClass}`}

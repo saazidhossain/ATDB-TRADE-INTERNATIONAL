@@ -15,6 +15,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EquipmentIndexRouteImport } from './routes/equipment.index'
 import { Route as EquipmentCategoryRouteImport } from './routes/equipment.$category'
+import { Route as ApiContactRouteImport } from './routes/api.contact'
 import { Route as EquipmentCategoryIdRouteImport } from './routes/equipment.$category.$id'
 
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -47,6 +48,11 @@ const EquipmentCategoryRoute = EquipmentCategoryRouteImport.update({
   path: '/equipment/$category',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EquipmentCategoryIdRoute = EquipmentCategoryIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
+  '/api/contact': typeof ApiContactRoute
   '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment/': typeof EquipmentIndexRoute
   '/equipment/$category/$id': typeof EquipmentCategoryIdRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
+  '/api/contact': typeof ApiContactRoute
   '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment': typeof EquipmentIndexRoute
   '/equipment/$category/$id': typeof EquipmentCategoryIdRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/projects': typeof ProjectsRoute
+  '/api/contact': typeof ApiContactRoute
   '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment/': typeof EquipmentIndexRoute
   '/equipment/$category/$id': typeof EquipmentCategoryIdRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/projects'
+    | '/api/contact'
     | '/equipment/$category'
     | '/equipment/'
     | '/equipment/$category/$id'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/projects'
+    | '/api/contact'
     | '/equipment/$category'
     | '/equipment'
     | '/equipment/$category/$id'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/projects'
+    | '/api/contact'
     | '/equipment/$category'
     | '/equipment/'
     | '/equipment/$category/$id'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   ProjectsRoute: typeof ProjectsRoute
+  ApiContactRoute: typeof ApiContactRoute
   EquipmentCategoryRoute: typeof EquipmentCategoryRouteWithChildren
   EquipmentIndexRoute: typeof EquipmentIndexRoute
 }
@@ -164,6 +177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquipmentCategoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/equipment/$category/$id': {
       id: '/equipment/$category/$id'
       path: '/$id'
@@ -190,6 +210,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ProjectsRoute: ProjectsRoute,
+  ApiContactRoute: ApiContactRoute,
   EquipmentCategoryRoute: EquipmentCategoryRouteWithChildren,
   EquipmentIndexRoute: EquipmentIndexRoute,
 }

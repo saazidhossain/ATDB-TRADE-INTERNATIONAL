@@ -194,24 +194,17 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
-      {/* Specs */}
+      {/* Specs — collapsible groups */}
       <section className="bg-muted/40 py-16 md:py-20">
         <div className="container-page">
           <p className="eyebrow">{t("detail.specs")}</p>
           <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{eq.name}</h2>
-
-          <dl className="mt-8 grid gap-px overflow-hidden rounded-md border border-border bg-border md:grid-cols-2">
-            <SpecRow label={t("detail.spec.id")} value={eq.id} />
-            <SpecRow label={t("detail.spec.brand")} value={eq.brand} />
-            <SpecRow label={t("detail.spec.model")} value={eq.model} />
-            <SpecRow label={t("detail.spec.capacity")} value={eq.capacity} />
-            <SpecRow label={t("detail.spec.origin")} value={eq.origin} />
-            <SpecRow label={t("detail.spec.year")} value={eq.year ? String(eq.year) : "—"} />
-            <SpecRow label={t("detail.spec.category")} value={cat.label} />
-            <SpecRow label={t("detail.spec.operator")} value={t("detail.spec.operator.v")} />
-          </dl>
+          <SpecGroupsAccordion eq={eq} />
         </div>
       </section>
+
+      {/* Reviews */}
+      <ReviewsSection />
 
       {/* Sticky CTA */}
       <section className="bg-gradient-safety py-14 text-white">

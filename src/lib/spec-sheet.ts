@@ -201,7 +201,7 @@ export async function generateSpecSheet(eq: Equipment, _t: T, _lang: Lang) {
   // Page footer label
   doc.setFontSize(7.5);
   doc.setTextColor(...MUTED);
-  doc.text(`Generated ${dateStr}  ·  www  ${COMPANY.website ?? ""}`.trim(), pageW - margin, pageH - 16, {
+  doc.text(`Generated ${dateStr}  ·  ${COMPANY.name}`, pageW - margin, pageH - 16, {
     align: "right",
   });
 

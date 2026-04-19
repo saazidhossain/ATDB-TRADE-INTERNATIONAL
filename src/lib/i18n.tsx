@@ -138,6 +138,25 @@ export const TRANSLATIONS: Dict = {
   "detail.related": { en: "Related Equipment", bn: "সম্পর্কিত ইকুইপমেন্ট" },
   "detail.notFound": { en: "Equipment not found", bn: "ইকুইপমেন্ট পাওয়া যায়নি" },
 
+  // Gallery captions + lightbox
+  "gallery.cap.hero": { en: "Hero shot", bn: "প্রধান ছবি" },
+  "gallery.cap.action": { en: "Action shot", bn: "অ্যাকশন শট" },
+  "gallery.cap.detail": { en: "Detail", bn: "ডিটেইল" },
+  "gallery.cap.site": { en: "Site context", bn: "সাইট কনটেক্সট" },
+  "gallery.cap.cabin": { en: "Operator cabin", bn: "অপারেটর কেবিন" },
+  "gallery.lightbox.open": { en: "Open fullscreen", bn: "ফুলস্ক্রিনে দেখুন" },
+  "gallery.lightbox.close": { en: "Close", bn: "বন্ধ করুন" },
+  "gallery.lightbox.prev": { en: "Previous image", bn: "আগের ছবি" },
+  "gallery.lightbox.next": { en: "Next image", bn: "পরের ছবি" },
+  "gallery.lightbox.zoom": { en: "Pinch or double-tap to zoom", bn: "জুম করতে পিঞ্চ বা ডাবল-ট্যাপ করুন" },
+
+  // PDF spec sheet
+  "detail.downloadPdf": { en: "Download Spec Sheet", bn: "স্পেক শিট ডাউনলোড" },
+  "pdf.title": { en: "Equipment Spec Sheet", bn: "ইকুইপমেন্ট স্পেক শিট" },
+  "pdf.contact": { en: "Contact ATDB Trade International", bn: "যোগাযোগ — ATDB Trade International" },
+  "pdf.generated": { en: "Generated", bn: "জেনারেট করা হয়েছে" },
+  "pdf.disclaimer": { en: "Specifications are indicative. Inspection-certified · operator included · mobilisation on request.", bn: "স্পেসিফিকেশন নির্দেশক। ইন্সপেকশন-সার্টিফাইড · অপারেটর সহ · অনুরোধে মোবিলাইজেশন।" },
+
   // Spec groups + rows
   "specs.dimensions": { en: "Dimensions", bn: "মাত্রা" },
   "specs.performance": { en: "Performance", bn: "পারফরম্যান্স" },

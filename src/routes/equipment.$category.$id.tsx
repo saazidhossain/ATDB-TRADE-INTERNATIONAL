@@ -1,13 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ShieldCheck, BadgeCheck, MapPin, Calendar, Plus, Check } from "lucide-react";
+import { motion } from "framer-motion";
+import { ChevronRight, ShieldCheck, BadgeCheck, MapPin, Calendar, Plus, Check, FileDown, Loader2 } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
 import { SpecGroupsAccordion } from "@/components/atdb/SpecGroups";
 import { ReviewsSection, SAMPLE_REVIEWS, reviewAggregate } from "@/components/atdb/Reviews";
 import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import { ContactChannelButton } from "@/components/atdb/ContactChannelButton";
+import { EquipmentGallery, type GallerySlot } from "@/components/atdb/EquipmentGallery";
 import {
   CATEGORIES,
   FLEET,
@@ -18,6 +19,7 @@ import {
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
+import { generateSpecSheet } from "@/lib/spec-sheet";
 import detailHero from "@/assets/eq-detail-crane.webp";
 import detailCabin from "@/assets/eq-detail-cabin.webp";
 import detailFleet from "@/assets/eq-detail-fleet.webp";
@@ -120,15 +122,37 @@ function EquipmentDetailPage() {
   const eq = getEquipmentById(id)!;
   const cat = CATEGORIES[category as EquipmentCategory];
   const related = FLEET.filter((f) => f.category === eq.category && f.id !== eq.id).slice(0, 3);
-  // Use cinematic gallery when available; fall back to legacy stock photos.
-  const gallery = eq.gallery && eq.gallery.length > 0
-    ? [eq.image, ...eq.gallery]
-    : [eq.image, detailHero, detailCabin, detailFleet];
+  // Build gallery slots with captions. The third "extra" image is "cabin" for cranes, "site" otherwise.
+  const thirdCaption: GallerySlot["captionKey"] = eq.category === "cranes" ? "gallery.cap.cabin" : "gallery.cap.site";
+  const gallerySlots: GallerySlot[] = eq.gallery && eq.gallery.length >= 3
+    ? [
+        { src: eq.image, captionKey: "gallery.cap.hero" },
+        { src: eq.gallery[0], captionKey: "gallery.cap.action" },
+        { src: eq.gallery[1], captionKey: "gallery.cap.detail" },
+        { src: eq.gallery[2], captionKey: thirdCaption },
+      ]
+    : [
+        { src: eq.image, captionKey: "gallery.cap.hero" },
+        { src: detailHero, captionKey: "gallery.cap.action" },
+        { src: detailCabin, captionKey: "gallery.cap.cabin" },
+        { src: detailFleet, captionKey: "gallery.cap.site" },
+      ];
 
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
   const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);
+  const [pdfBusy, setPdfBusy] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    if (pdfBusy) return;
+    setPdfBusy(true);
+    try {
+      await generateSpecSheet(eq, t, lang);
+    } finally {
+      setPdfBusy(false);
+    }
+  };
 
   // At-a-glance badge strip (4-6 chips)
   const glance: { label: string; value: string }[] = [
@@ -164,7 +188,7 @@ function EquipmentDetailPage() {
       <section className="bg-background py-10 md:py-14">
         <div className="container-page grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           {/* Gallery */}
-          <Gallery images={gallery} alt={eq.name} certifiedLabel={t("detail.certified")} />
+          <EquipmentGallery slots={gallerySlots} alt={eq.name} certifiedLabel={t("detail.certified")} />
 
           {/* Info */}
           <div>
@@ -218,6 +242,15 @@ function EquipmentDetailPage() {
             >
               {COMPANY.email}
             </ContactChannelButton>
+            <button
+              type="button"
+              onClick={handleDownloadPdf}
+              disabled={pdfBusy}
+              className={`mt-3 inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-iron/30 bg-card px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-iron transition-colors hover:border-iron hover:bg-iron hover:text-white disabled:opacity-60 ${fontClass}`}
+            >
+              {pdfBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileDown className="h-4 w-4" />}
+              {t("detail.downloadPdf")}
+            </button>
           </div>
         </div>
       </section>
@@ -319,91 +352,6 @@ function EquipmentDetailPage() {
         </section>
       )}
     </Layout>
-  );
-}
-
-function Gallery({ images, alt, certifiedLabel }: { images: string[]; alt: string; certifiedLabel: string }) {
-  const [active, setActive] = useState(0);
-  return (
-    <div>
-      <div className="group relative aspect-[4/3] overflow-hidden rounded-md border border-border bg-muted shadow-card">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={images[active]}
-            src={images[active]}
-            alt={alt}
-            initial={{ opacity: 0, scale: 1.0 }}
-            animate={{ opacity: 1, scale: 1.08 }}
-            exit={{ opacity: 0, scale: 1.12 }}
-            transition={{
-              opacity: { duration: 0.5, ease: "easeOut" },
-              scale: { duration: 12, ease: "linear" },
-            }}
-            className="absolute inset-0 h-full w-full object-cover will-change-transform"
-          />
-        </AnimatePresence>
-
-        {/* Glassmorphism overlay badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.45, ease: "easeOut" }}
-          className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/25 bg-white/15 px-3 py-1.5 backdrop-blur-md backdrop-saturate-150 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.3)]"
-        >
-          <BadgeCheck className="h-3.5 w-3.5 text-white" />
-          <span className="font-display text-[10px] font-bold uppercase tracking-[0.18em] text-white">
-            {certifiedLabel}
-          </span>
-        </motion.div>
-
-        {/* Glassmorphism gradient sheen — bottom */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-iron-deep/60 via-iron-deep/10 to-transparent" />
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.5, ease: "easeOut" }}
-          className="pointer-events-none absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3"
-        >
-          <span className="rounded-sm border border-white/20 bg-white/10 px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md">
-            {alt}
-          </span>
-          <span className="rounded-sm border border-white/20 bg-white/10 px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md">
-            {active + 1} / {images.length}
-          </span>
-        </motion.div>
-      </div>
-
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.07, delayChildren: 0.15 } },
-        }}
-        className="mt-3 grid grid-cols-4 gap-2"
-      >
-        {images.map((src, i) => (
-          <motion.button
-            key={src + i}
-            type="button"
-            onClick={() => setActive(i)}
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
-            }}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            className={`relative aspect-[4/3] overflow-hidden rounded-sm border-2 transition-colors ${
-              active === i ? "border-safety shadow-[0_0_0_3px_color-mix(in_oklab,var(--safety)_20%,transparent)]" : "border-transparent hover:border-iron/30"
-            }`}
-            aria-label={`View image ${i + 1}`}
-            aria-current={active === i}
-          >
-            <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
-          </motion.button>
-        ))}
-      </motion.div>
-    </div>
   );
 }
 

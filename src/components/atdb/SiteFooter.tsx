@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useEffect, useState } from "react";
 import logo from "@/assets/brand/atdb-logo-dark.webp";
 import { COMPANY } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
@@ -8,12 +9,22 @@ export function SiteFooter() {
   const { t, lang } = useI18n();
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
 
+  // Render year only after hydration to avoid SSR/client mismatch.
+  const [year, setYear] = useState<number | null>(null);
+  useEffect(() => setYear(new Date().getFullYear()), []);
+
   const links = [
     { to: "/equipment" as const, l: t("nav.equipment") },
     { to: "/projects" as const, l: t("nav.projects") },
     { to: "/about" as const, l: t("nav.about") },
     { to: "/contact" as const, l: t("nav.contact") },
   ];
+
+  // Localised office labels
+  const officeFor = (city: string) => {
+    if (city === "Dhaka") return { label: t("office.corporate"), city: t("office.dhaka"), addr: t("office.dhaka.address") };
+    return { label: t("office.branch"), city: t("office.tangail"), addr: t("office.tangail.address") };
+  };
 
   return (
     <footer className="bg-gradient-iron text-white/85">
@@ -42,15 +53,18 @@ export function SiteFooter() {
         <div>
           <h4 className="eyebrow !text-bronze-glow">{t("footer.offices")}</h4>
           <ul className="mt-4 space-y-4 text-sm text-white/75">
-            {COMPANY.offices.map((o) => (
-              <li key={o.city} className="flex gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-bronze-glow" />
-                <div>
-                  <p className="font-display text-sm font-semibold text-white">{o.label}</p>
-                  <p className="text-xs leading-relaxed">{o.address}</p>
-                </div>
-              </li>
-            ))}
+            {COMPANY.offices.map((o) => {
+              const loc = officeFor(o.city);
+              return (
+                <li key={o.city} className="flex gap-3">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-bronze-glow" />
+                  <div>
+                    <p className={`text-sm font-semibold text-white ${fontClass}`}>{loc.label}</p>
+                    <p className={`text-xs leading-relaxed ${fontClass}`}>{loc.addr}</p>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -61,7 +75,9 @@ export function SiteFooter() {
               <li key={p.number}>
                 <a href={`tel:${p.number}`} className="flex items-center gap-2 hover:text-safety">
                   <Phone className="h-4 w-4 text-bronze-glow" /> {p.number}
-                  <span className="text-xs text-white/45">· {p.label}</span>
+                  <span className={`text-xs text-white/45 ${fontClass}`}>
+                    · {p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
+                  </span>
                 </a>
               </li>
             ))}
@@ -76,7 +92,9 @@ export function SiteFooter() {
 
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col items-start justify-between gap-3 py-5 text-xs text-white/50 md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} {COMPANY.name}. {t("footer.rights")}</p>
+          <p className={fontClass}>
+            © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
+          </p>
           <p className={fontClass}>
             <a
               href="https://behance.net/saazidhossain"
@@ -88,7 +106,7 @@ export function SiteFooter() {
               {t("footer.credit")}
             </a>
           </p>
-          <p>Bank: {COMPANY.bank}</p>
+          <p className={fontClass}>{t("footer.bank")}: {COMPANY.bank}</p>
         </div>
       </div>
     </footer>

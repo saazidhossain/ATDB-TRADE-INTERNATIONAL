@@ -33,7 +33,9 @@ export const COMPANY = {
   tagline: "Your Project, Our Power.",
   tagline_bn: "আপনার প্রজেক্ট, আমাদের শক্তি।",
   founded: 2000,
-  yearsOperating: new Date().getFullYear() - 2000,
+  // Static value to keep SSR + client output identical (avoids hydration mismatch).
+  // Bump manually each year.
+  yearsOperating: 26,
   proprietor: "Md. Saiful Alam (Milon)",
   ceo: "Md. Rezaur Rahman Khan (Baboo)",
   staff: 25,

@@ -47,6 +47,7 @@ export const COMPANY = {
   tin: "138463501804",
   vat: "5021075252",
   bank: "Pubali Bank PLC — A/C 3433901022792",
+  facebook: "https://www.facebook.com/share/1HzpUFqjko/",
   offices: [
     {
       city: "Dhaka",

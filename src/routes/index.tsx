@@ -31,10 +31,10 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const PROJECTS = [
-  { img: projectJamuna, key: "home.project.jamuna" as const },
-  { img: projectCenteon, key: "home.project.pharma" as const },
-  { img: projectRtip2, key: "home.project.rtip" as const },
+const PROJECTS: { img: string; key: "home.project.jamuna" | "home.project.pharma" | "home.project.rtip" }[] = [
+  { img: projectJamuna, key: "home.project.jamuna" },
+  { img: projectCenteon, key: "home.project.pharma" },
+  { img: projectRtip2, key: "home.project.rtip" },
 ];
 
 const BRANDS = ["Liebherr", "Kato", "Sakai", "CAT", "Komatsu", "JCB", "Dynapac", "Bomag", "CASE", "XCMG"];

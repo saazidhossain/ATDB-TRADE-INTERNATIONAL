@@ -29,11 +29,18 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const PROJECTS: { img: string; key: "home.project.jamuna" | "home.project.pharma" | "home.project.rtip" }[] = [
-  { img: projectJamuna, key: "home.project.jamuna" },
-  { img: projectCenteon, key: "home.project.pharma" },
-  { img: projectRtip2, key: "home.project.rtip" },
-];
+// 6 featured projects — at least one from each of the 4 categories.
+const FEATURED_PROJECT_IDS = ["jamuna", "rtip2", "centeon", "pharmacil", "smc-reservoir", "centeon-etp"] as const;
+const HOME_PROJECTS = FEATURED_PROJECT_IDS
+  .map((id) => ALL_PROJECTS.find((p) => p.id === id))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p));
+
+const CAT_BADGE: Record<ProjectCategoryKey, string> = {
+  infra: "pcat.infra.badge",
+  industrial: "pcat.industrial.badge",
+  roads: "pcat.roads.badge",
+  civil: "pcat.civil.badge",
+};
 
 const BRANDS = ["Liebherr", "Kato", "Sakai", "CAT", "Komatsu", "JCB", "Dynapac", "Bomag", "CASE", "XCMG"];
 const CAT_KEYS: Record<EquipmentCategory, { label: string; tagline: string }> = {

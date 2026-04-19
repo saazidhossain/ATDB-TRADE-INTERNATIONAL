@@ -91,6 +91,11 @@ export const TRANSLATIONS: Dict = {
   "home.project.rtip": { en: "RTIP-2 · Ghatail, Tangail", bn: "RTIP-2 · ঘাটাইল, টাঙ্গাইল" },
   "home.project.jamuna": { en: "Jamuna Bridge Approach", bn: "যমুনা সেতু অ্যাপ্রোচ" },
   "home.project.pharma": { en: "Pharma Ashia · Centeon Pharma", bn: "ফার্মা এশিয়া · সেন্টিয়ন ফার্মা" },
+  "home.projects.sub": { en: "Six representative builds across mega-infrastructure, industrial, roadways and specialised civil works.", bn: "ছয়টি প্রতিনিধিত্বমূলক প্রজেক্ট — মেগা ইনফ্রাস্ট্রাকচার, শিল্প, সড়ক ও বিশেষ সিভিল ওয়ার্কস জুড়ে।" },
+  "pcat.infra.badge": { en: "Infrastructure", bn: "ইনফ্রাস্ট্রাকচার" },
+  "pcat.industrial.badge": { en: "Industrial", bn: "শিল্প" },
+  "pcat.roads.badge": { en: "Roads", bn: "সড়ক" },
+  "pcat.civil.badge": { en: "Civil Works", bn: "সিভিল ওয়ার্কস" },
 
   "home.cta.title": { en: "Ready to mobilise? Get a quote in minutes.", bn: "মোবিলাইজ করতে প্রস্তুত? মিনিটে কোটেশন নিন।" },
   "home.cta.body": { en: "Tell us your equipment, location and dates on WhatsApp — we'll respond with availability and pricing.", bn: "হোয়াটসঅ্যাপে আমাদের ইকুইপমেন্ট, লোকেশন ও তারিখ জানান — আমরা অ্যাভেইলেবিলিটি ও প্রাইস জানিয়ে দেব।" },

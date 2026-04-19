@@ -211,6 +211,54 @@ function EquipmentDetailPage() {
         </div>
       </section>
 
+      {/* At a Glance — quick badge strip */}
+      <section className="border-y border-border bg-card">
+        <div className="container-page py-6">
+          <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground ${fontClass}`}>
+            {t("detail.atGlance")}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {glance.map((g) => (
+              <div
+                key={g.label}
+                className="inline-flex items-center gap-2 rounded-sm border border-border bg-muted/40 px-3 py-1.5"
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground ${fontClass}`}>
+                  {g.label}
+                </span>
+                <span className={`text-xs font-semibold text-iron ${fontClass}`}>{g.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About + Best For */}
+      {(aboutText || bestForText) && (
+        <section className="bg-background py-14 md:py-20">
+          <div className="container-page grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+            {aboutText && (
+              <div>
+                <p className="eyebrow">{t("detail.about")}</p>
+                <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{eq.name}</h2>
+                <p className={`mt-4 text-base leading-relaxed text-muted-foreground ${fontClass}`}>{aboutText}</p>
+              </div>
+            )}
+            {bestForText && (
+              <aside className="rounded-md border-l-4 border-safety bg-muted/40 p-6 shadow-card">
+                <div className="flex items-center gap-2">
+                  <BadgeCheck className="h-4 w-4 text-safety" />
+                  <p className={`text-[11px] font-bold uppercase tracking-[0.18em] text-safety ${fontClass}`}>
+                    {t("detail.bestFor")}
+                  </p>
+                </div>
+                <p className={`mt-3 text-sm leading-relaxed text-iron ${fontClass}`}>{bestForText}</p>
+              </aside>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Specs — collapsible groups */}
       <section className="bg-muted/40 py-16 md:py-20">
         <div className="container-page">

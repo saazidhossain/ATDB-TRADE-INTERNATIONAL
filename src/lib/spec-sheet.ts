@@ -2,7 +2,7 @@
 // Pure client-side jsPDF — no server roundtrip.
 
 import { jsPDF } from "jspdf";
-import { COMPANY, type Equipment, CATEGORIES } from "@/lib/atdb-data";
+import { COMPANY, PRIMARY_WHATSAPP, type Equipment, CATEGORIES } from "@/lib/atdb-data";
 import type { Lang } from "@/lib/i18n";
 
 // Brand tokens (mirror src/styles.css safety/iron values)
@@ -153,7 +153,7 @@ export async function generateSpecSheet(eq: Equipment, t: T, lang: Lang) {
   const lines: string[] = [];
   lines.push(`Phone: ${COMPANY.phones.map((p) => p.number).join(" · ")}`);
   lines.push(`Email: ${COMPANY.email}`);
-  if (COMPANY.whatsapp) lines.push(`WhatsApp: +${COMPANY.whatsapp}`);
+  if (PRIMARY_WHATSAPP) lines.push(`WhatsApp: +${PRIMARY_WHATSAPP}`);
   lines.push(t("pdf.disclaimer"));
   lines.forEach((line, i) => {
     doc.text(line, margin + 16, footerY + 40 + i * 13);

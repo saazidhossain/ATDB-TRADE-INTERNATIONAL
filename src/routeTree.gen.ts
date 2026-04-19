@@ -16,8 +16,8 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EquipmentIndexRouteImport } from './routes/equipment.index'
-import { Route as EquipmentCategoryRouteImport } from './routes/equipment.$category'
 import { Route as ApiContactRouteImport } from './routes/api.contact'
+import { Route as EquipmentCategoryIndexRouteImport } from './routes/equipment.$category.index'
 import { Route as EquipmentCategoryIdRouteImport } from './routes/equipment.$category.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -55,20 +55,20 @@ const EquipmentIndexRoute = EquipmentIndexRouteImport.update({
   path: '/equipment/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EquipmentCategoryRoute = EquipmentCategoryRouteImport.update({
-  id: '/equipment/$category',
-  path: '/equipment/$category',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiContactRoute = ApiContactRouteImport.update({
   id: '/api/contact',
   path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EquipmentCategoryIndexRoute = EquipmentCategoryIndexRouteImport.update({
+  id: '/equipment/$category/',
+  path: '/equipment/$category/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EquipmentCategoryIdRoute = EquipmentCategoryIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => EquipmentCategoryRoute,
+  id: '/equipment/$category/$id',
+  path: '/equipment/$category/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -79,9 +79,9 @@ export interface FileRoutesByFullPath {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/contact': typeof ApiContactRoute
-  '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment/': typeof EquipmentIndexRoute
   '/equipment/$category/$id': typeof EquipmentCategoryIdRoute
+  '/equipment/$category/': typeof EquipmentCategoryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -91,9 +91,9 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/contact': typeof ApiContactRoute
-  '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment': typeof EquipmentIndexRoute
   '/equipment/$category/$id': typeof EquipmentCategoryIdRoute
+  '/equipment/$category': typeof EquipmentCategoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -104,9 +104,9 @@ export interface FileRoutesById {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/contact': typeof ApiContactRoute
-  '/equipment/$category': typeof EquipmentCategoryRouteWithChildren
   '/equipment/': typeof EquipmentIndexRoute
   '/equipment/$category/$id': typeof EquipmentCategoryIdRoute
+  '/equipment/$category/': typeof EquipmentCategoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -118,9 +118,9 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/api/contact'
-    | '/equipment/$category'
     | '/equipment/'
     | '/equipment/$category/$id'
+    | '/equipment/$category/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -130,9 +130,9 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/api/contact'
-    | '/equipment/$category'
     | '/equipment'
     | '/equipment/$category/$id'
+    | '/equipment/$category'
   id:
     | '__root__'
     | '/'
@@ -142,9 +142,9 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/api/contact'
-    | '/equipment/$category'
     | '/equipment/'
     | '/equipment/$category/$id'
+    | '/equipment/$category/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -155,8 +155,9 @@ export interface RootRouteChildren {
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiContactRoute: typeof ApiContactRoute
-  EquipmentCategoryRoute: typeof EquipmentCategoryRouteWithChildren
   EquipmentIndexRoute: typeof EquipmentIndexRoute
+  EquipmentCategoryIdRoute: typeof EquipmentCategoryIdRoute
+  EquipmentCategoryIndexRoute: typeof EquipmentCategoryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -210,13 +211,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquipmentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/equipment/$category': {
-      id: '/equipment/$category'
-      path: '/equipment/$category'
-      fullPath: '/equipment/$category'
-      preLoaderRoute: typeof EquipmentCategoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/contact': {
       id: '/api/contact'
       path: '/api/contact'
@@ -224,26 +218,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/equipment/$category/': {
+      id: '/equipment/$category/'
+      path: '/equipment/$category'
+      fullPath: '/equipment/$category/'
+      preLoaderRoute: typeof EquipmentCategoryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/equipment/$category/$id': {
       id: '/equipment/$category/$id'
-      path: '/$id'
+      path: '/equipment/$category/$id'
       fullPath: '/equipment/$category/$id'
       preLoaderRoute: typeof EquipmentCategoryIdRouteImport
-      parentRoute: typeof EquipmentCategoryRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface EquipmentCategoryRouteChildren {
-  EquipmentCategoryIdRoute: typeof EquipmentCategoryIdRoute
-}
-
-const EquipmentCategoryRouteChildren: EquipmentCategoryRouteChildren = {
-  EquipmentCategoryIdRoute: EquipmentCategoryIdRoute,
-}
-
-const EquipmentCategoryRouteWithChildren =
-  EquipmentCategoryRoute._addFileChildren(EquipmentCategoryRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -253,9 +243,19 @@ const rootRouteChildren: RootRouteChildren = {
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiContactRoute: ApiContactRoute,
-  EquipmentCategoryRoute: EquipmentCategoryRouteWithChildren,
   EquipmentIndexRoute: EquipmentIndexRoute,
+  EquipmentCategoryIdRoute: EquipmentCategoryIdRoute,
+  EquipmentCategoryIndexRoute: EquipmentCategoryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

@@ -77,14 +77,15 @@ export function ContactChannelButton({
       <motion.a
         href={href}
         aria-label={ariaLabel ?? (channel === "phone" ? "Call ATDB" : "Email ATDB")}
-        whileHover={{ y: -2, scale: 1.04 }}
+        title={typeof children === "string" ? children : ariaLabel}
+        whileHover={{ y: -2, scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
         transition={{ type: "spring", stiffness: 320, damping: 20 }}
-        className={`group relative hidden h-9 items-center gap-1.5 overflow-hidden rounded-sm border border-iron/15 bg-white/40 px-2.5 backdrop-blur-md backdrop-saturate-150 transition-colors ${accent.ringHover} hover:bg-white/70 sm:inline-flex ${className}`}
+        className={`group relative hidden h-9 w-9 place-items-center overflow-hidden rounded-sm border border-iron/15 bg-white/40 backdrop-blur-md backdrop-saturate-150 transition-colors ${accent.ringHover} hover:bg-white/70 sm:grid ${className}`}
       >
         <span
           aria-hidden
-          className="pointer-events-none absolute -inset-px rounded-sm opacity-0 blur-[6px] transition-opacity duration-500 group-hover:opacity-80"
+          className="pointer-events-none absolute -inset-px rounded-sm opacity-0 blur-[6px] transition-opacity duration-500 group-hover:opacity-90"
           style={{ background: accent.haloHeader }}
         />
         <span
@@ -92,13 +93,11 @@ export function ContactChannelButton({
           className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
         />
         <span
-          className={`relative grid h-6 w-6 place-items-center rounded-full ${accent.orbBg} ${accent.orbShadow} ring-1 ring-white/30 transition-transform duration-300 group-hover:rotate-[10deg]`}
+          className={`relative grid h-6 w-6 place-items-center rounded-full ${accent.orbBg} ${accent.orbShadow} ring-1 ring-white/30 transition-transform duration-300 group-hover:rotate-[12deg]`}
         >
-          <Icon className="h-3 w-3 text-white" strokeWidth={2.4} />
+          <Icon className="h-3.5 w-3.5 text-white" strokeWidth={2.4} />
         </span>
-        <span className={`relative z-10 ${fontClass} text-xs font-semibold text-iron transition-colors ${accent.textHover}`}>
-          {children}
-        </span>
+        <span className={`sr-only ${fontClass}`}>{children}</span>
       </motion.a>
     );
   }

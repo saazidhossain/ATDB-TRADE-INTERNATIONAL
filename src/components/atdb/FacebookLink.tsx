@@ -63,22 +63,23 @@ export function FacebookLink({ variant = "header", label, className = "" }: Face
     );
   }
 
-  // Header — compact glass pill
+  // Header — compact glass icon-only square (matches Phone + Email pills)
   return (
     <motion.a
       href={COMPANY.facebook}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Visit ATDB on Facebook"
-      whileHover={{ y: -2, scale: 1.04 }}
+      title="Facebook"
+      whileHover={{ y: -2, scale: 1.06 }}
       whileTap={{ scale: 0.94 }}
       transition={{ type: "spring", stiffness: 320, damping: 20 }}
-      className={`group relative hidden h-9 items-center gap-1.5 overflow-hidden rounded-sm border border-iron/15 bg-white/40 px-2.5 backdrop-blur-md backdrop-saturate-150 transition-colors hover:border-[#1877F2]/50 hover:bg-white/70 sm:inline-flex ${className}`}
+      className={`group relative hidden h-9 w-9 place-items-center overflow-hidden rounded-sm border border-iron/15 bg-white/40 backdrop-blur-md backdrop-saturate-150 transition-colors hover:border-[#1877F2]/50 hover:bg-white/70 sm:grid ${className}`}
     >
       {/* animated gradient ring on hover */}
       <span
         aria-hidden
-        className="pointer-events-none absolute -inset-px rounded-sm opacity-0 blur-[6px] transition-opacity duration-500 group-hover:opacity-80"
+        className="pointer-events-none absolute -inset-px rounded-sm opacity-0 blur-[6px] transition-opacity duration-500 group-hover:opacity-90"
         style={{
           background:
             "linear-gradient(120deg, rgba(24,119,242,0.45), rgba(245,124,0,0.35), rgba(24,119,242,0.45))",
@@ -89,12 +90,10 @@ export function FacebookLink({ variant = "header", label, className = "" }: Face
         aria-hidden
         className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
       />
-      <span className="relative grid h-6 w-6 place-items-center rounded-full bg-gradient-to-br from-[#1877F2] to-[#0c5dc7] shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/30 transition-transform duration-300 group-hover:rotate-[10deg]">
-        <Facebook className="h-3 w-3 fill-white text-white" strokeWidth={0} />
+      <span className="relative grid h-6 w-6 place-items-center rounded-full bg-gradient-to-br from-[#1877F2] to-[#0c5dc7] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_2px_8px_rgba(24,119,242,0.45)] ring-1 ring-white/30 transition-transform duration-300 group-hover:rotate-[12deg]">
+        <Facebook className="h-3.5 w-3.5 fill-white text-white" strokeWidth={0} />
       </span>
-      <span className="relative z-10 font-display text-xs font-semibold text-iron transition-colors group-hover:text-[#1877F2]">
-        Facebook
-      </span>
+      <span className="sr-only">Facebook</span>
     </motion.a>
   );
 }

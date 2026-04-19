@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Phone, Globe } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import logo from "@/assets/brand/atdb-logo-light.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { CartButton } from "./CartButton";
 import { FacebookLink } from "./FacebookLink";
 import { WhatsappButton } from "./WhatsappButton";
+import { ContactChannelButton } from "./ContactChannelButton";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);

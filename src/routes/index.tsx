@@ -13,9 +13,9 @@ import {
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 import heroImg from "@/assets/brand/atdb-hero-monument.webp";
-import projectRoad from "@/assets/project-road.webp";
-import projectBridge from "@/assets/project-bridge.webp";
-import projectPharma from "@/assets/project-pharma.webp";
+import projectJamuna from "@/assets/projects/jamuna-bridge.jpg";
+import projectCenteon from "@/assets/projects/centeon-pharma.jpg";
+import projectRtip2 from "@/assets/projects/rtip2-ghatail.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({

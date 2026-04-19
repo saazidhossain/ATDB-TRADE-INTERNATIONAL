@@ -118,12 +118,28 @@ function EquipmentDetailPage() {
   const eq = getEquipmentById(id)!;
   const cat = CATEGORIES[category as EquipmentCategory];
   const related = FLEET.filter((f) => f.category === eq.category && f.id !== eq.id).slice(0, 3);
-  const gallery = [eq.image, detailHero, detailCabin, detailFleet];
+  // Use cinematic gallery when available; fall back to legacy stock photos.
+  const gallery = eq.gallery && eq.gallery.length > 0
+    ? [eq.image, ...eq.gallery]
+    : [eq.image, detailHero, detailCabin, detailFleet];
 
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
   const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);
+
+  // At-a-glance badge strip (4-6 chips)
+  const glance: { label: string; value: string }[] = [
+    { label: t("detail.spec.brand"), value: eq.brand },
+    { label: t("detail.spec.capacity"), value: eq.capacity },
+    { label: t("detail.spec.origin"), value: eq.origin },
+    ...(eq.year ? [{ label: t("detail.spec.year"), value: String(eq.year) }] : []),
+    ...(eq.fuel ? [{ label: t("detail.spec.fuel"), value: eq.fuel }] : []),
+    ...(eq.quantity ? [{ label: t("detail.spec.qty"), value: eq.quantity }] : []),
+  ];
+
+  const bestForText = eq.bestForKey ? t(eq.bestForKey as Parameters<typeof t>[0]) : "";
+  const aboutText = eq.descriptionKey ? t(eq.descriptionKey as Parameters<typeof t>[0]) : "";
 
   return (
     <Layout>
@@ -194,6 +210,54 @@ function EquipmentDetailPage() {
           </div>
         </div>
       </section>
+
+      {/* At a Glance — quick badge strip */}
+      <section className="border-y border-border bg-card">
+        <div className="container-page py-6">
+          <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground ${fontClass}`}>
+            {t("detail.atGlance")}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {glance.map((g) => (
+              <div
+                key={g.label}
+                className="inline-flex items-center gap-2 rounded-sm border border-border bg-muted/40 px-3 py-1.5"
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground ${fontClass}`}>
+                  {g.label}
+                </span>
+                <span className={`text-xs font-semibold text-iron ${fontClass}`}>{g.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About + Best For */}
+      {(aboutText || bestForText) && (
+        <section className="bg-background py-14 md:py-20">
+          <div className="container-page grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+            {aboutText && (
+              <div>
+                <p className="eyebrow">{t("detail.about")}</p>
+                <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{eq.name}</h2>
+                <p className={`mt-4 text-base leading-relaxed text-muted-foreground ${fontClass}`}>{aboutText}</p>
+              </div>
+            )}
+            {bestForText && (
+              <aside className="rounded-md border-l-4 border-safety bg-muted/40 p-6 shadow-card">
+                <div className="flex items-center gap-2">
+                  <BadgeCheck className="h-4 w-4 text-safety" />
+                  <p className={`text-[11px] font-bold uppercase tracking-[0.18em] text-safety ${fontClass}`}>
+                    {t("detail.bestFor")}
+                  </p>
+                </div>
+                <p className={`mt-3 text-sm leading-relaxed text-iron ${fontClass}`}>{bestForText}</p>
+              </aside>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Specs — collapsible groups */}
       <section className="bg-muted/40 py-16 md:py-20">

@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
+import { Phone, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { FacebookFeed } from "@/components/atdb/FacebookFeed";
+import { FacebookLink } from "@/components/atdb/FacebookLink";
 import { WhatsappButton } from "@/components/atdb/WhatsappButton";
+import { ContactChannelButton } from "@/components/atdb/ContactChannelButton";
 import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 
@@ -216,27 +218,38 @@ function ContactPage() {
               <ul className="mt-5 space-y-3">
                 {COMPANY.phones.map((p) => (
                   <li key={p.number}>
-                    <a href={`tel:${p.number}`} className="flex items-center justify-between rounded-md border border-border bg-card px-4 py-3.5 shadow-card transition-colors hover:border-safety">
-                      <div className="flex items-center gap-3">
-                        <div className="grid h-10 w-10 place-items-center rounded-sm bg-gradient-safety text-white">
-                          <Phone className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <p className="font-display text-sm font-semibold text-iron">{p.number}</p>
-                          <p className={`text-xs text-muted-foreground ${fontClass}`}>{p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}</p>
-                        </div>
-                      </div>
-                      <span className={`text-[10px] font-semibold uppercase tracking-wider text-safety ${fontClass}`}>{t("common.call")}</span>
-                    </a>
+                    <ContactChannelButton
+                      channel="phone"
+                      href={`tel:${p.number}`}
+                      variant="card"
+                      sublabel={p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
+                    >
+                      {p.number}
+                    </ContactChannelButton>
                   </li>
                 ))}
                 <li>
-                  <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-3 rounded-md border border-border bg-card px-4 py-3.5 shadow-card transition-colors hover:border-safety">
-                    <div className="grid h-10 w-10 place-items-center rounded-sm bg-gradient-iron text-white">
-                      <Mail className="h-4 w-4" />
-                    </div>
-                    <p className="font-display text-sm font-semibold text-iron break-all">{COMPANY.email}</p>
-                  </a>
+                  <ContactChannelButton
+                    channel="email"
+                    href={`mailto:${COMPANY.email}`}
+                    variant="card"
+                    sublabel={t("contact.email")}
+                  >
+                    {COMPANY.email}
+                  </ContactChannelButton>
+                </li>
+                <li>
+                  <WhatsappButton
+                    href={buildWhatsappGenericLink(undefined, lang)}
+                    variant="cta"
+                    fullWidth
+                    className="!py-3.5"
+                  >
+                    {t("common.openWhatsapp")}
+                  </WhatsappButton>
+                </li>
+                <li className="flex">
+                  <FacebookLink variant="footer" className="w-full justify-start !bg-iron-deep !border-iron/20" />
                 </li>
               </ul>
             </div>
@@ -358,12 +371,15 @@ function OfficeMaps() {
             >
               {t("maps.directions")} <ExternalLink className="h-3.5 w-3.5" />
             </a>
-            <a
+            <ContactChannelButton
+              channel="phone"
               href={`tel:${COMPANY.phones[0].number}`}
-              className={`mt-2 inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-iron/15 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-iron transition-colors hover:border-iron hover:bg-iron hover:text-white ${fontClass}`}
+              variant="cta"
+              fullWidth
+              className="mt-2"
             >
-              <Phone className="h-3.5 w-3.5" /> {COMPANY.phones[0].number}
-            </a>
+              {COMPANY.phones[0].number}
+            </ContactChannelButton>
           </aside>
         </div>
       </div>

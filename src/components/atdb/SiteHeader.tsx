@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Phone, Globe } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import logo from "@/assets/brand/atdb-logo-light.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { CartButton } from "./CartButton";
 import { FacebookLink } from "./FacebookLink";
 import { WhatsappButton } from "./WhatsappButton";
+import { ContactChannelButton } from "./ContactChannelButton";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -52,23 +53,34 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <CartButton />
-          <FacebookLink variant="header" />
           <LangSwitch lang={lang} onToggle={toggleLang} />
-          <a
-            href={`tel:${COMPANY.phones[0].number}`}
-            className="hidden items-center gap-2 rounded-sm border border-iron/15 px-3 py-2 font-display text-xs font-semibold text-iron transition-colors hover:border-safety hover:text-safety lg:inline-flex"
-          >
-            <Phone className="h-3.5 w-3.5" />
-            {COMPANY.phones[0].number}
-          </a>
-          <WhatsappButton
-            href={buildWhatsappGenericLink(undefined, lang)}
-            variant="header"
-            ariaLabel={t("nav.getQuote")}
-            className="hidden md:inline-flex"
-          >
-            {t("nav.getQuote")}
-          </WhatsappButton>
+          {/* Unified social/contact channel row — equal alignment */}
+          <div className="hidden items-center gap-1.5 sm:flex">
+            <FacebookLink variant="header" />
+            <ContactChannelButton
+              channel="phone"
+              href={`tel:${COMPANY.phones[0].number}`}
+              ariaLabel={`Call ${COMPANY.phones[0].number}`}
+              variant="header"
+            >
+              Call
+            </ContactChannelButton>
+            <ContactChannelButton
+              channel="email"
+              href={`mailto:${COMPANY.email}`}
+              ariaLabel={`Email ${COMPANY.email}`}
+              variant="header"
+            >
+              Email
+            </ContactChannelButton>
+            <WhatsappButton
+              href={buildWhatsappGenericLink(undefined, lang)}
+              variant="header"
+              ariaLabel={t("nav.getQuote")}
+            >
+              {t("nav.getQuote")}
+            </WhatsappButton>
+          </div>
           <button
             className="grid h-10 w-10 place-items-center rounded-sm border border-border md:hidden"
             onClick={() => setOpen((v) => !v)}
@@ -103,8 +115,24 @@ export function SiteHeader() {
                 {t("nav.whatsappQuote")}
               </WhatsappButton>
             </div>
-            <div className="mt-3 flex justify-center">
-              <FacebookLink variant="footer" label="Facebook" />
+            {/* Unified social/contact channel row — equal alignment on mobile */}
+            <div className="mt-3 grid grid-cols-1 gap-2">
+              <ContactChannelButton
+                channel="phone"
+                href={`tel:${COMPANY.phones[0].number}`}
+                variant="footer"
+                sublabel={COMPANY.phones[0].label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
+              >
+                {COMPANY.phones[0].number}
+              </ContactChannelButton>
+              <ContactChannelButton
+                channel="email"
+                href={`mailto:${COMPANY.email}`}
+                variant="footer"
+              >
+                {COMPANY.email}
+              </ContactChannelButton>
+              <FacebookLink variant="footer" label="Facebook" className="w-full justify-start" />
             </div>
           </nav>
         </div>

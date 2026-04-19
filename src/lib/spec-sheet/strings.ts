@@ -1,14 +1,17 @@
-// Localised string bundles for the PDF spec sheet.
-// Kept in a dedicated module so each renderer can import only what it needs.
+// English string bundle for the PDF spec sheet.
+// Single language by design — keeps the PDF crisp & maintenance-light.
 
 export interface Strings {
   title: string;
+  subtitle: string;
   contact: string;
   phoneL: string;
   emailL: string;
   whatsappL: string;
+  webL: string;
   disclaimer: string;
   generated: string;
+  ref: string;
   category: string;
   brand: string;
   model: string;
@@ -23,17 +26,28 @@ export interface Strings {
   inspectionVal: string;
   assetId: string;
   unitSuffix: string;
+  specsHeading: string;
+  highlightsHeading: string;
+  hAvailability: string;
+  hAvailabilityV: string;
+  hMobilisation: string;
+  hMobilisationV: string;
+  hCompliance: string;
+  hComplianceV: string;
 }
 
 export const STRINGS_EN: Strings = {
   title: "Equipment Specification Sheet",
+  subtitle: "Heavy Equipment Rental · Bangladesh",
   contact: "Contact ATDB Trade International",
   phoneL: "Phone",
   emailL: "Email",
   whatsappL: "WhatsApp",
+  webL: "Web",
   disclaimer:
-    "Specifications are indicative. Inspection-certified, operator included, mobilisation on request.",
+    "Specifications are indicative and may vary by unit. Inspection-certified, operator included, mobilisation on request.",
   generated: "Generated",
+  ref: "Ref",
   category: "Category",
   brand: "Brand",
   model: "Model",
@@ -41,35 +55,19 @@ export const STRINGS_EN: Strings = {
   origin: "Country of Origin",
   year: "Year of Manufacture",
   fuel: "Fuel",
-  fleet: "In Fleet",
+  fleet: "Units in Fleet",
   operator: "Operator",
   operatorVal: "Certified operator included",
   inspection: "Inspection",
   inspectionVal: "City Inspection Services CIS/077/2018",
   assetId: "Asset ID",
   unitSuffix: "unit(s)",
-};
-
-export const STRINGS_BN: Strings = {
-  title: "ইকুইপমেন্ট স্পেসিফিকেশন শিট",
-  contact: "যোগাযোগ — ATDB Trade International",
-  phoneL: "ফোন",
-  emailL: "ইমেইল",
-  whatsappL: "হোয়াটসঅ্যাপ",
-  disclaimer: "স্পেসিফিকেশন নির্দেশক। ইন্সপেকশন-সার্টিফাইড, অপারেটর সহ, অনুরোধে মোবিলাইজেশন।",
-  generated: "তৈরি",
-  category: "ক্যাটাগরি",
-  brand: "ব্র্যান্ড",
-  model: "মডেল",
-  capacity: "ক্যাপাসিটি",
-  origin: "উৎপত্তি দেশ",
-  year: "নির্মাণ বছর",
-  fuel: "জ্বালানি",
-  fleet: "ফ্লিটে",
-  operator: "অপারেটর",
-  operatorVal: "সার্টিফাইড অপারেটর সহ",
-  inspection: "ইন্সপেকশন",
-  inspectionVal: "City Inspection Services CIS/077/2018",
-  assetId: "অ্যাসেট আইডি",
-  unitSuffix: "ইউনিট",
+  specsHeading: "Specifications",
+  highlightsHeading: "Service Highlights",
+  hAvailability: "Availability",
+  hAvailabilityV: "Ready for site mobilisation",
+  hMobilisation: "Coverage",
+  hMobilisationV: "Nationwide deployment, 24/7 support",
+  hCompliance: "Compliance",
+  hComplianceV: "CIS-inspected · operator certified",
 };

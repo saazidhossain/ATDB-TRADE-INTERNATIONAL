@@ -148,7 +148,7 @@ function EquipmentDetailPage() {
     if (pdfBusy) return;
     setPdfBusy(true);
     try {
-      await generateSpecSheet(eq, t, lang);
+      await generateSpecSheet(eq);
     } finally {
       setPdfBusy(false);
     }

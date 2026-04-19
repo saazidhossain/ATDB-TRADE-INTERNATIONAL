@@ -1,29 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import { MapPin, ArrowRight } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { useI18n } from "@/lib/i18n";
-import projectRoad from "@/assets/project-road.webp";
-import projectBridge from "@/assets/project-bridge.webp";
-import projectPharma from "@/assets/project-pharma.webp";
+import { buildWhatsappGenericLink } from "@/lib/atdb-data";
+import { PROJECT_CATEGORIES, PROJECTS, HERO_PROJECT_IMAGE } from "@/lib/projects-data";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects — ATDB Trade International" },
-      { name: "description", content: "ATDB's project portfolio: RTIP-2 Ghatail, Jamuna Bridge, BRT Airport-Gazipur, Pharma Ashia, Centeon Pharma, SMC ORS, NASSA Group." },
-      { property: "og:image", content: projectBridge },
+      { title: "Executed Projects — ATDB Trade International" },
+      { name: "description", content: "ATDB's portfolio: BRT Airport-Gazipur, Jamuna Bridge Contract 1, RTIP-2 Ghatail, Centeon Pharma, Pharmacil, Pharma Ashia, AMC Knit Composite, SMC ORS, Nassa Super Garments — 14 executed heavy-engineering & civil projects across Bangladesh." },
+      { property: "og:title", content: "ATDB Trade International — Executed Projects Portfolio" },
+      { property: "og:description", content: "14 executed projects across mega-infrastructure, industrial, roadways and specialised civil works." },
+      { property: "og:image", content: HERO_PROJECT_IMAGE },
+      { name: "twitter:image", content: HERO_PROJECT_IMAGE },
     ],
   }),
   component: ProjectsPage,
 });
 
-const PROJECTS = [
-  { img: projectRoad, t: "project.rtip.t", l: "project.rtip.l", s: "project.rtip.s" },
-  { img: projectBridge, t: "project.jamuna.t", l: "project.jamuna.l", s: "project.jamuna.s" },
-  { img: projectPharma, t: "project.pharmaA.t", l: "project.pharmaA.l", s: "project.pharmaA.s" },
-  { img: projectPharma, t: "project.centeon.t", l: "project.centeon.l", s: "project.centeon.s" },
-  { img: projectRoad, t: "project.brt.t", l: "project.brt.l", s: "project.brt.s" },
-  { img: projectBridge, t: "project.nassa.t", l: "project.nassa.l", s: "project.nassa.s" },
-] as const;
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const } },
+};
+
+const gridVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+};
 
 function ProjectsPage() {
   const { t, lang } = useI18n();
@@ -31,32 +36,121 @@ function ProjectsPage() {
 
   return (
     <Layout>
-      <section className="bg-iron-deep py-24 text-white">
-        <div className="container-page">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-iron-deep py-24 text-white">
+        <div
+          className="absolute inset-0 opacity-25"
+          style={{ backgroundImage: `url(${HERO_PROJECT_IMAGE})`, backgroundSize: "cover", backgroundPosition: "center" }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-iron-deep via-iron-deep/85 to-iron-deep/40" aria-hidden="true" />
+        <div className="container-page relative">
           <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("projects.eyebrow")}</p>
           <h1 className={`mt-2 max-w-3xl text-4xl font-bold text-white md:text-5xl ${fontClass}`}>
             {t("projects.title")}
           </h1>
-          <p className={`mt-4 max-w-2xl text-white/75 ${fontClass}`}>
+          <p className={`mt-4 max-w-3xl text-white/80 md:text-lg ${fontClass}`}>
             {t("projects.lede")}
           </p>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {PROJECT_CATEGORIES.map((c, idx) => (
+              <a
+                key={c.key}
+                href={`#cat-${c.key}`}
+                className={`rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md transition-colors hover:border-bronze-glow hover:text-bronze-glow ${fontClass}`}
+              >
+                {idx + 1}. {t(c.titleKey as Parameters<typeof t>[0])}
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="bg-background py-20">
-        <div className="container-page grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {PROJECTS.map((p) => (
-            <article key={p.t} className="group overflow-hidden rounded-md border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={p.img} alt={t(p.t)} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      {/* Categories + project grids */}
+      {PROJECT_CATEGORIES.map((cat, idx) => {
+        const items = PROJECTS.filter((p) => p.category === cat.key);
+        return (
+          <section
+            key={cat.key}
+            id={`cat-${cat.key}`}
+            className={`scroll-mt-24 py-16 md:py-20 ${idx % 2 === 0 ? "bg-background" : "bg-muted/40"}`}
+          >
+            <div className="container-page">
+              <div className="flex items-end justify-between gap-6">
+                <div>
+                  <p className={`text-[11px] font-bold uppercase tracking-[0.2em] text-safety ${fontClass}`}>
+                    {String(idx + 1).padStart(2, "0")} · {items.length} {items.length === 1 ? "project" : "projects"}
+                  </p>
+                  <h2 className={`mt-2 max-w-2xl text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>
+                    {t(cat.titleKey as Parameters<typeof t>[0])}
+                  </h2>
+                  <p className={`mt-1.5 max-w-xl text-sm text-muted-foreground ${fontClass}`}>
+                    {t(cat.subtitleKey as Parameters<typeof t>[0])}
+                  </p>
+                </div>
               </div>
-              <div className="p-6">
-                <p className={`text-xs uppercase tracking-[0.18em] text-safety ${fontClass}`}>{t(p.l)}</p>
-                <h2 className={`mt-1.5 text-lg font-semibold text-iron ${fontClass}`}>{t(p.t)}</h2>
-                <p className={`mt-2 text-sm text-muted-foreground ${fontClass}`}>{t(p.s)}</p>
-              </div>
-            </article>
-          ))}
+
+              <motion.div
+                variants={gridVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+              >
+                {items.map((p) => (
+                  <motion.article
+                    key={p.id}
+                    variants={cardVariants}
+                    whileHover={{ y: -6 }}
+                    transition={{ type: "spring", stiffness: 320, damping: 22 }}
+                    className="group flex flex-col overflow-hidden rounded-md border border-border bg-card shadow-card hover:shadow-card-hover"
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <img
+                        src={p.image}
+                        alt={t(p.titleKey as Parameters<typeof t>[0])}
+                        loading="lazy"
+                        width={1024}
+                        height={768}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-iron-deep/40 via-transparent to-transparent" />
+                    </div>
+                    <div className="flex flex-1 flex-col p-5">
+                      <p className={`flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-safety ${fontClass}`}>
+                        <MapPin className="h-3 w-3" />
+                        {t(p.locationKey as Parameters<typeof t>[0])}
+                      </p>
+                      <h3 className={`mt-1.5 text-lg font-bold leading-tight text-iron ${fontClass}`}>
+                        {t(p.titleKey as Parameters<typeof t>[0])}
+                      </h3>
+                      <p className={`mt-2 text-sm leading-relaxed text-muted-foreground ${fontClass}`}>
+                        {t(p.scopeKey as Parameters<typeof t>[0])}
+                      </p>
+                    </div>
+                  </motion.article>
+                ))}
+              </motion.div>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* CTA */}
+      <section className="bg-gradient-safety py-14 text-white">
+        <div className="container-page flex flex-col items-start justify-between gap-5 md:flex-row md:items-center">
+          <div>
+            <h2 className={`text-2xl font-bold text-white md:text-3xl ${fontClass}`}>{t("projects.cta.title")}</h2>
+            <p className={`mt-1 max-w-xl text-sm text-white/90 ${fontClass}`}>{t("projects.cta.body")}</p>
+          </div>
+          <a
+            href={buildWhatsappGenericLink(undefined, lang)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-2 rounded-sm bg-iron-deep px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px ${fontClass}`}
+          >
+            {t("home.cta.button")} <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </section>
     </Layout>

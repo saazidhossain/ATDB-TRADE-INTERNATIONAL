@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ShieldCheck, BadgeCheck, Phone, MapPin, Calendar, Plus, Check } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
-import { EquipmentCard } from "@/components/atdb/EquipmentCard";
+import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
 import { SpecGroupsAccordion } from "@/components/atdb/SpecGroups";
 import { ReviewsSection, SAMPLE_REVIEWS, reviewAggregate } from "@/components/atdb/Reviews";
 import {
@@ -234,11 +234,17 @@ function EquipmentDetailPage() {
           <div className="container-page">
             <p className="eyebrow">{t("detail.related")}</p>
             <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{cat.label}</h2>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={equipmentGridVariants}
+              className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
               {related.map((r) => (
                 <EquipmentCard key={r.id} eq={r} />
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       )}

@@ -13,9 +13,9 @@ import {
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 import heroImg from "@/assets/brand/atdb-hero-monument.webp";
-import projectRoad from "@/assets/project-road.webp";
-import projectBridge from "@/assets/project-bridge.webp";
-import projectPharma from "@/assets/project-pharma.webp";
+import projectJamuna from "@/assets/projects/jamuna-bridge.jpg";
+import projectCenteon from "@/assets/projects/centeon-pharma.jpg";
+import projectRtip2 from "@/assets/projects/rtip2-ghatail.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,9 +32,9 @@ export const Route = createFileRoute("/")({
 });
 
 const PROJECTS = [
-  { img: projectRoad, key: "home.project.rtip" as const },
-  { img: projectBridge, key: "home.project.jamuna" as const },
-  { img: projectPharma, key: "home.project.pharma" as const },
+  { img: projectJamuna, key: "home.project.jamuna" as const },
+  { img: projectCenteon, key: "home.project.pharma" as const },
+  { img: projectRtip2, key: "home.project.rtip" as const },
 ];
 
 const BRANDS = ["Liebherr", "Kato", "Sakai", "CAT", "Komatsu", "JCB", "Dynapac", "Bomag", "CASE", "XCMG"];

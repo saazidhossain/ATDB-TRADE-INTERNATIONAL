@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import logo from "@/assets/brand/atdb-logo-dark.webp";
-import { COMPANY } from "@/lib/atdb-data";
+import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 import { FacebookLink } from "./FacebookLink";
+import { WhatsappButton } from "./WhatsappButton";
+import { ContactChannelButton } from "./ContactChannelButton";
 
 export function SiteFooter() {
   const { t, lang } = useI18n();

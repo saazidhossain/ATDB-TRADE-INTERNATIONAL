@@ -1,13 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ShieldCheck, BadgeCheck, MapPin, Calendar, Plus, Check } from "lucide-react";
+import { motion } from "framer-motion";
+import { ChevronRight, ShieldCheck, BadgeCheck, MapPin, Calendar, Plus, Check, FileDown, Loader2 } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
 import { SpecGroupsAccordion } from "@/components/atdb/SpecGroups";
 import { ReviewsSection, SAMPLE_REVIEWS, reviewAggregate } from "@/components/atdb/Reviews";
 import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import { ContactChannelButton } from "@/components/atdb/ContactChannelButton";
+import { EquipmentGallery, type GallerySlot } from "@/components/atdb/EquipmentGallery";
 import {
   CATEGORIES,
   FLEET,
@@ -18,6 +19,7 @@ import {
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
+import { generateSpecSheet } from "@/lib/spec-sheet";
 import detailHero from "@/assets/eq-detail-crane.webp";
 import detailCabin from "@/assets/eq-detail-cabin.webp";
 import detailFleet from "@/assets/eq-detail-fleet.webp";

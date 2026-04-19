@@ -87,12 +87,31 @@ function AboutPage() {
           </h2>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {VALUES.map((v) => (
-              <div key={v.t} className="rounded-md border border-border bg-card p-6 shadow-card">
-                <div className="grid h-11 w-11 place-items-center rounded-sm bg-gradient-iron text-white">
-                  <v.icon className="h-5 w-5" />
+              <div
+                key={v.t}
+                className="group relative overflow-hidden rounded-md border border-border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-safety/40 hover:shadow-cta"
+              >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -inset-px rounded-md opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-70"
+                  style={{
+                    background:
+                      "conic-gradient(from 180deg at 50% 50%, rgba(245,124,0,0.45), rgba(212,162,77,0.35), rgba(245,124,0,0.45))",
+                  }}
+                />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+                />
+                <div className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-sm border border-iron/15 bg-white/40 backdrop-blur-md backdrop-saturate-150 transition-colors group-hover:border-safety/50">
+                  <span
+                    className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-[hsl(24,94%,53%)] to-[hsl(20,90%,42%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_8px_rgba(245,124,0,0.45)] ring-1 ring-white/30 transition-transform duration-300 group-hover:rotate-[10deg]"
+                  >
+                    <v.icon className="h-4 w-4 text-white" strokeWidth={2.2} />
+                  </span>
                 </div>
-                <h3 className={`mt-4 text-lg font-semibold text-iron ${fontClass}`}>{v.t}</h3>
-                <p className={`mt-2 text-sm text-muted-foreground ${fontClass}`}>{v.d}</p>
+                <h3 className={`relative mt-4 text-lg font-semibold text-iron transition-colors group-hover:text-safety ${fontClass}`}>{v.t}</h3>
+                <p className={`relative mt-2 text-sm text-muted-foreground ${fontClass}`}>{v.d}</p>
               </div>
             ))}
           </div>

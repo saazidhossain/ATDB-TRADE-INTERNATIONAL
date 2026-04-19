@@ -279,14 +279,9 @@ function EquipmentDetailPage() {
               <p className="mt-1 max-w-xl text-sm text-white/90">{t("detail.cta.body")}</p>
             </div>
           </div>
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 rounded-sm bg-iron-deep px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px ${fontClass}`}
-          >
-            <WhatsappIcon /> {t("detail.cta.button")}
-          </a>
+          <WhatsappButton href={whatsappUrl} variant="ctaDark">
+            {t("detail.cta.button")}
+          </WhatsappButton>
         </div>
       </section>
 

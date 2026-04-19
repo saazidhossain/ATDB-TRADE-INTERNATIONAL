@@ -237,18 +237,18 @@ function ContactPage() {
 
               {/* Centered channel orb row — same family as footer */}
               <div className="mt-6 flex items-center justify-center gap-3 rounded-md border border-border bg-card px-4 py-4 shadow-card">
-                <SidebarOrb href={`tel:${COMPANY.phones[0].number}`} ariaLabel={`Call ${COMPANY.phones[0].number}`} accent="safety">
-                  <Phone className="h-4 w-4 text-white" strokeWidth={2.4} />
-                </SidebarOrb>
-                <SidebarOrb href={`mailto:${COMPANY.email}`} ariaLabel={`Email ${COMPANY.email}`} accent="bronze">
-                  <Mail className="h-4 w-4 text-white" strokeWidth={2.4} />
-                </SidebarOrb>
-                <SidebarOrb href={buildWhatsappGenericLink(undefined, lang)} ariaLabel="Chat on WhatsApp" accent="whatsapp" external>
-                  <WaIcon />
-                </SidebarOrb>
-                <SidebarOrb href={COMPANY.facebook} ariaLabel="Visit ATDB on Facebook" accent="facebook" external>
-                  <Facebook className="h-4 w-4 fill-white text-white" strokeWidth={0} />
-                </SidebarOrb>
+                <ChannelIcon href={`tel:${COMPANY.phones[0].number}`} ariaLabel={`Call ${COMPANY.phones[0].number}`} accent="safety">
+                  <PhoneGlyph />
+                </ChannelIcon>
+                <ChannelIcon href={`mailto:${COMPANY.email}`} ariaLabel={`Email ${COMPANY.email}`} accent="bronze">
+                  <MailGlyph />
+                </ChannelIcon>
+                <ChannelIcon href={buildWhatsappGenericLink(undefined, lang)} ariaLabel="Chat on WhatsApp" accent="whatsapp" external>
+                  <WaGlyphSm />
+                </ChannelIcon>
+                <ChannelIcon href={COMPANY.facebook} ariaLabel="Visit ATDB on Facebook" accent="facebook" external>
+                  <FbGlyph />
+                </ChannelIcon>
               </div>
 
               {/* Single primary CTA */}

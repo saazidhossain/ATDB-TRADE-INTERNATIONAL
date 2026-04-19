@@ -2,8 +2,14 @@
 // Returns the Y cursor at the bottom of the table.
 
 import { CATEGORIES, type Equipment } from "@/lib/atdb-data";
-import { BORDER, IRON, MARGIN, MUTED, ZEBRA } from "./tokens";
+import { ascii, BORDER, IRON, MARGIN, MUTED, ZEBRA } from "./tokens";
 import type { RenderCtx } from "./render-context";
+
+// True when the string contains zero non-Latin script. We render those
+// values via Helvetica even in BN mode, because the embedded Noto Sans
+// Bengali subset doesn't ship Latin glyphs in the WinAnsi range —
+// without this fallback Latin values like "ATDB-CR-002" would print blank.
+const isLatinOnly = (s: string) => !/[^\x00-\x7F\u00A0-\u00FF]/.test(s);
 
 export function renderSpecsTable(ctx: RenderCtx, eq: Equipment, startY: number): number {
   const { doc, pageW, isBn, S, setFont, text } = ctx;

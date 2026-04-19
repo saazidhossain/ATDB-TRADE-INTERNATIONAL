@@ -159,6 +159,12 @@ export const CATEGORIES: Record<
   },
 };
 
+/** Locale-aware category label. Returns Bengali for `bn`, English otherwise. */
+export function getCategoryLabel(cat: EquipmentCategory, lang: "en" | "bn" = "en"): string {
+  const c = CATEGORIES[cat];
+  return lang === "bn" ? c.label_bn : c.label;
+}
+
 export const FLEET: Equipment[] = [
   // ── Cranes ──────────────────────────────────────────────────────────
   { id: "ATDB-CR-001", category: "cranes", name: "Liebherr LTM 1120-5.1", brand: "Liebherr", model: "LTM 1120-5.1", capacity: "120 Tons", origin: "Germany", year: 2005, fuel: "Diesel", quantity: "01", image: imgLiebherr1120, gallery: GALLERY_CRANE, featured: true, bestForKey: "eq.bestfor.liebherr1120", descriptionKey: "eq.desc.liebherr1120" },

@@ -43,6 +43,12 @@ export const Route = createRootRoute({
       { property: "og:locale", content: "en_US" },
       { property: "og:locale:alternate", content: "bn_BD" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "ATDB Trade International — Heavy Equipment Rental in Bangladesh" },
+      { name: "twitter:title", content: "ATDB Trade International — Heavy Equipment Rental in Bangladesh" },
+      { property: "og:description", content: "Bangladesh's premier heavy equipment rental partner since 2000. Cranes, road rollers, excavators. Instant WhatsApp quotation." },
+      { name: "twitter:description", content: "Bangladesh's premier heavy equipment rental partner since 2000. Cranes, road rollers, excavators. Instant WhatsApp quotation." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ecfb4d6d-d5c3-4c14-84f1-820645e39b84" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ecfb4d6d-d5c3-4c14-84f1-820645e39b84" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

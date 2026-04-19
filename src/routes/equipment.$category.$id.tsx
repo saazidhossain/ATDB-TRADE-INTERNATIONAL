@@ -135,7 +135,7 @@ function EquipmentDetailPage() {
           <Link to="/equipment" className="hover:text-safety">{t("nav.equipment")}</Link>
           <ChevronRight className="h-3 w-3" />
           <Link to="/equipment/$category" params={{ category: cat.slug }} className="hover:text-safety">
-            {cat.label}
+            {t(`cat.${cat.slug}.label` as Parameters<typeof t>[0])}
           </Link>
           <ChevronRight className="h-3 w-3" />
           <span className="truncate text-iron">{eq.name}</span>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Ruler, Gauge, Fuel, ShieldCheck } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import type { Equipment } from "@/lib/atdb-data";
@@ -71,12 +72,28 @@ export function SpecGroupsAccordion({ eq }: { eq: Equipment }) {
   });
 
   return (
-    <div className="mt-8 space-y-3">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+      }}
+      className="mt-8 space-y-3"
+    >
       {groups.map((g) => {
         const isOpen = !!open[g.key];
         const Icon = g.icon;
         return (
-          <div key={g.key} className="overflow-hidden rounded-md border border-border bg-card shadow-card">
+          <motion.div
+            key={g.key}
+            variants={{
+              hidden: { opacity: 0, y: 16 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+            }}
+            className="overflow-hidden rounded-md border border-border bg-card shadow-card"
+          >
             <button
               type="button"
               aria-expanded={isOpen}
@@ -89,25 +106,53 @@ export function SpecGroupsAccordion({ eq }: { eq: Equipment }) {
                 </span>
                 <span className={`text-[11px] font-bold uppercase tracking-[0.18em] text-safety ${fontClass}`}>{g.title}</span>
               </span>
-              <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`} />
+              <motion.span
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="inline-flex"
+              >
+                <ChevronDown className="h-4 w-4 text-muted-foreground" />
+              </motion.span>
             </button>
-            <div
-              className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-            >
-              <div className="overflow-hidden">
-                <dl className="grid gap-px bg-border sm:grid-cols-2">
-                  {g.rows.map((r) => (
-                    <div key={r.label} className="flex items-start justify-between gap-6 bg-card px-5 py-3">
-                      <dt className="font-display text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">{r.label}</dt>
-                      <dd className="text-right font-display text-sm font-semibold text-iron">{r.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
-          </div>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  key="content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="overflow-hidden"
+                >
+                  <motion.dl
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      hidden: {},
+                      visible: { transition: { staggerChildren: 0.04, delayChildren: 0.05 } },
+                    }}
+                    className="grid gap-px bg-border sm:grid-cols-2"
+                  >
+                    {g.rows.map((r) => (
+                      <motion.div
+                        key={r.label}
+                        variants={{
+                          hidden: { opacity: 0, y: 8 },
+                          visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
+                        }}
+                        className="flex items-start justify-between gap-6 bg-card px-5 py-3"
+                      >
+                        <dt className="font-display text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">{r.label}</dt>
+                        <dd className="text-right font-display text-sm font-semibold text-iron">{r.value}</dd>
+                      </motion.div>
+                    ))}
+                  </motion.dl>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         );
       })}
-    </div>
+    </motion.div>
   );
 }

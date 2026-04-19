@@ -200,12 +200,24 @@ function EquipmentDetailPage() {
               {inCart ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
               {inCart ? t("common.added") : t("common.addToQuote")}
             </button>
-            <a
+            <ContactChannelButton
+              channel="phone"
               href={`tel:${COMPANY.phones[0].number}`}
-              className={`mt-3 inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-iron/15 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-iron transition-colors hover:border-iron hover:bg-iron hover:text-white ${fontClass}`}
+              variant="cta"
+              fullWidth
+              className="mt-3"
             >
-              <Phone className="h-4 w-4" /> {COMPANY.phones[0].number}
-            </a>
+              {COMPANY.phones[0].number}
+            </ContactChannelButton>
+            <ContactChannelButton
+              channel="email"
+              href={`mailto:${COMPANY.email}`}
+              variant="cta"
+              fullWidth
+              className="mt-3"
+            >
+              {COMPANY.email}
+            </ContactChannelButton>
           </div>
         </div>
       </section>

@@ -1,10 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import logo from "@/assets/brand/atdb-logo-dark.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
-import { ChannelIcon, PhoneGlyph, MailGlyph, FbGlyph, WaGlyphSm } from "./ChannelIcon";
 
 export function SiteFooter() {
   const { t, lang } = useI18n();
@@ -69,32 +68,40 @@ export function SiteFooter() {
 
         <div>
           <h4 className="eyebrow !text-bronze-glow">{t("footer.contact")}</h4>
-          <ul className={`mt-4 space-y-2 text-sm text-white/75 ${fontClass}`}>
+          <ul className={`mt-4 space-y-2.5 text-sm text-white/75 ${fontClass}`}>
             <li>
-              <a href={`tel:${COMPANY.phones[0].number}`} className="transition-colors hover:text-safety">
-                {COMPANY.phones[0].number}
+              <a href={`tel:${COMPANY.phones[0].number}`} className="inline-flex items-center gap-2.5 transition-colors hover:text-safety">
+                <Phone className="h-3.5 w-3.5 text-bronze-glow" strokeWidth={2} />
+                <span>{COMPANY.phones[0].number}</span>
               </a>
             </li>
             <li>
-              <a href={`mailto:${COMPANY.email}`} className="break-all transition-colors hover:text-safety">
-                {COMPANY.email}
+              <a href={`mailto:${COMPANY.email}`} className="inline-flex items-center gap-2.5 break-all transition-colors hover:text-safety">
+                <Mail className="h-3.5 w-3.5 text-bronze-glow" strokeWidth={2} />
+                <span>{COMPANY.email}</span>
               </a>
             </li>
           </ul>
 
-          <div className="mt-5 flex items-center gap-2">
-            <ChannelIcon href={`tel:${COMPANY.phones[0].number}`} ariaLabel={`Call ${COMPANY.phones[0].number}`} accent="safety">
-              <PhoneGlyph />
-            </ChannelIcon>
-            <ChannelIcon href={`mailto:${COMPANY.email}`} ariaLabel={`Email ${COMPANY.email}`} accent="bronze">
-              <MailGlyph />
-            </ChannelIcon>
-            <ChannelIcon href={buildWhatsappGenericLink(undefined, lang)} ariaLabel="Chat on WhatsApp" accent="whatsapp" external>
-              <WaGlyphSm />
-            </ChannelIcon>
-            <ChannelIcon href={COMPANY.facebook} ariaLabel="Visit ATDB on Facebook" accent="facebook" external>
-              <FbGlyph />
-            </ChannelIcon>
+          <div className="mt-5 flex items-center gap-1">
+            <a
+              href={buildWhatsappGenericLink(undefined, lang)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat on WhatsApp"
+              className="grid h-9 w-9 place-items-center rounded-sm text-white/65 transition-colors hover:bg-white/5 hover:text-safety"
+            >
+              <MessageCircle className="h-4 w-4" strokeWidth={1.75} />
+            </a>
+            <a
+              href={COMPANY.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit ATDB on Facebook"
+              className="grid h-9 w-9 place-items-center rounded-sm text-white/65 transition-colors hover:bg-white/5 hover:text-safety"
+            >
+              <Facebook className="h-4 w-4" strokeWidth={1.75} />
+            </a>
           </div>
         </div>
       </div>

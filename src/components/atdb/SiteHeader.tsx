@@ -94,46 +94,69 @@ export function SiteHeader() {
 
       {open && (
         <div className="border-t border-border bg-background md:hidden">
-          <nav className="container-page flex flex-col py-4" aria-label="Mobile">
+          <nav className="container-page flex flex-col py-2" aria-label="Mobile">
             {NAV.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
-                className={`border-b border-border/60 py-3 text-sm font-medium text-iron ${lang === "bn" ? "font-bn" : "font-display"}`}
+                className={`border-b border-border/60 py-3.5 text-[15px] font-medium text-iron ${lang === "bn" ? "font-bn" : "font-display"}`}
                 activeProps={{ className: "text-safety" }}
               >
                 {n.label}
               </Link>
             ))}
-            <div className="mt-4">
-              <WhatsappButton
-                href={buildWhatsappGenericLink(undefined, lang)}
-                variant="cta"
-                fullWidth
-              >
-                {t("nav.whatsappQuote")}
-              </WhatsappButton>
-            </div>
-            {/* Unified social/contact channel row — equal alignment on mobile */}
-            <div className="mt-3 grid grid-cols-1 gap-2">
-              <ContactChannelButton
-                channel="phone"
-                href={`tel:${COMPANY.phones[0].number}`}
-                variant="footer"
-                sublabel={COMPANY.phones[0].label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
-              >
-                {COMPANY.phones[0].number}
-              </ContactChannelButton>
-              <ContactChannelButton
-                channel="email"
-                href={`mailto:${COMPANY.email}`}
-                variant="footer"
-              >
-                {COMPANY.email}
-              </ContactChannelButton>
-              <FacebookLink variant="footer" label="Facebook" className="w-full justify-start" />
-            </div>
+
+            {/* Primary CTA — minimal, single accent */}
+            <a
+              href={buildWhatsappGenericLink(undefined, lang)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className={`mt-5 inline-flex h-11 items-center justify-center rounded-sm bg-safety px-4 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-safety/90 ${lang === "bn" ? "font-bn" : "font-display"}`}
+            >
+              {t("nav.whatsappQuote")}
+            </a>
+
+            {/* Minimal contact row — flat, equal-height, aligned */}
+            <ul className="mt-3 mb-2 divide-y divide-border/60 border-y border-border/60">
+              <li>
+                <a
+                  href={`tel:${COMPANY.phones[0].number}`}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between py-3 text-sm text-iron"
+                >
+                  <span className={`text-muted-foreground ${lang === "bn" ? "font-bn" : "font-display"}`}>
+                    {t("nav.call") ?? "Call"}
+                  </span>
+                  <span className="font-display font-semibold tracking-wide text-iron">{COMPANY.phones[0].number}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${COMPANY.email}`}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between gap-3 py-3 text-sm text-iron"
+                >
+                  <span className={`text-muted-foreground ${lang === "bn" ? "font-bn" : "font-display"}`}>
+                    {t("nav.email") ?? "Email"}
+                  </span>
+                  <span className="truncate font-display font-semibold text-iron">{COMPANY.email}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={COMPANY.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between py-3 text-sm text-iron"
+                >
+                  <span className={`text-muted-foreground ${lang === "bn" ? "font-bn" : "font-display"}`}>Facebook</span>
+                  <span className="font-display font-semibold text-iron">@atdbtrade</span>
+                </a>
+              </li>
+            </ul>
           </nav>
         </div>
       )}

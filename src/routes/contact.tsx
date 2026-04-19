@@ -93,7 +93,7 @@ function ContactPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-base text-white/75 md:text-lg">{t("contact.sub")}</p>
           <a
-            href={buildWhatsappGenericLink()}
+            href={buildWhatsappGenericLink(undefined, lang)}
             target="_blank"
             rel="noopener noreferrer"
             className={`mt-8 inline-flex items-center gap-2 rounded-sm bg-whatsapp px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}

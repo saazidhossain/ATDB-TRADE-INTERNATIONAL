@@ -37,12 +37,16 @@ export async function renderHeader(
   doc.setFillColor(...SAFETY);
   doc.rect(0, bandH, pageW, 3, "F");
 
-  // Brand mark — actual ATDB logo on a safety-orange chip
+  // Brand mark — actual ATDB logo on a safety-orange chip with subtle white inner border
+  const chipS = 38;
   const chipX = MARGIN;
-  const chipY = 20;
-  const chipS = 32;
+  const chipY = 20 - (chipS - 32) / 2;
   doc.setFillColor(...SAFETY);
-  doc.roundedRect(chipX, chipY, chipS, chipS, 4, 4, "F");
+  doc.roundedRect(chipX, chipY, chipS, chipS, 5, 5, "F");
+  doc.setDrawColor(255, 255, 255);
+  doc.setLineWidth(0.6);
+  doc.roundedRect(chipX + 1.25, chipY + 1.25, chipS - 2.5, chipS - 2.5, 4, 4, "S");
+  doc.setLineWidth(0.2);
   const logo = await loadImageAsDataUrl(brandLogo);
   if (logo) {
     const pad = 4;

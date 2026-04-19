@@ -188,7 +188,7 @@ function EquipmentDetailPage() {
       <section className="bg-background py-10 md:py-14">
         <div className="container-page grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           {/* Gallery */}
-          <Gallery images={gallery} alt={eq.name} certifiedLabel={t("detail.certified")} />
+          <EquipmentGallery slots={gallerySlots} alt={eq.name} certifiedLabel={t("detail.certified")} />
 
           {/* Info */}
           <div>
@@ -242,6 +242,15 @@ function EquipmentDetailPage() {
             >
               {COMPANY.email}
             </ContactChannelButton>
+            <button
+              type="button"
+              onClick={handleDownloadPdf}
+              disabled={pdfBusy}
+              className={`mt-3 inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-iron/30 bg-card px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-iron transition-colors hover:border-iron hover:bg-iron hover:text-white disabled:opacity-60 ${fontClass}`}
+            >
+              {pdfBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileDown className="h-4 w-4" />}
+              {t("detail.downloadPdf")}
+            </button>
           </div>
         </div>
       </section>

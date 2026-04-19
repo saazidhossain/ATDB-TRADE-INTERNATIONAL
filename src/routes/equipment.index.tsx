@@ -33,7 +33,6 @@ function EquipmentIndex() {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
   const fontClassEyebrow = useFontClass({ eyebrow: true });
-  const fontClass = fontClass;
   return (
     <Layout>
       <section className="bg-iron-deep py-20 text-white">

@@ -73,7 +73,6 @@ function ProjectsPage() {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
   const fontClassEyebrow = useFontClass({ eyebrow: true });
-  const fontClass = fontClass;
 
   return (
     <Layout>

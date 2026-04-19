@@ -8,7 +8,6 @@ export function CartDrawer() {
   const { isOpen, close, items, project, setProject, setQty, remove, clear, whatsappUrl, count } = useCart();
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
-  const fontClass = fontClass;
 
   useEffect(() => {
     if (!isOpen) return;

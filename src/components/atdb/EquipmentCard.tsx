@@ -22,7 +22,6 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
   const fontClass = useFontClass();
   const { add, items } = useCart();
   const [justAdded, setJustAdded] = useState(false);
-  const fontClass = fontClass;
   const inCart = items.some((i) => i.id === eq.id);
 
   const handleAdd = (e: React.MouseEvent) => {

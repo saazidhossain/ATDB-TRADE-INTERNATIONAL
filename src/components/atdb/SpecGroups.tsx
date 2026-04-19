@@ -62,7 +62,6 @@ export function buildSpecGroups(eq: Equipment, t: (k: string) => string): Group[
 export function SpecGroupsAccordion({ eq }: { eq: Equipment }) {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
-  const fontClass = fontClass;
   const groups = buildSpecGroups(eq, t);
   const [open, setOpen] = useState<Record<string, boolean>>({
     dimensions: true,

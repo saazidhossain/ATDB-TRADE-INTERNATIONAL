@@ -138,8 +138,6 @@ function EquipmentDetailPage() {
         { src: detailCabin, captionKey: "gallery.cap.cabin" },
         { src: detailFleet, captionKey: "gallery.cap.site" },
       ];
-
-  const fontClass = fontClass;
   const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);

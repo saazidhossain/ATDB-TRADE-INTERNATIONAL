@@ -25,7 +25,6 @@ function ContactPage() {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
   const fontClassEyebrow = useFontClass({ eyebrow: true });
-  const fontClass = fontClass;
 
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -336,7 +335,6 @@ const DIRECTIONS_URLS: Record<"dhaka" | "tangail", string> = {
 
 function OfficeMaps() {
   const { t, lang } = useI18n();
-  const fontClass = fontClass;
   const [active, setActive] = useState<"dhaka" | "tangail">("dhaka");
   const office = COMPANY.offices.find((o) => o.city.toLowerCase() === active) ?? COMPANY.offices[0];
 

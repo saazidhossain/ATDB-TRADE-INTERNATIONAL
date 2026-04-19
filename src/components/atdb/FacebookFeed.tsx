@@ -15,7 +15,6 @@ import { useI18n, useFontClass } from "@/lib/i18n";
 export function FacebookFeed() {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
-  const fontClass = fontClass;
 
   // The Facebook Page Plugin accepts any public Page URL. We use the
   // share link supplied by the brand; if Facebook refuses to render it,

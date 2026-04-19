@@ -56,7 +56,6 @@ function Index() {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
   const fontClassEyebrow = useFontClass({ eyebrow: true });
-  const fontClass = fontClass;
   const tx = t as unknown as (k: string) => string;
 
   // Subtle scroll parallax on hero monument

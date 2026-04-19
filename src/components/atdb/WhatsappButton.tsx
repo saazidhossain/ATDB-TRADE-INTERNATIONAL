@@ -45,7 +45,6 @@ export function WhatsappButton({
 }: WhatsappButtonProps) {
   const { lang } = useI18n();
   const fontClass = useFontClass();
-  const fontClass = fontClass;
 
   // ─── HEADER PILL ──────────────────────────────────────────────────
   if (variant === "header") {

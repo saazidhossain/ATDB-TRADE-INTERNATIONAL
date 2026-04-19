@@ -72,7 +72,6 @@ export function ReviewsSection() {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
   const fontClassEyebrow = useFontClass({ eyebrow: true });
-  const fontClass = fontClass;
 
   return (
     <section className="bg-background py-16 md:py-20">

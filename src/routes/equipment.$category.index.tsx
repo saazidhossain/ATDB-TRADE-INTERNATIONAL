@@ -65,7 +65,6 @@ function CategoryPage() {
   const cat = CATEGORIES[category as EquipmentCategory];
   const items = getCategoryFleet(category as EquipmentCategory);
   const { t, lang } = useI18n();
-  const fontClass = fontClass;
 
   const labelKey = CAT_LABEL_KEY[category as EquipmentCategory];
   const taglineKey = CAT_TAGLINE_KEY[category as EquipmentCategory];

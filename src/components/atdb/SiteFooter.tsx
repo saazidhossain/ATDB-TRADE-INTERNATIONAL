@@ -8,7 +8,6 @@ import { useI18n, useFontClass } from "@/lib/i18n";
 export function SiteFooter() {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
-  const fontClass = fontClass;
 
   const [year, setYear] = useState<number | null>(null);
   useEffect(() => setYear(new Date().getFullYear()), []);

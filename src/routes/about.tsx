@@ -20,7 +20,6 @@ function AboutPage() {
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
   const fontClassEyebrow = useFontClass({ eyebrow: true });
-  const fontClass = fontClass;
 
   const VALUES = [
     { icon: ShieldCheck, t: t("about.value.safety.t"), d: t("about.value.safety.d") },

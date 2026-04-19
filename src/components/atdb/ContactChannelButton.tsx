@@ -40,7 +40,6 @@ export function ContactChannelButton({
 }: ContactChannelButtonProps) {
   const { lang } = useI18n();
   const fontClass = useFontClass();
-  const fontClass = fontClass;
   const Icon = channel === "phone" ? Phone : Mail;
 
   // Per-channel brand accents (kept in sync with WA green & FB blue).

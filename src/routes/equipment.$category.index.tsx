@@ -23,7 +23,7 @@ const CAT_TAGLINE_KEY: Record<EquipmentCategory, string> = {
   support: "cat.support.tagline",
 };
 
-export const Route = createFileRoute("/equipment/$category")({
+export const Route = createFileRoute("/equipment/$category/")({
   beforeLoad: ({ params }) => {
     if (!validCategories.includes(params.category as EquipmentCategory)) {
       throw notFound();

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { X, Trash2, MapPin, Calendar, Plus, Minus, ShoppingCart } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/i18n";
+import { WhatsappButton } from "./WhatsappButton";
 
 export function CartDrawer() {
   const { isOpen, close, items, project, setProject, setQty, remove, clear, whatsappUrl, count } = useCart();
@@ -151,14 +152,9 @@ export function CartDrawer() {
 
         {items.length > 0 && (
           <div className="border-t border-border bg-card px-5 py-4">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex w-full items-center justify-center gap-2 rounded-sm bg-whatsapp px-5 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
-            >
-              <WaIcon /> {t("cart.send")} ({count})
-            </a>
+            <WhatsappButton href={whatsappUrl} variant="drawer" fullWidth>
+              {t("cart.send")} ({count})
+            </WhatsappButton>
             <button
               onClick={clear}
               className={`mt-2 w-full text-center text-xs font-medium text-muted-foreground hover:text-destructive ${fontClass}`}

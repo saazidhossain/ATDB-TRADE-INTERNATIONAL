@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { FacebookFeed } from "@/components/atdb/FacebookFeed";
+import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 
@@ -93,14 +94,14 @@ function ContactPage() {
             {t("contact.title")}
           </h1>
           <p className="mt-4 max-w-2xl text-base text-white/75 md:text-lg">{t("contact.sub")}</p>
-          <a
-            href={buildWhatsappGenericLink(undefined, lang)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`mt-8 inline-flex items-center gap-2 rounded-sm bg-whatsapp px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
-          >
-            {t("common.openWhatsapp")}
-          </a>
+          <div className="mt-8">
+            <WhatsappButton
+              href={buildWhatsappGenericLink(undefined, lang)}
+              variant="hero"
+            >
+              {t("common.openWhatsapp")}
+            </WhatsappButton>
+          </div>
         </div>
       </section>
 

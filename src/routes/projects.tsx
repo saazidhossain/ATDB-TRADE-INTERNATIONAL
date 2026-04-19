@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
+import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import { useI18n, TRANSLATIONS } from "@/lib/i18n";
 import { buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { PROJECT_CATEGORIES, PROJECTS, HERO_PROJECT_IMAGE } from "@/lib/projects-data";
@@ -181,14 +182,12 @@ function ProjectsPage() {
             <h2 className={`text-2xl font-bold text-white md:text-3xl ${fontClass}`}>{t("projects.cta.title")}</h2>
             <p className={`mt-1 max-w-xl text-sm text-white/90 ${fontClass}`}>{t("projects.cta.body")}</p>
           </div>
-          <a
+          <WhatsappButton
             href={buildWhatsappGenericLink(undefined, lang)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 rounded-sm bg-iron-deep px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px ${fontClass}`}
+            variant="ctaDark"
           >
-            {t("home.cta.button")} <ArrowRight className="h-4 w-4" />
-          </a>
+            {t("home.cta.button")}
+          </WhatsappButton>
         </div>
       </section>
     </Layout>

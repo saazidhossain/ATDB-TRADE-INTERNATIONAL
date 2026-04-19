@@ -146,7 +146,7 @@ function EquipmentDetailPage() {
       <section className="bg-background py-10 md:py-14">
         <div className="container-page grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           {/* Gallery */}
-          <Gallery images={gallery} alt={eq.name} />
+          <Gallery images={gallery} alt={eq.name} certifiedLabel={t("detail.certified")} />
 
           {/* Info */}
           <div>
@@ -252,7 +252,7 @@ function EquipmentDetailPage() {
   );
 }
 
-function Gallery({ images, alt }: { images: string[]; alt: string }) {
+function Gallery({ images, alt, certifiedLabel }: { images: string[]; alt: string; certifiedLabel: string }) {
   const [active, setActive] = useState(0);
   return (
     <div>
@@ -282,7 +282,7 @@ function Gallery({ images, alt }: { images: string[]; alt: string }) {
         >
           <BadgeCheck className="h-3.5 w-3.5 text-white" />
           <span className="font-display text-[10px] font-bold uppercase tracking-[0.18em] text-white">
-            Inspection Certified
+            {certifiedLabel}
           </span>
         </motion.div>
 

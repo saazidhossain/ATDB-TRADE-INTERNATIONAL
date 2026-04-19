@@ -115,8 +115,24 @@ export function SiteHeader() {
                 {t("nav.whatsappQuote")}
               </WhatsappButton>
             </div>
-            <div className="mt-3 flex justify-center">
-              <FacebookLink variant="footer" label="Facebook" />
+            {/* Unified social/contact channel row — equal alignment on mobile */}
+            <div className="mt-3 grid grid-cols-1 gap-2">
+              <ContactChannelButton
+                channel="phone"
+                href={`tel:${COMPANY.phones[0].number}`}
+                variant="footer"
+                sublabel={COMPANY.phones[0].label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
+              >
+                {COMPANY.phones[0].number}
+              </ContactChannelButton>
+              <ContactChannelButton
+                channel="email"
+                href={`mailto:${COMPANY.email}`}
+                variant="footer"
+              >
+                {COMPANY.email}
+              </ContactChannelButton>
+              <FacebookLink variant="footer" label="Facebook" className="w-full justify-start" />
             </div>
           </nav>
         </div>

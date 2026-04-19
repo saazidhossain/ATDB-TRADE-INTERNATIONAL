@@ -144,10 +144,13 @@ function Index() {
               {t("home.hero.cta.browse")}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <a href={buildWhatsappGenericLink(undefined, lang)} target="_blank" rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 rounded-sm border-2 border-white/80 bg-white/5 px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-iron sm:px-7 sm:py-4 ${fontClass}`}>
+            <WhatsappButton
+              href={buildWhatsappGenericLink(undefined, lang)}
+              variant="cta"
+              className="!px-6 !py-3.5 sm:!px-7 sm:!py-4"
+            >
               {t("home.hero.cta.whatsapp")}
-            </a>
+            </WhatsappButton>
           </div>
         </div>
       </section>
@@ -338,10 +341,12 @@ function Index() {
             <h2 className={`text-3xl font-bold text-white md:text-4xl ${fontClass}`}>{t("home.cta.title")}</h2>
             <p className={`mt-2 max-w-xl text-white/90 ${fontClass}`}>{t("home.cta.body")}</p>
           </div>
-          <a href={buildWhatsappGenericLink(undefined, lang)} target="_blank" rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 rounded-sm bg-iron-deep px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px ${fontClass}`}>
-            {t("home.cta.button")} <ArrowRight className="h-4 w-4" />
-          </a>
+          <WhatsappButton
+            href={buildWhatsappGenericLink(undefined, lang)}
+            variant="ctaDark"
+          >
+            {t("home.cta.button")}
+          </WhatsappButton>
         </div>
       </section>
     </Layout>

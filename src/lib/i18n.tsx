@@ -301,8 +301,71 @@ export const TRANSLATIONS: Dict = {
   // ─── Projects page ───────────────────────────────────────────────
   "projects.eyebrow": { en: "Project Portfolio", bn: "প্রজেক্ট পোর্টফোলিও" },
   "projects.title": { en: "Powering national infrastructure & industrial development.", bn: "জাতীয় অবকাঠামো ও ইন্ডাস্ট্রিয়াল উন্নয়নে শক্তি যোগাচ্ছি।" },
-  "projects.lede": { en: "From flagship national bridges to multi-month road compaction and pharma site builds — selected engagements from our 26-year track record.", bn: "জাতীয় ফ্ল্যাগশিপ ব্রিজ থেকে শুরু করে বহু-মাসব্যাপী রোড কম্প্যাকশন ও ফার্মা সাইট নির্মাণ — আমাদের ২৬ বছরের ট্র্যাক রেকর্ড থেকে নির্বাচিত প্রজেক্ট।" },
+  "projects.lede": { en: "M/S ATDB Trade International has successfully delivered a wide spectrum of heavy engineering, civil construction and infrastructure works across Bangladesh. Below is a categorised view of our major executed projects.", bn: "মেসার্স ATDB ট্রেড ইন্টারন্যাশনাল সারা বাংলাদেশে বিভিন্ন ভারী প্রকৌশল, সিভিল কন্সট্রাকশন ও অবকাঠামোগত কাজ সফলভাবে সম্পন্ন করেছে। আমাদের উল্লেখযোগ্য সম্পন্নকৃত প্রজেক্টসমূহ ক্যাটাগরি অনুযায়ী নিচে দেওয়া হলো।" },
+  "projects.cta.title": { en: "Have a project in mind?", bn: "নতুন প্রজেক্ট আছে?" },
+  "projects.cta.body": { en: "From mega-bridge approaches to factory drainage — talk to ATDB about your scope, timeline and equipment needs.", bn: "মেগা-ব্রিজ অ্যাপ্রোচ থেকে শুরু করে ফ্যাক্টরি ড্রেনেজ — আপনার স্কোপ, টাইমলাইন ও ইকুইপমেন্ট প্রয়োজনের কথা ATDB-কে জানান।" },
 
+  // Project category headings
+  "pcat.infra.t": { en: "Mega Infrastructure & Highway Projects", bn: "মেগা ইনফ্রাস্ট্রাকচার ও হাইওয়ে প্রজেক্ট" },
+  "pcat.infra.s": { en: "National corridors, bridges and highway works.", bn: "জাতীয় করিডোর, সেতু ও হাইওয়ে কাজ।" },
+  "pcat.industrial.t": { en: "Industrial & Factory Building Construction", bn: "শিল্প ও কারখানা ভবন নির্মাণ" },
+  "pcat.industrial.s": { en: "Pharma plants, factory shells and supporting structures.", bn: "ফার্মা প্ল্যান্ট, ফ্যাক্টরি বিল্ডিং ও সহায়ক কাঠামো।" },
+  "pcat.roads.t": { en: "Roadways & Pavement Construction", bn: "অভ্যন্তরীণ সড়ক ও পেভমেন্ট নির্মাণ" },
+  "pcat.roads.s": { en: "Internal bituminous and RCC paved roads.", bn: "অভ্যন্তরীণ বিটুমিনাস ও আর.সি.সি পেভড সড়ক।" },
+  "pcat.civil.t": { en: "Drainage, Reservoirs & Specialised Civil Works", bn: "ড্রেনেজ, রিজার্ভার ও বিশেষ সিভিল ওয়ার্কস" },
+  "pcat.civil.s": { en: "Underground tanks, ETPs, drainage networks and retaining walls.", bn: "ভূগর্ভস্থ ট্যাংক, ETP, ড্রেনেজ নেটওয়ার্ক ও রিটেইনিং ওয়াল।" },
+
+  // Project cards — Mega Infra
+  "pj.brt.t": { en: "BRT Project (Airport → Gazipur)", bn: "বিআরটি প্রজেক্ট (এয়ারপোর্ট → গাজীপুর)" },
+  "pj.brt.l": { en: "Dhaka–Gazipur Corridor", bn: "ঢাকা–গাজীপুর করিডোর" },
+  "pj.brt.s": { en: "Extensive cleaning, de-watering and pavement repair works along the BRT elevated corridor.", bn: "বিআরটি এলিভেটেড করিডোরজুড়ে ব্যাপক ক্লিনিং, ডি-ওয়াটারিং এবং পেভমেন্ট মেরামত কাজ।" },
+  "pj.jamuna.t": { en: "Jamuna Multipurpose Bridge — Contract 1", bn: "যমুনা বহুমুখী সেতু — কন্ট্রাক্ট ১" },
+  "pj.jamuna.l": { en: "Tangail / Sirajganj", bn: "টাঙ্গাইল / সিরাজগঞ্জ" },
+  "pj.jamuna.s": { en: "Critical site clearance and outstanding remedial civil works on the iconic Jamuna bridge.", bn: "যমুনা সেতুর গুরুত্বপূর্ণ সাইট ক্লিয়ারেন্স এবং অবশিষ্ট রেমিডিয়াল সিভিল ওয়ার্কস।" },
+  "pj.rtip2.t": { en: "RTIP-2 Road Project", bn: "RTIP-2 রোড প্রজেক্ট" },
+  "pj.rtip2.l": { en: "Ghatail, Tangail · Ch. 15+800 → 14+800", bn: "ঘাটাইল, টাঙ্গাইল · চেইনেজ ১৫+৮০০ → ১৪+৮০০" },
+  "pj.rtip2.s": { en: "Roadway construction, repair and maintenance across a 1 km chainage section.", bn: "১ কি.মি. চেইনেজ অংশজুড়ে সড়ক নির্মাণ, মেরামত ও রক্ষণাবেক্ষণ কাজ।" },
+
+  // Project cards — Industrial
+  "pj.centeon.t": { en: "Centeon Pharma — 3-Storey RCC Factory", bn: "সেন্টিয়ন ফার্মা — ৩-তলা আর.সি.সি ফ্যাক্টরি" },
+  "pj.centeon.l": { en: "Mowna, Sreepur, Gazipur", bn: "মাওনা, শ্রীপুর, গাজীপুর" },
+  "pj.centeon.s": { en: "45,000 sq.ft 3-storey RCC factory building, utility structures and 500 m boundary wall.", bn: "৪৫,০০০ স্কয়ার ফিটের ৩-তলা আর.সি.সি ফ্যাক্টরি বিল্ডিং, ইউটিলিটি স্ট্রাকচার ও ৫০০ মি. সীমানা প্রাচীর।" },
+  "pj.pharmacil.t": { en: "Pharmacil Ltd — 3-Storey Factory", bn: "ফার্মাসিল লিমিটেড — ৩-তলা ফ্যাক্টরি" },
+  "pj.pharmacil.l": { en: "BSCIC, Tongi", bn: "বিসিক, টঙ্গী" },
+  "pj.pharmacil.s": { en: "Construction of a 33,000 sq.ft 3-storey pharmaceutical factory building.", bn: "৩৩,০০০ স্কয়ার ফিটের ৩-তলা ফার্মাসিউটিক্যাল ফ্যাক্টরি বিল্ডিং নির্মাণ।" },
+  "pj.pasite.t": { en: "Pharma Ashia Ltd — Site Development", bn: "ফার্মা এশিয়া লিমিটেড — সাইট ডেভেলপমেন্ট" },
+  "pj.pasite.l": { en: "Rajendrapur, Gazipur", bn: "রাজেন্দ্রপুর, গাজীপুর" },
+  "pj.pasite.s": { en: "General site development, protection-bund works and temporary site offices.", bn: "সাইট ডেভেলপমেন্ট, সাইট প্রোটেকশন বাঁধ নির্মাণ ও অস্থায়ী সাইট অফিস স্থাপন।" },
+
+  // Project cards — Roads
+  "pj.paroad.t": { en: "Pharma Ashia — Bituminous Internal Road", bn: "ফার্মা এশিয়া — বিটুমিনাস অভ্যন্তরীণ সড়ক" },
+  "pj.paroad.l": { en: "Gazipur · 400 m × 6 m", bn: "গাজীপুর · ৪০০ মি. × ৬ মি." },
+  "pj.paroad.s": { en: "Construction of an internal bituminous carpeting road, 400 m long × 6 m wide.", bn: "৪০০ মি. দীর্ঘ ও ৬ মি. চওড়া অভ্যন্তরীণ বিটুমিনাস কার্পেটিং সড়ক নির্মাণ।" },
+  "pj.crccroad.t": { en: "Centeon Pharma — RCC Internal Road", bn: "সেন্টিয়ন ফার্মা — আর.সি.সি অভ্যন্তরীণ সড়ক" },
+  "pj.crccroad.l": { en: "Gazipur · 300 m × 5.5 m", bn: "গাজীপুর · ৩০০ মি. × ৫.৫ মি." },
+  "pj.crccroad.s": { en: "Construction of an internal RCC paved road, 300 m long × 5.5 m wide.", bn: "৩০০ মি. দীর্ঘ ও ৫.৫ মি. চওড়া অভ্যন্তরীণ আর.সি.সি পেভড রোড নির্মাণ।" },
+  "pj.amcroad.t": { en: "AMC Knit Composite — RCC Internal Road", bn: "এএমসি নিট কম্পোজিট — আর.সি.সি অভ্যন্তরীণ সড়ক" },
+  "pj.amcroad.l": { en: "Bhabanipur, Gazipur · 300 m × 5 m", bn: "ভবানীপুর, গাজীপুর · ৩০০ মি. × ৫ মি." },
+  "pj.amcroad.s": { en: "Construction of an internal RCC paved road, 300 m long × 5 m wide.", bn: "৩০০ মি. দীর্ঘ ও ৫ মি. চওড়া অভ্যন্তরীণ আর.সি.সি পেভড রোড নির্মাণ।" },
+
+  // Project cards — Civil
+  "pj.smcres.t": { en: "SMC ORS — Underground RCC Reservoir", bn: "এসএমসি ওআরএস — ভূগর্ভস্থ আর.সি.সি রিজার্ভার" },
+  "pj.smcres.l": { en: "Bhaluka, Mymensingh · 20 m × 10 m × 3 m", bn: "ভালুকা, ময়মনসিংহ · ২০ মি. × ১০ মি. × ৩ মি." },
+  "pj.smcres.s": { en: "Construction of a raw + treated water underground RCC reservoir.", bn: "র' এবং ট্রিটেড পানির ভূগর্ভস্থ আর.সি.সি রিজার্ভার নির্মাণ।" },
+  "pj.smcdr.t": { en: "SMC ORS — 900 mm RCC Drainage Network", bn: "এসএমসি ওআরএস — ৯০০ মি.মি. আর.সি.সি ড্রেনেজ নেটওয়ার্ক" },
+  "pj.smcdr.l": { en: "Bhaluka, Mymensingh", bn: "ভালুকা, ময়মনসিংহ" },
+  "pj.smcdr.s": { en: "Excavation and laying of 900 mm dia. RCC pipes for internal & external drainage.", bn: "অভ্যন্তরীণ ও বাহ্যিক ড্রেনেজের জন্য ৯০০ মি.মি. ব্যাসের আর.সি.সি পাইপ স্থাপন ও খনন।" },
+  "pj.nassa.t": { en: "Nassa Super Garments — 800 mm RCC Drainage", bn: "নাসা সুপার গার্মেন্টস — ৮০০ মি.মি. আর.সি.সি ড্রেনেজ" },
+  "pj.nassa.l": { en: "Ashulia, Savar", bn: "আশুলিয়া, সাভার" },
+  "pj.nassa.s": { en: "Excavation and laying of 800 mm dia. RCC pipes for comprehensive drainage works.", bn: "ব্যাপক ড্রেনেজ কাজের জন্য ৮০০ মি.মি. ব্যাসের আর.সি.সি পাইপ স্থাপন ও খনন।" },
+  "pj.cetp.t": { en: "Centeon Pharma — Effluent Treatment Plant", bn: "সেন্টিয়ন ফার্মা — এফ্লুয়েন্ট ট্রিটমেন্ট প্ল্যান্ট" },
+  "pj.cetp.l": { en: "Gazipur · 12 m × 6 m", bn: "গাজীপুর · ১২ মি. × ৬ মি." },
+  "pj.cetp.s": { en: "Construction of a 12 m × 6 m ETP and site-protection RCC retaining walls.", bn: "১২ মি. × ৬ মি. ETP এবং সাইট সুরক্ষার জন্য আর.সি.সি রিটেইনিং ওয়াল নির্মাণ।" },
+  "pj.amcwall.t": { en: "AMC Knit Composite — RCC Retaining Walls", bn: "এএমসি নিট কম্পোজিট — আর.সি.সি রিটেইনিং ওয়াল" },
+  "pj.amcwall.l": { en: "Gazipur", bn: "গাজীপুর" },
+  "pj.amcwall.s": { en: "Construction of robust reinforced-concrete retaining walls.", bn: "মজবুত আর.সি.সি (রিইনফোর্সড কংক্রিট) রিটেইনিং ওয়াল নির্মাণ।" },
+
+  // Legacy keys — kept for the home-page strip & SEO meta on existing routes
   "project.rtip.t": { en: "RTIP-2 Road Project", bn: "RTIP-2 রোড প্রজেক্ট" },
   "project.rtip.l": { en: "Ghatail, Tangail", bn: "ঘাটাইল, টাঙ্গাইল" },
   "project.rtip.s": { en: "Road compaction & asphalt works — multi-month roller deployment.", bn: "রোড কম্প্যাকশন ও অ্যাসফল্ট কাজ — বহু-মাসব্যাপী রোলার মোতায়েন।" },

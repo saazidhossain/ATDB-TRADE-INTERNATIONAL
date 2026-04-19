@@ -13,6 +13,7 @@ import {
   CATEGORIES,
   FLEET,
   getEquipmentById,
+  getCategoryLabel,
   buildWhatsappRentLink,
   COMPANY,
   type EquipmentCategory,
@@ -175,11 +176,11 @@ function EquipmentDetailPage() {
           <ChevronRight className="h-3 w-3" />
           <Link to="/equipment" className="hover:text-safety">{t("nav.equipment")}</Link>
           <ChevronRight className="h-3 w-3" />
-          <Link to="/equipment/$category" params={{ category: cat.slug }} className="hover:text-safety">
-            {t(`cat.${cat.slug}.label` as Parameters<typeof t>[0])}
+          <Link to="/equipment/$category" params={{ category: cat.slug }} className={`hover:text-safety ${fontClass}`}>
+            {getCategoryLabel(cat.slug, lang)}
           </Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="truncate text-iron">{eq.name}</span>
+          <span className={`truncate text-iron ${fontClass}`}>{eq.name}</span>
         </nav>
       </div>
 
@@ -191,7 +192,10 @@ function EquipmentDetailPage() {
 
           {/* Info */}
           <div>
-            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-safety">{eq.id}</p>
+            <p className={`font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-safety`}>
+              {eq.id} <span className="text-iron/30">·</span>{" "}
+              <span className={fontClass}>{getCategoryLabel(cat.slug, lang)}</span>
+            </p>
             <h1 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{eq.name}</h1>
             <p className="mt-2 text-sm text-muted-foreground">{eq.brand} · {eq.capacity} · {eq.origin}{eq.year ? ` · ${eq.year}` : ""}</p>
 

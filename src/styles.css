@@ -213,6 +213,12 @@
   100% { transform: scale(1.9); opacity: 0;    }
 }
 
+/* Slow continuous spin — for WhatsApp FAB conic halo */
+@keyframes atdb-spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

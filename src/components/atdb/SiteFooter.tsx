@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import logo from "@/assets/brand/atdb-logo-dark.webp";
 import { COMPANY } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
+import { FacebookLink } from "./FacebookLink";
 
 export function SiteFooter() {
   const { t, lang } = useI18n();
@@ -87,6 +88,9 @@ export function SiteFooter() {
               </a>
             </li>
           </ul>
+          <div className="mt-5">
+            <FacebookLink variant="footer" />
+          </div>
         </div>
       </div>
 

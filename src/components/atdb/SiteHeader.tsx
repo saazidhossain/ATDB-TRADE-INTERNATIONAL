@@ -5,6 +5,7 @@ import logo from "@/assets/brand/atdb-logo-light.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { CartButton } from "./CartButton";
+import { FacebookLink } from "./FacebookLink";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -50,6 +51,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <CartButton />
+          <FacebookLink variant="header" />
           <LangSwitch lang={lang} onToggle={toggleLang} />
           <a
             href={`tel:${COMPANY.phones[0].number}`}
@@ -99,6 +101,9 @@ export function SiteHeader() {
             >
               {t("nav.whatsappQuote")}
             </a>
+            <div className="mt-3 flex justify-center">
+              <FacebookLink variant="footer" label="Facebook" />
+            </div>
           </nav>
         </div>
       )}

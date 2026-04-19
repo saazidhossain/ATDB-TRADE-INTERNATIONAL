@@ -2,9 +2,41 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, TRANSLATIONS } from "@/lib/i18n";
 import { buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { PROJECT_CATEGORIES, PROJECTS, HERO_PROJECT_IMAGE } from "@/lib/projects-data";
+
+const SITE_URL = "https://atdb.lovable.app";
+const en = (key: string): string => TRANSLATIONS[key]?.en ?? key;
+
+const projectsJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "ATDB Trade International — Executed Projects Portfolio",
+  description:
+    "14 executed heavy-engineering, civil construction and infrastructural projects across Bangladesh by M/S ATDB Trade International.",
+  numberOfItems: PROJECTS.length,
+  itemListElement: PROJECTS.map((p, idx) => ({
+    "@type": "ListItem",
+    position: idx + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: en(p.titleKey),
+      description: en(p.scopeKey),
+      image: `${SITE_URL}${p.image}`,
+      locationCreated: {
+        "@type": "Place",
+        name: en(p.locationKey),
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: en(p.locationKey),
+          addressCountry: "BD",
+        },
+      },
+      creator: { "@type": "Organization", name: "M/S ATDB Trade International" },
+    },
+  })),
+};
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -15,6 +47,12 @@ export const Route = createFileRoute("/projects")({
       { property: "og:description", content: "14 executed projects across mega-infrastructure, industrial, roadways and specialised civil works." },
       { property: "og:image", content: HERO_PROJECT_IMAGE },
       { name: "twitter:image", content: HERO_PROJECT_IMAGE },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(projectsJsonLd),
+      },
     ],
   }),
   component: ProjectsPage,

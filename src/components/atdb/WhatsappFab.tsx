@@ -5,7 +5,7 @@ export function WhatsappFab() {
   const { t, lang } = useI18n();
   return (
     <a
-      href={buildWhatsappGenericLink()}
+      href={buildWhatsappGenericLink(undefined, lang)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

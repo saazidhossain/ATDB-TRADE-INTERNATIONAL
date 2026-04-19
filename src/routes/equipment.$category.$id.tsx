@@ -121,7 +121,7 @@ function EquipmentDetailPage() {
   const gallery = [eq.image, detailHero, detailCabin, detailFleet];
 
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
-  const whatsappUrl = buildWhatsappRentLink(eq);
+  const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);
 
@@ -135,7 +135,7 @@ function EquipmentDetailPage() {
           <Link to="/equipment" className="hover:text-safety">{t("nav.equipment")}</Link>
           <ChevronRight className="h-3 w-3" />
           <Link to="/equipment/$category" params={{ category: cat.slug }} className="hover:text-safety">
-            {cat.label}
+            {t(`cat.${cat.slug}.label` as Parameters<typeof t>[0])}
           </Link>
           <ChevronRight className="h-3 w-3" />
           <span className="truncate text-iron">{eq.name}</span>
@@ -146,7 +146,7 @@ function EquipmentDetailPage() {
       <section className="bg-background py-10 md:py-14">
         <div className="container-page grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           {/* Gallery */}
-          <Gallery images={gallery} alt={eq.name} />
+          <Gallery images={gallery} alt={eq.name} certifiedLabel={t("detail.certified")} />
 
           {/* Info */}
           <div>
@@ -233,7 +233,7 @@ function EquipmentDetailPage() {
         <section className="bg-background py-16 md:py-20">
           <div className="container-page">
             <p className="eyebrow">{t("detail.related")}</p>
-            <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{cat.label}</h2>
+            <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{t(`cat.${cat.slug}.label` as Parameters<typeof t>[0])}</h2>
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -252,7 +252,7 @@ function EquipmentDetailPage() {
   );
 }
 
-function Gallery({ images, alt }: { images: string[]; alt: string }) {
+function Gallery({ images, alt, certifiedLabel }: { images: string[]; alt: string; certifiedLabel: string }) {
   const [active, setActive] = useState(0);
   return (
     <div>
@@ -282,7 +282,7 @@ function Gallery({ images, alt }: { images: string[]; alt: string }) {
         >
           <BadgeCheck className="h-3.5 w-3.5 text-white" />
           <span className="font-display text-[10px] font-bold uppercase tracking-[0.18em] text-white">
-            Inspection Certified
+            {certifiedLabel}
           </span>
         </motion.div>
 

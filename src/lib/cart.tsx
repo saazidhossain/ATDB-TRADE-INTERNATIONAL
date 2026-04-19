@@ -4,6 +4,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Equipment } from "./atdb-data";
 import { buildWhatsappCartLink, type CartItem, type CartProject } from "./atdb-data";
+import { useI18n } from "./i18n";
 
 const STORAGE_KEY = "atdb_quote_cart_v1";
 
@@ -30,6 +31,7 @@ interface CartCtx {
 const Ctx = createContext<CartCtx | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { lang } = useI18n();
   const [items, setItems] = useState<CartItem[]>([]);
   const [project, setProjectState] = useState<CartProject>({});
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +87,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const setProject = (p: Partial<CartProject>) => setProjectState((prev) => ({ ...prev, ...p }));
 
   const count = items.reduce((sum, i) => sum + i.qty, 0);
-  const whatsappUrl = useMemo(() => buildWhatsappCartLink(items, project), [items, project]);
+  const whatsappUrl = useMemo(() => buildWhatsappCartLink(items, project, lang), [items, project, lang]);
 
   const value: CartCtx = {
     items,

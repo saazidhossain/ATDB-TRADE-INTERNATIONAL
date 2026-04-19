@@ -244,6 +244,11 @@ export const TRANSLATIONS: Dict = {
   "contact.sidebar.officesTitle": { en: "Dhaka & Tangail.", bn: "ঢাকা ও টাঙ্গাইল।" },
   "contact.equipment.opt.cat": { en: "Categories", bn: "ক্যাটেগরি" },
   "contact.equipment.opt.brand": { en: "Brands", bn: "ব্র্যান্ড" },
+  "contact.equipment.opt.cranes": { en: "Mobile Cranes", bn: "মোবাইল ক্রেন" },
+  "contact.equipment.opt.rollers": { en: "Road Rollers", bn: "রোড রোলার" },
+  "contact.equipment.opt.excavators": { en: "Excavators", bn: "এক্সক্যাভেটর" },
+  "contact.equipment.opt.loaders": { en: "Loaders & Backhoes", bn: "লোডার ও ব্যাকহো" },
+  "contact.equipment.opt.support": { en: "Support Equipment", bn: "সাপোর্ট ইকুইপমেন্ট" },
 
   // Phone label translations
   "phone.proprietor": { en: "Proprietor", bn: "মালিক" },

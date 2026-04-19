@@ -177,15 +177,22 @@ export function getEquipmentById(id: string) {
 // Re-export legacy fallback assets so other files keep working
 export { craneImg, rollerImg, excavatorImg, supportImg };
 
-export function buildWhatsappRentLink(eq: Equipment) {
-  const msg = `আমি ${eq.name} (${eq.id}) ভাড়া নিতে চাই।\n\nI'd like to rent the ${eq.name} (${eq.id} · ${eq.capacity}).\nProject location: \nDuration (days): \nPlease send a quotation. — ATDB website`;
+export type WaLang = "en" | "bn";
+
+export function buildWhatsappRentLink(eq: Equipment, lang: WaLang = "en") {
+  const msg =
+    lang === "bn"
+      ? `আসসালামু আলাইকুম, ATDB Trade International।\n\nআমি ${eq.name} (${eq.id} · ${eq.capacity}) ভাড়া নিতে চাই।\nপ্রজেক্ট লোকেশন: \nসময়কাল (দিন): \nঅনুগ্রহ করে অ্যাভেইলেবিলিটি ও কোটেশন পাঠান। — ATDB ওয়েবসাইট`
+      : `Hello ATDB Trade International,\n\nI'd like to rent the ${eq.name} (${eq.id} · ${eq.capacity}).\nProject location: \nDuration (days): \nPlease share availability and a quotation. — ATDB website`;
   return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
 
-export function buildWhatsappGenericLink(text?: string) {
+export function buildWhatsappGenericLink(text?: string, lang: WaLang = "en") {
   const msg =
     text ??
-    `Hello ATDB Trade International,\n\nI'd like to discuss a heavy-equipment rental for an upcoming project. Please share availability and a quotation.`;
+    (lang === "bn"
+      ? `আসসালামু আলাইকুম, ATDB Trade International।\n\nআমি একটি আসন্ন প্রজেক্টের জন্য হেভি-ইকুইপমেন্ট ভাড়ার ব্যাপারে কথা বলতে চাই। অনুগ্রহ করে অ্যাভেইলেবিলিটি ও কোটেশন পাঠান।`
+      : `Hello ATDB Trade International,\n\nI'd like to discuss a heavy-equipment rental for an upcoming project. Please share availability and a quotation.`);
   return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
 
@@ -204,24 +211,44 @@ export interface CartProject {
   notes?: string;
 }
 
-export function buildWhatsappCartLink(items: CartItem[], project: CartProject) {
+export function buildWhatsappCartLink(items: CartItem[], project: CartProject, lang: WaLang = "en") {
   const lines: string[] = [];
-  lines.push("Hello ATDB Trade International,");
-  lines.push("");
-  lines.push("I'd like a quotation for the following equipment:");
-  lines.push("");
-  items.forEach((it, i) => {
-    lines.push(`${i + 1}. ${it.name}  ·  ${it.capacity}  ·  Qty: ${it.qty}  (${it.id})`);
-  });
-  lines.push("");
-  if (project.location) lines.push(`📍 Project location: ${project.location}`);
-  if (project.startDate) lines.push(`📅 Start date: ${project.startDate}`);
-  if (project.endDate) lines.push(`📅 End date: ${project.endDate}`);
-  if (project.notes) {
+  if (lang === "bn") {
+    lines.push("আসসালামু আলাইকুম, ATDB Trade International।");
     lines.push("");
-    lines.push(`Notes: ${project.notes}`);
+    lines.push("নিচের ইকুইপমেন্টগুলোর জন্য কোটেশন প্রয়োজন:");
+    lines.push("");
+    items.forEach((it, i) => {
+      lines.push(`${i + 1}. ${it.name}  ·  ${it.capacity}  ·  পরিমাণ: ${it.qty}  (${it.id})`);
+    });
+    lines.push("");
+    if (project.location) lines.push(`📍 প্রজেক্ট লোকেশন: ${project.location}`);
+    if (project.startDate) lines.push(`📅 শুরু: ${project.startDate}`);
+    if (project.endDate) lines.push(`📅 শেষ: ${project.endDate}`);
+    if (project.notes) {
+      lines.push("");
+      lines.push(`নোট: ${project.notes}`);
+    }
+    lines.push("");
+    lines.push("অনুগ্রহ করে অ্যাভেইলেবিলিটি ও প্রাইস জানান। — ATDB ওয়েবসাইট");
+  } else {
+    lines.push("Hello ATDB Trade International,");
+    lines.push("");
+    lines.push("I'd like a quotation for the following equipment:");
+    lines.push("");
+    items.forEach((it, i) => {
+      lines.push(`${i + 1}. ${it.name}  ·  ${it.capacity}  ·  Qty: ${it.qty}  (${it.id})`);
+    });
+    lines.push("");
+    if (project.location) lines.push(`📍 Project location: ${project.location}`);
+    if (project.startDate) lines.push(`📅 Start date: ${project.startDate}`);
+    if (project.endDate) lines.push(`📅 End date: ${project.endDate}`);
+    if (project.notes) {
+      lines.push("");
+      lines.push(`Notes: ${project.notes}`);
+    }
+    lines.push("");
+    lines.push("Please share availability and pricing. — ATDB website");
   }
-  lines.push("");
-  lines.push("Please share availability and pricing. — ATDB website");
   return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(lines.join("\n"))}`;
 }

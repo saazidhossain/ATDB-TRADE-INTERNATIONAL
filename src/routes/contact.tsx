@@ -93,7 +93,7 @@ function ContactPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-base text-white/75 md:text-lg">{t("contact.sub")}</p>
           <a
-            href={buildWhatsappGenericLink()}
+            href={buildWhatsappGenericLink(undefined, lang)}
             target="_blank"
             rel="noopener noreferrer"
             className={`mt-8 inline-flex items-center gap-2 rounded-sm bg-whatsapp px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
@@ -156,6 +156,7 @@ function ContactPage() {
                     onChange={update("equipment_interest")}
                     error={errors.equipment_interest}
                     fontClass={fontClass}
+                    t={t}
                   />
                 </div>
 
@@ -412,6 +413,7 @@ function SelectField({
   onChange,
   error,
   fontClass,
+  t,
 }: {
   label: string;
   name: string;
@@ -419,6 +421,7 @@ function SelectField({
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   error?: string;
   fontClass: string;
+  t: (key: Parameters<ReturnType<typeof useI18n>["t"]>[0]) => string;
 }) {
   // Group brands for quick selection
   const brands = Array.from(new Set(FLEET.map((f) => f.brand))).sort();
@@ -432,19 +435,19 @@ function SelectField({
         name={name}
         value={value}
         onChange={onChange}
-        className={`w-full rounded-sm border bg-background px-4 py-2.5 text-sm text-iron transition-colors focus:outline-none ${
+        className={`w-full rounded-sm border bg-background px-4 py-2.5 text-sm text-iron transition-colors focus:outline-none ${fontClass} ${
           error ? "border-destructive focus:border-destructive" : "border-border focus:border-safety"
         }`}
       >
         <option value="">—</option>
-        <optgroup label="Categories">
-          <option value="Mobile Cranes">Mobile Cranes</option>
-          <option value="Road Rollers">Road Rollers</option>
-          <option value="Excavators">Excavators</option>
-          <option value="Loaders & Backhoes">Loaders & Backhoes</option>
-          <option value="Support Equipment">Support Equipment</option>
+        <optgroup label={t("contact.equipment.opt.cat")}>
+          <option value="Mobile Cranes">{t("contact.equipment.opt.cranes")}</option>
+          <option value="Road Rollers">{t("contact.equipment.opt.rollers")}</option>
+          <option value="Excavators">{t("contact.equipment.opt.excavators")}</option>
+          <option value="Loaders & Backhoes">{t("contact.equipment.opt.loaders")}</option>
+          <option value="Support Equipment">{t("contact.equipment.opt.support")}</option>
         </optgroup>
-        <optgroup label="Brands">
+        <optgroup label={t("contact.equipment.opt.brand")}>
           {brands.map((b) => (
             <option key={b} value={b}>{b}</option>
           ))}

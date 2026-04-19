@@ -99,6 +99,6 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
           </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

@@ -100,15 +100,15 @@ function Index() {
         {/* Safety-orange ember particles — drifting upward */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           {[
-            { l: "12%", d: "0s",   s: 14, o: 0.55 },
-            { l: "22%", d: "3.2s", s: 22, o: 0.4  },
-            { l: "34%", d: "1.4s", s: 10, o: 0.65 },
-            { l: "46%", d: "5.1s", s: 18, o: 0.35 },
-            { l: "58%", d: "2.7s", s: 12, o: 0.55 },
-            { l: "67%", d: "6.4s", s: 24, o: 0.3  },
-            { l: "78%", d: "0.9s", s: 14, o: 0.5  },
-            { l: "88%", d: "4.3s", s: 10, o: 0.6  },
-            { l: "94%", d: "2.1s", s: 16, o: 0.4  },
+            { l: "12%", d: "0s",   s: 22, o: 0.38 },
+            { l: "22%", d: "5.0s", s: 32, o: 0.28 },
+            { l: "34%", d: "2.2s", s: 18, o: 0.45 },
+            { l: "46%", d: "7.5s", s: 28, o: 0.24 },
+            { l: "58%", d: "4.0s", s: 20, o: 0.38 },
+            { l: "67%", d: "9.4s", s: 36, o: 0.21 },
+            { l: "78%", d: "1.4s", s: 22, o: 0.35 },
+            { l: "88%", d: "6.2s", s: 18, o: 0.42 },
+            { l: "94%", d: "3.1s", s: 24, o: 0.28 },
           ].map((p, i) => (
             <span
               key={i}
@@ -120,7 +120,7 @@ function Index() {
                 opacity: p.o,
                 animationDelay: p.d,
                 ["--dur" as string]: `${p.s}s`,
-                boxShadow: "0 0 8px oklch(0.78 0.13 65 / 0.7), 0 0 16px oklch(0.7 0.19 45 / 0.4)",
+                boxShadow: "0 0 6px oklch(0.78 0.13 65 / 0.5), 0 0 14px oklch(0.7 0.19 45 / 0.28)",
               }}
             />
           ))}
@@ -258,7 +258,38 @@ function Index() {
       </section>
 
       {/* PROJECTS STRIP */}
-      <section className="bg-iron-deep py-20 text-white md:py-28">
+      <section className="relative isolate overflow-hidden bg-iron-deep py-20 text-white md:py-28">
+        {/* Bronze radial glow — warms the upper-left of the strip */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_55%_at_18%_30%,oklch(0.78_0.13_65/0.16),transparent_70%)] mix-blend-screen" />
+        {/* Engineering grid — subtle blueprint cross-hatch with vignette mask */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.022)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.022)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_75%)]" />
+        {/* Bronze film grain — layered radial dots */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.12] mix-blend-overlay [background-image:radial-gradient(oklch(0.78_0.13_65/0.5)_0.5px,transparent_0.5px),radial-gradient(oklch(0.62_0.10_55/0.35)_0.5px,transparent_0.5px)] [background-size:3px_3px,5px_5px] [background-position:0_0,1px_2px]" />
+        {/* Safety-orange ember particles — scaled-down ambient drift */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          {[
+            { l: "8%",  d: "1.5s", s: 28, o: 0.28 },
+            { l: "21%", d: "6.0s", s: 36, o: 0.22 },
+            { l: "39%", d: "3.4s", s: 24, o: 0.32 },
+            { l: "55%", d: "8.2s", s: 30, o: 0.2  },
+            { l: "72%", d: "2.0s", s: 26, o: 0.3  },
+            { l: "86%", d: "5.0s", s: 32, o: 0.24 },
+          ].map((p, i) => (
+            <span
+              key={i}
+              className="absolute bottom-[-10%] block rounded-full bg-safety blur-[1px] animate-[emberDrift_var(--dur)_linear_infinite]"
+              style={{
+                left: p.l,
+                width: 2,
+                height: 2,
+                opacity: p.o,
+                animationDelay: p.d,
+                ["--dur" as string]: `${p.s}s`,
+                boxShadow: "0 0 5px oklch(0.78 0.13 65 / 0.45), 0 0 12px oklch(0.7 0.19 45 / 0.22)",
+              }}
+            />
+          ))}
+        </div>
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">

@@ -233,7 +233,7 @@ function EquipmentDetailPage() {
         <section className="bg-background py-16 md:py-20">
           <div className="container-page">
             <p className="eyebrow">{t("detail.related")}</p>
-            <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{cat.label}</h2>
+            <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{t(`cat.${cat.slug}.label` as Parameters<typeof t>[0])}</h2>
             <motion.div
               initial="hidden"
               whileInView="visible"

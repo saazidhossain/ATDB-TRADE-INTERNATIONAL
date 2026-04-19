@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
-import { CATEGORIES, getCategoryFleet, type EquipmentCategory } from "@/lib/atdb-data";
+import { CATEGORIES, getCategoryFleet, getCategoryLabel, type EquipmentCategory } from "@/lib/atdb-data";
 import { useI18n, useFontClass } from "@/lib/i18n";
 
 const validCategories = Object.keys(CATEGORIES) as EquipmentCategory[];
@@ -49,7 +49,6 @@ export const Route = createFileRoute("/equipment/$category/")({
 
 function CategoryNotFound() {
   const { t } = useI18n();
-  const fontClass = useFontClass();
   return (
     <Layout>
       <div className="container-page py-32 text-center">
@@ -65,9 +64,10 @@ function CategoryPage() {
   const cat = CATEGORIES[category as EquipmentCategory];
   const items = getCategoryFleet(category as EquipmentCategory);
   const { t, lang } = useI18n();
+  const fontClass = useFontClass();
 
-  const labelKey = CAT_LABEL_KEY[category as EquipmentCategory];
   const taglineKey = CAT_TAGLINE_KEY[category as EquipmentCategory];
+  const localizedLabel = getCategoryLabel(category as EquipmentCategory, lang);
 
   return (
     <Layout>
@@ -80,10 +80,10 @@ function CategoryPage() {
             <ChevronRight className="h-3 w-3" />
             <Link to="/equipment" className={`hover:text-safety ${fontClass}`}>{t("eq.bc.equipment")}</Link>
             <ChevronRight className="h-3 w-3" />
-            <span className={`text-white ${fontClass}`}>{t(labelKey)}</span>
+            <span className={`text-white ${fontClass}`}>{localizedLabel}</span>
           </nav>
-          <p className="eyebrow mt-4 !text-bronze-glow font-bn">{cat.label_bn}</p>
-          <h1 className={`mt-2 text-4xl font-bold text-white md:text-5xl ${fontClass}`}>{t(labelKey)}</h1>
+          {lang === "en" && <p className="eyebrow mt-4 !text-bronze-glow font-bn">{cat.label_bn}</p>}
+          <h1 className={`mt-2 text-4xl font-bold text-white md:text-5xl ${fontClass}`}>{localizedLabel}</h1>
           <p className={`mt-3 max-w-2xl text-white/75 ${fontClass}`}>
             {items.length} {t("common.unitsAvailable")} · {t(taglineKey)}
           </p>

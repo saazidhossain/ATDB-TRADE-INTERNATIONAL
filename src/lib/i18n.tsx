@@ -389,6 +389,86 @@ export const TRANSLATIONS: Dict = {
   "project.nassa.t": { en: "NASSA Group Industrial Build", bn: "NASSA গ্রুপ ইন্ডাস্ট্রিয়াল নির্মাণ" },
   "project.nassa.l": { en: "Dhaka", bn: "ঢাকা" },
   "project.nassa.s": { en: "Crane and excavator support for industrial expansion.", bn: "ইন্ডাস্ট্রিয়াল সম্প্রসারণে ক্রেন ও এক্সক্যাভেটর সাপোর্ট।" },
+
+  // ─── Equipment detail UI (gallery, badges, sections) ─────────────
+  "eq.section.gallery": { en: "Gallery", bn: "গ্যালারি" },
+  "eq.section.bestfor": { en: "Best For", bn: "ব্যবহারের ক্ষেত্র" },
+  "eq.section.ataglance": { en: "At a glance", bn: "এক নজরে" },
+  "eq.section.about": { en: "About this equipment", bn: "এই ইকুইপমেন্ট সম্পর্কে" },
+  "eq.badge.origin": { en: "Origin", bn: "দেশ" },
+  "eq.badge.year": { en: "Year", bn: "সাল" },
+  "eq.badge.fuel": { en: "Fuel", bn: "জ্বালানি" },
+  "eq.badge.qty": { en: "Quantity", bn: "সংখ্যা" },
+  "eq.badge.capacity": { en: "Capacity", bn: "ধারণক্ষমতা" },
+  "eq.viewDetails": { en: "View details", bn: "বিস্তারিত দেখুন" },
+  "eq.gallery.next": { en: "Next photo", bn: "পরবর্তী ছবি" },
+  "eq.gallery.prev": { en: "Previous photo", bn: "পূর্ববর্তী ছবি" },
+  "eq.gallery.thumb": { en: "View photo", bn: "ছবি দেখুন" },
+
+  // ─── Per-equipment "Best For" + long descriptions (bilingual) ────
+  // Liebherr LTM 1120-5.1 (120 T)
+  "eq.bestfor.liebherr1120": { en: "Mega-bridge construction, high-rise steel erection, and heavy industrial plant set-ups. Offers maximum load capacity and high-altitude reach.", bn: "মেগা-ব্রিজ নির্মাণ, বহুতল ভবনের স্টিল স্ট্রাকচার এবং ভারী শিল্পকারখানা স্থাপনের জন্য আদর্শ। সর্বোচ্চ ওজন এবং উচ্চতায় কাজ করতে সক্ষম।" },
+  "eq.desc.liebherr1120": { en: "The Liebherr LTM 1120-5.1 is a 120-ton heavy-duty all-terrain mobile crane built in Germany. It is the flagship of the ATDB lifting fleet, deployed for the country's most demanding lifts — from precast bridge segments on the Jamuna corridor to multi-storey steel skeletons in industrial estates.", bn: "জার্মানিতে নির্মিত Liebherr LTM 1120-5.1 হলো ১২০ টন ক্ষমতার একটি হেভি-ডিউটি অল-টেরেইন মোবাইল ক্রেন। এটি ATDB-এর লিফটিং ফ্লিটের ফ্ল্যাগশিপ — যমুনা করিডোরের প্রিকাস্ট ব্রিজ সেগমেন্ট থেকে শুরু করে শিল্পাঞ্চলে বহুতল স্টিল স্ট্রাকচার বসানো পর্যন্ত দেশের সবচেয়ে চ্যালেঞ্জিং কাজে ব্যবহৃত।" },
+
+  // Liebherr LTM 1070-4.1 (70 T)
+  "eq.bestfor.liebherr1070": { en: "Mid-to-heavy urban construction, material handling, and operations in moderately confined spaces.", bn: "শহরের মাঝারি থেকে ভারী নির্মাণকাজ, মালামাল স্থানান্তর এবং অপেক্ষাকৃত সংকীর্ণ জায়গায় কাজের জন্য উপযুক্ত।" },
+  "eq.desc.liebherr1070": { en: "The Liebherr LTM 1070-4.1 is a versatile 70-ton mobile crane from Germany. Its compact 4-axle chassis lets it manoeuvre through Dhaka traffic and tight industrial yards while still delivering serious lifting power for mid-rise construction and pharma plant erection.", bn: "Liebherr LTM 1070-4.1 হলো জার্মানির ৭০ টন ক্ষমতার একটি বহুমুখী মোবাইল ক্রেন। এর কম্প্যাক্ট ৪-অ্যাক্সেল শ্যাসি ঢাকার ট্রাফিক ও সংকীর্ণ ইন্ডাস্ট্রিয়াল ইয়ার্ডে সহজে চলাচল করতে পারে — তবুও মিড-রাইজ নির্মাণ ও ফার্মা প্ল্যান্ট স্থাপনের জন্য যথেষ্ট লিফটিং শক্তি প্রদান করে।" },
+
+  // Kato cranes (10–50 T) — shared
+  "eq.bestfor.kato": { en: "Highly manoeuvrable for versatile site jobs, rapid deployment, and general daily lifting tasks across multiple project sites.", bn: "প্রজেক্ট সাইটে দ্রুত স্থানান্তর, দৈনন্দিন সাধারণ লিফটিং এবং বহুমুখী কাজের জন্য অত্যন্ত কার্যকরী।" },
+  "eq.desc.kato": { en: "Part of ATDB's 5-strong Kato fleet (10 T to 50 T), this Japanese mobile crane is the workhorse of daily site operations — fast to deploy, easy to position, and reliable shift after shift across road, factory and infrastructure jobs.", bn: "ATDB-এর ৫টি কাটো ক্রেনের বহরের অংশ (১০ টন থেকে ৫০ টন), এই জাপানি মোবাইল ক্রেনটি দৈনন্দিন সাইট অপারেশনের প্রধান কর্মী — দ্রুত মোতায়েন, সহজ পজিশনিং এবং রাস্তা, কারখানা ও অবকাঠামোর কাজে শিফটের পর শিফট নির্ভরযোগ্য।" },
+
+  // Heavy steel rollers 10-12 T (Sakai SV/RS, Dynapac HP/CC)
+  "eq.bestfor.heavyroller": { en: "Highway sub-base compaction, asphalt finishing, and large-scale pavement levelling to ensure long-lasting road durability.", bn: "হাইওয়ের সাব-বেস কম্প্যাকশন, পিচ ঢালাই (Asphalt) ফিনিশিং এবং দীর্ঘস্থায়ী রাস্তা নির্মাণের জন্য অত্যন্ত জরুরি।" },
+  "eq.desc.heavyroller": { en: "A 10-12 ton heavy-duty steel/tire roller from the Sakai/Dynapac line, engineered for highway-grade compaction. Used by ATDB on RTIP-2 Ghatail, BRT corridor pavement works and pharma factory access roads.", bn: "Sakai/Dynapac লাইনের ১০-১২ টন হেভি-ডিউটি স্টিল/টায়ার রোলার, হাইওয়ে-গ্রেড কম্প্যাকশনের জন্য ইঞ্জিনিয়ার্ড। ATDB কর্তৃক RTIP-2 ঘাটাইল, BRT করিডোর পেভমেন্ট কাজ এবং ফার্মা ফ্যাক্টরি অ্যাক্সেস রোডে ব্যবহৃত।" },
+
+  // Vibratory rollers 1–8.5 T (Bomag, Hawa, Advance, Sakai mini/920)
+  "eq.bestfor.vibroller": { en: "Road patching, internal factory road construction, and medium-density soil compaction.", bn: "রাস্তা প্যাচিং, কারখানার ভেতরের রাস্তা নির্মাণ এবং মাঝারি ঘনত্বের মাটি মজবুত করার কাজে।" },
+  "eq.desc.vibroller": { en: "A small-to-medium vibratory roller (1–8.5 T) ideal for tight-quarter compaction. Used inside factory premises for RCC paving works, drainage trench backfill and patch repairs where larger rollers cannot manoeuvre.", bn: "ছোট-থেকে-মাঝারি ভাইব্রেটরি রোলার (১–৮.৫ টন), সংকীর্ণ স্থানে কম্প্যাকশনের জন্য আদর্শ। ফ্যাক্টরি প্রিমাইসের ভেতরে RCC পেভিং, ড্রেনেজ ট্রেঞ্চ ব্যাকফিল এবং প্যাচ মেরামতে ব্যবহৃত হয় যেখানে বড় রোলার ঢুকতে পারে না।" },
+
+  // CAT CS54 Soil Compactor
+  "eq.bestfor.catcs54": { en: "Deep soil penetration and stabilisation. Ideal for building foundation prep and earth-fill dam projects.", bn: "মাটির গভীরে পেনিট্রেশন এবং স্থায়িত্ব বাড়াতে সক্ষম। বিল্ডিং ফাউন্ডেশন এবং মাটির বাঁধ নির্মাণে আদর্শ।" },
+  "eq.desc.catcs54": { en: "The CAT CS54 (CAT11020) is a 12-ton single-drum steel soil compactor (18 T effective with vibration). Engineered for deep soil penetration, it prepares stable foundations for industrial buildings and earth-fill embankments.", bn: "CAT CS54 (CAT11020) হলো ১২ টন সিঙ্গেল-ড্রাম স্টিল সয়েল কম্প্যাক্টর (ভাইব্রেশন সহ কার্যকর ১৮ টন)। গভীর সয়েল পেনিট্রেশনের জন্য ইঞ্জিনিয়ার্ড — ইন্ডাস্ট্রিয়াল বিল্ডিং ও মাটির বাঁধের জন্য স্থিতিশীল ফাউন্ডেশন প্রস্তুত করে।" },
+
+  // CAT 320BU Excavator
+  "eq.bestfor.cat320": { en: "Deep trenching, mass earthmoving, and heavy-duty quarry work. Engineered for high fuel efficiency during continuous operation.", bn: "গভীর ট্রেঞ্চিং, বিপুল পরিমাণ মাটি খনন এবং ভারী কোয়ারি কাজের জন্য। দীর্ঘক্ষণ কাজেও জ্বালানি সাশ্রয়ী।" },
+  "eq.desc.cat320": { en: "The Caterpillar 320BU is a 20-ton chain-wheel hydraulic excavator made in Japan. ATDB's primary heavy excavator — used for deep drainage trenches at SMC ORS Bhaluka, mass earthworks at Centeon Pharma and quarry-grade digging.", bn: "Caterpillar 320BU হলো জাপানে তৈরি ২০ টন চেইন-হুইল হাইড্রোলিক এক্সক্যাভেটর। ATDB-এর প্রধান হেভি এক্সক্যাভেটর — SMC ORS ভালুকার গভীর ড্রেনেজ ট্রেঞ্চ, সেন্টিয়ন ফার্মার বৃহৎ আর্থওয়ার্ক ও কোয়ারি-গ্রেড খননে ব্যবহৃত।" },
+
+  // Komatsu PC40
+  "eq.bestfor.komatsu": { en: "Urban utility works, foundation digging, and manoeuvring in tight, restricted spaces where large excavators cannot reach.", bn: "শহরের ইউটিলিটি কাজ, ফাউন্ডেশন খোঁড়া এবং ছোট বা সংকীর্ণ জায়গায় সহজে কাজ করার জন্য।" },
+  "eq.desc.komatsu": { en: "The Komatsu PC40 is a 4-ton mini chain-wheel excavator from Japan. Compact enough to enter pharma factory premises and dense urban sites, it handles utility trenches, footing pits and tight-quarter cleanup with precision.", bn: "Komatsu PC40 হলো জাপানের ৪ টন মিনি চেইন-হুইল এক্সক্যাভেটর। ফার্মা ফ্যাক্টরি প্রিমাইস ও ঘনবসতিপূর্ণ শহুরে সাইটে ঢোকার মতো যথেষ্ট কম্প্যাক্ট — ইউটিলিটি ট্রেঞ্চ, ফুটিং পিট ও সংকীর্ণ স্থানের কাজ নিখুঁতভাবে সম্পন্ন করে।" },
+
+  // Backhoe loaders (CASE 770EX, JCB JC 0.6)
+  "eq.bestfor.backhoe": { en: "Dual-purpose operations — trenching on one end and bulk loading on the other. Essential for quick municipal repairs and site cleanup.", bn: "দ্বৈত কাজের সুবিধা — একদিকে মাটি খনন এবং অন্যদিকে লোডিং। মিউনিসিপ্যাল মেরামত এবং সাইট পরিষ্কারের জন্য অপরিহার্য।" },
+  "eq.desc.backhoe": { en: "A multipurpose backhoe loader combining a front-end loader bucket with a rear excavator arm. ATDB deploys these for fast municipal works, drainage repairs, site clearance and aggregate loading on tight schedules.", bn: "একটি মাল্টিপারপাস ব্যাকহো লোডার যা সামনের লোডার বাকেট এবং পেছনের এক্সক্যাভেটর আর্ম একত্রিত করে। ATDB এগুলো দ্রুত মিউনিসিপ্যাল কাজ, ড্রেনেজ মেরামত, সাইট ক্লিয়ারেন্স এবং দ্রুত সময়সূচির এগ্রিগেট লোডিংয়ে মোতায়েন করে।" },
+
+  // XCMG Pay Loader
+  "eq.bestfor.xcmg": { en: "Rapid bulk material handling, aggregate loading into trucks, and large-scale site clearing.", bn: "দ্রুত মালামাল স্থানান্তর, ট্রাকে এগ্রিগেট (খোয়া/বালি) লোড করা এবং বড় সাইট সমতল করার কাজে ব্যবহৃত হয়।" },
+  "eq.desc.xcmg": { en: "The XCMG KMC 950 is a high-efficiency 5-ton bucket wheel loader from China. Built for rapid bulk handling — moving aggregate, loading trucks and clearing large stockyards on tight project timelines.", bn: "XCMG KMC 950 হলো চীনের ৫ টন বাকেট ক্ষমতার উচ্চ-কার্যক্ষমতা সম্পন্ন হুইল লোডার। দ্রুত বাল্ক হ্যান্ডলিং-এর জন্য নির্মিত — কঠোর প্রজেক্ট সময়সূচিতে এগ্রিগেট সরানো, ট্রাক লোড করা এবং বড় স্টকইয়ার্ড পরিষ্কার করার জন্য।" },
+
+  // Honda asphalt cutters
+  "eq.bestfor.cutter": { en: "Clean, precise cuts for road surface repairs, underground pipe laying, and concrete trenching.", bn: "রাস্তা মেরামতের সময় নিখুঁতভাবে কাটা, আন্ডারগ্রাউন্ড পাইপ বসানো এবং কংক্রিট কাটার কাজে ব্যবহৃত।" },
+  "eq.desc.cutter": { en: "A Honda-powered asphalt cutting machine with 7-inch depth capacity. Petrol-driven (octane) for portability — used for clean trench cuts before pipe laying, panel removal in road repair and precise concrete cutting.", bn: "৭ ইঞ্চি গভীরতা ক্ষমতা সম্পন্ন একটি Honda-চালিত অ্যাসফল্ট কাটিং মেশিন। বহনযোগ্যতার জন্য পেট্রোল-চালিত (অকটেন) — পাইপ বসানোর আগে পরিষ্কার ট্রেঞ্চ কাটা, রাস্তা মেরামতে প্যানেল অপসারণ এবং নিখুঁত কংক্রিট কাটায় ব্যবহৃত।" },
+
+  // Surface compactors (plate, sand rammer)
+  "eq.bestfor.surfacecomp": { en: "Sidewalk preparation, trench backfilling, and compaction in tight corners where large vehicle rollers cannot operate.", bn: "ফুটপাত তৈরি, ট্রেঞ্চ ভরাট এবং এমন চিপা জায়গায় মাটি মজবুত করার জন্য যেখানে বড় রোলার ঢুকতে পারে না।" },
+  "eq.desc.surfacecomp": { en: "A Honda surface compactor (plate or sand rammer) for hand-guided compaction. Lightweight, portable and ideal for sidewalk prep, trench backfill, footing pads and confined-space soil consolidation.", bn: "হাত দ্বারা পরিচালিত কম্প্যাকশনের জন্য একটি Honda সারফেস কম্প্যাক্টর (প্লেট বা স্যান্ড র‍্যামার)। হালকা, বহনযোগ্য — ফুটপাত প্রস্তুতি, ট্রেঞ্চ ব্যাকফিল, ফুটিং প্যাড এবং সংকীর্ণ স্থানে মাটি একীভূতকরণের জন্য আদর্শ।" },
+
+  // Generators
+  "eq.bestfor.generator": { en: "Reliable backup power for night shifts, remote site operations, and running critical electrical construction tools.", bn: "নাইট শিফটে কাজ, প্রত্যন্ত প্রজেক্ট সাইট এবং অতি-প্রয়োজনীয় ইলেকট্রিক্যাল যন্ত্রপাতি চালানোর জন্য নিরবচ্ছিন্ন বিদ্যুৎ সরবরাহ করে।" },
+  "eq.desc.generator": { en: "Octane-fuelled portable generator for site power. Powers welders, cutters, vibrators, lighting masts and on-site offices — keeping work going through grid outages and night shifts in remote locations.", bn: "সাইট পাওয়ারের জন্য অকটেন-চালিত পোর্টেবল জেনারেটর। ওয়েল্ডার, কাটার, ভাইব্রেটর, লাইটিং মাস্ট এবং অন-সাইট অফিস চালায় — গ্রিড আউটেজ এবং প্রত্যন্ত স্থানে নাইট শিফটে কাজ চালু রাখে।" },
+
+  // Power Trowel
+  "eq.bestfor.trowel": { en: "Ensuring smooth, polished, and perfectly levelled concrete finishes for industrial floors and warehouse slabs.", bn: "ইন্ডাস্ট্রিয়াল ফ্লোর এবং ওয়্যারহাউস স্ল্যাবের কংক্রিট ঢালাইয়ের পর মসৃণ ও সমতল ফিনিশিং নিশ্চিত করে।" },
+  "eq.desc.trowel": { en: "Honda HZRH50 walk-behind power trowel for concrete finishing. Spins polished steel blades over fresh slabs to deliver the dead-flat, mirror-smooth surface that pharma cleanrooms and warehouse floors demand.", bn: "কংক্রিট ফিনিশিংয়ের জন্য Honda HZRH50 ওয়াক-বিহাইন্ড পাওয়ার ট্রাওয়েল। তাজা স্ল্যাবের উপর পলিশড স্টিল ব্লেড ঘুরিয়ে ডেড-ফ্ল্যাট, আয়না-মসৃণ সারফেস তৈরি করে — যা ফার্মা ক্লিনরুম ও ওয়্যারহাউস ফ্লোরের জন্য প্রয়োজনীয়।" },
+
+  // Drill Hammer
+  "eq.bestfor.drillhammer": { en: "High-impact breaking of old concrete, rocks, and hard surfaces prior to new construction.", bn: "নতুন নির্মাণের আগে পুরোনো কংক্রিট, পাথর এবং শক্ত সারফেস ভাঙার জন্য শক্তিশালী ইমপ্যাক্ট প্রদান করে।" },
+  "eq.desc.drillhammer": { en: "Honda GXCR200ST heavy-duty demolition drill hammer. Delivers high-impact breaking force for cracking old concrete pavements, rock outcrops and obsolete foundations to clear the ground for new builds.", bn: "Honda GXCR200ST হেভি-ডিউটি ডেমোলিশন ড্রিল হ্যামার। পুরোনো কংক্রিট পেভমেন্ট, পাথর ও পুরাতন ফাউন্ডেশন ভেঙে নতুন নির্মাণের জন্য জায়গা প্রস্তুত করতে উচ্চ-ইমপ্যাক্ট ব্রেকিং ফোর্স সরবরাহ করে।" },
+
+  // TATA Drum Truck
+  "eq.bestfor.tata": { en: "Efficient, secure hauling of construction aggregate, excavated soil, and site debris across medium to long distances.", bn: "নির্মাণ সামগ্রী, খনন করা মাটি এবং সাইটের বর্জ্য মাঝারি থেকে দূরপাল্লায় দক্ষতার সাথে পরিবহনের জন্য।" },
+  "eq.desc.tata": { en: "TATA Ultra T7 3900/HSD drum truck — robust haulage workhorse for construction aggregate, excavated spoil and demolition debris. Trusted on long-distance shifts between quarry, depot and project site.", bn: "TATA Ultra T7 3900/HSD ড্রাম ট্রাক — নির্মাণ এগ্রিগেট, খনন করা মাটি এবং ডিমোলিশন বর্জ্যের জন্য মজবুত হলেজ ওয়ার্কহর্স। কোয়ারি, ডিপো এবং প্রজেক্ট সাইটের মধ্যে দূরপাল্লার শিফটে নির্ভরযোগ্য।" },
 };
 
 interface I18nCtx {

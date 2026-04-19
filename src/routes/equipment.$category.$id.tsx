@@ -6,6 +6,7 @@ import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
 import { SpecGroupsAccordion } from "@/components/atdb/SpecGroups";
 import { ReviewsSection, SAMPLE_REVIEWS, reviewAggregate } from "@/components/atdb/Reviews";
+import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import {
   CATEGORIES,
   FLEET,
@@ -181,14 +182,11 @@ function EquipmentDetailPage() {
               <Highlight icon={MapPin} title={t("detail.spec.transport")} value={t("detail.spec.transport.v")} />
             </div>
 
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`mt-7 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-whatsapp px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
-            >
-              <WhatsappIcon /> {t("detail.cta.button")}
-            </a>
+            <div className="mt-7">
+              <WhatsappButton href={whatsappUrl} variant="cta" fullWidth>
+                {t("detail.cta.button")}
+              </WhatsappButton>
+            </div>
             <button
               type="button"
               onClick={() => add(eq)}

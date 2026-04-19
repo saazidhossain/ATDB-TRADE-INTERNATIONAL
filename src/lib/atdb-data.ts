@@ -223,20 +223,63 @@ export { craneImg, rollerImg, excavatorImg, supportImg };
 
 export type WaLang = "en" | "bn";
 
+// ── WhatsApp message templates ────────────────────────────────────────
+// Centralised EN/BN copy. Edit here to change wording in either language;
+// no other file needs to know the templates exist.
+interface WaTemplates {
+  rent: (eq: Equipment) => string;
+  generic: string;
+  cart: {
+    greeting: string;
+    intro: string;
+    item: (i: number, it: CartItem) => string;
+    location: (v: string) => string;
+    start: (v: string) => string;
+    end: (v: string) => string;
+    notesLabel: (v: string) => string;
+    closing: string;
+  };
+}
+
+const WA_TEMPLATES: Record<WaLang, WaTemplates> = {
+  en: {
+    rent: (eq) =>
+      `Hello ATDB Trade International,\n\nI'd like to rent the ${eq.name} (${eq.id} · ${eq.capacity}).\nProject location: \nDuration (days): \nPlease share availability and a quotation. — ATDB website`,
+    generic: `Hello ATDB Trade International,\n\nI'd like to discuss a heavy-equipment rental for an upcoming project. Please share availability and a quotation.`,
+    cart: {
+      greeting: "Hello ATDB Trade International,",
+      intro: "I'd like a quotation for the following equipment:",
+      item: (i, it) => `${i + 1}. ${it.name}  ·  ${it.capacity}  ·  Qty: ${it.qty}  (${it.id})`,
+      location: (v) => `📍 Project location: ${v}`,
+      start: (v) => `📅 Start date: ${v}`,
+      end: (v) => `📅 End date: ${v}`,
+      notesLabel: (v) => `Notes: ${v}`,
+      closing: "Please share availability and pricing. — ATDB website",
+    },
+  },
+  bn: {
+    rent: (eq) =>
+      `আসসালামু আলাইকুম, ATDB Trade International।\n\nআমি ${eq.name} (${eq.id} · ${eq.capacity}) ভাড়া নিতে চাই।\nপ্রজেক্ট লোকেশন: \nসময়কাল (দিন): \nঅনুগ্রহ করে অ্যাভেইলেবিলিটি ও কোটেশন পাঠান। — ATDB ওয়েবসাইট`,
+    generic: `আসসালামু আলাইকুম, ATDB Trade International।\n\nআমি একটি আসন্ন প্রজেক্টের জন্য হেভি-ইকুইপমেন্ট ভাড়ার ব্যাপারে কথা বলতে চাই। অনুগ্রহ করে অ্যাভেইলেবিলিটি ও কোটেশন পাঠান।`,
+    cart: {
+      greeting: "আসসালামু আলাইকুম, ATDB Trade International।",
+      intro: "নিচের ইকুইপমেন্টগুলোর জন্য কোটেশন প্রয়োজন:",
+      item: (i, it) => `${i + 1}. ${it.name}  ·  ${it.capacity}  ·  পরিমাণ: ${it.qty}  (${it.id})`,
+      location: (v) => `📍 প্রজেক্ট লোকেশন: ${v}`,
+      start: (v) => `📅 শুরু: ${v}`,
+      end: (v) => `📅 শেষ: ${v}`,
+      notesLabel: (v) => `নোট: ${v}`,
+      closing: "অনুগ্রহ করে অ্যাভেইলেবিলিটি ও প্রাইস জানান। — ATDB ওয়েবসাইট",
+    },
+  },
+};
+
 export function buildWhatsappRentLink(eq: Equipment, lang: WaLang = "en") {
-  const msg =
-    lang === "bn"
-      ? `আসসালামু আলাইকুম, ATDB Trade International।\n\nআমি ${eq.name} (${eq.id} · ${eq.capacity}) ভাড়া নিতে চাই।\nপ্রজেক্ট লোকেশন: \nসময়কাল (দিন): \nঅনুগ্রহ করে অ্যাভেইলেবিলিটি ও কোটেশন পাঠান। — ATDB ওয়েবসাইট`
-      : `Hello ATDB Trade International,\n\nI'd like to rent the ${eq.name} (${eq.id} · ${eq.capacity}).\nProject location: \nDuration (days): \nPlease share availability and a quotation. — ATDB website`;
-  return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(WA_TEMPLATES[lang].rent(eq))}`;
 }
 
 export function buildWhatsappGenericLink(text?: string, lang: WaLang = "en") {
-  const msg =
-    text ??
-    (lang === "bn"
-      ? `আসসালামু আলাইকুম, ATDB Trade International।\n\nআমি একটি আসন্ন প্রজেক্টের জন্য হেভি-ইকুইপমেন্ট ভাড়ার ব্যাপারে কথা বলতে চাই। অনুগ্রহ করে অ্যাভেইলেবিলিটি ও কোটেশন পাঠান।`
-      : `Hello ATDB Trade International,\n\nI'd like to discuss a heavy-equipment rental for an upcoming project. Please share availability and a quotation.`);
+  const msg = text ?? WA_TEMPLATES[lang].generic;
   return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
 
@@ -256,43 +299,18 @@ export interface CartProject {
 }
 
 export function buildWhatsappCartLink(items: CartItem[], project: CartProject, lang: WaLang = "en") {
-  const lines: string[] = [];
-  if (lang === "bn") {
-    lines.push("আসসালামু আলাইকুম, ATDB Trade International।");
+  const t = WA_TEMPLATES[lang].cart;
+  const lines: string[] = [t.greeting, "", t.intro, ""];
+  items.forEach((it, i) => lines.push(t.item(i, it)));
+  lines.push("");
+  if (project.location) lines.push(t.location(project.location));
+  if (project.startDate) lines.push(t.start(project.startDate));
+  if (project.endDate) lines.push(t.end(project.endDate));
+  if (project.notes) {
     lines.push("");
-    lines.push("নিচের ইকুইপমেন্টগুলোর জন্য কোটেশন প্রয়োজন:");
-    lines.push("");
-    items.forEach((it, i) => {
-      lines.push(`${i + 1}. ${it.name}  ·  ${it.capacity}  ·  পরিমাণ: ${it.qty}  (${it.id})`);
-    });
-    lines.push("");
-    if (project.location) lines.push(`📍 প্রজেক্ট লোকেশন: ${project.location}`);
-    if (project.startDate) lines.push(`📅 শুরু: ${project.startDate}`);
-    if (project.endDate) lines.push(`📅 শেষ: ${project.endDate}`);
-    if (project.notes) {
-      lines.push("");
-      lines.push(`নোট: ${project.notes}`);
-    }
-    lines.push("");
-    lines.push("অনুগ্রহ করে অ্যাভেইলেবিলিটি ও প্রাইস জানান। — ATDB ওয়েবসাইট");
-  } else {
-    lines.push("Hello ATDB Trade International,");
-    lines.push("");
-    lines.push("I'd like a quotation for the following equipment:");
-    lines.push("");
-    items.forEach((it, i) => {
-      lines.push(`${i + 1}. ${it.name}  ·  ${it.capacity}  ·  Qty: ${it.qty}  (${it.id})`);
-    });
-    lines.push("");
-    if (project.location) lines.push(`📍 Project location: ${project.location}`);
-    if (project.startDate) lines.push(`📅 Start date: ${project.startDate}`);
-    if (project.endDate) lines.push(`📅 End date: ${project.endDate}`);
-    if (project.notes) {
-      lines.push("");
-      lines.push(`Notes: ${project.notes}`);
-    }
-    lines.push("");
-    lines.push("Please share availability and pricing. — ATDB website");
+    lines.push(t.notesLabel(project.notes));
   }
+  lines.push("");
+  lines.push(t.closing);
   return `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodeURIComponent(lines.join("\n"))}`;
 }

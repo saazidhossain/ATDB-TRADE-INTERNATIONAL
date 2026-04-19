@@ -1,55 +1,121 @@
-// Renders the contact card + page footer at the bottom of the spec sheet.
+// Renders the service-highlights row + branded contact card + page footer.
 
+import type { jsPDF } from "jspdf";
 import { COMPANY, PRIMARY_WHATSAPP } from "@/lib/atdb-data";
-import { ascii, BORDER, IRON, MARGIN, MUTED, SAFETY } from "./tokens";
-import type { RenderCtx } from "./render-context";
+import {
+  ascii,
+  BORDER,
+  BORDER_SOFT,
+  IRON,
+  MARGIN,
+  MUTED,
+  MUTED_SOFT,
+  SAFETY,
+  SURFACE,
+} from "./tokens";
+import type { Strings } from "./strings";
 
-export function renderFooter(ctx: RenderCtx, dateStr: string) {
-  const { doc, pageW, pageH, S, setFont, text } = ctx;
+export function renderFooter(doc: jsPDF, S: Strings, dateStr: string, afterTableY: number) {
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
 
-  const footerH = 102;
-  const footerY = pageH - MARGIN - footerH;
+  // ── Service highlights (3 chips) ──────────────────────────────
+  const highlightsY = afterTableY + 4;
+  const highlights: [string, string][] = [
+    [S.hAvailability, S.hAvailabilityV],
+    [S.hMobilisation, S.hMobilisationV],
+    [S.hCompliance, S.hComplianceV],
+  ];
+  const stripW = pageW - MARGIN * 2;
+  const gap = 8;
+  const chipW = (stripW - gap * (highlights.length - 1)) / highlights.length;
+  const chipH = 50;
 
-  doc.setDrawColor(...BORDER);
-  doc.setFillColor(252, 252, 253);
-  doc.roundedRect(MARGIN, footerY, pageW - MARGIN * 2, footerH, 6, 6, "FD");
-  doc.setFillColor(...SAFETY);
-  doc.rect(MARGIN, footerY, 3, footerH, "F");
+  highlights.forEach(([label, value], i) => {
+    const x = MARGIN + i * (chipW + gap);
+    doc.setFillColor(...SURFACE);
+    doc.setDrawColor(...BORDER_SOFT);
+    doc.roundedRect(x, highlightsY, chipW, chipH, 5, 5, "FD");
+    // Top accent rule
+    doc.setFillColor(...SAFETY);
+    doc.rect(x + 10, highlightsY + 8, 16, 2, "F");
 
-  doc.setTextColor(...IRON);
-  setFont("bold");
-  doc.setFontSize(11);
-  text(S.contact, MARGIN + 18, footerY + 22);
-
-  setFont("normal");
-  doc.setFontSize(9);
-  doc.setTextColor(...MUTED);
-  const phones = COMPANY.phones.map((p) => p.number).join("  ·  ");
-
-  // Mixed lines: BN label + Latin value. Render label in sansFamily, value in
-  // helvetica by drawing them as two segments to keep numerals crisp.
-  const drawLabeled = (label: string, value: string, y: number) => {
-    setFont("bold");
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8);
     doc.setTextColor(...IRON);
-    text(label, MARGIN + 18, y);
+    doc.text(ascii(label.toUpperCase()), x + 10, highlightsY + 22);
+
     doc.setFont("helvetica", "normal");
+    doc.setFontSize(8.5);
     doc.setTextColor(...MUTED);
-    doc.text(ascii(value), MARGIN + 90, y);
+    const lines = doc.splitTextToSize(ascii(value), chipW - 20);
+    doc.text(lines, x + 10, highlightsY + 36);
+  });
+
+  // ── Contact card ──────────────────────────────────────────────
+  const cardH = 96;
+  const cardY = pageH - MARGIN - cardH - 22;
+  doc.setFillColor(...IRON);
+  doc.roundedRect(MARGIN, cardY, pageW - MARGIN * 2, cardH, 6, 6, "F");
+
+  // Safety accent column
+  doc.setFillColor(...SAFETY);
+  doc.rect(MARGIN, cardY, 4, cardH, "F");
+
+  // Heading
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.setTextColor(255, 255, 255);
+  doc.text(ascii(S.contact), MARGIN + 18, cardY + 22);
+
+  // Tagline
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.5);
+  doc.setTextColor(200, 204, 212);
+  doc.text(ascii(COMPANY.tagline), MARGIN + 18, cardY + 36);
+
+  // Two-column contact details
+  const phones = COMPANY.phones.map((p) => p.number).join("  ·  ");
+  const colLY = cardY + 56;
+  const colRX = MARGIN + (pageW - MARGIN * 2) / 2 + 4;
+
+  const drawDetail = (label: string, value: string, x: number, y: number) => {
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7);
+    doc.setTextColor(...MUTED_SOFT);
+    doc.text(ascii(label.toUpperCase()), x, y);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.setTextColor(255, 255, 255);
+    doc.text(ascii(value), x, y + 12);
   };
 
-  drawLabeled(S.phoneL, phones, footerY + 42);
-  drawLabeled(S.emailL, COMPANY.email, footerY + 56);
-  if (PRIMARY_WHATSAPP) drawLabeled(S.whatsappL, `+${PRIMARY_WHATSAPP}`, footerY + 70);
+  drawDetail(S.phoneL, phones, MARGIN + 18, colLY);
+  drawDetail(S.emailL, COMPANY.email, MARGIN + 18, colLY + 26);
 
-  setFont("normal");
-  doc.setTextColor(...MUTED);
-  doc.setFontSize(8);
-  text(S.disclaimer, MARGIN + 18, footerY + 90);
+  if (PRIMARY_WHATSAPP) {
+    drawDetail(S.whatsappL, `+${PRIMARY_WHATSAPP}`, colRX, colLY);
+  }
+  drawDetail(S.webL, "atdbtrade.com", colRX, colLY + 26);
 
-  // Page footer label
-  doc.setFontSize(7.5);
+  // ── Page footer (disclaimer + meta) ───────────────────────────
+  doc.setDrawColor(...BORDER);
+  doc.setLineWidth(0.4);
+  doc.line(MARGIN, pageH - MARGIN - 4, pageW - MARGIN, pageH - MARGIN - 4);
+
+  doc.setFont("helvetica", "italic");
+  doc.setFontSize(7);
   doc.setTextColor(...MUTED);
-  text(`${S.generated} ${dateStr}  ·  ${COMPANY.name}`, pageW - MARGIN, pageH - 16, {
-    align: "right",
-  });
+  const disclaimerLines = doc.splitTextToSize(ascii(S.disclaimer), pageW - MARGIN * 2 - 180);
+  doc.text(disclaimerLines, MARGIN, pageH - MARGIN + 8);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(7);
+  doc.setTextColor(...MUTED);
+  doc.text(
+    ascii(`${S.generated} ${dateStr}  ·  ${COMPANY.name}`),
+    pageW - MARGIN,
+    pageH - MARGIN + 8,
+    { align: "right" },
+  );
 }

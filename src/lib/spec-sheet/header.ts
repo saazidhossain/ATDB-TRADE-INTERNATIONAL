@@ -49,7 +49,7 @@ export async function renderHeader(
   doc.setLineWidth(0.2);
   const logo = await loadImageAsDataUrl(brandLogo);
   if (logo) {
-    const pad = 4;
+    const pad = 6;
     const maxW = chipS - pad * 2;
     const maxH = chipS - pad * 2;
     const ratio = logo.w / logo.h;

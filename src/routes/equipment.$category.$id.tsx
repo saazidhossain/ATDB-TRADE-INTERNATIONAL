@@ -122,15 +122,37 @@ function EquipmentDetailPage() {
   const eq = getEquipmentById(id)!;
   const cat = CATEGORIES[category as EquipmentCategory];
   const related = FLEET.filter((f) => f.category === eq.category && f.id !== eq.id).slice(0, 3);
-  // Use cinematic gallery when available; fall back to legacy stock photos.
-  const gallery = eq.gallery && eq.gallery.length > 0
-    ? [eq.image, ...eq.gallery]
-    : [eq.image, detailHero, detailCabin, detailFleet];
+  // Build gallery slots with captions. The third "extra" image is "cabin" for cranes, "site" otherwise.
+  const thirdCaption: GallerySlot["captionKey"] = eq.category === "cranes" ? "gallery.cap.cabin" : "gallery.cap.site";
+  const gallerySlots: GallerySlot[] = eq.gallery && eq.gallery.length >= 3
+    ? [
+        { src: eq.image, captionKey: "gallery.cap.hero" },
+        { src: eq.gallery[0], captionKey: "gallery.cap.action" },
+        { src: eq.gallery[1], captionKey: "gallery.cap.detail" },
+        { src: eq.gallery[2], captionKey: thirdCaption },
+      ]
+    : [
+        { src: eq.image, captionKey: "gallery.cap.hero" },
+        { src: detailHero, captionKey: "gallery.cap.action" },
+        { src: detailCabin, captionKey: "gallery.cap.cabin" },
+        { src: detailFleet, captionKey: "gallery.cap.site" },
+      ];
 
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
   const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);
+  const [pdfBusy, setPdfBusy] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    if (pdfBusy) return;
+    setPdfBusy(true);
+    try {
+      await generateSpecSheet(eq, t, lang);
+    } finally {
+      setPdfBusy(false);
+    }
+  };
 
   // At-a-glance badge strip (4-6 chips)
   const glance: { label: string; value: string }[] = [

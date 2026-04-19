@@ -32,9 +32,9 @@ export const Route = createFileRoute("/")({
 });
 
 const PROJECTS = [
-  { img: projectRoad, key: "home.project.rtip" as const },
-  { img: projectBridge, key: "home.project.jamuna" as const },
-  { img: projectPharma, key: "home.project.pharma" as const },
+  { img: projectJamuna, key: "home.project.jamuna" as const },
+  { img: projectCenteon, key: "home.project.pharma" as const },
+  { img: projectRtip2, key: "home.project.rtip" as const },
 ];
 
 const BRANDS = ["Liebherr", "Kato", "Sakai", "CAT", "Komatsu", "JCB", "Dynapac", "Bomag", "CASE", "XCMG"];

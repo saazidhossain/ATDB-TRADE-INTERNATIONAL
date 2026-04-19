@@ -89,8 +89,44 @@ function Index() {
           style={reduce ? undefined : { y: heroY, scale: heroScale }}
           className="absolute inset-0 -z-10 h-[115%] w-full object-cover opacity-80 will-change-transform"
         />
+        {/* Tonal scrim — deepens the lower half so headline pops */}
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,oklch(0.18_0.018_240/0.35)_0%,oklch(0.18_0.018_240/0.78)_55%,oklch(0.16_0.018_240/0.95)_100%)]" />
+        {/* Bronze radial glow — warms the focal point behind the wordmark */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_55%_45%_at_28%_62%,oklch(0.78_0.13_65/0.22),transparent_70%)] mix-blend-screen" />
+        {/* Engineering grid — subtle blueprint cross-hatch with vignette mask */}
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+        {/* Bronze film grain — fine noise via layered radial dots */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.18] mix-blend-overlay [background-image:radial-gradient(oklch(0.78_0.13_65/0.55)_0.5px,transparent_0.5px),radial-gradient(oklch(0.62_0.10_55/0.4)_0.5px,transparent_0.5px)] [background-size:3px_3px,5px_5px] [background-position:0_0,1px_2px]" />
+        {/* Safety-orange ember particles — drifting upward */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          {[
+            { l: "12%", d: "0s",   s: 14, o: 0.55 },
+            { l: "22%", d: "3.2s", s: 22, o: 0.4  },
+            { l: "34%", d: "1.4s", s: 10, o: 0.65 },
+            { l: "46%", d: "5.1s", s: 18, o: 0.35 },
+            { l: "58%", d: "2.7s", s: 12, o: 0.55 },
+            { l: "67%", d: "6.4s", s: 24, o: 0.3  },
+            { l: "78%", d: "0.9s", s: 14, o: 0.5  },
+            { l: "88%", d: "4.3s", s: 10, o: 0.6  },
+            { l: "94%", d: "2.1s", s: 16, o: 0.4  },
+          ].map((p, i) => (
+            <span
+              key={i}
+              className="absolute bottom-[-10%] block rounded-full bg-safety blur-[1px] animate-[emberDrift_var(--dur)_linear_infinite]"
+              style={{
+                left: p.l,
+                width: 3,
+                height: 3,
+                opacity: p.o,
+                animationDelay: p.d,
+                ["--dur" as string]: `${p.s}s`,
+                boxShadow: "0 0 8px oklch(0.78 0.13 65 / 0.7), 0 0 16px oklch(0.7 0.19 45 / 0.4)",
+              }}
+            />
+          ))}
+        </div>
+        {/* Bottom edge fade — anchors content to next section */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-b from-transparent to-iron-deep" />
 
         <div className="container-page flex min-h-[88vh] flex-col justify-end pb-16 pt-28 md:min-h-[92vh] md:pb-24 md:pt-32">
           <p className={`eyebrow !text-bronze-glow animate-in fade-in slide-in-from-bottom-3 duration-700 ${lang === "bn" ? "font-bn" : ""}`}>

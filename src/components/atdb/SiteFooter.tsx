@@ -73,26 +73,43 @@ export function SiteFooter() {
 
         <div>
           <h4 className="eyebrow !text-bronze-glow">{t("footer.contact")}</h4>
-          <ul className="mt-4 space-y-3 text-sm text-white/75">
+          {/* Unified social/contact channel stack — all four channels equal */}
+          <ul className="mt-4 space-y-2.5">
             {COMPANY.phones.map((p) => (
               <li key={p.number}>
-                <a href={`tel:${p.number}`} className="flex items-center gap-2 hover:text-safety">
-                  <Phone className="h-4 w-4 text-bronze-glow" /> {p.number}
-                  <span className={`text-xs text-white/45 ${fontClass}`}>
-                    · {p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
-                  </span>
-                </a>
+                <ContactChannelButton
+                  channel="phone"
+                  href={`tel:${p.number}`}
+                  variant="footer"
+                  sublabel={p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
+                >
+                  {p.number}
+                </ContactChannelButton>
               </li>
             ))}
             <li>
-              <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-2 hover:text-safety">
-                <Mail className="h-4 w-4 text-bronze-glow" /> {COMPANY.email}
-              </a>
+              <ContactChannelButton
+                channel="email"
+                href={`mailto:${COMPANY.email}`}
+                variant="footer"
+              >
+                {COMPANY.email}
+              </ContactChannelButton>
+            </li>
+            <li>
+              <WhatsappButton
+                href={buildWhatsappGenericLink(undefined, lang)}
+                variant="ctaDark"
+                fullWidth
+                className="!py-2.5 !text-xs !normal-case !tracking-normal"
+              >
+                {t("nav.whatsappQuote")}
+              </WhatsappButton>
+            </li>
+            <li>
+              <FacebookLink variant="footer" className="w-full justify-start" />
             </li>
           </ul>
-          <div className="mt-5">
-            <FacebookLink variant="footer" />
-          </div>
         </div>
       </div>
 

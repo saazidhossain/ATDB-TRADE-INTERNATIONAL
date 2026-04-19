@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Equipment } from "@/lib/atdb-data";
 import { buildWhatsappRentLink } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 
 export const equipmentCardVariants = {
@@ -19,9 +19,10 @@ export const equipmentGridVariants = {
 
 export function EquipmentCard({ eq }: { eq: Equipment }) {
   const { t, lang } = useI18n();
+  const fontClass = useFontClass();
   const { add, items } = useCart();
   const [justAdded, setJustAdded] = useState(false);
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = fontClass;
   const inCart = items.some((i) => i.id === eq.id);
 
   const handleAdd = (e: React.MouseEvent) => {

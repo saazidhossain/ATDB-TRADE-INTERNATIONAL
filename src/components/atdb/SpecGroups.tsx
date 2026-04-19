@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Ruler, Gauge, Fuel, ShieldCheck } from "lucide-react";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 import type { Equipment } from "@/lib/atdb-data";
 
 type Row = { label: string; value: string };
@@ -61,7 +61,8 @@ export function buildSpecGroups(eq: Equipment, t: (k: string) => string): Group[
 
 export function SpecGroupsAccordion({ eq }: { eq: Equipment }) {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClass = fontClass;
   const groups = buildSpecGroups(eq, t);
   const [open, setOpen] = useState<Record<string, boolean>>({
     dimensions: true,

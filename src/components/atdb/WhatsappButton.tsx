@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 
 type Variant = "header" | "fab" | "cta" | "ctaDark" | "drawer" | "hero";
 
@@ -44,7 +44,8 @@ export function WhatsappButton({
   fullWidth,
 }: WhatsappButtonProps) {
   const { lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClass = fontClass;
 
   // ─── HEADER PILL ──────────────────────────────────────────────────
   if (variant === "header") {

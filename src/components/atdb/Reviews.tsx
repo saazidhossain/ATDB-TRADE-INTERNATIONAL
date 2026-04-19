@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { useI18n, type Lang } from "@/lib/i18n";
+import { useI18n, type Lang, useFontClass } from "@/lib/i18n";
 
 export type Review = {
   id: number;
@@ -70,14 +70,16 @@ function formatDate(iso: string, lang: Lang) {
 
 export function ReviewsSection() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClassEyebrow = useFontClass({ eyebrow: true });
+  const fontClass = fontClass;
 
   return (
     <section className="bg-background py-16 md:py-20">
       <div className="container-page">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("reviews.eyebrow")}</p>
+            <p className={`eyebrow ${fontClassEyebrow}`}>{t("reviews.eyebrow")}</p>
             <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{t("reviews.title")}</h2>
           </div>
           <div className="flex items-center gap-3 rounded-md border border-border bg-card px-4 py-2.5 shadow-card">

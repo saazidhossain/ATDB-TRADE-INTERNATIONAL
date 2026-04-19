@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { CATEGORIES, FLEET } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 
 const categoryGridVariants = {
   hidden: {},
@@ -31,12 +31,14 @@ export const Route = createFileRoute("/equipment/")({
 
 function EquipmentIndex() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClassEyebrow = useFontClass({ eyebrow: true });
+  const fontClass = fontClass;
   return (
     <Layout>
       <section className="bg-iron-deep py-20 text-white">
         <div className="container-page">
-          <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("eq.eyebrow")}</p>
+          <p className={`eyebrow !text-bronze-glow ${fontClassEyebrow}`}>{t("eq.eyebrow")}</p>
           <h1 className={`mt-2 max-w-3xl text-4xl font-bold text-white md:text-5xl ${fontClass}`}>
             {t("eq.title")}
           </h1>

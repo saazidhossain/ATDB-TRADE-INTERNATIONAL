@@ -13,7 +13,7 @@ import {
   type EquipmentCategory,
 } from "@/lib/atdb-data";
 import { PROJECTS as ALL_PROJECTS, type ProjectCategoryKey } from "@/lib/projects-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 import heroImg from "@/assets/brand/atdb-hero-monument.webp";
 
 export const Route = createFileRoute("/")({
@@ -54,7 +54,9 @@ const CAT_KEYS: Record<EquipmentCategory, { label: string; tagline: string }> = 
 
 function Index() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClassEyebrow = useFontClass({ eyebrow: true });
+  const fontClass = fontClass;
   const tx = t as unknown as (k: string) => string;
 
   // Subtle scroll parallax on hero monument
@@ -130,7 +132,7 @@ function Index() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-b from-transparent to-iron-deep" />
 
         <div className="container-page flex min-h-[88vh] flex-col justify-end pb-16 pt-28 md:min-h-[92vh] md:pb-24 md:pt-32">
-          <p className={`eyebrow !text-bronze-glow animate-in fade-in slide-in-from-bottom-3 duration-700 ${lang === "bn" ? "font-bn" : ""}`}>
+          <p className={`eyebrow !text-bronze-glow animate-in fade-in slide-in-from-bottom-3 duration-700 ${fontClassEyebrow}`}>
             {t("home.eyebrow")}
           </p>
           <h1 className={`mt-4 max-w-4xl text-4xl font-bold leading-[1.05] text-balance text-white animate-in fade-in slide-in-from-bottom-4 duration-700 [animation-delay:120ms] [animation-fill-mode:both] sm:text-5xl md:text-6xl lg:text-7xl ${fontClass}`}>
@@ -193,7 +195,7 @@ function Index() {
         <div className="container-page">
           <div className="flex items-end justify-between gap-6">
             <div>
-              <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.cat.eyebrow")}</p>
+              <p className={`eyebrow ${fontClassEyebrow}`}>{t("home.cat.eyebrow")}</p>
               <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{t("home.cat.title")}</h2>
             </div>
             <Link to="/equipment" className={`hidden items-center gap-1 text-sm font-semibold text-safety hover:text-safety-deep md:inline-flex ${fontClass}`}>
@@ -227,7 +229,7 @@ function Index() {
       {/* FEATURED */}
       <section className="bg-muted/40 py-20 md:py-28">
         <div className="container-page">
-          <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.featured.eyebrow")}</p>
+          <p className={`eyebrow ${fontClassEyebrow}`}>{t("home.featured.eyebrow")}</p>
           <h2 className={`mt-2 max-w-2xl text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{t("home.featured.title")}</h2>
           <motion.div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
@@ -242,7 +244,7 @@ function Index() {
         <div className="container-page">
           <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
             <div>
-              <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.why.eyebrow")}</p>
+              <p className={`eyebrow ${fontClassEyebrow}`}>{t("home.why.eyebrow")}</p>
               <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{t("home.why.title")}</h2>
               <p className={`mt-4 text-base text-muted-foreground ${fontClass}`}>{t("home.why.body")}</p>
             </div>
@@ -297,7 +299,7 @@ function Index() {
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
-              <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.projects.eyebrow")}</p>
+              <p className={`eyebrow !text-bronze-glow ${fontClassEyebrow}`}>{t("home.projects.eyebrow")}</p>
               <h2 className={`mt-2 text-3xl font-bold text-white md:text-4xl ${fontClass}`}>{t("home.projects.title")}</h2>
               <p className={`mt-3 text-sm text-white/70 md:text-base ${fontClass}`}>{t("home.projects.sub")}</p>
             </div>

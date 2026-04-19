@@ -17,7 +17,7 @@ import {
   COMPANY,
   type EquipmentCategory,
 } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { generateSpecSheet } from "@/lib/spec-sheet";
 import detailHero from "@/assets/eq-detail-crane.webp";
@@ -119,6 +119,7 @@ export const Route = createFileRoute("/equipment/$category/$id")({
 function EquipmentDetailPage() {
   const { category, id } = Route.useParams();
   const { t, lang } = useI18n();
+  const fontClass = useFontClass();
   const eq = getEquipmentById(id)!;
   const cat = CATEGORIES[category as EquipmentCategory];
   const related = FLEET.filter((f) => f.category === eq.category && f.id !== eq.id).slice(0, 3);
@@ -138,7 +139,7 @@ function EquipmentDetailPage() {
         { src: detailFleet, captionKey: "gallery.cap.site" },
       ];
 
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = fontClass;
   const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);

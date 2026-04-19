@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { X, Trash2, MapPin, Calendar, Plus, Minus, ShoppingCart } from "lucide-react";
 import { useCart } from "@/lib/cart";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 import { WhatsappButton } from "./WhatsappButton";
 
 export function CartDrawer() {
   const { isOpen, close, items, project, setProject, setQty, remove, clear, whatsappUrl, count } = useCart();
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClass = fontClass;
 
   useEffect(() => {
     if (!isOpen) return;

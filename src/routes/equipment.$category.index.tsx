@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
 import { CATEGORIES, getCategoryFleet, type EquipmentCategory } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 
 const validCategories = Object.keys(CATEGORIES) as EquipmentCategory[];
 
@@ -49,6 +49,7 @@ export const Route = createFileRoute("/equipment/$category/")({
 
 function CategoryNotFound() {
   const { t } = useI18n();
+  const fontClass = useFontClass();
   return (
     <Layout>
       <div className="container-page py-32 text-center">
@@ -64,7 +65,7 @@ function CategoryPage() {
   const cat = CATEGORIES[category as EquipmentCategory];
   const items = getCategoryFleet(category as EquipmentCategory);
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = fontClass;
 
   const labelKey = CAT_LABEL_KEY[category as EquipmentCategory];
   const taglineKey = CAT_TAGLINE_KEY[category as EquipmentCategory];

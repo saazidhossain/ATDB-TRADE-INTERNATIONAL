@@ -59,7 +59,7 @@ export function SiteHeader() {
             {COMPANY.phones[0].number}
           </a>
           <a
-            href={buildWhatsappGenericLink()}
+            href={buildWhatsappGenericLink(undefined, lang)}
             target="_blank"
             rel="noopener noreferrer"
             className={`hidden rounded-sm bg-gradient-safety px-4 py-2.5 text-sm font-semibold text-white shadow-cta transition-transform hover:-translate-y-px md:inline-flex ${lang === "bn" ? "font-bn" : "font-display"}`}
@@ -92,7 +92,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <a
-              href={buildWhatsappGenericLink()}
+              href={buildWhatsappGenericLink(undefined, lang)}
               target="_blank"
               rel="noopener noreferrer"
               className={`mt-4 inline-flex justify-center rounded-sm bg-gradient-safety px-4 py-3 text-sm font-semibold text-white ${lang === "bn" ? "font-bn" : "font-display"}`}

@@ -474,6 +474,16 @@ export const TRANSLATIONS: Dict = {
   // TATA Drum Truck
   "eq.bestfor.tata": { en: "Efficient, secure hauling of construction aggregate, excavated soil, and site debris across medium to long distances.", bn: "নির্মাণ সামগ্রী, খনন করা মাটি এবং সাইটের বর্জ্য মাঝারি থেকে দূরপাল্লায় দক্ষতার সাথে পরিবহনের জন্য।" },
   "eq.desc.tata": { en: "TATA Ultra T7 3900/HSD drum truck — robust haulage workhorse for construction aggregate, excavated spoil and demolition debris. Trusted on long-distance shifts between quarry, depot and project site.", bn: "TATA Ultra T7 3900/HSD ড্রাম ট্রাক — নির্মাণ এগ্রিগেট, খনন করা মাটি এবং ডিমোলিশন বর্জ্যের জন্য মজবুত হলেজ ওয়ার্কহর্স। কোয়ারি, ডিপো এবং প্রজেক্ট সাইটের মধ্যে দূরপাল্লার শিফটে নির্ভরযোগ্য।" },
+
+  // ─── Facebook live feed ─────────────────────────────────────────
+  "fb.eyebrow": { en: "Live from Facebook", bn: "ফেসবুক থেকে লাইভ" },
+  "fb.title": { en: "Latest from our job sites & yard.", bn: "আমাদের সাইট ও ইয়ার্ডের সর্বশেষ আপডেট।" },
+  "fb.body": { en: "Mobilisations, lifts, project completions and team milestones — straight from the ATDB Trade International Facebook page.", bn: "মোবিলাইজেশন, লিফট, প্রজেক্ট সমাপ্তি এবং টিম মাইলস্টোন — সরাসরি ATDB Trade International ফেসবুক পেজ থেকে।" },
+  "fb.cta": { en: "Open Facebook Page", bn: "ফেসবুক পেজ খুলুন" },
+  "fb.live": { en: "Live Feed", bn: "লাইভ ফিড" },
+  "fb.bullet.1": { en: "Real photos from active project sites across Bangladesh.", bn: "বাংলাদেশজুড়ে চলমান প্রজেক্ট সাইটের আসল ছবি।" },
+  "fb.bullet.2": { en: "Equipment availability and mobilisation announcements.", bn: "ইকুইপমেন্ট অ্যাভেইলেবিলিটি ও মোবিলাইজেশন ঘোষণা।" },
+  "fb.bullet.3": { en: "Behind-the-scenes from operators, riggers and crew.", bn: "অপারেটর, রিগার ও ক্রু-দের পর্দার আড়ালের মুহূর্ত।" },
 };
 
 interface I18nCtx {

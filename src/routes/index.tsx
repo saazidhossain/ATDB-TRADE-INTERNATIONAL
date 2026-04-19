@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Zap, Wrench, BadgeCheck } from "lucide-react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard } from "@/components/atdb/EquipmentCard";
 import {
@@ -170,11 +171,20 @@ function Index() {
           <h2 className={`mt-2 max-w-2xl text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>
             {t("home.featured.title")}
           </h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.div
+            className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+            }}
+          >
             {FEATURED.map((eq) => (
               <EquipmentCard key={eq.id} eq={eq} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -221,17 +231,34 @@ function Index() {
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <motion.div
+            className="mt-10 grid gap-5 md:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+            }}
+          >
             {PROJECTS.map((p) => (
-              <figure key={p.label} className="group relative aspect-[4/5] overflow-hidden rounded-md">
-                <img src={p.img} alt={p.label} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <motion.figure
+                key={p.label}
+                variants={{
+                  hidden: { opacity: 0, y: 28 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+                }}
+                whileHover={{ y: -6, transition: { type: "spring", stiffness: 320, damping: 22 } }}
+                className="group relative aspect-[4/5] overflow-hidden rounded-md shadow-card hover:shadow-card-hover"
+              >
+                <img src={p.img} alt={p.label} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-iron-deep/95 via-iron-deep/30 to-transparent" />
                 <figcaption className="absolute bottom-0 left-0 right-0 p-5 font-display text-sm font-semibold text-white">
                   {p.label}
                 </figcaption>
-              </figure>
+              </motion.figure>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

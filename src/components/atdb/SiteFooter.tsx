@@ -1,10 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import logo from "@/assets/brand/atdb-logo-dark.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
-import { ChannelIcon, PhoneGlyph, MailGlyph, FbGlyph, WaGlyphSm } from "./ChannelIcon";
 
 export function SiteFooter() {
   const { t, lang } = useI18n();

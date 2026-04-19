@@ -11,6 +11,12 @@ import type { RenderCtx } from "./render-context";
 // without this fallback Latin values like "ATDB-CR-002" would print blank.
 const isLatinOnly = (s: string) => !/[^\x00-\x7F\u00A0-\u00FF]/.test(s);
 
+// Latin → Bengali digit conversion (০-৯). Used so mixed-script values like
+// "01 ইউনিট" become "০১ ইউনিট" — single script renders cleanly via Noto.
+const BN_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+const toBnDigits = (s: string, on: boolean) =>
+  on ? s.replace(/\d/g, (d) => BN_DIGITS[Number(d)]) : s;
+
 export function renderSpecsTable(ctx: RenderCtx, eq: Equipment, startY: number): number {
   const { doc, pageW, isBn, sansFamily, S, setFont, text } = ctx;
 
@@ -24,7 +30,12 @@ export function renderSpecsTable(ctx: RenderCtx, eq: Equipment, startY: number):
     ...((eq.year ? [[S.year, String(eq.year)]] : []) as [string, string][]),
     ...((eq.fuel ? [[S.fuel, eq.fuel]] : []) as [string, string][]),
     ...((eq.quantity
-      ? [[S.fleet, `${String(eq.quantity).padStart(2, "0")} ${S.unitSuffix}`]]
+      ? [
+          [
+            S.fleet,
+            `${toBnDigits(String(eq.quantity).padStart(2, "0"), isBn)} ${S.unitSuffix}`,
+          ],
+        ]
       : []) as [string, string][]),
     [S.operator, S.operatorVal],
     [S.inspection, S.inspectionVal],

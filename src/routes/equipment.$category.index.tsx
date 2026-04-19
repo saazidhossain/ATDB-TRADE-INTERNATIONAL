@@ -8,13 +8,6 @@ import { useI18n, useFontClass } from "@/lib/i18n";
 
 const validCategories = Object.keys(CATEGORIES) as EquipmentCategory[];
 
-const CAT_LABEL_KEY: Record<EquipmentCategory, string> = {
-  cranes: "cat.cranes.label",
-  rollers: "cat.rollers.label",
-  excavators: "cat.excavators.label",
-  loaders: "cat.loaders.label",
-  support: "cat.support.label",
-};
 const CAT_TAGLINE_KEY: Record<EquipmentCategory, string> = {
   cranes: "cat.cranes.tagline",
   rollers: "cat.rollers.tagline",

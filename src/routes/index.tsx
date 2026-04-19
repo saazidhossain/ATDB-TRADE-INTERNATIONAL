@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, ShieldCheck, Zap, Wrench, BadgeCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Wrench, BadgeCheck, MapPin } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard } from "@/components/atdb/EquipmentCard";
@@ -11,11 +11,9 @@ import {
   buildWhatsappGenericLink,
   type EquipmentCategory,
 } from "@/lib/atdb-data";
+import { PROJECTS as ALL_PROJECTS, type ProjectCategoryKey } from "@/lib/projects-data";
 import { useI18n } from "@/lib/i18n";
 import heroImg from "@/assets/brand/atdb-hero-monument.webp";
-import projectJamuna from "@/assets/projects/jamuna-bridge.jpg";
-import projectCenteon from "@/assets/projects/centeon-pharma.jpg";
-import projectRtip2 from "@/assets/projects/rtip2-ghatail.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({

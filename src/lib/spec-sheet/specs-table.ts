@@ -12,7 +12,7 @@ import type { RenderCtx } from "./render-context";
 const isLatinOnly = (s: string) => !/[^\x00-\x7F\u00A0-\u00FF]/.test(s);
 
 export function renderSpecsTable(ctx: RenderCtx, eq: Equipment, startY: number): number {
-  const { doc, pageW, isBn, S, setFont, text } = ctx;
+  const { doc, pageW, isBn, sansFamily, S, setFont, text } = ctx;
 
   const rows: [string, string][] = [
     [S.assetId, eq.id],
@@ -53,7 +53,15 @@ export function renderSpecsTable(ctx: RenderCtx, eq: Equipment, startY: number):
     text(labelOut, labelX, y);
     setFont("normal");
     doc.setTextColor(...IRON);
-    text(r[1], valueX, y);
+    // BN mode: switch Latin-only values back to Helvetica so they actually render.
+    if (isBn && isLatinOnly(r[1])) {
+      doc.setFont("helvetica", "normal");
+      doc.text(ascii(r[1]), valueX, y);
+      // Restore BN font for the next iteration's label.
+      setFont("normal");
+    } else {
+      text(r[1], valueX, y);
+    }
   });
 
   const tableBottom = startY + rows.length * rowH - 14;

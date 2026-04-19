@@ -210,69 +210,75 @@ function ContactPage() {
             )}
           </div>
 
-          {/* SIDEBAR */}
-          <div className="space-y-8">
+          {/* SIDEBAR — minimal */}
+          <div className="space-y-10">
             <div>
               <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("contact.sidebar.direct")}</p>
               <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>{t("contact.sidebar.directTitle")}</h2>
-              <ul className="mt-5 space-y-3">
+
+              {/* Plain phone + email lines */}
+              <ul className={`mt-5 space-y-3 text-sm ${fontClass}`}>
                 {COMPANY.phones.map((p) => (
-                  <li key={p.number}>
-                    <ContactChannelButton
-                      channel="phone"
-                      href={`tel:${p.number}`}
-                      variant="card"
-                      sublabel={p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
-                    >
+                  <li key={p.number} className="flex items-baseline justify-between gap-4">
+                    <a href={`tel:${p.number}`} className="font-semibold text-iron transition-colors hover:text-safety">
                       {p.number}
-                    </ContactChannelButton>
+                    </a>
+                    <span className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                      {p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
+                    </span>
                   </li>
                 ))}
                 <li>
-                  <ContactChannelButton
-                    channel="email"
-                    href={`mailto:${COMPANY.email}`}
-                    variant="card"
-                    sublabel={t("contact.email")}
-                  >
+                  <a href={`mailto:${COMPANY.email}`} className="font-semibold text-iron transition-colors hover:text-safety break-all">
                     {COMPANY.email}
-                  </ContactChannelButton>
-                </li>
-                <li>
-                  <WhatsappButton
-                    href={buildWhatsappGenericLink(undefined, lang)}
-                    variant="cta"
-                    fullWidth
-                    className="!py-3.5"
-                  >
-                    {t("common.openWhatsapp")}
-                  </WhatsappButton>
-                </li>
-                <li className="flex">
-                  <FacebookLink variant="footer" className="w-full justify-start !bg-iron-deep !border-iron/20" />
+                  </a>
                 </li>
               </ul>
+
+              {/* Centered channel orb row — same family as footer */}
+              <div className="mt-6 flex items-center justify-center gap-3 rounded-md border border-border bg-card px-4 py-4 shadow-card">
+                <SidebarOrb href={`tel:${COMPANY.phones[0].number}`} ariaLabel={`Call ${COMPANY.phones[0].number}`} accent="safety">
+                  <Phone className="h-4 w-4 text-white" strokeWidth={2.4} />
+                </SidebarOrb>
+                <SidebarOrb href={`mailto:${COMPANY.email}`} ariaLabel={`Email ${COMPANY.email}`} accent="bronze">
+                  <Mail className="h-4 w-4 text-white" strokeWidth={2.4} />
+                </SidebarOrb>
+                <SidebarOrb href={buildWhatsappGenericLink(undefined, lang)} ariaLabel="Chat on WhatsApp" accent="whatsapp" external>
+                  <WaIcon />
+                </SidebarOrb>
+                <SidebarOrb href={COMPANY.facebook} ariaLabel="Visit ATDB on Facebook" accent="facebook" external>
+                  <Facebook className="h-4 w-4 fill-white text-white" strokeWidth={0} />
+                </SidebarOrb>
+              </div>
+
+              {/* Single primary CTA */}
+              <div className="mt-4">
+                <WhatsappButton
+                  href={buildWhatsappGenericLink(undefined, lang)}
+                  variant="cta"
+                  fullWidth
+                  className="!py-3.5"
+                >
+                  {t("common.openWhatsapp")}
+                </WhatsappButton>
+              </div>
             </div>
 
             <div>
               <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("footer.offices")}</p>
               <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>{t("contact.sidebar.officesTitle")}</h2>
-              <ul className="mt-5 space-y-4">
+              <ul className="mt-5 space-y-3">
                 {COMPANY.offices.map((o) => {
                   const labelTr = o.label === "Corporate Office" ? t("office.corporate") : t("office.branch");
                   const cityTr = o.city === "Dhaka" ? t("office.dhaka") : t("office.tangail");
                   const addrTr = o.city === "Dhaka" ? t("office.dhaka.address") : t("office.tangail.address");
                   return (
-                    <li key={o.city} className="rounded-md border border-border bg-card p-5 shadow-card border-safety-top">
-                      <div className="flex items-start gap-3">
-                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-gradient-iron text-white">
-                          <MapPin className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <p className={`text-[11px] uppercase tracking-[0.18em] text-safety ${fontClass}`}>{labelTr}</p>
-                          <p className={`mt-0.5 text-base font-semibold text-iron ${fontClass}`}>{cityTr}</p>
-                          <p className={`mt-1 text-sm leading-relaxed text-muted-foreground ${fontClass}`}>{addrTr}</p>
-                        </div>
+                    <li key={o.city} className="flex items-start gap-3 rounded-md border border-border bg-card p-4">
+                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-bronze-glow" />
+                      <div>
+                        <p className={`text-[11px] uppercase tracking-[0.16em] text-safety ${fontClass}`}>{labelTr}</p>
+                        <p className={`mt-0.5 text-sm font-semibold text-iron ${fontClass}`}>{cityTr}</p>
+                        <p className={`mt-1 text-xs leading-relaxed text-muted-foreground ${fontClass}`}>{addrTr}</p>
                       </div>
                     </li>
                   );

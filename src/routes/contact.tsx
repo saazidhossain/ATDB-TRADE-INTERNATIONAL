@@ -218,27 +218,38 @@ function ContactPage() {
               <ul className="mt-5 space-y-3">
                 {COMPANY.phones.map((p) => (
                   <li key={p.number}>
-                    <a href={`tel:${p.number}`} className="flex items-center justify-between rounded-md border border-border bg-card px-4 py-3.5 shadow-card transition-colors hover:border-safety">
-                      <div className="flex items-center gap-3">
-                        <div className="grid h-10 w-10 place-items-center rounded-sm bg-gradient-safety text-white">
-                          <Phone className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <p className="font-display text-sm font-semibold text-iron">{p.number}</p>
-                          <p className={`text-xs text-muted-foreground ${fontClass}`}>{p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}</p>
-                        </div>
-                      </div>
-                      <span className={`text-[10px] font-semibold uppercase tracking-wider text-safety ${fontClass}`}>{t("common.call")}</span>
-                    </a>
+                    <ContactChannelButton
+                      channel="phone"
+                      href={`tel:${p.number}`}
+                      variant="card"
+                      sublabel={p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
+                    >
+                      {p.number}
+                    </ContactChannelButton>
                   </li>
                 ))}
                 <li>
-                  <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-3 rounded-md border border-border bg-card px-4 py-3.5 shadow-card transition-colors hover:border-safety">
-                    <div className="grid h-10 w-10 place-items-center rounded-sm bg-gradient-iron text-white">
-                      <Mail className="h-4 w-4" />
-                    </div>
-                    <p className="font-display text-sm font-semibold text-iron break-all">{COMPANY.email}</p>
-                  </a>
+                  <ContactChannelButton
+                    channel="email"
+                    href={`mailto:${COMPANY.email}`}
+                    variant="card"
+                    sublabel={t("contact.email")}
+                  >
+                    {COMPANY.email}
+                  </ContactChannelButton>
+                </li>
+                <li>
+                  <WhatsappButton
+                    href={buildWhatsappGenericLink(undefined, lang)}
+                    variant="cta"
+                    fullWidth
+                    className="!py-3.5"
+                  >
+                    {t("common.openWhatsapp")}
+                  </WhatsappButton>
+                </li>
+                <li className="flex">
+                  <FacebookLink variant="footer" className="w-full justify-start !bg-iron-deep !border-iron/20" />
                 </li>
               </ul>
             </div>

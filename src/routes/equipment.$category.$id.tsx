@@ -118,12 +118,28 @@ function EquipmentDetailPage() {
   const eq = getEquipmentById(id)!;
   const cat = CATEGORIES[category as EquipmentCategory];
   const related = FLEET.filter((f) => f.category === eq.category && f.id !== eq.id).slice(0, 3);
-  const gallery = [eq.image, detailHero, detailCabin, detailFleet];
+  // Use cinematic gallery when available; fall back to legacy stock photos.
+  const gallery = eq.gallery && eq.gallery.length > 0
+    ? [eq.image, ...eq.gallery]
+    : [eq.image, detailHero, detailCabin, detailFleet];
 
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
   const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);
+
+  // At-a-glance badge strip (4-6 chips)
+  const glance: { label: string; value: string }[] = [
+    { label: t("detail.spec.brand"), value: eq.brand },
+    { label: t("detail.spec.capacity"), value: eq.capacity },
+    { label: t("detail.spec.origin"), value: eq.origin },
+    ...(eq.year ? [{ label: t("detail.spec.year"), value: String(eq.year) }] : []),
+    ...(eq.fuel ? [{ label: t("detail.spec.fuel"), value: eq.fuel }] : []),
+    ...(eq.quantity ? [{ label: t("detail.spec.qty"), value: eq.quantity }] : []),
+  ];
+
+  const bestForText = eq.bestForKey ? t(eq.bestForKey as Parameters<typeof t>[0]) : "";
+  const aboutText = eq.descriptionKey ? t(eq.descriptionKey as Parameters<typeof t>[0]) : "";
 
   return (
     <Layout>

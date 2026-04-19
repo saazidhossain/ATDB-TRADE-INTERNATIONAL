@@ -93,9 +93,10 @@ export function ReviewsSection() {
 
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {SAMPLE_REVIEWS.map((r) => {
-            const author = t(`review.${r.id}.author` as keyof typeof TRANSLATIONS_PROXY) || r.author;
-            const company = t(`review.${r.id}.company` as keyof typeof TRANSLATIONS_PROXY) || r.company;
-            const body = t(`review.${r.id}.body` as keyof typeof TRANSLATIONS_PROXY) || r.content;
+            const tx = t as unknown as (k: string) => string;
+            const author = tx(`review.${r.id}.author`) || r.author;
+            const company = tx(`review.${r.id}.company`) || r.company;
+            const body = tx(`review.${r.id}.body`) || r.content;
             return (
               <article
                 key={r.id}
@@ -118,5 +119,3 @@ export function ReviewsSection() {
   );
 }
 
-// Type proxy used only to satisfy TS for dynamic translation keys.
-const TRANSLATIONS_PROXY = {} as Record<string, string>;

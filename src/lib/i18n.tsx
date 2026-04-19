@@ -553,3 +553,16 @@ export function useI18n() {
   if (!v) throw new Error("useI18n must be used inside <I18nProvider>");
   return v;
 }
+
+/**
+ * Returns the locale-appropriate font class.
+ * - `bn` → `"font-bn"` (Bengali display face)
+ * - `en` → `"font-display"` (Latin display face)
+ *
+ * Pass `eyebrow: true` to get `""` for English (eyebrows already inherit display font via the `.eyebrow` utility).
+ */
+export function useFontClass(opts?: { eyebrow?: boolean }): string {
+  const { lang } = useI18n();
+  if (opts?.eyebrow) return lang === "bn" ? "font-bn" : "";
+  return lang === "bn" ? "font-bn" : "font-display";
+}

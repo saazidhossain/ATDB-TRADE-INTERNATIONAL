@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import logo from "@/assets/brand/atdb-logo-light.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
-import { useI18n, type Lang } from "@/lib/i18n";
+import { useI18n, type Lang, useFontClass } from "@/lib/i18n";
 import { CartButton } from "./CartButton";
 import { FacebookLink } from "./FacebookLink";
 import { WhatsappButton } from "./WhatsappButton";
@@ -12,6 +12,7 @@ import { ContactChannelButton } from "./ContactChannelButton";
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { lang, setLang, t } = useI18n();
+  const fontClass = useFontClass();
 
   const NAV = [
     { to: "/" as const, label: t("nav.home") },
@@ -42,7 +43,7 @@ export function SiteHeader() {
             <Link
               key={n.to}
               to={n.to}
-              className={`text-sm font-medium text-iron/80 transition-colors hover:text-safety ${lang === "bn" ? "font-bn" : "font-display"}`}
+              className={`text-sm font-medium text-iron/80 transition-colors hover:text-safety ${fontClass}`}
               activeProps={{ className: "text-safety" }}
               activeOptions={{ exact: n.to === "/" }}
             >
@@ -100,7 +101,7 @@ export function SiteHeader() {
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
-                className={`border-b border-border/60 py-3.5 text-[15px] font-medium text-iron ${lang === "bn" ? "font-bn" : "font-display"}`}
+                className={`border-b border-border/60 py-3.5 text-[15px] font-medium text-iron ${fontClass}`}
                 activeProps={{ className: "text-safety" }}
               >
                 {n.label}
@@ -113,7 +114,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className={`mt-5 inline-flex h-11 items-center justify-center rounded-sm bg-safety px-4 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-safety/90 ${lang === "bn" ? "font-bn" : "font-display"}`}
+              className={`mt-5 inline-flex h-11 items-center justify-center rounded-sm bg-safety px-4 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-safety/90 ${fontClass}`}
             >
               {t("nav.whatsappQuote")}
             </a>
@@ -126,7 +127,7 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-between py-3 text-sm text-iron"
                 >
-                  <span className={`text-muted-foreground ${lang === "bn" ? "font-bn" : "font-display"}`}>
+                  <span className={`text-muted-foreground ${fontClass}`}>
                     {t("nav.call")}
                   </span>
                   <span className="font-display font-semibold tracking-wide text-iron">{COMPANY.phones[0].number}</span>
@@ -138,7 +139,7 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-between gap-3 py-3 text-sm text-iron"
                 >
-                  <span className={`text-muted-foreground ${lang === "bn" ? "font-bn" : "font-display"}`}>
+                  <span className={`text-muted-foreground ${fontClass}`}>
                     {t("nav.email")}
                   </span>
                   <span className="truncate font-display font-semibold text-iron">{COMPANY.email}</span>
@@ -152,7 +153,7 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-between py-3 text-sm text-iron"
                 >
-                  <span className={`text-muted-foreground ${lang === "bn" ? "font-bn" : "font-display"}`}>Facebook</span>
+                  <span className={`text-muted-foreground ${fontClass}`}>Facebook</span>
                   <span className="font-display font-semibold text-iron">@atdbtrade</span>
                 </a>
               </li>

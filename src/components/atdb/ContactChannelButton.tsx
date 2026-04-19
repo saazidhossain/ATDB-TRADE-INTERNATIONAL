@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Phone, Mail } from "lucide-react";
 import type { ReactNode } from "react";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 
 export type Channel = "phone" | "email";
 export type ChannelVariant = "header" | "footer" | "card" | "cta";
@@ -39,7 +39,7 @@ export function ContactChannelButton({
   fullWidth,
 }: ContactChannelButtonProps) {
   const { lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
   const Icon = channel === "phone" ? Phone : Mail;
 
   // Per-channel brand accents (kept in sync with WA green & FB blue).

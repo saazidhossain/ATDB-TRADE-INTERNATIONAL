@@ -6,7 +6,7 @@ import { FacebookFeed } from "@/components/atdb/FacebookFeed";
 import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import { ContactChannelButton } from "@/components/atdb/ContactChannelButton";
 import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -23,7 +23,8 @@ type Status = "idle" | "submitting" | "success" | "error" | "rate_limited";
 
 function ContactPage() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClassEyebrow = useFontClass({ eyebrow: true });
 
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -212,7 +213,7 @@ function ContactPage() {
           {/* SIDEBAR — minimal */}
           <div className="space-y-10">
             <div>
-              <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("contact.sidebar.direct")}</p>
+              <p className={`eyebrow ${fontClassEyebrow}`}>{t("contact.sidebar.direct")}</p>
               <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>{t("contact.sidebar.directTitle")}</h2>
 
               {/* Minimal divided list — flat, properly aligned */}
@@ -284,7 +285,7 @@ function ContactPage() {
             </div>
 
             <div>
-              <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("footer.offices")}</p>
+              <p className={`eyebrow ${fontClassEyebrow}`}>{t("footer.offices")}</p>
               <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>{t("contact.sidebar.officesTitle")}</h2>
               <ul className="mt-5 space-y-3">
                 {COMPANY.offices.map((o) => {
@@ -334,7 +335,7 @@ const DIRECTIONS_URLS: Record<"dhaka" | "tangail", string> = {
 
 function OfficeMaps() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
   const [active, setActive] = useState<"dhaka" | "tangail">("dhaka");
   const office = COMPANY.offices.find((o) => o.city.toLowerCase() === active) ?? COMPANY.offices[0];
 

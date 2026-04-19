@@ -3,8 +3,8 @@ import { ArrowRight, Plus, Check } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Equipment } from "@/lib/atdb-data";
-import { buildWhatsappRentLink } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { buildWhatsappRentLink, getCategoryLabel } from "@/lib/atdb-data";
+import { useI18n, useFontClass } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 
 export const equipmentCardVariants = {
@@ -19,9 +19,9 @@ export const equipmentGridVariants = {
 
 export function EquipmentCard({ eq }: { eq: Equipment }) {
   const { t, lang } = useI18n();
+  const fontClass = useFontClass();
   const { add, items } = useCart();
   const [justAdded, setJustAdded] = useState(false);
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
   const inCart = items.some((i) => i.id === eq.id);
 
   const handleAdd = (e: React.MouseEvent) => {
@@ -59,11 +59,17 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
         )}
       </Link>
       <div className="flex flex-1 flex-col p-5">
-        <p className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-safety">{eq.id}</p>
+        <div className="flex items-center gap-2">
+          <p className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-safety">{eq.id}</p>
+          <span aria-hidden className="h-1 w-1 rounded-full bg-iron/20" />
+          <p className={`text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground ${fontClass}`}>
+            {getCategoryLabel(eq.category, lang)}
+          </p>
+        </div>
         <Link
           to="/equipment/$category/$id"
           params={{ category: eq.category, id: eq.id }}
-          className="mt-1.5 font-display text-base font-semibold text-iron transition-colors hover:text-safety md:text-lg"
+          className={`mt-1.5 text-base font-semibold text-iron transition-colors hover:text-safety md:text-lg ${fontClass}`}
         >
           {eq.name}
         </Link>

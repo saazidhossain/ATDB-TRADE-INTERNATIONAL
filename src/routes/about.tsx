@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/atdb/Layout";
 import { COMPANY } from "@/lib/atdb-data";
 import { ShieldCheck, FileCheck, Building2, Leaf } from "lucide-react";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -18,7 +18,8 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClassEyebrow = useFontClass({ eyebrow: true });
 
   const VALUES = [
     { icon: ShieldCheck, t: t("about.value.safety.t"), d: t("about.value.safety.d") },
@@ -38,7 +39,7 @@ function AboutPage() {
     <Layout>
       <section className="bg-iron-deep py-24 text-white">
         <div className="container-page">
-          <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("about.eyebrow")}</p>
+          <p className={`eyebrow !text-bronze-glow ${fontClassEyebrow}`}>{t("about.eyebrow")}</p>
           <h1 className={`mt-2 max-w-3xl text-4xl font-bold text-white md:text-5xl ${fontClass}`}>
             {t("about.title")}
           </h1>
@@ -51,7 +52,7 @@ function AboutPage() {
       <section className="bg-background py-20">
         <div className="container-page grid gap-12 lg:grid-cols-2">
           <div>
-            <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("about.leadership")}</p>
+            <p className={`eyebrow ${fontClassEyebrow}`}>{t("about.leadership")}</p>
             <h2 className={`mt-2 text-3xl font-bold text-iron ${fontClass}`}>{t("about.leadership.title")}</h2>
             <div className="mt-8 space-y-6">
               <div className="rounded-md border border-border bg-card p-6 shadow-card border-safety-top">
@@ -65,7 +66,7 @@ function AboutPage() {
             </div>
           </div>
           <div>
-            <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("about.credentials")}</p>
+            <p className={`eyebrow ${fontClassEyebrow}`}>{t("about.credentials")}</p>
             <h2 className={`mt-2 text-3xl font-bold text-iron ${fontClass}`}>{t("about.credentials.title")}</h2>
             <dl className="mt-8 divide-y divide-border rounded-md border border-border bg-card shadow-card">
               {CREDENTIALS.map(([k, v]) => (
@@ -81,7 +82,7 @@ function AboutPage() {
 
       <section className="bg-muted/40 py-20">
         <div className="container-page">
-          <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("about.values")}</p>
+          <p className={`eyebrow ${fontClassEyebrow}`}>{t("about.values")}</p>
           <h2 className={`mt-2 max-w-2xl text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>
             {t("about.values.title")}
           </h2>

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Facebook, ExternalLink } from "lucide-react";
 import { COMPANY } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 
 /**
  * Live Facebook Page Plugin (timeline tab) styled for the ATDB
@@ -14,7 +14,7 @@ import { useI18n } from "@/lib/i18n";
  */
 export function FacebookFeed() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
 
   // The Facebook Page Plugin accepts any public Page URL. We use the
   // share link supplied by the brand; if Facebook refuses to render it,

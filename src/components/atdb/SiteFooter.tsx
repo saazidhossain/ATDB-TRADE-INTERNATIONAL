@@ -3,11 +3,11 @@ import { MapPin, Phone, Mail, Facebook, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import logo from "@/assets/brand/atdb-logo-dark.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 
 export function SiteFooter() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
 
   const [year, setYear] = useState<number | null>(null);
   useEffect(() => setYear(new Date().getFullYear()), []);

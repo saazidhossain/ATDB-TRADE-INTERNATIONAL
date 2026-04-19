@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { WhatsappButton } from "@/components/atdb/WhatsappButton";
-import { useI18n, TRANSLATIONS } from "@/lib/i18n";
+import { useI18n, TRANSLATIONS, useFontClass } from "@/lib/i18n";
 import { buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { PROJECT_CATEGORIES, PROJECTS, HERO_PROJECT_IMAGE } from "@/lib/projects-data";
 
@@ -71,7 +71,8 @@ const gridVariants = {
 
 function ProjectsPage() {
   const { t, lang } = useI18n();
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const fontClass = useFontClass();
+  const fontClassEyebrow = useFontClass({ eyebrow: true });
 
   return (
     <Layout>
@@ -84,7 +85,7 @@ function ProjectsPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-iron-deep via-iron-deep/85 to-iron-deep/40" aria-hidden="true" />
         <div className="container-page relative">
-          <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("projects.eyebrow")}</p>
+          <p className={`eyebrow !text-bronze-glow ${fontClassEyebrow}`}>{t("projects.eyebrow")}</p>
           <h1 className={`mt-2 max-w-3xl text-4xl font-bold text-white md:text-5xl ${fontClass}`}>
             {t("projects.title")}
           </h1>

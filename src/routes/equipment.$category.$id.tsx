@@ -13,11 +13,12 @@ import {
   CATEGORIES,
   FLEET,
   getEquipmentById,
+  getCategoryLabel,
   buildWhatsappRentLink,
   COMPANY,
   type EquipmentCategory,
 } from "@/lib/atdb-data";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, useFontClass } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { generateSpecSheet } from "@/lib/spec-sheet";
 import detailHero from "@/assets/eq-detail-crane.webp";
@@ -119,6 +120,7 @@ export const Route = createFileRoute("/equipment/$category/$id")({
 function EquipmentDetailPage() {
   const { category, id } = Route.useParams();
   const { t, lang } = useI18n();
+  const fontClass = useFontClass();
   const eq = getEquipmentById(id)!;
   const cat = CATEGORIES[category as EquipmentCategory];
   const related = FLEET.filter((f) => f.category === eq.category && f.id !== eq.id).slice(0, 3);
@@ -137,8 +139,6 @@ function EquipmentDetailPage() {
         { src: detailCabin, captionKey: "gallery.cap.cabin" },
         { src: detailFleet, captionKey: "gallery.cap.site" },
       ];
-
-  const fontClass = lang === "bn" ? "font-bn" : "font-display";
   const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);
@@ -176,11 +176,11 @@ function EquipmentDetailPage() {
           <ChevronRight className="h-3 w-3" />
           <Link to="/equipment" className="hover:text-safety">{t("nav.equipment")}</Link>
           <ChevronRight className="h-3 w-3" />
-          <Link to="/equipment/$category" params={{ category: cat.slug }} className="hover:text-safety">
-            {t(`cat.${cat.slug}.label` as Parameters<typeof t>[0])}
+          <Link to="/equipment/$category" params={{ category: cat.slug }} className={`hover:text-safety ${fontClass}`}>
+            {getCategoryLabel(cat.slug, lang)}
           </Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="truncate text-iron">{eq.name}</span>
+          <span className={`truncate text-iron ${fontClass}`}>{eq.name}</span>
         </nav>
       </div>
 
@@ -192,7 +192,10 @@ function EquipmentDetailPage() {
 
           {/* Info */}
           <div>
-            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-safety">{eq.id}</p>
+            <p className={`font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-safety`}>
+              {eq.id} <span className="text-iron/30">·</span>{" "}
+              <span className={fontClass}>{getCategoryLabel(cat.slug, lang)}</span>
+            </p>
             <h1 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{eq.name}</h1>
             <p className="mt-2 text-sm text-muted-foreground">{eq.brand} · {eq.capacity} · {eq.origin}{eq.year ? ` · ${eq.year}` : ""}</p>
 

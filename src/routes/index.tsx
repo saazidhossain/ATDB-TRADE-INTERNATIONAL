@@ -4,6 +4,7 @@ import { ArrowRight, ShieldCheck, Zap, Wrench, BadgeCheck, MapPin } from "lucide
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard } from "@/components/atdb/EquipmentCard";
+import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import {
   CATEGORIES,
   COMPANY,

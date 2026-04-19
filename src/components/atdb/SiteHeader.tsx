@@ -127,7 +127,7 @@ export function SiteHeader() {
                   className="flex items-center justify-between py-3 text-sm text-iron"
                 >
                   <span className={`text-muted-foreground ${lang === "bn" ? "font-bn" : "font-display"}`}>
-                    {lang === "bn" ? "ফোন" : "Call"}
+                    {t("nav.call")}
                   </span>
                   <span className="font-display font-semibold tracking-wide text-iron">{COMPANY.phones[0].number}</span>
                 </a>
@@ -139,7 +139,7 @@ export function SiteHeader() {
                   className="flex items-center justify-between gap-3 py-3 text-sm text-iron"
                 >
                   <span className={`text-muted-foreground ${lang === "bn" ? "font-bn" : "font-display"}`}>
-                    {lang === "bn" ? "ইমেইল" : "Email"}
+                    {t("nav.email")}
                   </span>
                   <span className="truncate font-display font-semibold text-iron">{COMPANY.email}</span>
                 </a>

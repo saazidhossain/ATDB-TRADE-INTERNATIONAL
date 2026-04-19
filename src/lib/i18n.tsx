@@ -18,6 +18,8 @@ export const TRANSLATIONS: Dict = {
   "nav.contact": { en: "Contact", bn: "যোগাযোগ" },
   "nav.getQuote": { en: "Get Quote", bn: "কোটেশন নিন" },
   "nav.whatsappQuote": { en: "Get WhatsApp Quote", bn: "হোয়াটসঅ্যাপে কোটেশন" },
+  "nav.call": { en: "Call", bn: "ফোন" },
+  "nav.email": { en: "Email", bn: "ইমেইল" },
 
   // ─── Common ──────────────────────────────────────────────────────
   "common.rentNow": { en: "Rent Now", bn: "ভাড়া নিন" },

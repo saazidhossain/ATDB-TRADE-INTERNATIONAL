@@ -8,7 +8,6 @@ type Row = { label: string; value: string };
 type Group = { key: string; title: string; icon: typeof Ruler; rows: Row[] };
 
 export function buildSpecGroups(eq: Equipment, t: (k: string) => string): Group[] {
-  // Derive sensible category-aware values from existing data
   const isCrane = eq.category === "cranes";
   const isRoller = eq.category === "rollers";
 
@@ -18,10 +17,10 @@ export function buildSpecGroups(eq: Equipment, t: (k: string) => string): Group[
       title: t("specs.dimensions"),
       icon: Ruler,
       rows: [
-        { label: "Capacity", value: eq.capacity },
-        { label: "Configuration", value: eq.notes ?? (isCrane ? "Telescopic boom" : "Standard chassis") },
-        { label: "Country of Origin", value: eq.origin },
-        { label: "Year of Manufacture", value: eq.year ? String(eq.year) : "—" },
+        { label: t("spec.row.capacity"), value: eq.capacity },
+        { label: t("spec.row.config"), value: eq.notes ?? (isCrane ? t("spec.val.telescopic") : t("spec.val.standard")) },
+        { label: t("spec.row.origin"), value: eq.origin },
+        { label: t("spec.row.year"), value: eq.year ? String(eq.year) : t("spec.val.dash") },
       ],
     },
     {
@@ -29,10 +28,10 @@ export function buildSpecGroups(eq: Equipment, t: (k: string) => string): Group[
       title: t("specs.performance"),
       icon: Gauge,
       rows: [
-        { label: "Rated Capacity", value: eq.capacity },
-        { label: "Operator", value: "Certified, included" },
-        { label: "Mobilisation", value: "Arranged on request" },
-        { label: "Working Mode", value: isRoller ? "Vibratory / Static" : isCrane ? "Lift & Place" : "Heavy-duty cyclic" },
+        { label: t("spec.row.rated"), value: eq.capacity },
+        { label: t("spec.row.operator"), value: t("spec.val.operatorIncl") },
+        { label: t("spec.row.mobilisation"), value: t("spec.val.onRequest") },
+        { label: t("spec.row.workMode"), value: isRoller ? t("spec.val.vibratory") : isCrane ? t("spec.val.lift") : t("spec.val.cyclic") },
       ],
     },
     {
@@ -40,10 +39,10 @@ export function buildSpecGroups(eq: Equipment, t: (k: string) => string): Group[
       title: t("specs.engine"),
       icon: Fuel,
       rows: [
-        { label: "Fuel Type", value: eq.fuel ?? "Diesel" },
-        { label: "Brand", value: eq.brand },
-        { label: "Model", value: eq.model },
-        { label: "Drive", value: isCrane ? "All-terrain hydraulic" : "OEM standard" },
+        { label: t("spec.row.fuel"), value: eq.fuel ?? t("spec.val.diesel") },
+        { label: t("spec.row.brand"), value: eq.brand },
+        { label: t("spec.row.model"), value: eq.model },
+        { label: t("spec.row.drive"), value: isCrane ? t("spec.val.allTerrain") : t("spec.val.oem") },
       ],
     },
     {
@@ -51,10 +50,10 @@ export function buildSpecGroups(eq: Equipment, t: (k: string) => string): Group[
       title: t("specs.safety"),
       icon: ShieldCheck,
       rows: [
-        { label: "Inspection", value: "City Inspection Services CIS/077/2018" },
-        { label: "Class", value: "1st Class Contractor & Supplier" },
-        { label: "Operator PPE", value: "Provided on every site" },
-        { label: "Insurance", value: "On request for tendered works" },
+        { label: t("spec.row.inspection"), value: t("spec.val.cis") },
+        { label: t("spec.row.class"), value: t("spec.val.firstClass") },
+        { label: t("spec.row.ppe"), value: t("spec.val.ppeProvided") },
+        { label: t("spec.row.insurance"), value: t("spec.val.insOnReq") },
       ],
     },
   ];
@@ -142,8 +141,8 @@ export function SpecGroupsAccordion({ eq }: { eq: Equipment }) {
                         }}
                         className="flex items-start justify-between gap-6 bg-card px-5 py-3"
                       >
-                        <dt className="font-display text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">{r.label}</dt>
-                        <dd className="text-right font-display text-sm font-semibold text-iron">{r.value}</dd>
+                        <dt className={`text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground ${fontClass}`}>{r.label}</dt>
+                        <dd className={`text-right text-sm font-semibold text-iron ${fontClass}`}>{r.value}</dd>
                       </motion.div>
                     ))}
                   </motion.dl>

@@ -1,4 +1,4 @@
-// ATDB bilingual i18n — English + Bengali.
+// ATDB bilingual i18n — English + Bengali. 100% coverage across every page.
 // Persists choice in localStorage. Wraps app via <I18nProvider>.
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
@@ -10,7 +10,7 @@ const STORAGE_KEY = "atdb_lang";
 type Dict = Record<string, { en: string; bn: string }>;
 
 export const TRANSLATIONS: Dict = {
-  // Nav
+  // ─── Nav ─────────────────────────────────────────────────────────
   "nav.home": { en: "Home", bn: "হোম" },
   "nav.equipment": { en: "Equipment", bn: "ইকুইপমেন্ট" },
   "nav.projects": { en: "Projects", bn: "প্রজেক্ট" },
@@ -19,7 +19,7 @@ export const TRANSLATIONS: Dict = {
   "nav.getQuote": { en: "Get Quote", bn: "কোটেশন নিন" },
   "nav.whatsappQuote": { en: "Get WhatsApp Quote", bn: "হোয়াটসঅ্যাপে কোটেশন" },
 
-  // Common
+  // ─── Common ──────────────────────────────────────────────────────
   "common.rentNow": { en: "Rent Now", bn: "ভাড়া নিন" },
   "common.details": { en: "Details", bn: "বিস্তারিত" },
   "common.viewAll": { en: "View all", bn: "সব দেখুন" },
@@ -29,9 +29,10 @@ export const TRANSLATIONS: Dict = {
   "common.units": { en: "units", bn: "ইউনিট" },
   "common.unitsAvailable": { en: "units available", bn: "ইউনিট রেডি" },
   "common.backTo": { en: "Back to", bn: "ফিরে যান" },
+  "common.call": { en: "Call", bn: "কল" },
   "whatsapp.fab": { en: "WhatsApp Quote", bn: "হোয়াটসঅ্যাপ কোটেশন" },
 
-  // Home — Hero
+  // ─── Home — Hero ─────────────────────────────────────────────────
   "home.eyebrow": { en: "Since 2000 · Dhaka & Tangail, Bangladesh", bn: "২০০০ সাল থেকে · ঢাকা ও টাঙ্গাইল, বাংলাদেশ" },
   "home.hero.title.a": { en: "Bangladesh's premier", bn: "বাংলাদেশের সেরা" },
   "home.hero.title.b": { en: "heavy equipment", bn: "হেভি ইকুইপমেন্ট" },
@@ -40,21 +41,35 @@ export const TRANSLATIONS: Dict = {
   "home.hero.cta.browse": { en: "Browse Equipment", bn: "ইকুইপমেন্ট দেখুন" },
   "home.hero.cta.whatsapp": { en: "WhatsApp a Quote", bn: "হোয়াটসঅ্যাপে কোটেশন" },
 
-  // Trust bar
+  "home.brands.eyebrow": { en: "Trusted brands in our fleet", bn: "আমাদের ফ্লিটের ব্র্যান্ডসমূহ" },
+
+  // ─── Trust bar ───────────────────────────────────────────────────
   "stats.years": { en: "Years Experience", bn: "বছরের অভিজ্ঞতা" },
   "stats.equipment": { en: "Equipment Units", bn: "ইকুইপমেন্ট ইউনিট" },
   "stats.staff": { en: "Skilled Staff", bn: "দক্ষ কর্মী" },
   "stats.offices": { en: "Office Locations", bn: "অফিস" },
 
-  // Categories section
+  // ─── Categories section ──────────────────────────────────────────
   "home.cat.eyebrow": { en: "Our Equipment", bn: "আমাদের ইকুইপমেন্ট" },
   "home.cat.title": { en: "A complete fleet for every job site.", bn: "প্রতিটি প্রজেক্টের জন্য সম্পূর্ণ ফ্লিট।" },
 
-  // Featured
+  // Category labels & taglines
+  "cat.cranes.label": { en: "Mobile Cranes", bn: "মোবাইল ক্রেন" },
+  "cat.cranes.tagline": { en: "7 units · 10T to 120T · Liebherr & Kato", bn: "৭ ইউনিট · ১০ থেকে ১২০ টন · Liebherr ও Kato" },
+  "cat.rollers.label": { en: "Road Rollers", bn: "রোড রোলার" },
+  "cat.rollers.tagline": { en: "9 units · 1T to 12T · Sakai, Dynapac, Bomag", bn: "৯ ইউনিট · ১ থেকে ১২ টন · Sakai, Dynapac, Bomag" },
+  "cat.excavators.label": { en: "Excavators & Compactors", bn: "এক্সক্যাভেটর ও কম্প্যাক্টর" },
+  "cat.excavators.tagline": { en: "3 units · CAT, Komatsu", bn: "৩ ইউনিট · CAT, Komatsu" },
+  "cat.loaders.label": { en: "Loaders & Backhoes", bn: "লোডার ও ব্যাকহো" },
+  "cat.loaders.tagline": { en: "3 units · CASE, XCMG, JCB", bn: "৩ ইউনিট · CASE, XCMG, JCB" },
+  "cat.support.label": { en: "Support Equipment", bn: "সাপোর্ট ইকুইপমেন্ট" },
+  "cat.support.tagline": { en: "Generators, compactors, cutters & TATA trucks", bn: "জেনারেটর, কম্প্যাক্টর, কাটার ও TATA ট্রাক" },
+
+  // ─── Featured ────────────────────────────────────────────────────
   "home.featured.eyebrow": { en: "Featured Equipment", bn: "ফিচার্ড ইকুইপমেন্ট" },
   "home.featured.title": { en: "Flagship machines from our certified fleet.", bn: "আমাদের সার্টিফাইড ফ্লিটের ফ্ল্যাগশিপ মেশিন।" },
 
-  // Why ATDB
+  // ─── Why ATDB ────────────────────────────────────────────────────
   "home.why.eyebrow": { en: "Why ATDB", bn: "কেন ATDB" },
   "home.why.title": { en: "A partner contractors return to, project after project.", bn: "যে পার্টনারের কাছে কন্ট্রাক্টররা বারবার ফিরে আসে।" },
   "home.why.body": { en: "We've spent 25+ years earning the trust of Bangladesh's largest road, bridge, pharma and industrial developers — through certified equipment, disciplined operations, and zero-friction WhatsApp service.", bn: "২৫+ বছর ধরে বাংলাদেশের শীর্ষ রোড, ব্রিজ, ফার্মা ও ইন্ডাস্ট্রিয়াল ডেভেলপারদের আস্থা অর্জন — সার্টিফাইড ইকুইপমেন্ট, ডিসিপ্লিনড অপারেশন ও দ্রুত হোয়াটসঅ্যাপ সার্ভিসের মাধ্যমে।" },
@@ -72,16 +87,25 @@ export const TRANSLATIONS: Dict = {
   "home.projects.title": { en: "Powering Bangladesh's biggest builds.", bn: "বাংলাদেশের সবচেয়ে বড় নির্মাণে শক্তি যোগাচ্ছি।" },
   "home.projects.viewAll": { en: "View all projects", bn: "সব প্রজেক্ট দেখুন" },
 
+  // Project labels (home strip)
+  "home.project.rtip": { en: "RTIP-2 · Ghatail, Tangail", bn: "RTIP-2 · ঘাটাইল, টাঙ্গাইল" },
+  "home.project.jamuna": { en: "Jamuna Bridge Approach", bn: "যমুনা সেতু অ্যাপ্রোচ" },
+  "home.project.pharma": { en: "Pharma Ashia · Centeon Pharma", bn: "ফার্মা এশিয়া · সেন্টিয়ন ফার্মা" },
+
   "home.cta.title": { en: "Ready to mobilise? Get a quote in minutes.", bn: "মোবিলাইজ করতে প্রস্তুত? মিনিটে কোটেশন নিন।" },
   "home.cta.body": { en: "Tell us your equipment, location and dates on WhatsApp — we'll respond with availability and pricing.", bn: "হোয়াটসঅ্যাপে আমাদের ইকুইপমেন্ট, লোকেশন ও তারিখ জানান — আমরা অ্যাভেইলেবিলিটি ও প্রাইস জানিয়ে দেব।" },
   "home.cta.button": { en: "Start on WhatsApp", bn: "হোয়াটসঅ্যাপে শুরু করুন" },
 
-  // Equipment index
+  // ─── Equipment index / category ─────────────────────────────────
   "eq.eyebrow": { en: "Equipment", bn: "ইকুইপমেন্ট" },
   "eq.title": { en: "A certified fleet of 28 machines, ready to mobilise.", bn: "২৮টি সার্টিফাইড মেশিনের ফ্লিট — মোবিলাইজেশনের জন্য প্রস্তুত।" },
   "eq.sub": { en: "From 120-tonne mobile cranes to road rollers, excavators and on-site support equipment — every unit is inspection-certified and operator-supported.", bn: "১২০ টন মোবাইল ক্রেন থেকে রোড রোলার, এক্সক্যাভেটর ও অন-সাইট সাপোর্ট ইকুইপমেন্ট — প্রতিটি ইউনিট ইন্সপেকশন-সার্টিফাইড।" },
+  "eq.bc.home": { en: "Home", bn: "হোম" },
+  "eq.bc.equipment": { en: "Equipment", bn: "ইকুইপমেন্ট" },
+  "eq.cat.notFound": { en: "Category not found", bn: "ক্যাটেগরি পাওয়া যায়নি" },
+  "eq.cat.back": { en: "Back to Equipment", bn: "ইকুইপমেন্টে ফিরুন" },
 
-  // Detail page
+  // ─── Detail page ────────────────────────────────────────────────
   "detail.specs": { en: "Full Specifications", bn: "সম্পূর্ণ স্পেসিফিকেশন" },
   "detail.spec.id": { en: "Asset ID", bn: "অ্যাসেট আইডি" },
   "detail.spec.brand": { en: "Brand", bn: "ব্র্যান্ড" },
@@ -95,6 +119,7 @@ export const TRANSLATIONS: Dict = {
   "detail.spec.transport": { en: "Transport", bn: "পরিবহন" },
   "detail.spec.transport.v": { en: "Mobilisation arranged on request", bn: "অনুরোধে মোবিলাইজেশন" },
   "detail.gallery": { en: "Gallery", bn: "গ্যালারি" },
+  "detail.viewImage": { en: "View image", bn: "ছবি দেখুন" },
   "detail.certified": { en: "Inspection Certified", bn: "ইন্সপেকশন সার্টিফাইড" },
   "detail.certified.body": { en: "City Inspection Services CIS/077/2018 — full statutory compliance for tendered works.", bn: "City Inspection Services CIS/077/2018 — টেন্ডার ওয়ার্কসের জন্য সম্পূর্ণ সম্মতি।" },
   "detail.cta.title": { en: "Ready to deploy this unit?", bn: "এই ইউনিট ডেপ্লয় করতে প্রস্তুত?" },
@@ -103,34 +128,80 @@ export const TRANSLATIONS: Dict = {
   "detail.related": { en: "Related Equipment", bn: "সম্পর্কিত ইকুইপমেন্ট" },
   "detail.notFound": { en: "Equipment not found", bn: "ইকুইপমেন্ট পাওয়া যায়নি" },
 
-  // Spec groups
+  // Spec groups + rows
   "specs.dimensions": { en: "Dimensions", bn: "মাত্রা" },
   "specs.performance": { en: "Performance", bn: "পারফরম্যান্স" },
   "specs.engine": { en: "Engine & Power", bn: "ইঞ্জিন ও পাওয়ার" },
   "specs.safety": { en: "Safety & Compliance", bn: "সেফটি ও কমপ্লায়েন্স" },
 
-  // Reviews
+  "spec.row.capacity": { en: "Capacity", bn: "ক্যাপাসিটি" },
+  "spec.row.config": { en: "Configuration", bn: "কনফিগারেশন" },
+  "spec.row.origin": { en: "Country of Origin", bn: "উৎপত্তি দেশ" },
+  "spec.row.year": { en: "Year of Manufacture", bn: "নির্মাণ সাল" },
+  "spec.row.rated": { en: "Rated Capacity", bn: "রেটেড ক্যাপাসিটি" },
+  "spec.row.operator": { en: "Operator", bn: "অপারেটর" },
+  "spec.row.mobilisation": { en: "Mobilisation", bn: "মোবিলাইজেশন" },
+  "spec.row.workMode": { en: "Working Mode", bn: "ওয়ার্কিং মোড" },
+  "spec.row.fuel": { en: "Fuel Type", bn: "জ্বালানি" },
+  "spec.row.brand": { en: "Brand", bn: "ব্র্যান্ড" },
+  "spec.row.model": { en: "Model", bn: "মডেল" },
+  "spec.row.drive": { en: "Drive", bn: "ড্রাইভ" },
+  "spec.row.inspection": { en: "Inspection", bn: "ইন্সপেকশন" },
+  "spec.row.class": { en: "Class", bn: "ক্লাস" },
+  "spec.row.ppe": { en: "Operator PPE", bn: "অপারেটর PPE" },
+  "spec.row.insurance": { en: "Insurance", bn: "ইনস্যুরেন্স" },
+
+  // Spec values
+  "spec.val.telescopic": { en: "Telescopic boom", bn: "টেলিস্কোপিক বুম" },
+  "spec.val.standard": { en: "Standard chassis", bn: "স্ট্যান্ডার্ড চ্যাসিস" },
+  "spec.val.operatorIncl": { en: "Certified, included", bn: "সার্টিফাইড, অন্তর্ভুক্ত" },
+  "spec.val.onRequest": { en: "Arranged on request", bn: "অনুরোধে ব্যবস্থা" },
+  "spec.val.vibratory": { en: "Vibratory / Static", bn: "ভাইব্রেটরি / স্ট্যাটিক" },
+  "spec.val.lift": { en: "Lift & Place", bn: "লিফট ও প্লেস" },
+  "spec.val.cyclic": { en: "Heavy-duty cyclic", bn: "হেভি-ডিউটি সাইক্লিক" },
+  "spec.val.diesel": { en: "Diesel", bn: "ডিজেল" },
+  "spec.val.allTerrain": { en: "All-terrain hydraulic", bn: "অল-টেরেইন হাইড্রোলিক" },
+  "spec.val.oem": { en: "OEM standard", bn: "OEM স্ট্যান্ডার্ড" },
+  "spec.val.cis": { en: "City Inspection Services CIS/077/2018", bn: "City Inspection Services CIS/077/2018" },
+  "spec.val.firstClass": { en: "1st Class Contractor & Supplier", bn: "১ম শ্রেণির ঠিকাদার ও সরবরাহকারী" },
+  "spec.val.ppeProvided": { en: "Provided on every site", bn: "প্রতিটি সাইটে সরবরাহ" },
+  "spec.val.insOnReq": { en: "On request for tendered works", bn: "টেন্ডার ওয়ার্কে অনুরোধে" },
+  "spec.val.dash": { en: "—", bn: "—" },
+
+  // ─── Reviews ─────────────────────────────────────────────────────
   "reviews.eyebrow": { en: "Customer Reviews", bn: "কাস্টমার রিভিউ" },
   "reviews.title": { en: "Trusted by Bangladesh's biggest builders.", bn: "বাংলাদেশের শীর্ষ নির্মাতাদের আস্থা।" },
   "reviews.based": { en: "based on", bn: "মোট" },
   "reviews.count": { en: "verified projects", bn: "ভেরিফায়েড প্রজেক্ট" },
 
-  // Maps
+  // Review content
+  "review.1.author": { en: "Engr. Rahim Chowdhury", bn: "প্রকৌশলী রহিম চৌধুরী" },
+  "review.1.company": { en: "MegaBuilders Corp.", bn: "মেগাবিল্ডার্স কর্প." },
+  "review.1.body": { en: "Equipment delivered on time and in pristine condition. The ATDB team supported us through the entire bridge piling phase — operator discipline was outstanding.", bn: "ইকুইপমেন্ট সময়মতো এবং পরিপূর্ণ অবস্থায় পৌঁছেছে। ব্রিজ পাইলিং পর্যায়ের পুরোটাই ATDB টিম পাশে ছিল — অপারেটরদের ডিসিপ্লিন ছিল চমৎকার।" },
+  "review.2.author": { en: "Engr. Tariqul Islam", bn: "প্রকৌশলী তারিকুল ইসলাম" },
+  "review.2.company": { en: "National Infrastructure Solutions", bn: "ন্যাশনাল ইনফ্রাস্ট্রাকচার সলিউশনস" },
+  "review.2.body": { en: "Maintenance logs were fully up to date — our compliance audit took minutes, not days. Highest tier supplier in the country.", bn: "মেইনটেন্যান্স লগ পূর্ণাঙ্গ আপডেট — কমপ্লায়েন্স অডিটে মিনিট লেগেছে, দিন নয়। দেশের সর্বোচ্চ মানের সরবরাহকারী।" },
+  "review.3.author": { en: "Sajjad Hossain", bn: "সাজ্জাদ হোসেন" },
+  "review.3.company": { en: "Pinnacle Developments", bn: "পিনাকল ডেভেলপমেন্টস" },
+  "review.3.body": { en: "Reliable machinery and a WhatsApp response team that handles shift changes within minutes. Will rent from ATDB again.", bn: "নির্ভরযোগ্য মেশিনারি এবং দ্রুত রেসপন্সিভ হোয়াটসঅ্যাপ টিম — শিফট পরিবর্তন মিনিটেই। আবার ATDB থেকে ভাড়া নেব।" },
+
+  // ─── Maps ────────────────────────────────────────────────────────
   "maps.eyebrow": { en: "Find Us", bn: "আমাদের খুঁজুন" },
   "maps.title": { en: "Two offices, one team.", bn: "দুটি অফিস, এক টিম।" },
   "maps.dhaka": { en: "Dhaka HQ", bn: "ঢাকা হেডকোয়ার্টার" },
   "maps.tangail": { en: "Tangail Branch", bn: "টাঙ্গাইল শাখা" },
   "maps.directions": { en: "Get Directions", bn: "ডিরেকশন নিন" },
 
-  // Footer
+  // ─── Footer ──────────────────────────────────────────────────────
   "footer.explore": { en: "Explore", bn: "অন্বেষণ" },
   "footer.offices": { en: "Offices", bn: "অফিস" },
   "footer.contact": { en: "Contact", bn: "যোগাযোগ" },
+  "footer.bank": { en: "Bank", bn: "ব্যাংক" },
   "footer.tagline": { en: "Bangladesh's premier heavy equipment rental partner. Since 2000.", bn: "বাংলাদেশের সেরা হেভি ইকুইপমেন্ট রেন্টাল পার্টনার। ২০০০ সাল থেকে।" },
   "footer.rights": { en: "All rights reserved.", bn: "সর্বস্বত্ব সংরক্ষিত।" },
   "footer.credit": { en: "A SAZID HOSSAIN ARCHITECTURE", bn: "একটি সাজিদ হোসেন স্থাপত্য" },
 
-  // Cart
+  // ─── Cart ────────────────────────────────────────────────────────
   "common.addToQuote": { en: "Add to quote", bn: "কোটেশনে যোগ করুন" },
   "common.added": { en: "Added", bn: "যোগ হয়েছে" },
   "cart.title": { en: "Quotation Cart", bn: "কোটেশন কার্ট" },
@@ -138,14 +209,19 @@ export const TRANSLATIONS: Dict = {
   "cart.empty.d": { en: "Add equipment from the fleet pages to build a single consolidated WhatsApp quotation.", bn: "ফ্লিট পেজ থেকে ইকুইপমেন্ট যোগ করে একসাথে হোয়াটসঅ্যাপে কোটেশন পাঠান।" },
   "cart.project": { en: "Project Details", bn: "প্রজেক্ট ডিটেইলস" },
   "cart.location": { en: "Location", bn: "লোকেশন" },
+  "cart.location.ph": { en: "Dhaka, Tangail, Mymensingh…", bn: "ঢাকা, টাঙ্গাইল, ময়মনসিংহ…" },
   "cart.start": { en: "Start", bn: "শুরু" },
   "cart.end": { en: "End", bn: "শেষ" },
   "cart.notes": { en: "Notes", bn: "নোট" },
   "cart.notes.ph": { en: "Site access, lift duration, special requirements…", bn: "সাইট অ্যাক্সেস, কাজের সময়, বিশেষ প্রয়োজন…" },
   "cart.send": { en: "Send Quote on WhatsApp", bn: "হোয়াটসঅ্যাপে কোটেশন পাঠান" },
   "cart.clear": { en: "Clear cart", bn: "কার্ট খালি করুন" },
+  "cart.remove": { en: "Remove", bn: "সরান" },
+  "cart.increase": { en: "Increase", bn: "বাড়ান" },
+  "cart.decrease": { en: "Decrease", bn: "কমান" },
+  "cart.close": { en: "Close", bn: "বন্ধ করুন" },
 
-  // Contact form
+  // ─── Contact form & sidebar ──────────────────────────────────────
   "contact.eyebrow": { en: "Quote Request", bn: "কোটেশন রিকোয়েস্ট" },
   "contact.title": { en: "Tell us about your project.", bn: "আপনার প্রজেক্ট সম্পর্কে জানান।" },
   "contact.sub": { en: "Send a detailed enquiry — our team will respond with a written quotation, usually within the hour during business days.", bn: "বিস্তারিত পাঠান — আমরা সাধারণত একই কর্মদিবসে লিখিত কোটেশন পাঠিয়ে দিই।" },
@@ -163,6 +239,83 @@ export const TRANSLATIONS: Dict = {
   "contact.success.d": { en: "Our team will reach out shortly with a written quotation.", bn: "আমাদের টিম শীঘ্রই লিখিত কোটেশন পাঠাবে।" },
   "contact.error": { en: "We couldn't send your enquiry. Please try again or message us on WhatsApp.", bn: "এনকোয়ারি পাঠানো যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন বা হোয়াটসঅ্যাপে জানান।" },
   "contact.rate": { en: "Too many requests — please try again in a minute.", bn: "অনেক রিকোয়েস্ট — এক মিনিট পর আবার চেষ্টা করুন।" },
+  "contact.sidebar.direct": { en: "Direct Lines", bn: "সরাসরি যোগাযোগ" },
+  "contact.sidebar.directTitle": { en: "Speak to leadership.", bn: "নেতৃত্বের সাথে কথা বলুন।" },
+  "contact.sidebar.officesTitle": { en: "Dhaka & Tangail.", bn: "ঢাকা ও টাঙ্গাইল।" },
+  "contact.equipment.opt.cat": { en: "Categories", bn: "ক্যাটেগরি" },
+  "contact.equipment.opt.brand": { en: "Brands", bn: "ব্র্যান্ড" },
+
+  // Phone label translations
+  "phone.proprietor": { en: "Proprietor", bn: "মালিক" },
+  "phone.ceo": { en: "CEO", bn: "সিইও" },
+
+  // Office labels
+  "office.dhaka": { en: "Dhaka", bn: "ঢাকা" },
+  "office.tangail": { en: "Tangail", bn: "টাঙ্গাইল" },
+  "office.corporate": { en: "Corporate Office", bn: "কর্পোরেট অফিস" },
+  "office.branch": { en: "Branch Office", bn: "শাখা অফিস" },
+  "office.dhaka.address": {
+    en: "House #319 (8F), Lane #8, East Kazi Para, Kafrul, Dhaka-1216",
+    bn: "বাড়ি #৩১৯ (৮ম তলা), লেন #৮, পূর্ব কাজীপাড়া, কাফরুল, ঢাকা-১২১৬",
+  },
+  "office.tangail.address": {
+    en: "House #311 (2F), Boro Kalibari Road, Tangail-1900",
+    bn: "বাড়ি #৩১১ (২য় তলা), বড় কালীবাড়ি রোড, টাঙ্গাইল-১৯০০",
+  },
+
+  // ─── About page ──────────────────────────────────────────────────
+  "about.eyebrow": { en: "About ATDB", bn: "ATDB সম্পর্কে" },
+  "about.title": { en: "Built in 2000. Trusted by Bangladesh's biggest builders.", bn: "২০০০ সালে প্রতিষ্ঠিত। বাংলাদেশের শীর্ষ নির্মাতাদের আস্থা।" },
+  "about.lede": {
+    en: "M/S ATDB Trade International is a 1st Class Contractor and Heavy Equipment Service Provider headquartered in Dhaka with a branch in Tangail. 25+ years of certified fleet operations, 25 permanent staff, and a portfolio that spans national infrastructure, pharma and industrial development.",
+    bn: "M/S ATDB Trade International ঢাকায় সদর দপ্তর ও টাঙ্গাইলে শাখা সহ একটি ১ম শ্রেণির ঠিকাদার ও হেভি ইকুইপমেন্ট সার্ভিস প্রোভাইডার। ২৫+ বছরের সার্টিফাইড ফ্লিট অপারেশন, ২৫ জন স্থায়ী কর্মী এবং জাতীয় অবকাঠামো, ফার্মা ও ইন্ডাস্ট্রিয়াল উন্নয়নের পোর্টফোলিও।",
+  },
+  "about.leadership": { en: "Leadership", bn: "নেতৃত্ব" },
+  "about.leadership.title": { en: "A family-owned operation, professionally run.", bn: "পারিবারিক মালিকানা, পেশাদার পরিচালনা।" },
+  "about.role.proprietor": { en: "Proprietor", bn: "মালিক" },
+  "about.role.ceo": { en: "Chief Executive Officer", bn: "প্রধান নির্বাহী কর্মকর্তা" },
+  "about.credentials": { en: "Credentials", bn: "ক্রেডেনশিয়াল" },
+  "about.credentials.title": { en: "Certified, compliant, audit-ready.", bn: "সার্টিফাইড, কমপ্লায়েন্ট, অডিট-রেডি।" },
+  "about.cred.tin": { en: "TIN", bn: "TIN" },
+  "about.cred.vat": { en: "VAT", bn: "VAT" },
+  "about.cred.bank": { en: "Bank", bn: "ব্যাংক" },
+  "about.cred.inspection": { en: "Inspection", bn: "ইন্সপেকশন" },
+  "about.cred.class": { en: "Class", bn: "শ্রেণি" },
+  "about.cred.classV": { en: "1st Class Contractor & Supplier", bn: "১ম শ্রেণির ঠিকাদার ও সরবরাহকারী" },
+  "about.values": { en: "Our Values", bn: "আমাদের মূল্যবোধ" },
+  "about.values.title": { en: "How we earn the call-back, every project.", bn: "প্রতিটি প্রজেক্টে কেন কাস্টমাররা আবার ফেরে।" },
+  "about.value.safety.t": { en: "Safety First", bn: "সেফটি ফার্স্ট" },
+  "about.value.safety.d": { en: "City Inspection Services certified equipment. Operator training and PPE compliance on every site.", bn: "City Inspection Services সার্টিফাইড ইকুইপমেন্ট। প্রতিটি সাইটে অপারেটর ট্রেনিং ও PPE।" },
+  "about.value.compliance.t": { en: "Compliance", bn: "কমপ্লায়েন্স" },
+  "about.value.compliance.d": { en: "TIN, VAT, Trade License and 1st Class Contractor status — full documentation for public-works tenders.", bn: "TIN, VAT, ট্রেড লাইসেন্স ও ১ম শ্রেণির ঠিকাদার মর্যাদা — পাবলিক ওয়ার্কস টেন্ডারের জন্য সম্পূর্ণ ডকুমেন্টেশন।" },
+  "about.value.reliability.t": { en: "Reliability", bn: "নির্ভরযোগ্যতা" },
+  "about.value.reliability.d": { en: "26 years of uninterrupted operations across roads, bridges, pharma and industrial projects.", bn: "২৬ বছরের নিরবিচ্ছিন্ন অপারেশন — রোড, ব্রিজ, ফার্মা ও ইন্ডাস্ট্রিয়াল প্রজেক্টে।" },
+  "about.value.responsibility.t": { en: "Responsibility", bn: "দায়িত্বশীলতা" },
+  "about.value.responsibility.d": { en: "Environmental and safety policies aligned with national and donor-agency standards.", bn: "জাতীয় ও ডোনার এজেন্সির মানদণ্ডের সাথে সামঞ্জস্যপূর্ণ পরিবেশ ও সেফটি পলিসি।" },
+
+  // ─── Projects page ───────────────────────────────────────────────
+  "projects.eyebrow": { en: "Project Portfolio", bn: "প্রজেক্ট পোর্টফোলিও" },
+  "projects.title": { en: "Powering national infrastructure & industrial development.", bn: "জাতীয় অবকাঠামো ও ইন্ডাস্ট্রিয়াল উন্নয়নে শক্তি যোগাচ্ছি।" },
+  "projects.lede": { en: "From flagship national bridges to multi-month road compaction and pharma site builds — selected engagements from our 26-year track record.", bn: "জাতীয় ফ্ল্যাগশিপ ব্রিজ থেকে শুরু করে বহু-মাসব্যাপী রোড কম্প্যাকশন ও ফার্মা সাইট নির্মাণ — আমাদের ২৬ বছরের ট্র্যাক রেকর্ড থেকে নির্বাচিত প্রজেক্ট।" },
+
+  "project.rtip.t": { en: "RTIP-2 Road Project", bn: "RTIP-2 রোড প্রজেক্ট" },
+  "project.rtip.l": { en: "Ghatail, Tangail", bn: "ঘাটাইল, টাঙ্গাইল" },
+  "project.rtip.s": { en: "Road compaction & asphalt works — multi-month roller deployment.", bn: "রোড কম্প্যাকশন ও অ্যাসফল্ট কাজ — বহু-মাসব্যাপী রোলার মোতায়েন।" },
+  "project.jamuna.t": { en: "Jamuna Multipurpose Bridge", bn: "যমুনা বহুমুখী সেতু" },
+  "project.jamuna.l": { en: "Tangail / Sirajganj", bn: "টাঙ্গাইল / সিরাজগঞ্জ" },
+  "project.jamuna.s": { en: "Heavy crane deployment for steel girder placement and approach works.", bn: "স্টিল গার্ডার বসানো ও অ্যাপ্রোচ কাজে হেভি ক্রেন মোতায়েন।" },
+  "project.pharmaA.t": { en: "Pharma Ashia Facility", bn: "ফার্মা এশিয়া ফ্যাসিলিটি" },
+  "project.pharmaA.l": { en: "Dhaka", bn: "ঢাকা" },
+  "project.pharmaA.s": { en: "Site preparation, foundation excavation, and structural support equipment.", bn: "সাইট প্রস্তুতি, ফাউন্ডেশন এক্সকাভেশন ও স্ট্রাকচারাল সাপোর্ট ইকুইপমেন্ট।" },
+  "project.centeon.t": { en: "Centeon Pharma Plant", bn: "সেন্টিয়ন ফার্মা প্ল্যান্ট" },
+  "project.centeon.l": { en: "Dhaka", bn: "ঢাকা" },
+  "project.centeon.s": { en: "Earthworks and material handling across the build-out phase.", bn: "নির্মাণ পর্যায়জুড়ে আর্থওয়ার্ক ও মেটেরিয়াল হ্যান্ডলিং।" },
+  "project.brt.t": { en: "BRT Airport–Gazipur", bn: "BRT এয়ারপোর্ট–গাজীপুর" },
+  "project.brt.l": { en: "Dhaka–Gazipur Corridor", bn: "ঢাকা–গাজীপুর করিডোর" },
+  "project.brt.s": { en: "Compaction fleet for elevated corridor pavement works.", bn: "এলিভেটেড করিডোর পেভমেন্ট কাজের জন্য কম্প্যাকশন ফ্লিট।" },
+  "project.nassa.t": { en: "NASSA Group Industrial Build", bn: "NASSA গ্রুপ ইন্ডাস্ট্রিয়াল নির্মাণ" },
+  "project.nassa.l": { en: "Dhaka", bn: "ঢাকা" },
+  "project.nassa.s": { en: "Crane and excavator support for industrial expansion.", bn: "ইন্ডাস্ট্রিয়াল সম্প্রসারণে ক্রেন ও এক্সক্যাভেটর সাপোর্ট।" },
 };
 
 interface I18nCtx {

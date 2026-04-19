@@ -208,8 +208,8 @@ function ContactPage() {
           {/* SIDEBAR */}
           <div className="space-y-8">
             <div>
-              <p className="eyebrow">Direct Lines</p>
-              <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>Speak to leadership.</h2>
+              <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("contact.sidebar.direct")}</p>
+              <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>{t("contact.sidebar.directTitle")}</h2>
               <ul className="mt-5 space-y-3">
                 {COMPANY.phones.map((p) => (
                   <li key={p.number}>
@@ -220,10 +220,10 @@ function ContactPage() {
                         </div>
                         <div>
                           <p className="font-display text-sm font-semibold text-iron">{p.number}</p>
-                          <p className="text-xs text-muted-foreground">{p.label}</p>
+                          <p className={`text-xs text-muted-foreground ${fontClass}`}>{p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}</p>
                         </div>
                       </div>
-                      <span className="font-display text-[10px] font-semibold uppercase tracking-wider text-safety">Call</span>
+                      <span className={`text-[10px] font-semibold uppercase tracking-wider text-safety ${fontClass}`}>{t("common.call")}</span>
                     </a>
                   </li>
                 ))}
@@ -239,23 +239,28 @@ function ContactPage() {
             </div>
 
             <div>
-              <p className="eyebrow">{t("footer.offices")}</p>
-              <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>Dhaka & Tangail.</h2>
+              <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("footer.offices")}</p>
+              <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>{t("contact.sidebar.officesTitle")}</h2>
               <ul className="mt-5 space-y-4">
-                {COMPANY.offices.map((o) => (
-                  <li key={o.city} className="rounded-md border border-border bg-card p-5 shadow-card border-safety-top">
-                    <div className="flex items-start gap-3">
-                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-gradient-iron text-white">
-                        <MapPin className="h-4 w-4" />
+                {COMPANY.offices.map((o) => {
+                  const labelTr = o.label === "Corporate Office" ? t("office.corporate") : t("office.branch");
+                  const cityTr = o.city === "Dhaka" ? t("office.dhaka") : t("office.tangail");
+                  const addrTr = o.city === "Dhaka" ? t("office.dhaka.address") : t("office.tangail.address");
+                  return (
+                    <li key={o.city} className="rounded-md border border-border bg-card p-5 shadow-card border-safety-top">
+                      <div className="flex items-start gap-3">
+                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-gradient-iron text-white">
+                          <MapPin className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <p className={`text-[11px] uppercase tracking-[0.18em] text-safety ${fontClass}`}>{labelTr}</p>
+                          <p className={`mt-0.5 text-base font-semibold text-iron ${fontClass}`}>{cityTr}</p>
+                          <p className={`mt-1 text-sm leading-relaxed text-muted-foreground ${fontClass}`}>{addrTr}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-[11px] uppercase tracking-[0.18em] text-safety">{o.label}</p>
-                        <p className="mt-0.5 font-display text-base font-semibold text-iron">{o.city}</p>
-                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{o.address}</p>
-                      </div>
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
               <p className="mt-4 text-xs text-muted-foreground">
                 TIN {COMPANY.tin} · VAT {COMPANY.vat}

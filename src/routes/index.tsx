@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { ArrowRight, ShieldCheck, Zap, Wrench, BadgeCheck } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard } from "@/components/atdb/EquipmentCard";
 import {
@@ -8,6 +9,7 @@ import {
   COMPANY,
   FEATURED,
   buildWhatsappGenericLink,
+  type EquipmentCategory,
 } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 import heroImg from "@/assets/brand/atdb-hero-monument.webp";
@@ -19,17 +21,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "ATDB Trade International — Heavy Equipment Rental in Bangladesh" },
-      {
-        name: "description",
-        content:
-          "Bangladesh's premier heavy equipment rental partner since 2000. Cranes, road rollers, excavators, and support equipment. Instant WhatsApp quotation.",
-      },
+      { name: "description", content: "Bangladesh's premier heavy equipment rental partner since 2000. Cranes, road rollers, excavators, and support equipment. Instant WhatsApp quotation." },
       { property: "og:title", content: "ATDB Trade International — Heavy Equipment Rental" },
-      {
-        property: "og:description",
-        content:
-          "26 years of certified fleet operations across Bangladesh. Liebherr, Kato, Sakai, CAT, Komatsu, JCB, CASE.",
-      },
+      { property: "og:description", content: "26 years of certified fleet operations across Bangladesh. Liebherr, Kato, Sakai, CAT, Komatsu, JCB, CASE." },
       { property: "og:image", content: heroImg },
       { name: "twitter:image", content: heroImg },
     ],
@@ -38,14 +32,37 @@ export const Route = createFileRoute("/")({
 });
 
 const PROJECTS = [
-  { img: projectRoad, label: "RTIP-2 · Ghatail, Tangail" },
-  { img: projectBridge, label: "Jamuna Bridge Approach" },
-  { img: projectPharma, label: "Pharma Ashia · Centeon Pharma" },
+  { img: projectRoad, key: "home.project.rtip" as const },
+  { img: projectBridge, key: "home.project.jamuna" as const },
+  { img: projectPharma, key: "home.project.pharma" as const },
 ];
+
+const BRANDS = ["Liebherr", "Kato", "Sakai", "CAT", "Komatsu", "JCB", "Dynapac", "Bomag", "CASE", "XCMG"];
+const CAT_KEYS: Record<EquipmentCategory, { label: string; tagline: string }> = {
+  cranes: { label: "cat.cranes.label", tagline: "cat.cranes.tagline" },
+  rollers: { label: "cat.rollers.label", tagline: "cat.rollers.tagline" },
+  excavators: { label: "cat.excavators.label", tagline: "cat.excavators.tagline" },
+  loaders: { label: "cat.loaders.label", tagline: "cat.loaders.tagline" },
+  support: { label: "cat.support.label", tagline: "cat.support.tagline" },
+};
 
 function Index() {
   const { t, lang } = useI18n();
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
+  const tx = t as unknown as (k: string) => string;
+
+  // Subtle scroll parallax on hero monument
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 800], [0, 160]);
+  const heroScale = useTransform(scrollY, [0, 800], [1.05, 1.18]);
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    const m = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduce(m.matches);
+    const fn = () => setReduce(m.matches);
+    m.addEventListener("change", fn);
+    return () => m.removeEventListener("change", fn);
+  }, []);
 
   const PILLARS = [
     { icon: ShieldCheck, title: t("pillar.fleet.t"), desc: t("pillar.fleet.d") },
@@ -56,15 +73,16 @@ function Index() {
 
   return (
     <Layout>
-      {/* HERO — monumental ATDB gateway */}
+      {/* HERO */}
       <section className="relative isolate overflow-hidden bg-iron-deep text-white">
-        <img
+        <motion.img
           src={heroImg}
           alt="ATDB Trade International — monumental industrial gateway with cranes, road roller and Dhaka skyline at sunset"
           width={1920}
           height={1080}
           fetchPriority="high"
-          className="absolute inset-0 -z-10 h-full w-full scale-105 animate-[heroZoom_18s_ease-out_forwards] object-cover opacity-80"
+          style={reduce ? undefined : { y: heroY, scale: heroScale }}
+          className="absolute inset-0 -z-10 h-[115%] w-full object-cover opacity-80 will-change-transform"
         />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,oklch(0.18_0.018_240/0.35)_0%,oklch(0.18_0.018_240/0.78)_55%,oklch(0.16_0.018_240/0.95)_100%)]" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
@@ -80,30 +98,14 @@ function Index() {
             {t("home.hero.sub")}
           </p>
           <div className="mt-8 flex flex-wrap gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700 [animation-delay:360ms] [animation-fill-mode:both]">
-            <Link
-              to="/equipment"
-              className={`group inline-flex items-center gap-2 rounded-sm bg-gradient-safety px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_oklch(0.7_0.19_45/0.5)] sm:px-7 sm:py-4 ${fontClass}`}
-            >
+            <Link to="/equipment" className={`group inline-flex items-center gap-2 rounded-sm bg-gradient-safety px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_oklch(0.7_0.19_45/0.5)] sm:px-7 sm:py-4 ${fontClass}`}>
               {t("home.hero.cta.browse")}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <a
-              href={buildWhatsappGenericLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 rounded-sm border-2 border-white/80 bg-white/5 px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-iron sm:px-7 sm:py-4 ${fontClass}`}
-            >
+            <a href={buildWhatsappGenericLink()} target="_blank" rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 rounded-sm border-2 border-white/80 bg-white/5 px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-iron sm:px-7 sm:py-4 ${fontClass}`}>
               {t("home.hero.cta.whatsapp")}
             </a>
-          </div>
-
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/10 pt-5 text-[11px] uppercase tracking-[0.18em] text-white/55 animate-in fade-in duration-1000 [animation-delay:520ms] [animation-fill-mode:both]">
-            <span className="font-display"><span className="text-bronze-glow">●</span> Liebherr</span>
-            <span className="font-display"><span className="text-bronze-glow">●</span> Kato</span>
-            <span className="font-display"><span className="text-bronze-glow">●</span> Sakai</span>
-            <span className="font-display"><span className="text-bronze-glow">●</span> CAT</span>
-            <span className="font-display"><span className="text-bronze-glow">●</span> Komatsu</span>
-            <span className="font-display"><span className="text-bronze-glow">●</span> JCB</span>
           </div>
         </div>
       </section>
@@ -125,15 +127,29 @@ function Index() {
         </div>
       </section>
 
+      {/* BRAND MARQUEE */}
+      <section className="overflow-hidden border-y border-border bg-card py-6">
+        <p className={`container-page text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground ${fontClass}`}>
+          {t("home.brands.eyebrow")}
+        </p>
+        <div className="relative mt-4 flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+          <div className="flex shrink-0 animate-[brandMarquee_28s_linear_infinite] gap-12 pr-12">
+            {[...BRANDS, ...BRANDS].map((b, i) => (
+              <span key={`${b}-${i}`} className="font-display text-2xl font-bold tracking-[0.06em] text-iron/55 transition-colors hover:text-safety md:text-3xl">
+                <span className="text-bronze-glow">●</span> {b}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CATEGORIES */}
       <section className="bg-background py-20 md:py-28">
         <div className="container-page">
           <div className="flex items-end justify-between gap-6">
             <div>
               <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.cat.eyebrow")}</p>
-              <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>
-                {t("home.cat.title")}
-              </h2>
+              <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{t("home.cat.title")}</h2>
             </div>
             <Link to="/equipment" className={`hidden items-center gap-1 text-sm font-semibold text-safety hover:text-safety-deep md:inline-flex ${fontClass}`}>
               {t("common.viewAll")} <ArrowRight className="h-4 w-4" />
@@ -141,25 +157,24 @@ function Index() {
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {Object.values(CATEGORIES).map((c) => (
-              <Link
-                key={c.slug}
-                to="/equipment/$category"
-                params={{ category: c.slug }}
-                className="group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-md border-safety-top shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover"
-              >
-                <img src={c.image} alt={c.label} loading="lazy" className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-iron-deep via-iron-deep/70 to-transparent" />
-                <div className="p-6 text-white">
-                  <p className="font-bn text-sm text-bronze-glow">{c.label_bn}</p>
-                  <h3 className="mt-1 font-display text-xl font-bold text-white">{c.label}</h3>
-                  <p className="mt-1 text-xs text-white/75">{c.tagline}</p>
-                  <span className={`mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-safety transition-transform group-hover:translate-x-1 ${fontClass}`}>
-                    {t("common.explore")} <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+            {Object.values(CATEGORIES).map((c) => {
+              const keys = CAT_KEYS[c.slug];
+              return (
+                <Link key={c.slug} to="/equipment/$category" params={{ category: c.slug }}
+                  className="group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-md border-safety-top shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover">
+                  <img src={c.image} alt={tx(keys.label)} loading="lazy" className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-iron-deep via-iron-deep/70 to-transparent" />
+                  <div className="p-6 text-white">
+                    <p className="font-bn text-sm text-bronze-glow">{c.label_bn}</p>
+                    <h3 className={`mt-1 text-xl font-bold text-white ${fontClass}`}>{tx(keys.label)}</h3>
+                    <p className={`mt-1 text-xs text-white/75 ${fontClass}`}>{tx(keys.tagline)}</p>
+                    <span className={`mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-safety transition-transform group-hover:translate-x-1 ${fontClass}`}>
+                      {t("common.explore")} <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -168,22 +183,11 @@ function Index() {
       <section className="bg-muted/40 py-20 md:py-28">
         <div className="container-page">
           <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.featured.eyebrow")}</p>
-          <h2 className={`mt-2 max-w-2xl text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>
-            {t("home.featured.title")}
-          </h2>
-          <motion.div
-            className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
-            }}
-          >
-            {FEATURED.map((eq) => (
-              <EquipmentCard key={eq.id} eq={eq} />
-            ))}
+          <h2 className={`mt-2 max-w-2xl text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{t("home.featured.title")}</h2>
+          <motion.div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } } }}>
+            {FEATURED.map((eq) => <EquipmentCard key={eq.id} eq={eq} />)}
           </motion.div>
         </div>
       </section>
@@ -194,12 +198,8 @@ function Index() {
           <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
             <div>
               <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.why.eyebrow")}</p>
-              <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>
-                {t("home.why.title")}
-              </h2>
-              <p className={`mt-4 text-base text-muted-foreground ${fontClass}`}>
-                {t("home.why.body")}
-              </p>
+              <h2 className={`mt-2 text-3xl font-bold text-iron md:text-4xl ${fontClass}`}>{t("home.why.title")}</h2>
+              <p className={`mt-4 text-base text-muted-foreground ${fontClass}`}>{t("home.why.body")}</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
               {PILLARS.map((p) => (
@@ -222,39 +222,25 @@ function Index() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.projects.eyebrow")}</p>
-              <h2 className={`mt-2 text-3xl font-bold text-white md:text-4xl ${fontClass}`}>
-                {t("home.projects.title")}
-              </h2>
+              <h2 className={`mt-2 text-3xl font-bold text-white md:text-4xl ${fontClass}`}>{t("home.projects.title")}</h2>
             </div>
             <Link to="/projects" className={`inline-flex items-center gap-1 text-sm font-semibold text-safety hover:text-bronze-glow ${fontClass}`}>
               {t("home.projects.viewAll")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <motion.div
-            className="mt-10 grid gap-5 md:grid-cols-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-            }}
-          >
+          <motion.div className="mt-10 grid gap-5 md:grid-cols-3"
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } }}>
             {PROJECTS.map((p) => (
-              <motion.figure
-                key={p.label}
-                variants={{
-                  hidden: { opacity: 0, y: 28 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-                }}
+              <motion.figure key={p.key}
+                variants={{ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
                 whileHover={{ y: -6, transition: { type: "spring", stiffness: 320, damping: 22 } }}
-                className="group relative aspect-[4/5] overflow-hidden rounded-md shadow-card hover:shadow-card-hover"
-              >
-                <img src={p.img} alt={p.label} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                className="group relative aspect-[4/5] overflow-hidden rounded-md shadow-card hover:shadow-card-hover">
+                <img src={p.img} alt={t(p.key)} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-iron-deep/95 via-iron-deep/30 to-transparent" />
-                <figcaption className="absolute bottom-0 left-0 right-0 p-5 font-display text-sm font-semibold text-white">
-                  {p.label}
+                <figcaption className={`absolute bottom-0 left-0 right-0 p-5 text-sm font-semibold text-white ${fontClass}`}>
+                  {t(p.key)}
                 </figcaption>
               </motion.figure>
             ))}
@@ -266,19 +252,11 @@ function Index() {
       <section className="bg-gradient-safety py-16 text-white">
         <div className="container-page flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <div>
-            <h2 className={`text-3xl font-bold text-white md:text-4xl ${fontClass}`}>
-              {t("home.cta.title")}
-            </h2>
-            <p className={`mt-2 max-w-xl text-white/90 ${fontClass}`}>
-              {t("home.cta.body")}
-            </p>
+            <h2 className={`text-3xl font-bold text-white md:text-4xl ${fontClass}`}>{t("home.cta.title")}</h2>
+            <p className={`mt-2 max-w-xl text-white/90 ${fontClass}`}>{t("home.cta.body")}</p>
           </div>
-          <a
-            href={buildWhatsappGenericLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 rounded-sm bg-iron-deep px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px ${fontClass}`}
-          >
+          <a href={buildWhatsappGenericLink()} target="_blank" rel="noopener noreferrer"
+            className={`inline-flex items-center gap-2 rounded-sm bg-iron-deep px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px ${fontClass}`}>
             {t("home.cta.button")} <ArrowRight className="h-4 w-4" />
           </a>
         </div>

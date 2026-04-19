@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, type Lang } from "@/lib/i18n";
 
 export type Review = {
   id: number;
@@ -10,6 +10,7 @@ export type Review = {
   content: string;
 };
 
+// Source content kept in English for SEO / Schema.org JSON-LD output.
 export const SAMPLE_REVIEWS: Review[] = [
   {
     id: 1,
@@ -58,6 +59,15 @@ function Stars({ value }: { value: number }) {
   );
 }
 
+function formatDate(iso: string, lang: Lang) {
+  // Stable, locale-aware formatting — won't drift between SSR and client.
+  return new Date(iso).toLocaleDateString(lang === "bn" ? "bn-BD" : "en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 export function ReviewsSection() {
   const { t, lang } = useI18n();
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
@@ -67,14 +77,14 @@ export function ReviewsSection() {
       <div className="container-page">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="eyebrow">{t("reviews.eyebrow")}</p>
+            <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("reviews.eyebrow")}</p>
             <h2 className={`mt-2 text-2xl font-bold text-iron md:text-3xl ${fontClass}`}>{t("reviews.title")}</h2>
           </div>
           <div className="flex items-center gap-3 rounded-md border border-border bg-card px-4 py-2.5 shadow-card">
             <Stars value={reviewAggregate.rating} />
-            <p className="font-display text-sm font-semibold text-iron">
+            <p className={`text-sm font-semibold text-iron ${fontClass}`}>
               {reviewAggregate.rating.toFixed(1)}
-              <span className="ml-2 text-xs font-medium text-muted-foreground">
+              <span className={`ml-2 text-xs font-medium text-muted-foreground ${fontClass}`}>
                 {t("reviews.based")} {reviewAggregate.count} {t("reviews.count")}
               </span>
             </p>
@@ -82,24 +92,30 @@ export function ReviewsSection() {
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {SAMPLE_REVIEWS.map((r) => (
-            <article
-              key={r.id}
-              className="flex flex-col rounded-md border border-border bg-card p-5 shadow-card transition-transform hover:-translate-y-0.5"
-            >
-              <Stars value={r.rating} />
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-iron/80">"{r.content}"</p>
-              <div className="mt-4 border-t border-border pt-3">
-                <p className="font-display text-sm font-semibold text-iron">{r.author}</p>
-                <p className="text-xs text-muted-foreground">
-                  {r.company} ·{" "}
-                  {new Date(r.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
-                </p>
-              </div>
-            </article>
-          ))}
+          {SAMPLE_REVIEWS.map((r) => {
+            const tx = t as unknown as (k: string) => string;
+            const author = tx(`review.${r.id}.author`) || r.author;
+            const company = tx(`review.${r.id}.company`) || r.company;
+            const body = tx(`review.${r.id}.body`) || r.content;
+            return (
+              <article
+                key={r.id}
+                className="flex flex-col rounded-md border border-border bg-card p-5 shadow-card transition-transform hover:-translate-y-0.5"
+              >
+                <Stars value={r.rating} />
+                <p className={`mt-3 flex-1 text-sm leading-relaxed text-iron/80 ${fontClass}`}>"{body}"</p>
+                <div className="mt-4 border-t border-border pt-3">
+                  <p className={`text-sm font-semibold text-iron ${fontClass}`}>{author}</p>
+                  <p className={`text-xs text-muted-foreground ${fontClass}`}>
+                    {company} · {formatDate(r.date, lang)}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
+

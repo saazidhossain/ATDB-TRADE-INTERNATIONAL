@@ -8,7 +8,6 @@ export function CartDrawer() {
   const { t, lang } = useI18n();
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
 
-  // Close on Escape
   useEffect(() => {
     if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
@@ -23,34 +22,32 @@ export function CartDrawer() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label="Quotation cart">
+    <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label={t("cart.title")}>
       <button
         className="absolute inset-0 bg-iron-deep/60 backdrop-blur-sm animate-in fade-in duration-200"
         onClick={close}
-        aria-label="Close cart"
+        aria-label={t("cart.close")}
       />
       <aside className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-background shadow-2xl animate-in slide-in-from-right duration-300">
-        {/* Header */}
         <div className="flex items-center justify-between border-b border-border bg-iron-deep px-5 py-4 text-white">
           <div className="flex items-center gap-3">
             <ShoppingCart className="h-5 w-5 text-bronze-glow" />
             <div>
               <p className={`text-base font-bold ${fontClass}`}>{t("cart.title")}</p>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">
+              <p className={`text-[11px] uppercase tracking-[0.18em] text-white/55 ${fontClass}`}>
                 {count} {t("common.units")}
               </p>
             </div>
           </div>
           <button
             onClick={close}
-            aria-label="Close"
+            aria-label={t("cart.close")}
             className="grid h-9 w-9 place-items-center rounded-sm border border-white/15 text-white/80 hover:border-white hover:text-white"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        {/* Body */}
         <div className="flex-1 overflow-y-auto p-5">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -70,13 +67,13 @@ export function CartDrawer() {
                 <li key={it.id} className="rounded-md border border-border bg-card p-4 shadow-card">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="font-display text-[10px] font-semibold uppercase tracking-[0.18em] text-safety">{it.id}</p>
+                      <p className={`text-[10px] font-semibold uppercase tracking-[0.18em] text-safety ${fontClass}`}>{it.id}</p>
                       <p className={`mt-1 truncate text-sm font-semibold text-iron ${fontClass}`}>{it.name}</p>
                       <p className="mt-0.5 text-xs text-muted-foreground">{it.capacity}</p>
                     </div>
                     <button
                       onClick={() => remove(it.id)}
-                      aria-label="Remove"
+                      aria-label={t("cart.remove")}
                       className="grid h-8 w-8 place-items-center rounded-sm text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
@@ -85,7 +82,7 @@ export function CartDrawer() {
                   <div className="mt-3 inline-flex items-center rounded-sm border border-border">
                     <button
                       onClick={() => setQty(it.id, it.qty - 1)}
-                      aria-label="Decrease"
+                      aria-label={t("cart.decrease")}
                       className="grid h-8 w-8 place-items-center text-iron hover:bg-muted"
                     >
                       <Minus className="h-3.5 w-3.5" />
@@ -93,7 +90,7 @@ export function CartDrawer() {
                     <span className="w-9 text-center font-display text-sm font-semibold text-iron">{it.qty}</span>
                     <button
                       onClick={() => setQty(it.id, it.qty + 1)}
-                      aria-label="Increase"
+                      aria-label={t("cart.increase")}
                       className="grid h-8 w-8 place-items-center text-iron hover:bg-muted"
                     >
                       <Plus className="h-3.5 w-3.5" />
@@ -102,7 +99,6 @@ export function CartDrawer() {
                 </li>
               ))}
 
-              {/* Project context */}
               <li className="mt-2 rounded-md border-safety-top border border-border bg-card p-4 shadow-card">
                 <p className={`text-xs font-semibold uppercase tracking-[0.16em] text-safety ${fontClass}`}>
                   {t("cart.project")}
@@ -113,7 +109,8 @@ export function CartDrawer() {
                     label={t("cart.location")}
                     value={project.location ?? ""}
                     onChange={(v) => setProject({ location: v })}
-                    placeholder="Dhaka, Tangail, Mymensingh…"
+                    placeholder={t("cart.location.ph")}
+                    fontClass={fontClass}
                   />
                   <div className="grid grid-cols-2 gap-2">
                     <Field
@@ -122,6 +119,7 @@ export function CartDrawer() {
                       type="date"
                       value={project.startDate ?? ""}
                       onChange={(v) => setProject({ startDate: v })}
+                      fontClass={fontClass}
                     />
                     <Field
                       icon={<Calendar className="h-3.5 w-3.5" />}
@@ -129,6 +127,7 @@ export function CartDrawer() {
                       type="date"
                       value={project.endDate ?? ""}
                       onChange={(v) => setProject({ endDate: v })}
+                      fontClass={fontClass}
                     />
                   </div>
                   <div>
@@ -141,7 +140,7 @@ export function CartDrawer() {
                       maxLength={500}
                       rows={2}
                       placeholder={t("cart.notes.ph")}
-                      className="w-full resize-none rounded-sm border border-border bg-background px-3 py-2 text-sm text-iron focus:border-safety focus:outline-none"
+                      className={`w-full resize-none rounded-sm border border-border bg-background px-3 py-2 text-sm text-iron focus:border-safety focus:outline-none ${fontClass}`}
                     />
                   </div>
                 </div>
@@ -150,7 +149,6 @@ export function CartDrawer() {
           )}
         </div>
 
-        {/* Footer */}
         {items.length > 0 && (
           <div className="border-t border-border bg-card px-5 py-4">
             <a
@@ -181,6 +179,7 @@ function Field({
   onChange,
   type = "text",
   placeholder,
+  fontClass,
 }: {
   icon?: React.ReactNode;
   label: string;
@@ -188,10 +187,11 @@ function Field({
   onChange: (v: string) => void;
   type?: string;
   placeholder?: string;
+  fontClass?: string;
 }) {
   return (
     <div>
-      <label className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+      <label className={`mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground ${fontClass ?? ""}`}>
         {icon}
         {label}
       </label>
@@ -200,7 +200,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value.slice(0, 200))}
         placeholder={placeholder}
-        className="w-full rounded-sm border border-border bg-background px-3 py-2 text-sm text-iron focus:border-safety focus:outline-none"
+        className={`w-full rounded-sm border border-border bg-background px-3 py-2 text-sm text-iron focus:border-safety focus:outline-none ${fontClass ?? ""}`}
       />
     </div>
   );

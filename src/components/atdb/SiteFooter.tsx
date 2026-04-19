@@ -73,48 +73,64 @@ export function SiteFooter() {
 
         <div>
           <h4 className="eyebrow !text-bronze-glow">{t("footer.contact")}</h4>
-          {/* Unified social/contact channel stack — all four channels equal */}
-          <ul className="mt-4 space-y-2.5">
-            {COMPANY.phones.map((p) => (
-              <li key={p.number}>
-                <ContactChannelButton
-                  channel="phone"
-                  href={`tel:${p.number}`}
-                  variant="footer"
-                  sublabel={p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
-                >
-                  {p.number}
-                </ContactChannelButton>
-              </li>
-            ))}
+          {/* Minimal: primary phone + email as plain links, channel orbs as a tight icon row */}
+          <ul className={`mt-4 space-y-2 text-sm text-white/75 ${fontClass}`}>
             <li>
-              <ContactChannelButton
-                channel="email"
+              <a
+                href={`tel:${COMPANY.phones[0].number}`}
+                className="transition-colors hover:text-safety"
+              >
+                {COMPANY.phones[0].number}
+              </a>
+            </li>
+            <li>
+              <a
                 href={`mailto:${COMPANY.email}`}
-                variant="footer"
+                className="break-all transition-colors hover:text-safety"
               >
                 {COMPANY.email}
-              </ContactChannelButton>
-            </li>
-            <li>
-              <WhatsappButton
-                href={buildWhatsappGenericLink(undefined, lang)}
-                variant="ctaDark"
-                fullWidth
-                className="!py-2.5 !text-xs !normal-case !tracking-normal"
-              >
-                {t("nav.whatsappQuote")}
-              </WhatsappButton>
-            </li>
-            <li>
-              <FacebookLink variant="footer" className="w-full justify-start" />
+              </a>
             </li>
           </ul>
+
+          {/* Compact channel icon row — same glass treatment as header, dark surface */}
+          <div className="mt-5 flex items-center gap-2">
+            <ChannelIcon
+              href={`tel:${COMPANY.phones[0].number}`}
+              ariaLabel={`Call ${COMPANY.phones[0].number}`}
+              accent="safety"
+            >
+              <PhoneGlyph />
+            </ChannelIcon>
+            <ChannelIcon
+              href={`mailto:${COMPANY.email}`}
+              ariaLabel={`Email ${COMPANY.email}`}
+              accent="bronze"
+            >
+              <MailGlyph />
+            </ChannelIcon>
+            <ChannelIcon
+              href={buildWhatsappGenericLink(undefined, lang)}
+              ariaLabel="Chat on WhatsApp"
+              accent="whatsapp"
+              external
+            >
+              <WaGlyphSm />
+            </ChannelIcon>
+            <ChannelIcon
+              href={COMPANY.facebook}
+              ariaLabel="Visit ATDB on Facebook"
+              accent="facebook"
+              external
+            >
+              <FbGlyph />
+            </ChannelIcon>
+          </div>
         </div>
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-start justify-between gap-3 py-5 text-xs text-white/50 md:flex-row md:items-center">
+        <div className="container-page flex flex-col items-start justify-between gap-2 py-5 text-xs text-white/50 md:flex-row md:items-center">
           <p className={fontClass}>
             © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
           </p>
@@ -129,7 +145,6 @@ export function SiteFooter() {
               {t("footer.credit")}
             </a>
           </p>
-          <p className={fontClass}>{t("footer.bank")}: {COMPANY.bank}</p>
         </div>
       </div>
     </footer>

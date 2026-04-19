@@ -81,7 +81,7 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
           </button>
           <div className="flex items-center gap-2">
             <a
-              href={buildWhatsappRentLink(eq)}
+              href={buildWhatsappRentLink(eq, lang)}
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-sm border border-iron/15 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-iron transition-colors hover:border-safety hover:text-safety ${fontClass}`}

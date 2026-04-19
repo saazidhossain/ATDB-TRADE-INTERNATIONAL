@@ -121,7 +121,7 @@ function EquipmentDetailPage() {
   const gallery = [eq.image, detailHero, detailCabin, detailFleet];
 
   const fontClass = lang === "bn" ? "font-bn" : "font-display";
-  const whatsappUrl = buildWhatsappRentLink(eq);
+  const whatsappUrl = buildWhatsappRentLink(eq, lang);
   const { add, items } = useCart();
   const inCart = items.some((i) => i.id === eq.id);
 

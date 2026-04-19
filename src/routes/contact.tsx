@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
+import { Mail, MapPin, Phone, Facebook, MessageCircle, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { FacebookFeed } from "@/components/atdb/FacebookFeed";
 import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import { ContactChannelButton } from "@/components/atdb/ContactChannelButton";
-import { ChannelIcon, PhoneGlyph, MailGlyph, FbGlyph, WaGlyphSm } from "@/components/atdb/ChannelIcon";
 import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 
@@ -216,43 +215,63 @@ function ContactPage() {
               <p className={`eyebrow ${lang === "bn" ? "font-bn" : ""}`}>{t("contact.sidebar.direct")}</p>
               <h2 className={`mt-2 text-xl font-bold text-iron md:text-2xl ${fontClass}`}>{t("contact.sidebar.directTitle")}</h2>
 
-              {/* Plain phone + email lines */}
-              <ul className={`mt-5 space-y-3 text-sm ${fontClass}`}>
+              {/* Minimal divided list — flat, properly aligned */}
+              <ul className="mt-5 divide-y divide-border border-y border-border">
                 {COMPANY.phones.map((p) => (
-                  <li key={p.number} className="flex items-baseline justify-between gap-4">
-                    <a href={`tel:${p.number}`} className="font-semibold text-iron transition-colors hover:text-safety">
-                      {p.number}
+                  <li key={p.number}>
+                    <a
+                      href={`tel:${p.number}`}
+                      className="flex items-center gap-3 py-3 text-sm text-iron transition-colors hover:text-safety"
+                    >
+                      <Phone className="h-4 w-4 shrink-0 text-bronze-glow" strokeWidth={1.75} />
+                      <span className="font-display font-semibold tracking-wide">{p.number}</span>
+                      <span className={`ml-auto text-[10px] uppercase tracking-[0.16em] text-muted-foreground ${fontClass}`}>
+                        {p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
+                      </span>
                     </a>
-                    <span className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-                      {p.label === "Proprietor" ? t("phone.proprietor") : t("phone.ceo")}
-                    </span>
                   </li>
                 ))}
                 <li>
-                  <a href={`mailto:${COMPANY.email}`} className="font-semibold text-iron transition-colors hover:text-safety break-all">
-                    {COMPANY.email}
+                  <a
+                    href={`mailto:${COMPANY.email}`}
+                    className="flex items-center gap-3 py-3 text-sm text-iron transition-colors hover:text-safety"
+                  >
+                    <Mail className="h-4 w-4 shrink-0 text-bronze-glow" strokeWidth={1.75} />
+                    <span className="truncate font-display font-semibold">{COMPANY.email}</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={buildWhatsappGenericLink(undefined, lang)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 py-3 text-sm text-iron transition-colors hover:text-safety"
+                  >
+                    <MessageCircle className="h-4 w-4 shrink-0 text-bronze-glow" strokeWidth={1.75} />
+                    <span className="font-display font-semibold">WhatsApp</span>
+                    <span className={`ml-auto text-[10px] uppercase tracking-[0.16em] text-muted-foreground ${fontClass}`}>
+                      {COMPANY.phones[0].number}
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={COMPANY.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 py-3 text-sm text-iron transition-colors hover:text-safety"
+                  >
+                    <Facebook className="h-4 w-4 shrink-0 text-bronze-glow" strokeWidth={1.75} />
+                    <span className="font-display font-semibold">Facebook</span>
+                    <span className={`ml-auto text-[10px] uppercase tracking-[0.16em] text-muted-foreground ${fontClass}`}>
+                      @atdbtrade
+                    </span>
                   </a>
                 </li>
               </ul>
 
-              {/* Centered channel orb row — same family as footer */}
-              <div className="mt-6 flex items-center justify-center gap-3 rounded-md border border-border bg-card px-4 py-4 shadow-card">
-                <ChannelIcon href={`tel:${COMPANY.phones[0].number}`} ariaLabel={`Call ${COMPANY.phones[0].number}`} accent="safety">
-                  <PhoneGlyph />
-                </ChannelIcon>
-                <ChannelIcon href={`mailto:${COMPANY.email}`} ariaLabel={`Email ${COMPANY.email}`} accent="bronze">
-                  <MailGlyph />
-                </ChannelIcon>
-                <ChannelIcon href={buildWhatsappGenericLink(undefined, lang)} ariaLabel="Chat on WhatsApp" accent="whatsapp" external>
-                  <WaGlyphSm />
-                </ChannelIcon>
-                <ChannelIcon href={COMPANY.facebook} ariaLabel="Visit ATDB on Facebook" accent="facebook" external>
-                  <FbGlyph />
-                </ChannelIcon>
-              </div>
-
               {/* Single primary CTA */}
-              <div className="mt-4">
+              <div className="mt-5">
                 <WhatsappButton
                   href={buildWhatsappGenericLink(undefined, lang)}
                   variant="cta"

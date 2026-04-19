@@ -1,12 +1,13 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ShieldCheck, BadgeCheck, Phone, MapPin, Calendar, Plus, Check } from "lucide-react";
+import { ChevronRight, ShieldCheck, BadgeCheck, MapPin, Calendar, Plus, Check } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
 import { SpecGroupsAccordion } from "@/components/atdb/SpecGroups";
 import { ReviewsSection, SAMPLE_REVIEWS, reviewAggregate } from "@/components/atdb/Reviews";
 import { WhatsappButton } from "@/components/atdb/WhatsappButton";
+import { ContactChannelButton } from "@/components/atdb/ContactChannelButton";
 import {
   CATEGORIES,
   FLEET,

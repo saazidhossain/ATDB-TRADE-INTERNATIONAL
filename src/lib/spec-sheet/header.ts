@@ -4,6 +4,7 @@
 
 import type { jsPDF } from "jspdf";
 import { COMPANY, type Equipment } from "@/lib/atdb-data";
+import brandLogo from "@/assets/brand/atdb-logo-light.webp";
 import {
   ascii,
   BORDER,
@@ -36,16 +37,33 @@ export async function renderHeader(
   doc.setFillColor(...SAFETY);
   doc.rect(0, bandH, pageW, 3, "F");
 
-  // Brand mark — square chip + wordmark
+  // Brand mark — actual ATDB logo on a safety-orange chip
   const chipX = MARGIN;
   const chipY = 20;
   const chipS = 32;
   doc.setFillColor(...SAFETY);
   doc.roundedRect(chipX, chipY, chipS, chipS, 4, 4, "F");
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(15);
-  doc.setTextColor(...IRON);
-  doc.text("A", chipX + chipS / 2, chipY + chipS / 2 + 5.5, { align: "center" });
+  const logo = await loadImageAsDataUrl(brandLogo);
+  if (logo) {
+    const pad = 4;
+    const maxW = chipS - pad * 2;
+    const maxH = chipS - pad * 2;
+    const ratio = logo.w / logo.h;
+    let lw = maxW;
+    let lh = lw / ratio;
+    if (lh > maxH) {
+      lh = maxH;
+      lw = lh * ratio;
+    }
+    const lx = chipX + (chipS - lw) / 2;
+    const ly = chipY + (chipS - lh) / 2;
+    doc.addImage(logo.data, "PNG", lx, ly, lw, lh);
+  } else {
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(15);
+    doc.setTextColor(...IRON);
+    doc.text("A", chipX + chipS / 2, chipY + chipS / 2 + 5.5, { align: "center" });
+  }
 
   // Wordmark
   doc.setTextColor(255, 255, 255);

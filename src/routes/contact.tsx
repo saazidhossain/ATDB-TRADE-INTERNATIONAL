@@ -371,12 +371,15 @@ function OfficeMaps() {
             >
               {t("maps.directions")} <ExternalLink className="h-3.5 w-3.5" />
             </a>
-            <a
+            <ContactChannelButton
+              channel="phone"
               href={`tel:${COMPANY.phones[0].number}`}
-              className={`mt-2 inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-iron/15 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-iron transition-colors hover:border-iron hover:bg-iron hover:text-white ${fontClass}`}
+              variant="cta"
+              fullWidth
+              className="mt-2"
             >
-              <Phone className="h-3.5 w-3.5" /> {COMPANY.phones[0].number}
-            </a>
+              {COMPANY.phones[0].number}
+            </ContactChannelButton>
           </aside>
         </div>
       </div>

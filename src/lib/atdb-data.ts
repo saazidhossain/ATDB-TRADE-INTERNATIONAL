@@ -27,6 +27,30 @@ import imgXcmg from "@/assets/fleet/xcmg-loader.webp";
 import imgSupport from "@/assets/fleet/support-tools.webp";
 import imgTata from "@/assets/fleet/tata-truck.webp";
 
+// Per-category cinematic gallery shots (action / detail / site/cabin)
+import gCraneAction from "@/assets/fleet/gallery/crane-action.webp";
+import gCraneCabin from "@/assets/fleet/gallery/crane-cabin.webp";
+import gCraneDetail from "@/assets/fleet/gallery/crane-detail.webp";
+import gRollerAction from "@/assets/fleet/gallery/roller-action.webp";
+import gRollerDetail from "@/assets/fleet/gallery/roller-detail.webp";
+import gRollerSite from "@/assets/fleet/gallery/roller-site.webp";
+import gExcAction from "@/assets/fleet/gallery/excavator-action.webp";
+import gExcDetail from "@/assets/fleet/gallery/excavator-detail.webp";
+import gExcSite from "@/assets/fleet/gallery/excavator-site.webp";
+import gLoaderAction from "@/assets/fleet/gallery/loader-action.webp";
+import gLoaderDetail from "@/assets/fleet/gallery/loader-detail.webp";
+import gLoaderSite from "@/assets/fleet/gallery/loader-site.webp";
+import gSupportAction from "@/assets/fleet/gallery/support-action.webp";
+import gSupportDetail from "@/assets/fleet/gallery/support-detail.webp";
+import gSupportSite from "@/assets/fleet/gallery/support-site.webp";
+
+// Per-category gallery sets — appended after the equipment's own hero image.
+const GALLERY_CRANE = [gCraneAction, gCraneDetail, gCraneCabin];
+const GALLERY_ROLLER = [gRollerAction, gRollerDetail, gRollerSite];
+const GALLERY_EXC = [gExcAction, gExcDetail, gExcSite];
+const GALLERY_LOADER = [gLoaderAction, gLoaderDetail, gLoaderSite];
+const GALLERY_SUPPORT = [gSupportAction, gSupportDetail, gSupportSite];
+
 export const COMPANY = {
   name: "M/S ATDB Trade International",
   short: "ATDB",

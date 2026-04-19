@@ -56,13 +56,12 @@ export function renderSpecsTable(
     [S.inspection, S.inspectionVal],
   ];
 
-  const rowH = 20;
+  const rowH = 17;
   const tableW = pageW - MARGIN * 2;
   const labelX = MARGIN + 14;
   const valueX = MARGIN + tableW * 0.42;
   const dividerX = MARGIN + tableW * 0.42 - 14;
 
-  doc.setFontSize(9);
   rows.forEach((r, i) => {
     const y = tableTop + i * rowH;
     if (i % 2 === 0) {
@@ -71,15 +70,15 @@ export function renderSpecsTable(
     }
     // Label
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(7.5);
+    doc.setFontSize(7);
     doc.setTextColor(...MUTED);
-    doc.text(ascii(r[0].toUpperCase()), labelX, y + rowH / 2 + 3);
+    doc.text(ascii(r[0].toUpperCase()), labelX, y + rowH / 2 + 2.5);
 
     // Value
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(9.5);
+    doc.setFontSize(9);
     doc.setTextColor(...IRON);
-    doc.text(ascii(r[1]), valueX, y + rowH / 2 + 3);
+    doc.text(ascii(r[1]), valueX, y + rowH / 2 + 2.5);
   });
 
   // Vertical divider

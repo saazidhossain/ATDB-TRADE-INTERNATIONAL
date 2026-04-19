@@ -1,10 +1,21 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Plus, Check } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import type { Equipment } from "@/lib/atdb-data";
 import { buildWhatsappRentLink } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
+
+export const equipmentCardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
+export const equipmentGridVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
 
 export function EquipmentCard({ eq }: { eq: Equipment }) {
   const { t, lang } = useI18n();
@@ -21,7 +32,12 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
   };
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-md border border-border bg-card border-safety-top shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
+    <motion.article
+      variants={equipmentCardVariants}
+      whileHover={{ y: -6 }}
+      transition={{ type: "spring", stiffness: 280, damping: 22 }}
+      className="group flex flex-col overflow-hidden rounded-md border border-border bg-card border-safety-top shadow-card hover:shadow-card-hover"
+    >
       <Link
         to="/equipment/$category/$id"
         params={{ category: eq.category, id: eq.id }}
@@ -83,6 +99,6 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
           </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

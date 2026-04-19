@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
-import { EquipmentCard } from "@/components/atdb/EquipmentCard";
+import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
 import { CATEGORIES, getCategoryFleet, type EquipmentCategory } from "@/lib/atdb-data";
 
 const validCategories = Object.keys(CATEGORIES) as EquipmentCategory[];
@@ -62,11 +63,17 @@ function CategoryPage() {
       </section>
 
       <section className="bg-muted/40 py-16 md:py-20">
-        <div className="container-page grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={equipmentGridVariants}
+          className="container-page grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {items.map((eq) => (
             <EquipmentCard key={eq.id} eq={eq} />
           ))}
-        </div>
+        </motion.div>
       </section>
     </Layout>
   );

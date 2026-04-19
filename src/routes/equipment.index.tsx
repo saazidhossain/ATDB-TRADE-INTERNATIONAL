@@ -1,8 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { CATEGORIES, FLEET } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
+
+const categoryGridVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+};
+const categoryCardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const } },
+};
 
 export const Route = createFileRoute("/equipment/")({
   head: () => ({
@@ -37,30 +47,42 @@ function EquipmentIndex() {
       </section>
 
       <section className="bg-background py-20">
-        <div className="container-page grid gap-8 md:grid-cols-2">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={categoryGridVariants}
+          className="container-page grid gap-8 md:grid-cols-2"
+        >
           {Object.values(CATEGORIES).map((c) => {
             const count = FLEET.filter((f) => f.category === c.slug).length;
             return (
-              <Link
+              <motion.div
                 key={c.slug}
-                to="/equipment/$category"
-                params={{ category: c.slug }}
-                className="group relative isolate flex aspect-[16/10] flex-col justify-end overflow-hidden rounded-md border-safety-top shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover"
+                variants={categoryCardVariants}
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22 }}
               >
-                <img src={c.image} alt={c.label} loading="lazy" className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-iron-deep via-iron-deep/70 to-transparent" />
-                <div className="p-6 text-white md:p-8">
-                  <p className="font-bn text-sm text-bronze-glow">{c.label_bn}</p>
-                  <h2 className="mt-1 font-display text-2xl font-bold text-white md:text-3xl">{c.label}</h2>
-                  <p className="mt-1 text-sm text-white/80">{count} {t("common.units")} · {c.tagline}</p>
-                  <span className={`mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-safety ${fontClass}`}>
-                    {t("common.exploreCategory")} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
+                <Link
+                  to="/equipment/$category"
+                  params={{ category: c.slug }}
+                  className="group relative isolate flex aspect-[16/10] flex-col justify-end overflow-hidden rounded-md border-safety-top shadow-card hover:shadow-card-hover"
+                >
+                  <img src={c.image} alt={c.label} loading="lazy" className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-iron-deep via-iron-deep/70 to-transparent" />
+                  <div className="p-6 text-white md:p-8">
+                    <p className="font-bn text-sm text-bronze-glow">{c.label_bn}</p>
+                    <h2 className="mt-1 font-display text-2xl font-bold text-white md:text-3xl">{c.label}</h2>
+                    <p className="mt-1 text-sm text-white/80">{count} {t("common.units")} · {c.tagline}</p>
+                    <span className={`mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-safety ${fontClass}`}>
+                      {t("common.exploreCategory")} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </section>
     </Layout>
   );

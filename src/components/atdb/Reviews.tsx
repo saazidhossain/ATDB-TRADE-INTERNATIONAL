@@ -59,13 +59,19 @@ function Stars({ value }: { value: number }) {
   );
 }
 
+const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS_BN = ["জানু", "ফেব্রু", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্ট", "অক্টো", "নভে", "ডিসে"];
+const DIGITS_BN = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+const toBnDigits = (s: string) => s.replace(/\d/g, (d) => DIGITS_BN[Number(d)]);
+
 function formatDate(iso: string, lang: Lang) {
-  // Stable, locale-aware formatting — won't drift between SSR and client.
-  return new Date(iso).toLocaleDateString(lang === "bn" ? "bn-BD" : "en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  // Deterministic UTC formatting — identical on server and client to avoid hydration drift.
+  const d = new Date(iso);
+  const day = d.getUTCDate();
+  const month = (lang === "bn" ? MONTHS_BN : MONTHS_EN)[d.getUTCMonth()];
+  const year = d.getUTCFullYear();
+  const out = `${day} ${month} ${year}`;
+  return lang === "bn" ? toBnDigits(out) : out;
 }
 
 export function ReviewsSection() {

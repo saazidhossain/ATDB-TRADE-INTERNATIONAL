@@ -80,6 +80,10 @@ export async function renderHeader(
   doc.setTextColor(200, 204, 212);
   doc.text(ascii(S.subtitle), chipX + chipS + 12, chipY + 26);
 
+  // Thin safety-orange divider under the wordmark — echoes the brand band accent
+  doc.setFillColor(...SAFETY);
+  doc.rect(chipX + chipS + 12, chipY + 30, 24, 1, "F");
+
   // Right-aligned reference block
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7);

@@ -6,6 +6,7 @@ import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { CartButton } from "./CartButton";
 import { FacebookLink } from "./FacebookLink";
+import { WhatsappButton } from "./WhatsappButton";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -60,14 +61,14 @@ export function SiteHeader() {
             <Phone className="h-3.5 w-3.5" />
             {COMPANY.phones[0].number}
           </a>
-          <a
+          <WhatsappButton
             href={buildWhatsappGenericLink(undefined, lang)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`hidden rounded-sm bg-gradient-safety px-4 py-2.5 text-sm font-semibold text-white shadow-cta transition-transform hover:-translate-y-px md:inline-flex ${lang === "bn" ? "font-bn" : "font-display"}`}
+            variant="header"
+            ariaLabel={t("nav.getQuote")}
+            className="hidden md:inline-flex"
           >
             {t("nav.getQuote")}
-          </a>
+          </WhatsappButton>
           <button
             className="grid h-10 w-10 place-items-center rounded-sm border border-border md:hidden"
             onClick={() => setOpen((v) => !v)}
@@ -93,14 +94,15 @@ export function SiteHeader() {
                 {n.label}
               </Link>
             ))}
-            <a
-              href={buildWhatsappGenericLink(undefined, lang)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`mt-4 inline-flex justify-center rounded-sm bg-gradient-safety px-4 py-3 text-sm font-semibold text-white ${lang === "bn" ? "font-bn" : "font-display"}`}
-            >
-              {t("nav.whatsappQuote")}
-            </a>
+            <div className="mt-4">
+              <WhatsappButton
+                href={buildWhatsappGenericLink(undefined, lang)}
+                variant="cta"
+                fullWidth
+              >
+                {t("nav.whatsappQuote")}
+              </WhatsappButton>
+            </div>
             <div className="mt-3 flex justify-center">
               <FacebookLink variant="footer" label="Facebook" />
             </div>

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { X, Trash2, MapPin, Calendar, Plus, Minus, ShoppingCart } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/i18n";
+import { WhatsappButton } from "./WhatsappButton";
 
 export function CartDrawer() {
   const { isOpen, close, items, project, setProject, setQty, remove, clear, whatsappUrl, count } = useCart();
@@ -151,14 +152,9 @@ export function CartDrawer() {
 
         {items.length > 0 && (
           <div className="border-t border-border bg-card px-5 py-4">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex w-full items-center justify-center gap-2 rounded-sm bg-whatsapp px-5 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
-            >
-              <WaIcon /> {t("cart.send")} ({count})
-            </a>
+            <WhatsappButton href={whatsappUrl} variant="drawer" fullWidth>
+              {t("cart.send")} ({count})
+            </WhatsappButton>
             <button
               onClick={clear}
               className={`mt-2 w-full text-center text-xs font-medium text-muted-foreground hover:text-destructive ${fontClass}`}
@@ -203,13 +199,5 @@ function Field({
         className={`w-full rounded-sm border border-border bg-background px-3 py-2 text-sm text-iron focus:border-safety focus:outline-none ${fontClass ?? ""}`}
       />
     </div>
-  );
-}
-
-function WaIcon() {
-  return (
-    <svg viewBox="0 0 32 32" className="h-4 w-4 fill-white" aria-hidden="true">
-      <path d="M16.06 5.33c-5.91 0-10.71 4.8-10.71 10.7 0 1.89.5 3.74 1.45 5.36L5 27l5.78-1.51a10.7 10.7 0 0 0 5.28 1.36h.01c5.9 0 10.7-4.8 10.7-10.71 0-2.86-1.11-5.55-3.13-7.57a10.65 10.65 0 0 0-7.58-3.24z" />
-    </svg>
   );
 }

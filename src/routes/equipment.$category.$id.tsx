@@ -6,6 +6,7 @@ import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard, equipmentGridVariants } from "@/components/atdb/EquipmentCard";
 import { SpecGroupsAccordion } from "@/components/atdb/SpecGroups";
 import { ReviewsSection, SAMPLE_REVIEWS, reviewAggregate } from "@/components/atdb/Reviews";
+import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import {
   CATEGORIES,
   FLEET,
@@ -181,14 +182,11 @@ function EquipmentDetailPage() {
               <Highlight icon={MapPin} title={t("detail.spec.transport")} value={t("detail.spec.transport.v")} />
             </div>
 
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`mt-7 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-whatsapp px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-transform hover:-translate-y-px ${fontClass}`}
-            >
-              <WhatsappIcon /> {t("detail.cta.button")}
-            </a>
+            <div className="mt-7">
+              <WhatsappButton href={whatsappUrl} variant="cta" fullWidth>
+                {t("detail.cta.button")}
+              </WhatsappButton>
+            </div>
             <button
               type="button"
               onClick={() => add(eq)}
@@ -281,14 +279,9 @@ function EquipmentDetailPage() {
               <p className="mt-1 max-w-xl text-sm text-white/90">{t("detail.cta.body")}</p>
             </div>
           </div>
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 rounded-sm bg-iron-deep px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-px ${fontClass}`}
-          >
-            <WhatsappIcon /> {t("detail.cta.button")}
-          </a>
+          <WhatsappButton href={whatsappUrl} variant="ctaDark">
+            {t("detail.cta.button")}
+          </WhatsappButton>
         </div>
       </section>
 
@@ -413,13 +406,5 @@ function Highlight({ icon: Icon, title, value }: { icon: React.ComponentType<{ c
         <p className="mt-0.5 text-sm font-medium text-iron">{value}</p>
       </div>
     </div>
-  );
-}
-
-function WhatsappIcon() {
-  return (
-    <svg viewBox="0 0 32 32" className="h-4 w-4 fill-white" aria-hidden="true">
-      <path d="M16.06 5.33c-5.91 0-10.71 4.8-10.71 10.7 0 1.89.5 3.74 1.45 5.36L5 27l5.78-1.51a10.7 10.7 0 0 0 5.28 1.36h.01c5.9 0 10.7-4.8 10.7-10.71 0-2.86-1.11-5.55-3.13-7.57a10.65 10.65 0 0 0-7.58-3.24zm5.05 14.99c-.22.62-1.28 1.19-1.81 1.27-.47.07-1.08.1-1.74-.11-.4-.13-.92-.3-1.58-.58-2.77-1.2-4.59-4-4.72-4.18-.14-.18-1.13-1.49-1.13-2.84 0-1.35.71-2.02.96-2.29.25-.27.55-.34.74-.34l.53.01c.17.01.4-.06.62.47.22.54.76 1.87.83 2 .06.13.11.29.02.47-.09.18-.14.29-.27.45-.13.15-.28.34-.4.46-.14.14-.28.28-.12.55.16.27.7 1.15 1.49 1.86 1.03.92 1.89 1.21 2.16 1.34.27.13.42.11.58-.07.15-.18.67-.78.85-1.05.18-.26.36-.22.61-.13.25.09 1.57.74 1.84.87.27.13.45.2.52.31.06.11.06.65-.16 1.27z" />
-    </svg>
   );
 }

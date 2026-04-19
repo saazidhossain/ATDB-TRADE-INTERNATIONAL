@@ -335,6 +335,7 @@ const DIRECTIONS_URLS: Record<"dhaka" | "tangail", string> = {
 
 function OfficeMaps() {
   const { t, lang } = useI18n();
+  const fontClass = useFontClass();
   const [active, setActive] = useState<"dhaka" | "tangail">("dhaka");
   const office = COMPANY.offices.find((o) => o.city.toLowerCase() === active) ?? COMPANY.offices[0];
 

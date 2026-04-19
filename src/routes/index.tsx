@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, ShieldCheck, Zap, Wrench, BadgeCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Wrench, BadgeCheck, MapPin } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { EquipmentCard } from "@/components/atdb/EquipmentCard";
@@ -11,11 +11,9 @@ import {
   buildWhatsappGenericLink,
   type EquipmentCategory,
 } from "@/lib/atdb-data";
+import { PROJECTS as ALL_PROJECTS, type ProjectCategoryKey } from "@/lib/projects-data";
 import { useI18n } from "@/lib/i18n";
 import heroImg from "@/assets/brand/atdb-hero-monument.webp";
-import projectJamuna from "@/assets/projects/jamuna-bridge.jpg";
-import projectCenteon from "@/assets/projects/centeon-pharma.jpg";
-import projectRtip2 from "@/assets/projects/rtip2-ghatail.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,11 +29,18 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const PROJECTS: { img: string; key: "home.project.jamuna" | "home.project.pharma" | "home.project.rtip" }[] = [
-  { img: projectJamuna, key: "home.project.jamuna" },
-  { img: projectCenteon, key: "home.project.pharma" },
-  { img: projectRtip2, key: "home.project.rtip" },
-];
+// 6 featured projects — at least one from each of the 4 categories.
+const FEATURED_PROJECT_IDS = ["jamuna", "rtip2", "centeon", "pharmacil", "smc-reservoir", "centeon-etp"] as const;
+const HOME_PROJECTS = FEATURED_PROJECT_IDS
+  .map((id) => ALL_PROJECTS.find((p) => p.id === id))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p));
+
+const CAT_BADGE: Record<ProjectCategoryKey, string> = {
+  infra: "pcat.infra.badge",
+  industrial: "pcat.industrial.badge",
+  roads: "pcat.roads.badge",
+  civil: "pcat.civil.badge",
+};
 
 const BRANDS = ["Liebherr", "Kato", "Sakai", "CAT", "Komatsu", "JCB", "Dynapac", "Bomag", "CASE", "XCMG"];
 const CAT_KEYS: Record<EquipmentCategory, { label: string; tagline: string }> = {
@@ -220,29 +225,39 @@ function Index() {
       <section className="bg-iron-deep py-20 text-white md:py-28">
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
+            <div className="max-w-2xl">
               <p className={`eyebrow !text-bronze-glow ${lang === "bn" ? "font-bn" : ""}`}>{t("home.projects.eyebrow")}</p>
               <h2 className={`mt-2 text-3xl font-bold text-white md:text-4xl ${fontClass}`}>{t("home.projects.title")}</h2>
+              <p className={`mt-3 text-sm text-white/70 md:text-base ${fontClass}`}>{t("home.projects.sub")}</p>
             </div>
             <Link to="/projects" className={`inline-flex items-center gap-1 text-sm font-semibold text-safety hover:text-bronze-glow ${fontClass}`}>
               {t("home.projects.viewAll")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <motion.div className="mt-10 grid gap-5 md:grid-cols-3"
+          <motion.div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } }}>
-            {PROJECTS.map((p) => (
-              <motion.figure key={p.key}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } } }}>
+            {HOME_PROJECTS.map((p) => (
+              <motion.article key={p.id}
                 variants={{ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
                 whileHover={{ y: -6, transition: { type: "spring", stiffness: 320, damping: 22 } }}
                 className="group relative aspect-[4/5] overflow-hidden rounded-md shadow-card hover:shadow-card-hover">
-                <img src={p.img} alt={t(p.key)} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-iron-deep/95 via-iron-deep/30 to-transparent" />
-                <figcaption className={`absolute bottom-0 left-0 right-0 p-5 text-sm font-semibold text-white ${fontClass}`}>
-                  {t(p.key)}
-                </figcaption>
-              </motion.figure>
+                <img src={p.image} alt={tx(p.titleKey)} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-iron-deep/95 via-iron-deep/40 to-transparent" />
+                <span className={`absolute left-4 top-4 rounded-full border border-white/25 bg-iron-deep/60 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-bronze-glow backdrop-blur-md ${fontClass}`}>
+                  {tx(CAT_BADGE[p.category])}
+                </span>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className={`flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-safety ${fontClass}`}>
+                    <MapPin className="h-3 w-3" />
+                    {tx(p.locationKey)}
+                  </p>
+                  <h3 className={`mt-1.5 text-base font-bold leading-tight text-white md:text-lg ${fontClass}`}>
+                    {tx(p.titleKey)}
+                  </h3>
+                </div>
+              </motion.article>
             ))}
           </motion.div>
         </div>

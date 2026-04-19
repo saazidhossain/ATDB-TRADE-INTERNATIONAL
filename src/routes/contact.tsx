@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { Layout } from "@/components/atdb/Layout";
 import { FacebookFeed } from "@/components/atdb/FacebookFeed";
-import { FacebookLink } from "@/components/atdb/FacebookLink";
 import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import { ContactChannelButton } from "@/components/atdb/ContactChannelButton";
+import { ChannelIcon, PhoneGlyph, MailGlyph, FbGlyph, WaGlyphSm } from "@/components/atdb/ChannelIcon";
 import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
 import { useI18n } from "@/lib/i18n";
 

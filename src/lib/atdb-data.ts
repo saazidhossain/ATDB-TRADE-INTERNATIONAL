@@ -75,8 +75,21 @@ export interface Equipment {
   origin: string;
   year?: number;
   fuel?: string;
+  /** Quantity available in fleet (e.g., "01", "05"). */
+  quantity?: string;
   notes?: string;
+  /** Primary hero image. */
   image: string;
+  /**
+   * Optional gallery of additional cinematic, ATDB-watermarked photos.
+   * Order: action shot → close-up detail → operator cabin → site context.
+   * The hero image is automatically prepended in the UI.
+   */
+  gallery?: string[];
+  /** i18n key for the bilingual "Best For" use-case copy. */
+  bestForKey?: string;
+  /** i18n key for the long-form bilingual product description. */
+  descriptionKey?: string;
   featured?: boolean;
 }
 

@@ -33,7 +33,11 @@ export function SiteHeader() {
   const toggleLang = () => setLang(lang === "en" ? "bn" : "en");
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 transition-all duration-300">
+    <header
+      className={`sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 transition-all duration-300 ${
+        scrolled ? "shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)]" : "shadow-none"
+      }`}
+    >
       <div
         className={`container-page flex items-center justify-between gap-4 transition-all duration-300 ${
           scrolled ? "h-14 md:h-16 lg:h-16" : "h-16 md:h-20 lg:h-24 lg:py-2"

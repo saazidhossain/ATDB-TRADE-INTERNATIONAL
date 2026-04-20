@@ -65,7 +65,7 @@ function CategoryPage() {
   return (
     <Layout>
       <section className="relative isolate overflow-hidden bg-iron-deep py-20 text-white md:py-24">
-        <img src={cat.image} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-25" />
+        <img src={cat.image} alt="" loading="lazy" decoding="async" aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-25" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-iron-deep/70 to-iron-deep" />
         <div className="container-page">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1 text-xs text-white/65">

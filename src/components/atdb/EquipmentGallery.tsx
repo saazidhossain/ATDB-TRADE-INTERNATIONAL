@@ -364,7 +364,7 @@ function Lightbox({
               index === i ? "border-safety" : "border-white/20 hover:border-white/40"
             }`}
           >
-            <img src={slot.src} alt="" className="h-full w-full object-cover" />
+            <img src={slot.src} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </button>
         ))}
       </div>

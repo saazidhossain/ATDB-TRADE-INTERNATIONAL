@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import logo from "@/assets/brand/atdb-logo-light.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
@@ -11,8 +11,16 @@ import { ContactChannelButton } from "./ContactChannelButton";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { lang, setLang, t } = useI18n();
   const fontClass = useFontClass();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const NAV = [
     { to: "/" as const, label: t("nav.home") },
@@ -26,7 +34,11 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 transition-all duration-300">
-      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20 lg:h-24 lg:py-2">
+      <div
+        className={`container-page flex items-center justify-between gap-4 transition-all duration-300 ${
+          scrolled ? "h-14 md:h-16 lg:h-16" : "h-16 md:h-20 lg:h-24 lg:py-2"
+        }`}
+      >
         <Link
           to="/"
           className="flex items-center gap-2.5 group transition-opacity duration-300 hover:opacity-80 focus-visible:opacity-80"
@@ -37,7 +49,9 @@ export function SiteHeader() {
             alt="ATDB Trade International"
             width={180}
             height={48}
-            className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03] md:h-11 lg:h-14"
+            className={`w-auto object-contain transition-all duration-300 group-hover:scale-[1.03] ${
+              scrolled ? "h-8 md:h-9 lg:h-10" : "h-9 md:h-11 lg:h-14"
+            }`}
             fetchPriority="high"
           />
         </Link>

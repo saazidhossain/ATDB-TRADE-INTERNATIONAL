@@ -91,6 +91,8 @@ export const Route = createRootRoute({
                   "https://www.behance.net/saazidhossain",
                   "https://www.pinterest.com/saazidhossain",
                   "https://linkedin.com/in/saazidhossain",
+                  "https://www.saazidhossain.com",
+
                 ],
               },
             },

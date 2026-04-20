@@ -121,13 +121,13 @@ export function SiteFooter() {
               href="https://behance.net/saazidhossain"
               target="_blank"
               rel="noopener noreferrer author"
-              className="text-sm font-bold uppercase tracking-[0.25em] text-safety transition-colors duration-300 hover:text-white"
+              className="text-sm font-bold uppercase tracking-[0.25em] text-primary"
               title="Sazid Hossain — Architect & Designer · Behance portfolio"
             >
               {t("footer.credit")}
             </a>
           </p>
-          <p className={`text-xs text-white/40 md:mr-56 lg:mr-60 ${fontClass}`}>
+          <p className={`text-xs text-gray-500 ${fontClass}`}>
             © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
           </p>
         </div>

@@ -25,25 +25,29 @@ export function SiteHeader() {
   const toggleLang = () => setLang(lang === "en" ? "bn" : "en");
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="flex items-center gap-2.5 group" aria-label="ATDB Trade International — home">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 transition-all duration-300">
+      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20 lg:h-24 lg:py-2">
+        <Link
+          to="/"
+          className="flex items-center gap-2.5 group transition-opacity duration-300 hover:opacity-80 focus-visible:opacity-80"
+          aria-label="ATDB Trade International — home"
+        >
           <img
             src={logo}
             alt="ATDB Trade International"
             width={180}
             height={48}
-            className="h-9 w-auto object-contain transition-transform group-hover:scale-[1.03] md:h-11"
+            className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03] md:h-11 lg:h-14"
             fetchPriority="high"
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-8 md:flex lg:gap-10" aria-label="Main">
           {NAV.map((n) => (
             <Link
               key={n.to}
               to={n.to}
-              className={`text-sm font-medium text-iron/80 transition-colors hover:text-safety ${fontClass}`}
+              className={`text-sm font-medium text-iron/80 transition-colors duration-200 hover:text-safety lg:text-[15px] ${fontClass}`}
               activeProps={{ className: "text-safety" }}
               activeOptions={{ exact: n.to === "/" }}
             >

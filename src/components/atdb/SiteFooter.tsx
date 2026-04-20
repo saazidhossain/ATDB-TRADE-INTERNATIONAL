@@ -40,7 +40,7 @@ export function SiteFooter() {
           <p className={`mt-5 max-w-xs text-sm leading-relaxed text-white/65 ${fontClass}`}>
             {t("footer.tagline")}
           </p>
-          <p className="mt-4 text-xs text-white/50">TIN {COMPANY.tin} · VAT {COMPANY.vat}</p>
+          
         </div>
 
         <div>

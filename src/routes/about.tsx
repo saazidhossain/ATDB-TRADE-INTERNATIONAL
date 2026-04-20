@@ -3,6 +3,7 @@ import { Layout } from "@/components/atdb/Layout";
 import { COMPANY } from "@/lib/atdb-data";
 import { ShieldCheck, FileCheck, Building2, Leaf } from "lucide-react";
 import { useI18n, useFontClass } from "@/lib/i18n";
+import aboutOg from "@/assets/brand/atdb-hero-monument.webp";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -11,6 +12,8 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "Founded in 2000, ATDB Trade International is a 1st Class government-approved contractor and heavy equipment supplier with offices in Dhaka and Tangail." },
       { property: "og:title", content: "About ATDB Trade International" },
       { property: "og:description", content: "26 years building Bangladesh — certified fleet, 25 staff, 2 offices, government-compliant." },
+      { property: "og:image", content: aboutOg },
+      { name: "twitter:image", content: aboutOg },
     ],
   }),
   component: AboutPage,

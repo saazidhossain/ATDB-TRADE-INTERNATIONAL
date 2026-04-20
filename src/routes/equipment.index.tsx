@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/atdb/Layout";
 import { CATEGORIES, FLEET } from "@/lib/atdb-data";
 import { useI18n, useFontClass } from "@/lib/i18n";
+import equipmentOg from "@/assets/eq-crane-liebherr.webp";
 
 const categoryGridVariants = {
   hidden: {},
@@ -24,6 +25,8 @@ export const Route = createFileRoute("/equipment/")({
       },
       { property: "og:title", content: "Equipment Fleet — ATDB Trade International" },
       { property: "og:description", content: "30+ certified heavy machines across cranes, rollers, excavators and support equipment." },
+      { property: "og:image", content: equipmentOg },
+      { name: "twitter:image", content: equipmentOg },
     ],
   }),
   component: EquipmentIndex,

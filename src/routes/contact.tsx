@@ -7,6 +7,7 @@ import { WhatsappButton } from "@/components/atdb/WhatsappButton";
 import { ContactChannelButton } from "@/components/atdb/ContactChannelButton";
 import { COMPANY, buildWhatsappGenericLink, FLEET } from "@/lib/atdb-data";
 import { useI18n, useFontClass } from "@/lib/i18n";
+import contactOg from "@/assets/brand/atdb-hero-monument.webp";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -14,6 +15,9 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact ATDB Trade International — WhatsApp, Phone & Quote Form" },
       { name: "description", content: "Reach ATDB Trade International for heavy equipment rental quotations. WhatsApp +8801712106242. Offices in Dhaka and Tangail." },
       { property: "og:title", content: "Contact ATDB Trade International" },
+      { property: "og:description", content: "WhatsApp, phone, email or quote form — get a heavy-equipment rental quotation in minutes." },
+      { property: "og:image", content: contactOg },
+      { name: "twitter:image", content: contactOg },
     ],
   }),
   component: ContactPage,

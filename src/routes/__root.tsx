@@ -31,8 +31,8 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ATDB Trade International — Heavy Equipment Rental in Bangladesh" },
-      { name: "description", content: "Bangladesh's premier heavy equipment rental partner since 2000. Cranes, road rollers, excavators. Instant WhatsApp quotation." },
+      { title: "ATDB Trade International | Premier Heavy Equipment Rental in Bangladesh" },
+      { name: "description", content: "Bangladesh's trusted heavy equipment rental partner since 2000. Mobile cranes, excavators, road rollers, and support equipment for mega-infrastructure projects." },
       { name: "author", content: "ATDB Trade International" },
       { name: "creator", content: "Sazid Hossain — A SAZID HOSSAIN ARCHITECTURE" },
       { name: "designer", content: "Sazid Hossain (behance.net/saazidhossain)" },

@@ -26,7 +26,7 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-gradient-iron text-white/85">
-      <div className="container-page grid grid-cols-1 gap-8 py-16 pb-28 sm:grid-cols-2 md:gap-12 lg:grid-cols-4 lg:pb-16">
+      <div className="container-page grid grid-cols-1 gap-8 py-16 sm:grid-cols-2 md:gap-12 lg:grid-cols-4">
         <div className="lg:col-span-1">
           <img
             src={logo}
@@ -114,7 +114,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 pb-24 md:pb-0">
+      <div className="border-t border-white/10 pb-24 md:pb-8">
         <div className="container-page flex flex-col items-center justify-between gap-4 py-5 text-center md:flex-row md:items-center md:gap-2 md:space-y-0 md:text-left">
           <p className={fontClass}>
             <a
@@ -127,7 +127,7 @@ export function SiteFooter() {
               {t("footer.credit")}
             </a>
           </p>
-          <p className={`text-xs text-white/40 ${fontClass}`}>
+          <p className={`text-xs text-white/40 md:mr-56 lg:mr-60 ${fontClass}`}>
             © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
           </p>
         </div>

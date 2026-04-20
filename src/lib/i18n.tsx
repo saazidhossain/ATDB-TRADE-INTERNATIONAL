@@ -312,8 +312,6 @@ export const TRANSLATIONS: Dict = {
   "about.role.ceo": { en: "Chief Executive Officer", bn: "প্রধান নির্বাহী কর্মকর্তা" },
   "about.credentials": { en: "Credentials", bn: "ক্রেডেনশিয়াল" },
   "about.credentials.title": { en: "Certified, compliant, audit-ready.", bn: "সার্টিফাইড, কমপ্লায়েন্ট, অডিট-রেডি।" },
-  "about.cred.tin": { en: "TIN", bn: "TIN" },
-  "about.cred.vat": { en: "VAT", bn: "VAT" },
   "about.cred.bank": { en: "Bank", bn: "ব্যাংক" },
   "about.cred.inspection": { en: "Inspection", bn: "ইন্সপেকশন" },
   "about.cred.class": { en: "Class", bn: "শ্রেণি" },

@@ -115,7 +115,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10 pb-24 md:pb-0">
-        <div className="container-page flex flex-col items-center justify-between gap-4 py-5 text-center md:flex-row md:items-center md:gap-2 md:space-y-0 md:text-left">
+        <div className="container-page flex flex-col items-center justify-between gap-4 py-5 text-center md:flex-row md:items-center md:gap-2 md:space-y-0 md:pr-48 md:text-left lg:pr-56">
           <p className={fontClass}>
             <a
               href="https://behance.net/saazidhossain"

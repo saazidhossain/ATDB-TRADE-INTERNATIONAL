@@ -114,21 +114,21 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-center justify-between gap-4 py-5 text-center text-xs text-white/50 md:flex-row md:items-center md:gap-2 md:space-y-0 md:text-left">
-          <p className={fontClass}>
-            © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
-          </p>
+      <div className="border-t border-white/10 pb-24 md:pb-0">
+        <div className="container-page flex flex-col items-center justify-between gap-4 py-5 text-center md:flex-row md:items-center md:gap-2 md:space-y-0 md:text-left">
           <p className={fontClass}>
             <a
               href="https://behance.net/saazidhossain"
               target="_blank"
               rel="noopener noreferrer author"
-              className="text-xs font-semibold tracking-[0.2em] text-bronze-glow/80 transition-colors duration-300 hover:text-bronze-glow"
+              className="text-sm font-bold uppercase tracking-[0.25em] text-safety transition-colors duration-300 hover:text-white"
               title="Sazid Hossain — Architect & Designer · Behance portfolio"
             >
               {t("footer.credit")}
             </a>
+          </p>
+          <p className={`text-xs text-white/40 ${fontClass}`}>
+            © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
           </p>
         </div>
       </div>

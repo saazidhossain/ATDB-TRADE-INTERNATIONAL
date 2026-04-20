@@ -1,0 +1,80 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        iron: 'var(--iron)',
+        'iron-deep': 'var(--iron-deep)',
+        steel: 'var(--steel)',
+        bronze: 'var(--bronze)',
+        'bronze-glow': 'var(--bronze-glow)',
+        safety: 'var(--safety)',
+        'safety-deep': 'var(--safety-deep)',
+        whatsapp: 'var(--whatsapp)',
+        success: 'var(--success)',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        card: 'var(--card)',
+        'card-foreground': 'var(--card-foreground)',
+        popover: 'var(--popover)',
+        'popover-foreground': 'var(--popover-foreground)',
+        primary: 'var(--primary)',
+        'primary-foreground': 'var(--primary-foreground)',
+        secondary: 'var(--secondary)',
+        'secondary-foreground': 'var(--secondary-foreground)',
+        muted: 'var(--muted)',
+        'muted-foreground': 'var(--muted-foreground)',
+        accent: 'var(--accent)',
+        'accent-foreground': 'var(--accent-foreground)',
+        destructive: 'var(--destructive)',
+        'destructive-foreground': 'var(--destructive-foreground)',
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)',
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      fontFamily: {
+        display: ['Montserrat', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
+        bn: ['Hind Siliguri', 'Noto Sans Bengali', 'sans-serif'],
+      },
+      keyframes: {
+        brandMarquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
+        emberDrift: {
+          '0%': { transform: 'translate3d(0, 0, 0) scale(1)', opacity: '0' },
+          '10%': { opacity: '1' },
+          '50%': { transform: 'translate3d(8px, -55vh, 0) scale(1.15)' },
+          '90%': { opacity: '1' },
+          '100%': { transform: 'translate3d(-6px, -110vh, 0) scale(0.85)', opacity: '0' },
+        },
+        'atdb-ripple': {
+          '0%': { transform: 'scale(1)', opacity: '0.55' },
+          '80%': { transform: 'scale(1.9)', opacity: '0' },
+          '100%': { transform: 'scale(1.9)', opacity: '0' },
+        },
+        'atdb-spin-slow': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+      },
+      animation: {
+        'brand-marquee': 'brandMarquee 28s linear infinite',
+        'ember-drift': 'emberDrift var(--dur) linear infinite',
+        'atdb-ripple': 'atdb-ripple 2s ease-out infinite',
+        'atdb-spin-slow': 'atdb-spin-slow 12s linear infinite',
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+}

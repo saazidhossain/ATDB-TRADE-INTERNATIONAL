@@ -1,53 +1,14 @@
-@import "tailwindcss" source(none);
-@source "../src";
-@import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@custom-variant dark (&:is(.dark *));
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 
 /*
  * ATDB Trade International — Design System
  * Direction: Industrial bronze & steel + safety orange accent.
  * Editorial industrial minimalism. 8pt grid. Montserrat display, Inter body.
  */
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-iron: var(--iron);
-  --color-iron-deep: var(--iron-deep);
-  --color-bronze: var(--bronze);
-  --color-bronze-glow: var(--bronze-glow);
-  --color-safety: var(--safety);
-  --color-safety-deep: var(--safety-deep);
-  --color-steel: var(--steel);
-  --color-whatsapp: var(--whatsapp);
-  --color-success: var(--success);
-  --font-display: 'Montserrat', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-bn: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
-}
 
 :root {
   --radius: 0.25rem;
@@ -122,7 +83,7 @@
 
 @layer base {
   * {
-    border-color: var(--color-border);
+    border-color: var(--border);
   }
 
   html {
@@ -130,24 +91,24 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-body);
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5 {
-    font-family: var(--font-display);
-    color: var(--color-iron);
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--iron);
     letter-spacing: -0.01em;
   }
 
-  .font-display { font-family: var(--font-display); }
-  .font-bn { font-family: var(--font-bn); line-height: 1.7; }
+  .font-display { font-family: 'Montserrat', system-ui, sans-serif; }
+  .font-bn { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; line-height: 1.7; }
 
   ::selection {
-    background: var(--color-safety);
+    background: var(--safety);
     color: white;
   }
 }
@@ -173,15 +134,15 @@
   .shadow-card-hover { box-shadow: var(--shadow-card-hover); }
   .shadow-cta { box-shadow: var(--shadow-cta); }
 
-  .border-safety-top { border-top: 4px solid var(--color-safety); }
+  .border-safety-top { border-top: 4px solid var(--safety); }
 
   .eyebrow {
-    font-family: var(--font-display);
+    font-family: 'Montserrat', system-ui, sans-serif;
     font-weight: 600;
     font-size: 0.75rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-safety);
+    color: var(--safety);
   }
 }
 

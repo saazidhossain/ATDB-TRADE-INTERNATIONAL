@@ -127,7 +127,7 @@ export function SiteFooter() {
               {t("footer.credit")}
             </a>
           </p>
-          <p className={`text-xs text-white/40 ${fontClass}`}>
+          <p className={`text-xs text-white/40 md:mr-56 lg:mr-60 ${fontClass}`}>
             © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
           </p>
         </div>

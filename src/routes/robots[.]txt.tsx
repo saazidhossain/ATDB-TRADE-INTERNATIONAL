@@ -8,9 +8,10 @@ function getOrigin(request: Request): string {
 }
 
 export const Route = createFileRoute("/robots.txt")({
+  // @ts-expect-error TanStack Start `server` option not in router type defs
   server: {
     handlers: {
-      GET: async ({ request }) => {
+      GET: async ({ request }: { request: Request }) => {
         const origin = getOrigin(request);
         const body = `# ATDB Trade International — robots.txt
 User-agent: *

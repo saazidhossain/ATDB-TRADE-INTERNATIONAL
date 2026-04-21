@@ -9,9 +9,10 @@ function getOrigin(request: Request): string {
 }
 
 export const Route = createFileRoute("/sitemap.xml")({
+  // @ts-expect-error TanStack Start `server` option not in router type defs
   server: {
     handlers: {
-      GET: async ({ request }) => {
+      GET: async ({ request }: { request: Request }) => {
         const origin = getOrigin(request);
         const today = new Date().toISOString().slice(0, 10);
 

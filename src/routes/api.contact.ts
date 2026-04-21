@@ -71,11 +71,12 @@ async function hashIp(ip: string): Promise<string> {
 }
 
 export const Route = createFileRoute("/api/contact")({
+  // @ts-expect-error TanStack Start `server` option not in router type defs
   server: {
     handlers: {
       OPTIONS: async () => new Response(null, { status: 204, headers: CORS }),
 
-      POST: async ({ request }) => {
+      POST: async ({ request }: { request: Request }) => {
         const ip =
           request.headers.get("cf-connecting-ip") ||
           request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||

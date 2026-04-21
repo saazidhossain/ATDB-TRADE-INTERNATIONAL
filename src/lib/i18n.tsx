@@ -230,7 +230,7 @@ export const TRANSLATIONS: Dict = {
   "footer.bank": { en: "Bank", bn: "ব্যাংক" },
   "footer.tagline": { en: "Bangladesh's premier heavy equipment rental partner. Since 2000.", bn: "বাংলাদেশের সেরা হেভি ইকুইপমেন্ট রেন্টাল পার্টনার। ২০০০ সাল থেকে।" },
   "footer.rights": { en: "All rights reserved.", bn: "সর্বস্বত্ব সংরক্ষিত।" },
-  "footer.credit": { en: "SAZID HOSSAIN", bn: "সাজিদ হোসেন" },
+  "footer.credit": { en: "A SAZID HOSSAIN ARCHITECTURE", bn: "একটি সাজিদ হোসেন স্থাপত্য" },
 
   // ─── Cart ────────────────────────────────────────────────────────
   "common.addToQuote": { en: "Add to quote", bn: "কোটেশনে যোগ করুন" },
@@ -312,6 +312,8 @@ export const TRANSLATIONS: Dict = {
   "about.role.ceo": { en: "Chief Executive Officer", bn: "প্রধান নির্বাহী কর্মকর্তা" },
   "about.credentials": { en: "Credentials", bn: "ক্রেডেনশিয়াল" },
   "about.credentials.title": { en: "Certified, compliant, audit-ready.", bn: "সার্টিফাইড, কমপ্লায়েন্ট, অডিট-রেডি।" },
+  "about.cred.tin": { en: "TIN", bn: "TIN" },
+  "about.cred.vat": { en: "VAT", bn: "VAT" },
   "about.cred.bank": { en: "Bank", bn: "ব্যাংক" },
   "about.cred.inspection": { en: "Inspection", bn: "ইন্সপেকশন" },
   "about.cred.class": { en: "Class", bn: "শ্রেণি" },

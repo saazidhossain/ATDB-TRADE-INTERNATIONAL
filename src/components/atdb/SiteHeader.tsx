@@ -45,7 +45,7 @@ export function SiteHeader() {
       >
         <Link
           to="/"
-          className="flex items-center gap-2.5 group transition-opacity duration-300 ease-in-out hover:opacity-85 focus-visible:opacity-85"
+          className="flex items-center gap-2.5 group transition-opacity duration-300 hover:opacity-80 focus-visible:opacity-80"
           aria-label="ATDB Trade International — home"
         >
           <img
@@ -53,8 +53,8 @@ export function SiteHeader() {
             alt="ATDB Trade International"
             width={180}
             height={48}
-            className={`w-auto object-contain transition-all duration-300 ease-in-out group-hover:scale-[1.03] ${
-              scrolled ? "h-10 md:h-11 lg:h-12" : "h-11 sm:h-12 md:h-14 lg:h-16"
+            className={`w-auto object-contain transition-all duration-300 group-hover:scale-[1.03] ${
+              scrolled ? "h-8 md:h-9 lg:h-10" : "h-9 md:h-11 lg:h-14"
             }`}
             fetchPriority="high"
           />

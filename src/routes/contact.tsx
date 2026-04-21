@@ -308,6 +308,9 @@ function ContactPage() {
                   );
                 })}
               </ul>
+              <p className="mt-4 text-xs text-muted-foreground">
+                TIN {COMPANY.tin} · VAT {COMPANY.vat}
+              </p>
             </div>
           </div>
         </div>

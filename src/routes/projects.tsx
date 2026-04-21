@@ -7,7 +7,7 @@ import { useI18n, TRANSLATIONS, useFontClass } from "@/lib/i18n";
 import { buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { PROJECT_CATEGORIES, PROJECTS, HERO_PROJECT_IMAGE } from "@/lib/projects-data";
 
-const SITE_URL = "https://www.atdbtrade.com";
+const SITE_URL = "https://atdb.lovable.app";
 const en = (key: string): string => TRANSLATIONS[key]?.en ?? key;
 
 const projectsJsonLd = {

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin, Phone, Mail, Facebook, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, MessageCircle, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import logo from "@/assets/brand/atdb-logo-dark.webp";
 import { COMPANY, buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { useI18n, useFontClass } from "@/lib/i18n";
@@ -25,7 +26,10 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="bg-gradient-iron pb-24 text-white/85 md:pb-8">
+    <footer className="relative bg-gradient-iron pb-24 text-white/85 md:pb-8">
+      {/* Decorative top gradient line */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-bronze-glow/40 to-transparent" />
+      
       <div className="container-page grid gap-12 py-16 md:grid-cols-4">
         <div className="md:col-span-1">
           <img src={logo} alt="ATDB Trade International" width={220} height={64} className="h-14 w-auto object-contain" />
@@ -105,21 +109,52 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-center justify-between space-y-4 py-5 md:flex-row md:items-center md:space-y-0">
-          <p className={fontClass}>
-            <a
-              href="https://behance.net/saazidhossain"
-              target="_blank"
-              rel="noopener noreferrer author"
-              className="relative inline-block text-sm font-bold uppercase tracking-[0.25em] text-primary transition-colors duration-300 hover:text-white after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
-              title="Sazid Hossain — Architect & Designer · Behance portfolio"
-            >
-              {t("footer.credit")}
-            </a>
-          </p>
-          <p className={`text-xs text-gray-500 ${fontClass}`}>
-            © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
+      {/* Premium Designer Credit Section */}
+      <div className="border-t border-white/5">
+        <div className="container-page flex flex-col items-center justify-between gap-6 py-8 md:flex-row md:items-center">
+          {/* Designer Credit — Premium Branding */}
+          <motion.div
+            className="group relative flex items-center gap-3"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          >
+            <div className="relative">
+              {/* Animated glow backdrop */}
+              <div className="pointer-events-none absolute -inset-2 rounded-full bg-gradient-to-r from-bronze-glow/40 via-safety/20 to-bronze-glow/40 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
+              
+              {/* Glass container with premium styling */}
+              <a
+                href="https://behance.net/saazidhossain"
+                target="_blank"
+                rel="noopener noreferrer author"
+                className="relative inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/8 px-5 py-2.5 backdrop-blur-md transition-all duration-300 hover:border-bronze-glow/60 hover:bg-white/12 hover:shadow-[0_8px_24px_rgba(212,162,77,0.2)]"
+                title="Sazid Hossain — Architect & Designer · Award-Winning Portfolio"
+              >
+                {/* Shimmer effect */}
+                <span className="pointer-events-none absolute inset-0 -translate-x-full rounded-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                
+                {/* Sparkle icon */}
+                <span className="relative">
+                  <Sparkles className="h-3.5 w-3.5 text-bronze-glow transition-transform duration-300 group-hover:rotate-12" />
+                </span>
+                
+                {/* Text content */}
+                <span className="relative flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-bronze-glow to-safety" />
+                  <span className={`text-xs font-semibold uppercase tracking-[0.16em] text-white/90 transition-colors group-hover:text-bronze-glow ${fontClass}`}>
+                    Designed by
+                  </span>
+                  <span className={`text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-bronze-glow via-safety to-bronze-glow bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105 ${fontClass}`}>
+                    Sazid Hossain
+                  </span>
+                </span>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Copyright */}
+          <p className={`text-xs text-white/50 transition-colors duration-300 ${fontClass}`}>
+            © {year ?? "—"} <span className="font-semibold text-white/70">{COMPANY.name}</span>. {t("footer.rights")}
           </p>
         </div>
       </div>

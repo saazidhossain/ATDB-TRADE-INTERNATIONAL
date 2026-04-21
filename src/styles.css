@@ -127,6 +127,10 @@
 
   html {
     scroll-behavior: smooth;
+    /* Sticky header offset so anchor jumps don't get hidden behind navbar */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -134,7 +138,10 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Prevent horizontal overflow from animations / wide content */
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5 {
@@ -143,12 +150,36 @@
     letter-spacing: -0.01em;
   }
 
+  h2, h3, h4 {
+    /* Same sticky-header offset for in-page anchor targets */
+    scroll-margin-top: 6rem;
+  }
+
   .font-display { font-family: var(--font-display); }
   .font-bn { font-family: var(--font-bn); line-height: 1.7; }
 
   ::selection {
     background: var(--color-safety);
     color: white;
+  }
+
+  /* Accessible keyboard focus — visible only for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--color-safety);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  :focus:not(:focus-visible) { outline: none; }
+
+  /* Snappier tap response on touch devices, no blue tap highlight */
+  a, button, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Higher-quality image rendering for the equipment galleries */
+  img {
+    image-rendering: -webkit-optimize-contrast;
   }
 }
 

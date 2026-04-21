@@ -112,7 +112,7 @@ export function SiteFooter() {
               href="https://behance.net/saazidhossain"
               target="_blank"
               rel="noopener noreferrer author"
-              className="text-sm font-bold uppercase tracking-[0.25em] text-primary transition-colors duration-300 hover:text-white"
+              className="relative inline-block text-sm font-bold uppercase tracking-[0.25em] text-primary transition-colors duration-300 hover:text-white after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
               title="Sazid Hossain — Architect & Designer · Behance portfolio"
             >
               {t("footer.credit")}

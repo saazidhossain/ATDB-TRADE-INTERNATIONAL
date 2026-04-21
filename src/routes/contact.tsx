@@ -297,7 +297,7 @@ function ContactPage() {
                   const cityTr = o.city === "Dhaka" ? t("office.dhaka") : t("office.tangail");
                   const addrTr = o.city === "Dhaka" ? t("office.dhaka.address") : t("office.tangail.address");
                   return (
-                    <li key={o.city} className="flex items-start gap-3 rounded-md border border-border bg-card p-4">
+                    <li key={o.city} className="hover-lift flex items-start gap-3 rounded-md border border-border bg-card p-4 hover:shadow-card hover:border-safety/40">
                       <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-bronze-glow" />
                       <div>
                         <p className={`text-[11px] uppercase tracking-[0.16em] text-safety ${fontClass}`}>{labelTr}</p>

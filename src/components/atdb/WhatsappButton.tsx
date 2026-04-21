@@ -128,11 +128,7 @@ export function WhatsappButton({
   if (variant === "cta" || variant === "drawer" || variant === "hero" || variant === "ctaDark") {
     const isDark = variant === "ctaDark";
     const isHero = variant === "hero";
-    const sizing = isHero
-      ? "px-7 py-4"
-      : variant === "drawer"
-      ? "px-5 py-3.5"
-      : "px-7 py-4";
+    const sizing = isHero ? "px-7 py-4" : variant === "drawer" ? "px-5 py-3.5" : "px-7 py-4";
     return (
       <motion.a
         href={href}

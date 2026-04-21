@@ -9,9 +9,17 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About ATDB — 26 Years of Heavy Equipment Excellence in Bangladesh" },
-      { name: "description", content: "Founded in 2000, ATDB Trade International is a 1st Class government-approved contractor and heavy equipment supplier with offices in Dhaka and Tangail." },
+      {
+        name: "description",
+        content:
+          "Founded in 2000, ATDB Trade International is a 1st Class government-approved contractor and heavy equipment supplier with offices in Dhaka and Tangail.",
+      },
       { property: "og:title", content: "About ATDB Trade International" },
-      { property: "og:description", content: "26 years building Bangladesh — certified fleet, 25 staff, 2 offices, government-compliant." },
+      {
+        property: "og:description",
+        content:
+          "26 years building Bangladesh — certified fleet, 25 staff, 2 offices, government-compliant.",
+      },
       { property: "og:image", content: aboutOg },
       { name: "twitter:image", content: aboutOg },
     ],
@@ -44,9 +52,7 @@ function AboutPage() {
           <h1 className={`mt-2 max-w-3xl text-4xl font-bold text-white md:text-5xl ${fontClass}`}>
             {t("about.title")}
           </h1>
-          <p className={`mt-5 max-w-2xl text-lg text-white/80 ${fontClass}`}>
-            {t("about.lede")}
-          </p>
+          <p className={`mt-5 max-w-2xl text-lg text-white/80 ${fontClass}`}>{t("about.lede")}</p>
         </div>
       </section>
 
@@ -54,21 +60,35 @@ function AboutPage() {
         <div className="container-page grid gap-12 lg:grid-cols-2">
           <div>
             <p className={`eyebrow ${fontClassEyebrow}`}>{t("about.leadership")}</p>
-            <h2 className={`mt-2 text-3xl font-bold text-iron ${fontClass}`}>{t("about.leadership.title")}</h2>
+            <h2 className={`mt-2 text-3xl font-bold text-iron ${fontClass}`}>
+              {t("about.leadership.title")}
+            </h2>
             <div className="mt-8 space-y-6">
               <div className="rounded-md border border-border bg-card p-6 shadow-card border-safety-top">
-                <p className={`text-xs uppercase tracking-[0.18em] text-muted-foreground ${fontClass}`}>{t("about.role.proprietor")}</p>
-                <p className="mt-1 font-display text-xl font-semibold text-iron">{COMPANY.proprietor}</p>
+                <p
+                  className={`text-xs uppercase tracking-[0.18em] text-muted-foreground ${fontClass}`}
+                >
+                  {t("about.role.proprietor")}
+                </p>
+                <p className="mt-1 font-display text-xl font-semibold text-iron">
+                  {COMPANY.proprietor}
+                </p>
               </div>
               <div className="rounded-md border border-border bg-card p-6 shadow-card border-safety-top">
-                <p className={`text-xs uppercase tracking-[0.18em] text-muted-foreground ${fontClass}`}>{t("about.role.ceo")}</p>
+                <p
+                  className={`text-xs uppercase tracking-[0.18em] text-muted-foreground ${fontClass}`}
+                >
+                  {t("about.role.ceo")}
+                </p>
                 <p className="mt-1 font-display text-xl font-semibold text-iron">{COMPANY.ceo}</p>
               </div>
             </div>
           </div>
           <div>
             <p className={`eyebrow ${fontClassEyebrow}`}>{t("about.credentials")}</p>
-            <h2 className={`mt-2 text-3xl font-bold text-iron ${fontClass}`}>{t("about.credentials.title")}</h2>
+            <h2 className={`mt-2 text-3xl font-bold text-iron ${fontClass}`}>
+              {t("about.credentials.title")}
+            </h2>
             <dl className="mt-8 divide-y divide-border rounded-md border border-border bg-card shadow-card">
               {CREDENTIALS.map(([k, v]) => (
                 <div key={k} className="flex items-start justify-between gap-6 px-6 py-4">
@@ -106,13 +126,15 @@ function AboutPage() {
                   className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
                 />
                 <div className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-sm border border-iron/15 bg-white/40 backdrop-blur-md backdrop-saturate-150 transition-colors group-hover:border-safety/50">
-                  <span
-                    className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-[hsl(24,94%,53%)] to-[hsl(20,90%,42%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_8px_rgba(245,124,0,0.45)] ring-1 ring-white/30 transition-transform duration-300 group-hover:rotate-[10deg]"
-                  >
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-[hsl(24,94%,53%)] to-[hsl(20,90%,42%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_8px_rgba(245,124,0,0.45)] ring-1 ring-white/30 transition-transform duration-300 group-hover:rotate-[10deg]">
                     <v.icon className="h-4 w-4 text-white" strokeWidth={2.2} />
                   </span>
                 </div>
-                <h3 className={`relative mt-4 text-lg font-semibold text-iron transition-colors group-hover:text-safety ${fontClass}`}>{v.t}</h3>
+                <h3
+                  className={`relative mt-4 text-lg font-semibold text-iron transition-colors group-hover:text-safety ${fontClass}`}
+                >
+                  {v.t}
+                </h3>
                 <p className={`relative mt-2 text-sm text-muted-foreground ${fontClass}`}>{v.d}</p>
               </div>
             ))}

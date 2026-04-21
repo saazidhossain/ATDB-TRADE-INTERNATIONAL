@@ -32,7 +32,11 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "ATDB Trade International | Premier Heavy Equipment Rental in Bangladesh" },
-      { name: "description", content: "Bangladesh's trusted heavy equipment rental partner since 2000. Mobile cranes, excavators, road rollers, and support equipment for mega-infrastructure projects." },
+      {
+        name: "description",
+        content:
+          "Bangladesh's trusted heavy equipment rental partner since 2000. Mobile cranes, excavators, road rollers, and support equipment for mega-infrastructure projects.",
+      },
       { name: "author", content: "ATDB Trade International" },
       { name: "creator", content: "Sazid Hossain — A SAZID HOSSAIN ARCHITECTURE" },
       { name: "designer", content: "Sazid Hossain (behance.net/saazidhossain)" },
@@ -43,13 +47,35 @@ export const Route = createRootRoute({
       { property: "og:locale", content: "en_US" },
       { property: "og:locale:alternate", content: "bn_BD" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "ATDB Trade International | Premier Heavy Equipment Rental in Bangladesh" },
-      { name: "twitter:title", content: "ATDB Trade International | Premier Heavy Equipment Rental in Bangladesh" },
-      { property: "og:description", content: "Bangladesh's trusted heavy equipment rental partner since 2000. Mobile cranes, excavators, road rollers, and support equipment for mega-infrastructure projects." },
-      { name: "twitter:description", content: "Bangladesh's trusted heavy equipment rental partner since 2000. Mobile cranes, excavators, road rollers, and support equipment for mega-infrastructure projects." },
+      {
+        property: "og:title",
+        content: "ATDB Trade International | Premier Heavy Equipment Rental in Bangladesh",
+      },
+      {
+        name: "twitter:title",
+        content: "ATDB Trade International | Premier Heavy Equipment Rental in Bangladesh",
+      },
+      {
+        property: "og:description",
+        content:
+          "Bangladesh's trusted heavy equipment rental partner since 2000. Mobile cranes, excavators, road rollers, and support equipment for mega-infrastructure projects.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Bangladesh's trusted heavy equipment rental partner since 2000. Mobile cranes, excavators, road rollers, and support equipment for mega-infrastructure projects.",
+      },
       { property: "og:url", content: "https://www.atdbtrade.com" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e50bbcf7-c7b8-45e1-a9bf-c1598573f482" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e50bbcf7-c7b8-45e1-a9bf-c1598573f482" },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e50bbcf7-c7b8-45e1-a9bf-c1598573f482",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e50bbcf7-c7b8-45e1-a9bf-c1598573f482",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

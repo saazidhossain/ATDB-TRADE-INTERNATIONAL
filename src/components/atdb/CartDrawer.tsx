@@ -5,7 +5,8 @@ import { useI18n, useFontClass } from "@/lib/i18n";
 import { WhatsappButton } from "./WhatsappButton";
 
 export function CartDrawer() {
-  const { isOpen, close, items, project, setProject, setQty, remove, clear, whatsappUrl, count } = useCart();
+  const { isOpen, close, items, project, setProject, setQty, remove, clear, whatsappUrl, count } =
+    useCart();
   const { t, lang } = useI18n();
   const fontClass = useFontClass();
 
@@ -23,7 +24,12 @@ export function CartDrawer() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label={t("cart.title")}>
+    <div
+      className="fixed inset-0 z-[60]"
+      role="dialog"
+      aria-modal="true"
+      aria-label={t("cart.title")}
+    >
       <button
         className="absolute inset-0 bg-iron-deep/60 backdrop-blur-sm animate-in fade-in duration-200"
         onClick={close}
@@ -68,8 +74,14 @@ export function CartDrawer() {
                 <li key={it.id} className="rounded-md border border-border bg-card p-4 shadow-card">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className={`text-[10px] font-semibold uppercase tracking-[0.18em] text-safety ${fontClass}`}>{it.id}</p>
-                      <p className={`mt-1 truncate text-sm font-semibold text-iron ${fontClass}`}>{it.name}</p>
+                      <p
+                        className={`text-[10px] font-semibold uppercase tracking-[0.18em] text-safety ${fontClass}`}
+                      >
+                        {it.id}
+                      </p>
+                      <p className={`mt-1 truncate text-sm font-semibold text-iron ${fontClass}`}>
+                        {it.name}
+                      </p>
                       <p className="mt-0.5 text-xs text-muted-foreground">{it.capacity}</p>
                     </div>
                     <button
@@ -88,7 +100,9 @@ export function CartDrawer() {
                     >
                       <Minus className="h-3.5 w-3.5" />
                     </button>
-                    <span className="w-9 text-center font-display text-sm font-semibold text-iron">{it.qty}</span>
+                    <span className="w-9 text-center font-display text-sm font-semibold text-iron">
+                      {it.qty}
+                    </span>
                     <button
                       onClick={() => setQty(it.id, it.qty + 1)}
                       aria-label={t("cart.increase")}
@@ -101,7 +115,9 @@ export function CartDrawer() {
               ))}
 
               <li className="mt-2 rounded-md border-safety-top border border-border bg-card p-4 shadow-card">
-                <p className={`text-xs font-semibold uppercase tracking-[0.16em] text-safety ${fontClass}`}>
+                <p
+                  className={`text-xs font-semibold uppercase tracking-[0.16em] text-safety ${fontClass}`}
+                >
                   {t("cart.project")}
                 </p>
                 <div className="mt-3 space-y-3">
@@ -132,7 +148,9 @@ export function CartDrawer() {
                     />
                   </div>
                   <div>
-                    <label className={`mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground ${fontClass}`}>
+                    <label
+                      className={`mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground ${fontClass}`}
+                    >
                       {t("cart.notes")}
                     </label>
                     <textarea
@@ -187,7 +205,9 @@ function Field({
 }) {
   return (
     <div>
-      <label className={`mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground ${fontClass ?? ""}`}>
+      <label
+        className={`mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground ${fontClass ?? ""}`}
+      >
         {icon}
         {label}
       </label>

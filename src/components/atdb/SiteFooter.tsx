@@ -20,15 +20,30 @@ export function SiteFooter() {
   ];
 
   const officeFor = (city: string) => {
-    if (city === "Dhaka") return { label: t("office.corporate"), city: t("office.dhaka"), addr: t("office.dhaka.address") };
-    return { label: t("office.branch"), city: t("office.tangail"), addr: t("office.tangail.address") };
+    if (city === "Dhaka")
+      return {
+        label: t("office.corporate"),
+        city: t("office.dhaka"),
+        addr: t("office.dhaka.address"),
+      };
+    return {
+      label: t("office.branch"),
+      city: t("office.tangail"),
+      addr: t("office.tangail.address"),
+    };
   };
 
   return (
     <footer className="bg-gradient-iron pb-24 text-white/85 md:pb-8">
       <div className="container-page grid gap-12 py-16 md:grid-cols-4">
         <div className="md:col-span-1">
-          <img src={logo} alt="ATDB Trade International" width={220} height={64} className="h-14 w-auto object-contain" />
+          <img
+            src={logo}
+            alt="ATDB Trade International"
+            width={220}
+            height={64}
+            className="h-14 w-auto object-contain"
+          />
           <p className={`mt-5 max-w-xs text-sm leading-relaxed text-white/65 ${fontClass}`}>
             {t("footer.tagline")}
           </p>
@@ -39,7 +54,10 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2 text-sm">
             {links.map((i) => (
               <li key={i.to}>
-                <Link to={i.to} className={`text-white/75 transition-colors hover:text-safety ${fontClass}`}>
+                <Link
+                  to={i.to}
+                  className={`text-white/75 transition-colors hover:text-safety ${fontClass}`}
+                >
                   {i.l}
                 </Link>
               </li>
@@ -69,13 +87,19 @@ export function SiteFooter() {
           <h4 className="eyebrow !text-bronze-glow">{t("footer.contact")}</h4>
           <ul className={`mt-4 space-y-2.5 text-sm text-white/75 ${fontClass}`}>
             <li>
-              <a href={`tel:${COMPANY.phones[0].number}`} className="inline-flex items-center gap-2.5 transition-colors hover:text-safety">
+              <a
+                href={`tel:${COMPANY.phones[0].number}`}
+                className="inline-flex items-center gap-2.5 transition-colors hover:text-safety"
+              >
                 <Phone className="h-3.5 w-3.5 text-bronze-glow" strokeWidth={2} />
                 <span>{COMPANY.phones[0].number}</span>
               </a>
             </li>
             <li>
-              <a href={`mailto:${COMPANY.email}`} className="inline-flex items-center gap-2.5 break-all transition-colors hover:text-safety">
+              <a
+                href={`mailto:${COMPANY.email}`}
+                className="inline-flex items-center gap-2.5 break-all transition-colors hover:text-safety"
+              >
                 <Mail className="h-3.5 w-3.5 text-bronze-glow" strokeWidth={2} />
                 <span>{COMPANY.email}</span>
               </a>

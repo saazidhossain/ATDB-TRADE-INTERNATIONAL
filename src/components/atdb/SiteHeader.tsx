@@ -149,10 +149,10 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-between py-3 text-sm text-iron"
                 >
-                  <span className={`text-muted-foreground ${fontClass}`}>
-                    {t("nav.call")}
+                  <span className={`text-muted-foreground ${fontClass}`}>{t("nav.call")}</span>
+                  <span className="font-display font-semibold tracking-wide text-iron">
+                    {COMPANY.phones[0].number}
                   </span>
-                  <span className="font-display font-semibold tracking-wide text-iron">{COMPANY.phones[0].number}</span>
                 </a>
               </li>
               <li>
@@ -161,10 +161,10 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-between gap-3 py-3 text-sm text-iron"
                 >
-                  <span className={`text-muted-foreground ${fontClass}`}>
-                    {t("nav.email")}
+                  <span className={`text-muted-foreground ${fontClass}`}>{t("nav.email")}</span>
+                  <span className="truncate font-display font-semibold text-iron">
+                    {COMPANY.email}
                   </span>
-                  <span className="truncate font-display font-semibold text-iron">{COMPANY.email}</span>
                 </a>
               </li>
               <li>

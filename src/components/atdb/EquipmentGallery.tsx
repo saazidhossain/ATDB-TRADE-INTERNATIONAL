@@ -8,7 +8,12 @@ import { useI18n } from "@/lib/i18n";
 
 export type GallerySlot = {
   src: string;
-  captionKey: "gallery.cap.hero" | "gallery.cap.action" | "gallery.cap.detail" | "gallery.cap.site" | "gallery.cap.cabin";
+  captionKey:
+    | "gallery.cap.hero"
+    | "gallery.cap.action"
+    | "gallery.cap.detail"
+    | "gallery.cap.site"
+    | "gallery.cap.cabin";
 };
 
 interface Props {
@@ -23,7 +28,10 @@ export function EquipmentGallery({ slots, alt, certifiedLabel }: Props) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const next = useCallback(() => setActive((i) => (i + 1) % slots.length), [slots.length]);
-  const prev = useCallback(() => setActive((i) => (i - 1 + slots.length) % slots.length), [slots.length]);
+  const prev = useCallback(
+    () => setActive((i) => (i - 1 + slots.length) % slots.length),
+    [slots.length],
+  );
 
   return (
     <div>
@@ -227,7 +235,10 @@ function Lightbox({
     if (e.touches.length === 2 && pinchRef.current) {
       const [a, b] = [e.touches[0], e.touches[1]];
       const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
-      const next = Math.min(4, Math.max(1, pinchRef.current.startZoom * (dist / pinchRef.current.startDist)));
+      const next = Math.min(
+        4,
+        Math.max(1, pinchRef.current.startZoom * (dist / pinchRef.current.startDist)),
+      );
       setZoom(next);
     }
   };
@@ -269,7 +280,9 @@ function Lightbox({
       {/* Top bar */}
       <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 text-white">
         <div className="min-w-0 flex-1">
-          <p className="truncate font-display text-sm font-semibold uppercase tracking-wider">{alt}</p>
+          <p className="truncate font-display text-sm font-semibold uppercase tracking-wider">
+            {alt}
+          </p>
           <p className="text-[11px] text-white/60">
             {t(slots[index].captionKey)} · {index + 1} / {slots.length}
           </p>
@@ -364,7 +377,13 @@ function Lightbox({
               index === i ? "border-safety" : "border-white/20 hover:border-white/40"
             }`}
           >
-            <img src={slot.src} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            <img
+              src={slot.src}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
           </button>
         ))}
       </div>

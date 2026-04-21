@@ -34,8 +34,10 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 transition-all duration-300 ${
-        scrolled ? "shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)]" : "shadow-none"
+      className={`sticky top-0 z-40 w-full border-b transition-all duration-300 ${
+        scrolled
+          ? "border-border/60 bg-background/80 shadow-[0_4px_24px_-8px_oklch(0.2_0.02_240/0.12)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/70"
+          : "border-transparent bg-background/60 backdrop-blur-md supports-[backdrop-filter]:bg-background/50"
       }`}
     >
       <div
@@ -116,7 +118,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background md:hidden">
+        <div className="border-t border-border/60 bg-background/95 backdrop-blur-xl md:hidden">
           <nav className="container-page flex flex-col py-2" aria-label="Mobile">
             {NAV.map((n) => (
               <Link

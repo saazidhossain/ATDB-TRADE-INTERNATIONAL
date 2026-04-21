@@ -98,6 +98,12 @@
   --shadow-card: 0 2px 8px oklch(0.2 0.02 240 / 0.08);
   --shadow-card-hover: 0 12px 32px oklch(0.2 0.02 240 / 0.16);
   --shadow-cta: 0 8px 24px oklch(0.7 0.19 45 / 0.35);
+
+  /* Glassmorphic shadow variants */
+  --shadow-glass: 0 4px 24px oklch(0.2 0.02 240 / 0.08), inset 0 1px 0 oklch(1 0 0 / 0.45);
+  --shadow-glass-dark: 0 4px 24px oklch(0.1 0.01 240 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.12);
+  --shadow-glass-safety: 0 2px 12px oklch(0.70 0.19 45 / 0.18);
+  --shadow-glass-bronze: 0 2px 12px oklch(0.62 0.10 55 / 0.14);
 }
 
 .dark {
@@ -242,6 +248,101 @@
   .hover-lift:hover {
     transform: translateY(-2px);
   }
+
+  /* ── Glassmorphic surface utilities ─────────────────────────────── */
+
+  /* Standard glass card — light & dark aware */
+  .glass {
+    background: oklch(1 0 0 / 0.55);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid oklch(1 0 0 / 0.22);
+    box-shadow:
+      0 4px 24px oklch(0.2 0.02 240 / 0.08),
+      inset 0 1px 0 oklch(1 0 0 / 0.45);
+  }
+
+  /* Dark-surface glass (for iron/dark hero sections) */
+  .glass-dark {
+    background: oklch(0.22 0.018 240 / 0.55);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid oklch(1 0 0 / 0.10);
+    box-shadow:
+      0 4px 24px oklch(0.1 0.01 240 / 0.35),
+      inset 0 1px 0 oklch(1 0 0 / 0.12);
+  }
+
+  /* Safety-accent glass pill/badge */
+  .glass-safety {
+    background: oklch(0.70 0.19 45 / 0.14);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    border: 1px solid oklch(0.70 0.19 45 / 0.30);
+    box-shadow: 0 2px 12px oklch(0.70 0.19 45 / 0.18);
+  }
+
+  /* Bronze-accent glass pill/badge */
+  .glass-bronze {
+    background: oklch(0.62 0.10 55 / 0.12);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    border: 1px solid oklch(0.78 0.13 65 / 0.25);
+    box-shadow: 0 2px 12px oklch(0.62 0.10 55 / 0.14);
+  }
+
+  /* Shimmer sweep — additive highlight that sweeps across on hover */
+  .shimmer-on-hover {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer-on-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      oklch(1 0 0 / 0.22) 50%,
+      transparent 65%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .shimmer-on-hover:hover::before {
+    transform: translateX(100%);
+  }
+
+  /* Conic border glow — rotates on hover for interactive cards */
+  .conic-border {
+    position: relative;
+  }
+  .conic-border::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--conic-angle, 0deg),
+      oklch(0.70 0.19 45 / 0),
+      oklch(0.70 0.19 45 / 0.7),
+      oklch(0.78 0.13 65 / 0.7),
+      oklch(0.70 0.19 45 / 0)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    pointer-events: none;
+  }
+  .conic-border:hover::after {
+    opacity: 1;
+  }
 }
 
 /* Hero ken-burns subtle zoom */
@@ -276,6 +377,18 @@
 @keyframes atdb-spin-slow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
+}
+
+/* Fade-up entrance — used by section headings */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle pulse glow — safety accent elements */
+@keyframes safetyPulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.70 0.19 45 / 0); }
+  50%       { box-shadow: 0 0 0 6px oklch(0.70 0.19 45 / 0.18); }
 }
 
 /* Reduced motion accessibility */

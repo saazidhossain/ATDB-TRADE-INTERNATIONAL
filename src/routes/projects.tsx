@@ -7,7 +7,7 @@ import { useI18n, TRANSLATIONS, useFontClass } from "@/lib/i18n";
 import { buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { PROJECT_CATEGORIES, PROJECTS, HERO_PROJECT_IMAGE } from "@/lib/projects-data";
 
-const SITE_URL = "https://atdb.lovable.app";
+const SITE_URL = "https://www.atdbtrade.com";
 const en = (key: string): string => TRANSLATIONS[key]?.en ?? key;
 
 const projectsJsonLd = {
@@ -112,7 +112,7 @@ function ProjectsPage() {
               <a
                 key={c.key}
                 href={`#cat-${c.key}`}
-                className={`rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md transition-colors hover:border-bronze-glow hover:text-bronze-glow ${fontClass}`}
+                className={`rounded-full glass-dark px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:border-bronze-glow hover:text-bronze-glow ${fontClass}`}
               >
                 {idx + 1}. {t(c.titleKey as Parameters<typeof t>[0])}
               </a>
@@ -163,7 +163,7 @@ function ProjectsPage() {
                     variants={cardVariants}
                     whileHover={{ y: -6 }}
                     transition={{ type: "spring", stiffness: 320, damping: 22 }}
-                    className="group flex flex-col overflow-hidden rounded-md border border-border bg-card shadow-card hover:shadow-card-hover"
+                    className="group flex flex-col overflow-hidden rounded-md border border-border bg-card shadow-card hover:shadow-card-hover shimmer-on-hover"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img

@@ -36,7 +36,7 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
       variants={equipmentCardVariants}
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
-      className="group flex flex-col overflow-hidden rounded-md border border-border bg-card border-safety-top shadow-card hover:shadow-card-hover"
+      className="group flex flex-col overflow-hidden rounded-md border border-border bg-card border-safety-top shadow-card hover:shadow-card-hover shimmer-on-hover"
     >
       <Link
         to="/equipment/$category/$id"
@@ -49,7 +49,7 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <span className="absolute left-3 top-3 rounded-sm bg-iron/85 px-2 py-1 font-display text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur">
+        <span className="absolute left-3 top-3 rounded-sm glass-dark px-2 py-1 font-display text-[10px] font-semibold uppercase tracking-wider text-white">
           {eq.brand}
         </span>
         {inCart && (

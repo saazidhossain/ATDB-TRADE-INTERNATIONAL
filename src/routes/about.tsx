@@ -111,7 +111,7 @@ function AboutPage() {
             {VALUES.map((v) => (
               <div
                 key={v.t}
-                className="group relative overflow-hidden rounded-md border border-border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-safety/40 hover:shadow-cta"
+                className="group relative overflow-hidden rounded-md border border-border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-safety/40 hover:shadow-cta shimmer-on-hover"
               >
                 <span
                   aria-hidden

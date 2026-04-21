@@ -25,14 +25,13 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="bg-gradient-iron text-white/85">
+    <footer className="bg-gradient-iron pb-24 text-white/85 md:pb-8">
       <div className="container-page grid gap-12 py-16 md:grid-cols-4">
         <div className="md:col-span-1">
           <img src={logo} alt="ATDB Trade International" width={220} height={64} className="h-14 w-auto object-contain" />
           <p className={`mt-5 max-w-xs text-sm leading-relaxed text-white/65 ${fontClass}`}>
             {t("footer.tagline")}
           </p>
-          <p className="mt-4 text-xs text-white/50">TIN {COMPANY.tin} · VAT {COMPANY.vat}</p>
         </div>
 
         <div>
@@ -107,20 +106,20 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-start justify-between gap-2 py-5 text-xs text-white/50 md:flex-row md:items-center">
-          <p className={fontClass}>
-            © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
-          </p>
+        <div className="container-page flex flex-col items-center justify-between space-y-4 py-5 md:flex-row md:items-center md:space-y-0">
           <p className={fontClass}>
             <a
               href="https://behance.net/saazidhossain"
               target="_blank"
               rel="noopener noreferrer author"
-              className="font-semibold tracking-[0.14em] text-bronze-glow transition-colors hover:text-safety"
+              className="text-sm font-bold uppercase tracking-[0.25em] text-primary transition-colors duration-300 hover:text-white"
               title="Sazid Hossain — Architect & Designer · Behance portfolio"
             >
               {t("footer.credit")}
             </a>
+          </p>
+          <p className={`text-xs text-gray-500 ${fontClass}`}>
+            © {year ?? "—"} {COMPANY.name}. {t("footer.rights")}
           </p>
         </div>
       </div>

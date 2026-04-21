@@ -47,13 +47,3 @@ declare module "react-resizable-panels" {
   export const Group: any;
   export const Separator: any;
 }
-
-// Allow `server: { handlers: { ... } }` on file routes (TanStack Start
-// extends the base react-router options at runtime; types not yet shipped).
-declare module "@tanstack/react-router" {
-  interface UpdatableRouteOptionsExtensions {
-    server?: {
-      handlers?: Record<string, (ctx: { request: Request }) => Response | Promise<Response>>;
-    };
-  }
-}

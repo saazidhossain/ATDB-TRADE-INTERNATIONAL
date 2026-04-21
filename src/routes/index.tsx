@@ -141,14 +141,14 @@ function Index() {
             {t("home.hero.sub")}
           </p>
           <div className="mt-8 flex flex-wrap gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700 [animation-delay:360ms] [animation-fill-mode:both]">
-            <Link to="/equipment" className={`group inline-flex items-center gap-2 rounded-sm bg-gradient-safety px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_oklch(0.7_0.19_45/0.5)] sm:px-7 sm:py-4 ${fontClass}`}>
+            <Link to="/equipment" className={`group inline-flex items-center gap-2 rounded-full bg-gradient-safety px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-cta transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_oklch(0.7_0.19_45/0.5)] sm:px-7 sm:py-4 ${fontClass}`}>
               {t("home.hero.cta.browse")}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <WhatsappButton
               href={buildWhatsappGenericLink(undefined, lang)}
               variant="cta"
-              className="!px-6 !py-3.5 sm:!px-7 sm:!py-4"
+              className="!px-6 !py-3.5 sm:!px-7 sm:!py-4 glass border-white/20 hover:bg-white/20 rounded-full"
             >
               {t("home.hero.cta.whatsapp")}
             </WhatsappButton>

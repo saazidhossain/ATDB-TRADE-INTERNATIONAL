@@ -7,7 +7,7 @@ import { useI18n, TRANSLATIONS, useFontClass } from "@/lib/i18n";
 import { buildWhatsappGenericLink } from "@/lib/atdb-data";
 import { PROJECT_CATEGORIES, PROJECTS, HERO_PROJECT_IMAGE } from "@/lib/projects-data";
 
-const SITE_URL = "https://atdb.lovable.app";
+const SITE_URL = "https://atdb-trade.com";
 const en = (key: string): string => TRANSLATIONS[key]?.en ?? key;
 
 const projectsJsonLd = {
@@ -143,7 +143,7 @@ function ProjectsPage() {
                     variants={cardVariants}
                     whileHover={{ y: -6 }}
                     transition={{ type: "spring", stiffness: 320, damping: 22 }}
-                    className="group flex flex-col overflow-hidden rounded-md border border-border bg-card shadow-card hover:shadow-card-hover"
+                    className="group flex flex-col overflow-hidden rounded-md border border-border glass-card shadow-card hover:shadow-card-hover"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img

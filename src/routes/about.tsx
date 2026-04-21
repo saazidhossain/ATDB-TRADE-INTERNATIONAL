@@ -56,11 +56,11 @@ function AboutPage() {
             <p className={`eyebrow ${fontClassEyebrow}`}>{t("about.leadership")}</p>
             <h2 className={`mt-2 text-3xl font-bold text-iron ${fontClass}`}>{t("about.leadership.title")}</h2>
             <div className="mt-8 space-y-6">
-              <div className="rounded-md border border-border bg-card p-6 shadow-card border-safety-top">
+              <div className="rounded-md border border-border glass-card p-6 shadow-card border-safety-top">
                 <p className={`text-xs uppercase tracking-[0.18em] text-muted-foreground ${fontClass}`}>{t("about.role.proprietor")}</p>
                 <p className="mt-1 font-display text-xl font-semibold text-iron">{COMPANY.proprietor}</p>
               </div>
-              <div className="rounded-md border border-border bg-card p-6 shadow-card border-safety-top">
+              <div className="rounded-md border border-border glass-card p-6 shadow-card border-safety-top">
                 <p className={`text-xs uppercase tracking-[0.18em] text-muted-foreground ${fontClass}`}>{t("about.role.ceo")}</p>
                 <p className="mt-1 font-display text-xl font-semibold text-iron">{COMPANY.ceo}</p>
               </div>
@@ -69,7 +69,7 @@ function AboutPage() {
           <div>
             <p className={`eyebrow ${fontClassEyebrow}`}>{t("about.credentials")}</p>
             <h2 className={`mt-2 text-3xl font-bold text-iron ${fontClass}`}>{t("about.credentials.title")}</h2>
-            <dl className="mt-8 divide-y divide-border rounded-md border border-border bg-card shadow-card">
+            <dl className="mt-8 divide-y divide-border rounded-md border border-border glass-card shadow-card">
               {CREDENTIALS.map(([k, v]) => (
                 <div key={k} className="flex items-start justify-between gap-6 px-6 py-4">
                   <dt className={`text-sm font-medium text-muted-foreground ${fontClass}`}>{k}</dt>
@@ -91,7 +91,7 @@ function AboutPage() {
             {VALUES.map((v) => (
               <div
                 key={v.t}
-                className="group relative overflow-hidden rounded-md border border-border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-safety/40 hover:shadow-cta"
+                className="group relative overflow-hidden rounded-md border border-border glass-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-safety/40 hover:shadow-cta"
               >
                 <span
                   aria-hidden

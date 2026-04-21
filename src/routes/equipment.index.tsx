@@ -67,9 +67,9 @@ function EquipmentIndex() {
               <motion.div key={c.slug} variants={categoryCardVariants}
                 whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }}>
                 <Link to="/equipment/$category" params={{ category: c.slug }}
-                  className="group relative isolate flex aspect-[16/10] flex-col justify-end overflow-hidden rounded-md border-safety-top shadow-card hover:shadow-card-hover">
+                  className="group relative isolate flex aspect-[16/10] flex-col justify-end overflow-hidden rounded-md border border-border glass-card border-safety-top shadow-card hover:shadow-card-hover">
                   <img src={c.image} alt={tx(labelKey)} loading="lazy" className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-iron-deep via-iron-deep/70 to-transparent" />
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-iron-deep/90 via-iron-deep/60 to-transparent" />
                   <div className="p-6 text-white md:p-8">
                     <p className="font-bn text-sm text-bronze-glow">{c.label_bn}</p>
                     <h2 className={`mt-1 text-2xl font-bold text-white md:text-3xl ${fontClass}`}>{tx(labelKey)}</h2>

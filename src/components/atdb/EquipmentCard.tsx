@@ -36,7 +36,7 @@ export function EquipmentCard({ eq }: { eq: Equipment }) {
       variants={equipmentCardVariants}
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
-      className="group flex flex-col overflow-hidden rounded-md border border-border bg-card border-safety-top shadow-card hover:shadow-card-hover"
+      className="group flex flex-col overflow-hidden rounded-md border border-border glass-card border-safety-top shadow-card hover:shadow-card-hover"
     >
       <Link
         to="/equipment/$category/$id"

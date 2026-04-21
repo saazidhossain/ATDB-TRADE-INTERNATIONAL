@@ -34,8 +34,8 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 transition-all duration-300 ${
-        scrolled ? "shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)]" : "shadow-none"
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+        scrolled ? "glass shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)]" : "bg-transparent border-transparent"
       }`}
     >
       <div

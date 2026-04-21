@@ -287,3 +287,42 @@
     scroll-behavior: auto !important;
   }
 }
+
+@layer utilities {
+  .glass {
+    background: oklch(1 0 0 / 12%);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid oklch(1 0 0 / 15%);
+    box-shadow: 0 8px 32px 0 oklch(0 0 0 / 12%);
+  }
+
+  .glass-dark {
+    background: oklch(0.22 0.018 240 / 45%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid oklch(1 0 0 / 10%);
+    box-shadow: 0 8px 32px 0 oklch(0 0 0 / 25%);
+  }
+
+  .glass-card {
+    background: oklch(1 0 0 / 65%);
+    backdrop-filter: blur(10px);
+    border: 1px solid oklch(1 0 0 / 20%);
+    box-shadow: 0 4px 16px 0 oklch(0 0 0 / 5%);
+    transition: all 0.3s ease;
+  }
+
+  .dark .glass-card {
+    background: oklch(0.26 0.018 240 / 65%);
+    border: 1px solid oklch(1 0 0 / 10%);
+  }
+
+  .glass-card:hover {
+    background: oklch(1 0 0 / 85%);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px 0 oklch(0 0 0 / 10%);
+  }
+
+  .dark .glass-card:hover {
+    background: oklch(0.26 0.018 240 / 85%);
+  }
+}

@@ -68,8 +68,6 @@ export const COMPANY = {
     { label: "CEO", number: "+8801816666067", whatsapp: "8801816666067" },
   ],
   email: "saifulaapi@gmail.com",
-  tin: "138463501804",
-  vat: "5021075252",
   // bank intentionally removed from public-facing surfaces
   facebook: "https://www.facebook.com/share/1HzpUFqjko/",
   offices: [

@@ -32,8 +32,6 @@ function AboutPage() {
   ];
 
   const CREDENTIALS: Array<[string, string]> = [
-    [t("about.cred.tin"), COMPANY.tin],
-    [t("about.cred.vat"), COMPANY.vat],
     [t("about.cred.inspection"), t("spec.val.cis")],
     [t("about.cred.class"), t("about.cred.classV")],
   ];
